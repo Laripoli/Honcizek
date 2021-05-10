@@ -1,0 +1,40 @@
+﻿@{
+    ViewData["Title"] = "Login";
+}
+
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/css/site.css" />
+<link rel="stylesheet" href="~/css/style.bundle.css" />
+<link rel="stylesheet" href="~/css/Login/Login.css" />
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="wrapper fadeInDown">
+
+    <div id="formContent">
+        <!-- Tabs Titles -->
+        <!-- Icon -->
+        <div class="fadeIn first">
+            <img id="logo" src="~/css/Login/logo_small.png" alt="" />
+        </div>
+
+        <!-- Login Form -->
+        <form method="post">
+            <input class="fadeIn second" type="text" name="username" placeholder="Usuario" />
+            <input class="fadeIn third" type="password" name="password" placeholder="Contraseña" />
+            <input type="submit" value="Iniciar sesión" class="btn btn-primary fadeIn fourth">
+            <span class="text-danger">@ViewData["Error"]</span>
+        </form>
+        @*<form>
+                <input type="text" id="login"  name="login" placeholder="login">
+                <input type="text" id="password"  name="login" placeholder="password">
+                <input type="submit"  value="Log In">
+            </form>*@
+
+    </div>
+</div>
+
+
+
+@*<h1>Esto es una prueba del login en mi proyecto</h1>
+
+*@

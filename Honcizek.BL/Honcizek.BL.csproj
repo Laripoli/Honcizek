@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <OutputType>Library</OutputType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Honcizek.Core\Honcizek.Core.csproj" />
+    <ProjectReference Include="..\Honcizek.DAL\Honcizek.DAL.csproj" />
+  </ItemGroup>
+
+
+</Project>

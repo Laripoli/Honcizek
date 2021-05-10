@@ -1,0 +1,15 @@
+C:\Users\alvar\Desktop\tuto\Proyectos\Honcizek\Honcizek.Core\obj\Debug\netcoreapp3.1\Honcizek.Core.csprojAssemblyReference.cache
+C:\Users\alvar\Desktop\tuto\Proyectos\Honcizek\Honcizek.Core\obj\Debug\netcoreapp3.1\Honcizek.Core.AssemblyInfoInputs.cache
+C:\Users\alvar\Desktop\tuto\Proyectos\Honcizek\Honcizek.Core\obj\Debug\netcoreapp3.1\Honcizek.Core.AssemblyInfo.cs
+C:\Users\alvar\Desktop\tuto\Proyectos\Honcizek\Honcizek.Core\obj\Debug\netcoreapp3.1\Honcizek.Core.csproj.CoreCompileInputs.cache
+C:\Users\alvar\Desktop\tuto\Proyectos\Honcizek\Honcizek.Core\bin\Debug\netcoreapp3.1\appsettings.Development.json
+C:\Users\alvar\Desktop\tuto\Proyectos\Honcizek\Honcizek.Core\bin\Debug\netcoreapp3.1\appsettings.json
+C:\Users\alvar\Desktop\tuto\Proyectos\Honcizek\Honcizek.Core\bin\Debug\netcoreapp3.1\Honcizek.Core.deps.json
+C:\Users\alvar\Desktop\tuto\Proyectos\Honcizek\Honcizek.Core\bin\Debug\netcoreapp3.1\Honcizek.Core.dll
+C:\Users\alvar\Desktop\tuto\Proyectos\Honcizek\Honcizek.Core\bin\Debug\netcoreapp3.1\Honcizek.Core.pdb
+C:\Users\alvar\Desktop\tuto\Proyectos\Honcizek\Honcizek.Core\obj\Debug\netcoreapp3.1\staticwebassets\Honcizek.Core.StaticWebAssets.Manifest.cache
+C:\Users\alvar\Desktop\tuto\Proyectos\Honcizek\Honcizek.Core\obj\Debug\netcoreapp3.1\staticwebassets\Honcizek.Core.StaticWebAssets.xml
+C:\Users\alvar\Desktop\tuto\Proyectos\Honcizek\Honcizek.Core\obj\Debug\netcoreapp3.1\scopedcss\bundle\Honcizek.Core.styles.css
+C:\Users\alvar\Desktop\tuto\Proyectos\Honcizek\Honcizek.Core\obj\Debug\netcoreapp3.1\Honcizek.Core.RazorTargetAssemblyInfo.cache
+C:\Users\alvar\Desktop\tuto\Proyectos\Honcizek\Honcizek.Core\obj\Debug\netcoreapp3.1\Honcizek.Core.dll
+C:\Users\alvar\Desktop\tuto\Proyectos\Honcizek\Honcizek.Core\obj\Debug\netcoreapp3.1\Honcizek.Core.pdb

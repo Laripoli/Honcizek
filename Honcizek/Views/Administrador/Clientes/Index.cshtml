@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Honcizek.DAL.Models.Clientes>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Clientes";
 }
 
 <h1>Index</h1>
@@ -9,7 +9,7 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
+<table>
     <thead>
         <tr>
             <th>
@@ -31,34 +31,13 @@
                 @Html.DisplayNameFor(model => model.Apellidos)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Nifcif)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Telefono)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Movil)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Direccion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cp)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Observaciones)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Localidad)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Pais)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Provincia)
             </th>
             <th></th>
         </tr>
@@ -85,39 +64,20 @@
                 @Html.DisplayFor(modelItem => item.Apellidos)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Nifcif)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Telefono)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Movil)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Direccion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cp)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Observaciones)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Localidad.Id)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Pais.Id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Provincia.Id)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Id">
+                    <button class="btn btn-primary">Editar</button>
+                </a>
+                <button class="btn btn-info" asp-action="Details" asp-route-id="@item.Id">Detalles</button>
+                <button class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Eliminar</button>
             </td>
         </tr>
 }

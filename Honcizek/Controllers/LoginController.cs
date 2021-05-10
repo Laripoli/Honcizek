@@ -28,6 +28,7 @@ namespace Honcizek.Controllers
 
          public IActionResult Login()
          {
+            ViewData["Layout"] = "";
              return View();
          }
 
@@ -77,17 +78,6 @@ namespace Honcizek.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(string username, string password, string ReturnUrl)
         {
-            var prueba = new UsuarioDTO
-            {
-                Login = "",
-                Password = "",
-                Nombre = "",
-                Apellidos = "",
-                Email = "",
-                Tipo = ""
-
-            };
-            /*_usuarioBL.Login(prueba);*/
             UsuarioDTO usuarioDTO = _usuarioBL.Login(new UsuarioDTO
             {
                 Login = username,

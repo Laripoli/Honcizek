@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Honcizek.DAL.Models;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace Honcizek.Controllers.Administrador
 {
@@ -17,12 +18,13 @@ namespace Honcizek.Controllers.Administrador
 
         public ClientesController(honcizekContext context)
         {
-            
             _context = context;
         }
 
         public async Task<IActionResult> Index()
         {
+            /*context.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;*/
+            var a = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Role)?.Value;
             ViewData["Layout"] = "_Admin";
             var honcizekContext = _context.Clientes.Include(c => c.Localidad).Include(c => c.Pais).Include(c => c.Provincia);
             return View("Views/Administrador/Clientes/Index.cshtml", await honcizekContext.ToListAsync());
@@ -31,6 +33,7 @@ namespace Honcizek.Controllers.Administrador
         // GET: Clientes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            ViewData["Layout"] = "_Admin";
             if (id == null)
             {
                 return NotFound();
@@ -52,6 +55,7 @@ namespace Honcizek.Controllers.Administrador
         // GET: Clientes/Create
         public IActionResult Create()
         {
+            ViewData["Layout"] = "_Admin";
             ViewData["LocalidadId"] = new SelectList(_context.Localidades, "Id", "Id");
             ViewData["PaisId"] = new SelectList(_context.Paises, "Id", "Id");
             ViewData["ProvinciaId"] = new SelectList(_context.Provincias, "Id", "Id");

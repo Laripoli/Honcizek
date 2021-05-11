@@ -18,8 +18,6 @@ namespace Honcizek.DAL.Models
         public int Id { get; set; }
         public int PaisId { get; set; }
         public string Nombre { get; set; }
-        public string Comunidad { get; set; }
-        public string Normalizado { get; set; }
 
         public virtual Paises Pais { get; set; }
         public virtual ICollection<Clientes> Clientes { get; set; }

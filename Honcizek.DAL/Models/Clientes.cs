@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 
 // Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
@@ -23,7 +24,7 @@ namespace Honcizek.DAL.Models
         public int? LocalidadId { get; set; }
         public int? ProvinciaId { get; set; }
         public int? PaisId { get; set; }
-        public DateTime FechaRegistro { get; set; }
+        public DateTime? FechaRegistro { get; set; }
         public string Tipo { get; set; }
         public string RazonSocial { get; set; }
         public string Nombre { get; set; }
@@ -44,4 +45,12 @@ namespace Honcizek.DAL.Models
         public virtual ICollection<Tareas> Tareas { get; set; }
         public virtual ICollection<Tickets> Tickets { get; set; }
     }
+
+    public enum ClientesTipo
+    {
+        Persona,
+        Empresa
+    }
 }
+
+

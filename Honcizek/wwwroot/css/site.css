@@ -73,51 +73,7 @@ body {
   line-height: 60px;  Vertically center the text there 
 }
 
-table {
-    border-collapse: collapse;
-    border-spacing: 1;
-    background: #fff;
-    border-radius: 10px;
-    overflow: hidden;
-    width: 100%;
-    margin: 0 auto;
-    position: relative;
-}
 
-table * {
-    position: relative;
-}
-
-table thead tr {
-    height: 60px;
-    background: #36304a;
-}
-
-table thead th {
-    font-family: OpenSans-Regular;
-    font-size: 18px;
-    color: #fff;
-    line-height: 3;
-    font-weight: unset;
-}
-
-table tbody tr {
-    font-family: OpenSans-Regular;
-    font-size: 15px;
-    color: gray;
-    line-height: 1.2;
-    font-weight: unset;
-}
-
-table tbody tr td {
-    padding-left: 1rem !important;
-}
-
-table tbody button{
-    height: 80%;
-    border-radius: 10px;
-
-}*/
 
 /* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
@@ -197,3 +153,58 @@ body {
     white-space: nowrap;
     line-height: 46px;
 }
+
+
+table {
+    border-collapse: collapse;
+    border-spacing: 1;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+}
+
+table * {
+    position: relative;
+}
+
+table td,th{
+    text-align: center;
+}
+
+table thead{
+    justify-content: center;
+}
+
+table thead tr {
+    height: 60px;
+    background: #36304a;
+}
+
+table thead th {
+    font-family: OpenSans-Regular;
+    font-size: 18px;
+    color: #fff;
+    line-height: 3;
+    font-weight: unset;
+}
+
+table tbody tr {
+    font-family: OpenSans-Regular;
+    font-size: 15px;
+    color: gray;
+    line-height: 1.2;
+    font-weight: unset;
+}
+
+    table tbody tr td {
+        padding-left: 1rem !important;
+    }
+
+table tbody button {
+    height: 80%;
+    border-radius: 10px;
+}
+

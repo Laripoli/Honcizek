@@ -71,7 +71,6 @@ namespace Honcizek.DAL.Models
                     .HasMaxLength(250);
 
                 entity.Property(e => e.Clave)
-                    .IsRequired()
                     .HasColumnName("clave")
                     .HasMaxLength(100);
 
@@ -96,7 +95,6 @@ namespace Honcizek.DAL.Models
                     .HasColumnType("int(11)");
 
                 entity.Property(e => e.Login)
-                    .IsRequired()
                     .HasColumnName("login")
                     .HasMaxLength(50);
 
@@ -109,7 +107,6 @@ namespace Honcizek.DAL.Models
                     .HasMaxLength(20);
 
                 entity.Property(e => e.Nombre)
-                    .IsRequired()
                     .HasColumnName("nombre")
                     .HasMaxLength(250);
 
@@ -134,7 +131,8 @@ namespace Honcizek.DAL.Models
                 entity.Property(e => e.Tipo)
                     .IsRequired()
                     .HasColumnName("tipo")
-                    .HasColumnType("enum('Empresa','Persona')");
+                    .HasColumnType("enum('Empresa','Persona')")
+                    .HasDefaultValueSql("'Empresa'");
 
                 entity.HasOne(d => d.Localidad)
                     .WithMany(p => p.Clientes)
@@ -184,11 +182,6 @@ namespace Honcizek.DAL.Models
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
-
-                entity.Property(e => e.Iso)
-                    .HasColumnName("iso")
-                    .HasMaxLength(2)
-                    .IsFixedLength();
 
                 entity.Property(e => e.Nombre)
                     .HasColumnName("nombre")
@@ -276,13 +269,7 @@ namespace Honcizek.DAL.Models
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
 
-                entity.Property(e => e.Comunidad)
-                    .HasColumnName("comunidad")
-                    .HasMaxLength(50);
-
                 entity.Property(e => e.Nombre).HasColumnName("nombre");
-
-                entity.Property(e => e.Normalizado).HasColumnName("normalizado");
 
                 entity.Property(e => e.PaisId)
                     .HasColumnName("pais_id")
@@ -306,37 +293,13 @@ namespace Honcizek.DAL.Models
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
 
-                entity.Property(e => e.AnalisisFechaFin)
-                    .HasColumnName("analisis_fecha_fin")
-                    .HasColumnType("date");
-
-                entity.Property(e => e.AnalisisFechaInicio)
-                    .HasColumnName("analisis_fecha_inicio")
-                    .HasColumnType("date");
-
                 entity.Property(e => e.ClienteId)
                     .HasColumnName("cliente_id")
                     .HasColumnType("int(11)");
 
-                entity.Property(e => e.DesarrolloFechaFin)
-                    .HasColumnName("desarrollo_fecha_fin")
-                    .HasColumnType("date");
-
-                entity.Property(e => e.DesarrolloFechaInicio)
-                    .HasColumnName("desarrollo_fecha_inicio")
-                    .HasColumnType("date");
-
                 entity.Property(e => e.Descripcion).HasColumnName("descripcion");
 
                 entity.Property(e => e.DescripcionDesarrollo).HasColumnName("descripcion_desarrollo");
-
-                entity.Property(e => e.DisegnoFechaFin)
-                    .HasColumnName("disegno_fecha_fin")
-                    .HasColumnType("date");
-
-                entity.Property(e => e.DisegnoFechaInicio)
-                    .HasColumnName("disegno_fecha_inicio")
-                    .HasColumnType("date");
 
                 entity.Property(e => e.Estado)
                     .IsRequired()
@@ -369,42 +332,10 @@ namespace Honcizek.DAL.Models
                     .HasColumnName("horas_internas_previstas")
                     .HasColumnType("int(11)");
 
-                entity.Property(e => e.ImplantacionFechaFin)
-                    .HasColumnName("implantacion_fecha_fin")
-                    .HasColumnType("date");
-
-                entity.Property(e => e.ImplantacionFechaInicio)
-                    .HasColumnName("implantacion_fecha_inicio")
-                    .HasColumnType("date");
-
-                entity.Property(e => e.MaquetacionFechaFin)
-                    .HasColumnName("maquetacion_fecha_fin")
-                    .HasColumnType("date");
-
-                entity.Property(e => e.MaquetacionFechaInicio)
-                    .HasColumnName("maquetacion_fecha_inicio")
-                    .HasColumnType("date");
-
                 entity.Property(e => e.Nombre)
                     .IsRequired()
                     .HasColumnName("nombre")
                     .HasMaxLength(250);
-
-                entity.Property(e => e.PruebasClienteFechaFin)
-                    .HasColumnName("pruebas_cliente_fecha_fin")
-                    .HasColumnType("date");
-
-                entity.Property(e => e.PruebasClienteFechaInicio)
-                    .HasColumnName("pruebas_cliente_fecha_inicio")
-                    .HasColumnType("date");
-
-                entity.Property(e => e.PruebasInternasFechaFin)
-                    .HasColumnName("pruebas_internas_fecha_fin")
-                    .HasColumnType("date");
-
-                entity.Property(e => e.PruebasInternasFechaInicio)
-                    .HasColumnName("pruebas_internas_fecha_inicio")
-                    .HasColumnType("date");
 
                 entity.Property(e => e.Tipo)
                     .IsRequired()
@@ -902,34 +833,28 @@ namespace Honcizek.DAL.Models
                     .HasColumnType("int(11)");
 
                 entity.Property(e => e.Apellidos)
-                    .IsRequired()
                     .HasColumnName("apellidos")
                     .HasMaxLength(45);
 
                 entity.Property(e => e.Clave)
-                    .IsRequired()
                     .HasColumnName("clave")
                     .HasMaxLength(100);
 
                 entity.Property(e => e.Email)
-                    .IsRequired()
                     .HasColumnName("email")
                     .HasMaxLength(100);
 
                 entity.Property(e => e.Login)
-                    .IsRequired()
                     .HasColumnName("login")
                     .HasMaxLength(45);
 
                 entity.Property(e => e.Nombre)
-                    .IsRequired()
                     .HasColumnName("nombre")
                     .HasMaxLength(100);
 
                 entity.Property(e => e.Puesto)
-                    .IsRequired()
                     .HasColumnName("puesto")
-                    .HasColumnType("enum('Supervisor','Programador','Técnico')");
+                    .HasColumnType("enum('Administrador','Programador','Cliente')");
             });
 
             OnModelCreatingPartial(modelBuilder);

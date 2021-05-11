@@ -1,3 +1,10 @@
 ﻿@{
-    Layout = (string)ViewData["Layout"] ?? "_Admin";
+    if (Context.Request.Path != "/")
+    {
+        string s = Context.Request.Path;
+        var area = s.Split("/");
+        Layout = area[1];
+    }
+    @*else
+    Layout = (string)ViewData["Layout"] ?? "_Admin";*@
 }

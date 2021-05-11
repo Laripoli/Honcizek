@@ -4,10 +4,12 @@
     ViewData["Title"] = "Clientes";
 }
 
-<h1>Index</h1>
+<h1>Listado de clientes</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">
+        <button class="btn btn-info">Crear nuevo</button>
+    </a>
 </p>
 <table>
     <thead>
@@ -70,14 +72,20 @@
                 @Html.DisplayFor(modelItem => item.Movil)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Pais.Id)
+                @Html.DisplayFor(modelItem => item.Pais.Nombre)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">
                     <button class="btn btn-primary">Editar</button>
                 </a>
-                <button class="btn btn-info" asp-action="Details" asp-route-id="@item.Id">Detalles</button>
-                <button class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Eliminar</button>
+                <a asp-action="Details" asp-route-id="@item.Id">
+                    <button class="btn btn-info" >Detalles</button>
+                </a>
+                <a asp-action="Delete" asp-route-id="@item.Id">
+                    <button class="btn btn-danger" >Eliminar</button>
+                </a>
+                
+                
             </td>
         </tr>
 }

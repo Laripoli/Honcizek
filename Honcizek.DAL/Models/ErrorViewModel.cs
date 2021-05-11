@@ -1,6 +1,6 @@
 using System;
 
-namespace Honcizek.Models
+namespace Honcizek.DAL.Models
 {
     public class ErrorViewModel
     {

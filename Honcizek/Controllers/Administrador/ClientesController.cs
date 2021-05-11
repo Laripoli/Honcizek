@@ -23,17 +23,15 @@ namespace Honcizek.Controllers.Administrador
 
         public async Task<IActionResult> Index()
         {
-            /*context.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;*/
-            var a = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Role)?.Value;
-            ViewData["Layout"] = "_Admin";
             var honcizekContext = _context.Clientes.Include(c => c.Localidad).Include(c => c.Pais).Include(c => c.Provincia);
+            
+
             return View("Views/Administrador/Clientes/Index.cshtml", await honcizekContext.ToListAsync());
         }
 
         // GET: Clientes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            ViewData["Layout"] = "_Admin";
             if (id == null)
             {
                 return NotFound();
@@ -55,10 +53,14 @@ namespace Honcizek.Controllers.Administrador
         // GET: Clientes/Create
         public IActionResult Create()
         {
-            ViewData["Layout"] = "_Admin";
-            ViewData["LocalidadId"] = new SelectList(_context.Localidades, "Id", "Id");
-            ViewData["PaisId"] = new SelectList(_context.Paises, "Id", "Id");
-            ViewData["ProvinciaId"] = new SelectList(_context.Provincias, "Id", "Id");
+            ViewData["Tipo"] = new List<SelectListItem>
+                {
+                    new SelectListItem {Text = "Empresa", Value = "Empresa"},
+                    new SelectListItem {Text = "Persona", Value = "Persona"}
+                };
+            ViewData["LocalidadId"] = new SelectList(_context.Localidades, "Id", "Nombre");
+            ViewData["PaisId"] = new SelectList(_context.Paises, "Id", "Nombre");
+            ViewData["ProvinciaId"] = new SelectList(_context.Provincias, "Id", "Nombre");
             return View("Views/Administrador/Clientes/Create.cshtml");
         }
 
@@ -94,9 +96,9 @@ namespace Honcizek.Controllers.Administrador
             {
                 return NotFound();
             }
-            ViewData["LocalidadId"] = new SelectList(_context.Localidades, "Id", "Id", clientes.LocalidadId);
-            ViewData["PaisId"] = new SelectList(_context.Paises, "Id", "Id", clientes.PaisId);
-            ViewData["ProvinciaId"] = new SelectList(_context.Provincias, "Id", "Id", clientes.ProvinciaId);
+            ViewData["LocalidadId"] = new SelectList(_context.Localidades, "Id", "Nombre", clientes.LocalidadId);
+            ViewData["PaisId"] = new SelectList(_context.Paises, "Id", "Nombre", clientes.PaisId);
+            ViewData["ProvinciaId"] = new SelectList(_context.Provincias, "Id", "Nombre", clientes.ProvinciaId);
             return View("Views/Administrador/Clientes/Edit.cshtml", clientes);
         }
 

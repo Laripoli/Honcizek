@@ -1,5 +1,8 @@
 ﻿@{
     ViewData["Title"] = "Login";
+    string s = Context.Request.Path;
+    var area = s.Split("/");
+    ViewData["Prueba"] = area[0];
 }
 
 <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />

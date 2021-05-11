@@ -1,6 +1,6 @@
 ﻿using Honcizek.BL.Contracts;
 using Honcizek.Core.DTO;
-using Honcizek.Models;
+using Honcizek.DAL.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
@@ -29,7 +29,7 @@ namespace Honcizek.Controllers
          public IActionResult Login()
          {
             ViewData["Layout"] = "";
-             return View();
+            return View();
          }
 
         /* public IActionResult Privacy()
@@ -94,6 +94,7 @@ namespace Honcizek.Controllers
                 };
 
                 var claimsIdentity = new ClaimsIdentity(claims, "Login");
+                var a = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
 
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
                 return Redirect("/"+ usuarioDTO.Tipo +"/Escritorio");

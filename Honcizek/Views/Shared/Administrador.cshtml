@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Honcizek</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/Administrador.css" />
+</head>
+<body>
+    <header>
+        <div class="left-side d-flex justify-content-center">
+            <a asp-controller="Administrador" asp-action="Escritorio" class="d-flex justify-content-center">
+                <img class="p-2" id="logo" src="~/css/Administrador/logo_white_large.png" alt="Logo" />
+            </a>
+
+        </div>
+        <div class="rest-header"></div>
+    </header>
+    <div class="d-flex main">
+        <aside class="d-flex flex-column">
+            <a asp-controller="Clientes" asp-action="Index">
+                <div class="menu-option">
+                    <span>
+                        @*<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M2 13.5V7h1v6.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7h1v6.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5zm11-11V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z" />
+                            <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z" />
+                        </svg>*@
+                        Clientes
+                    </span>
+                </div>
+            </a>
+            <div class="menu-option"><a asp-controller="Clientes" asp-action="Index">Proyectos</a></div>
+            <div class="menu-option"><a asp-controller="Clientes" asp-action="Index">Tickets</a></div>
+            <div class="menu-option"><a asp-controller="Clientes" asp-action="Index">Clientes</a></div>
+            <div class="menu-option"><a asp-controller="Clientes" asp-action="Index">Trabajadores</a></div>
+
+        </aside>
+            <section>
+                @RenderBody()
+            </section>
+        <footer class="border-top footer text-muted">
+            <div class="container">
+                &copy; 2021 - Honcizek - Todos los derechos reservados
+            </div>
+        </footer>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

@@ -52,16 +52,16 @@
                 </div>
             </div>
             <div class="row col-12 tipo-persona d-none">
-                    <div class="form-group col-6">
-                        <label asp-for="Nombre" class="control-label"></label>
-                        <input asp-for="Nombre" class="form-control" />
-                        <span asp-validation-for="Nombre" class="text-danger"></span>
-                    </div>
-                    <div class="form-group col-6">
-                        <label asp-for="Apellidos" class="control-label"></label>
-                        <input asp-for="Apellidos" class="form-control" />
-                        <span asp-validation-for="Apellidos" class="text-danger"></span>
-                    </div>
+                <div class="form-group col-6">
+                    <label asp-for="Nombre" class="control-label"></label>
+                    <input asp-for="Nombre" class="form-control" />
+                    <span asp-validation-for="Nombre" class="text-danger"></span>
+                </div>
+                <div class="form-group col-6">
+                    <label asp-for="Apellidos" class="control-label"></label>
+                    <input asp-for="Apellidos" class="form-control" />
+                    <span asp-validation-for="Apellidos" class="text-danger"></span>
+                </div>
             </div>
             <div class="row col-12">
                 <div class="form-group col-4">
@@ -104,13 +104,15 @@
                     <span asp-validation-for="Observaciones" class="text-danger"></span>
                 </div>
             </div>
-            <div class="form-group text-center">
+            <div class="form-group pl-3">
                 <input type="submit" value="Crear" class="btn btn-info" />
-                <a asp-action="Index">
-                    <button class="btn btn-primary">Volver al listado</button>
-                </a>
             </div>
         </form>
+        <div class="pt-3 pl-3">
+            <a asp-action="Index">
+                <button class="btn btn-primary">Volver al listado</button>
+            </a>
+        </div>
     </div>
 </div>
 

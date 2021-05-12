@@ -1,4 +1,7 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
-
-// Write your JavaScript code.
+﻿
+$('.menu-option').each(function () {
+    console.log('Texto: ' + $(this).children(0).text() + " Url: " + window.location.pathname.split("/", 3)[2]);
+    if ($(this).hasClass(window.location.pathname.split("/", 3)[2])) {
+        $(this).addClass('active');
+    }
+})

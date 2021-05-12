@@ -199,12 +199,26 @@ table tbody tr {
     font-weight: unset;
 }
 
-    table tbody tr td {
-        padding-left: 1rem !important;
-    }
 
-table tbody button {
-    height: 80%;
-    border-radius: 10px;
+table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
 }
 
+table tbody tr:hover {
+    background-color: #e3e1e1;
+}
+
+
+table tbody tr td {
+    padding-left: 1rem !important;
+}
+
+
+table tbody tr td:last-child {
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+}
+
+.tipo-persona{
+    padding-left: -2vh;
+}

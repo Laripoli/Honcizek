@@ -53,6 +53,8 @@ namespace Honcizek.Controllers.Administrador
         // GET: Clientes/Create
         public IActionResult Create()
         {
+            DateTime hoy = DateTime.Today;
+            ViewData["hoy"] = hoy.ToString("d");
             ViewData["Tipo"] = new List<SelectListItem>
                 {
                     new SelectListItem {Text = "Empresa", Value = "Empresa"},
@@ -86,6 +88,11 @@ namespace Honcizek.Controllers.Administrador
         // GET: Clientes/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            ViewData["Tipo"] = new List<SelectListItem>
+                {
+                    new SelectListItem {Text = "Empresa", Value = "Empresa"},
+                    new SelectListItem {Text = "Persona", Value = "Persona"}
+                };
             if (id == null)
             {
                 return NotFound();

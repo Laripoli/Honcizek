@@ -2,6 +2,7 @@
 
     var handler = function () {
         _ocultar_campos();
+        _limpiar_filtros();
     };
 
     var _ocultar_campos = function () {
@@ -23,6 +24,12 @@
                 $('.tipo-empresa').addClass('d-none').children().val('');
                 $('.tipo-persona').removeClass('d-none');
             }
+        });
+    }
+
+    var _limpiar_filtros = function () {
+        $('#limpia-filtros').on('click', function (e) {
+            $('#filtro').val('');
         });
     }
 

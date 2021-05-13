@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using Honcizek.DAL.Models;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
+using System.Text;
+using System.Globalization;
 
 namespace Honcizek.Controllers.Administrador
 {
@@ -21,12 +23,32 @@ namespace Honcizek.Controllers.Administrador
             _context = context;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(String search)
         {
+            ViewData["CurrentFilter"] = search;
             var honcizekContext = _context.Clientes.Include(c => c.Localidad).Include(c => c.Pais).Include(c => c.Provincia);
+
+            if (!String.IsNullOrEmpty(search))
+            {
+
+                honcizekContext = _context.Clientes.Where(s => s.Apellidos.Contains(search)
+                               || s.Nombre.Contains(search)).Include(c => c.Localidad).Include(c => c.Pais).Include(c => c.Provincia);
+
+            }
             
 
+
             return View("Views/Administrador/Clientes/Index.cshtml", await honcizekContext.ToListAsync());
+        }
+
+        public string quitaTildes(string text)
+        {
+            if (string.IsNullOrWhiteSpace(text))
+                return text;
+
+            text = text.Normalize(NormalizationForm.FormD);
+            var chars = text.Where(c => CharUnicodeInfo.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark).ToArray();
+            return new string(chars).Normalize(NormalizationForm.FormC);
         }
 
         // GET: Clientes/Details/5

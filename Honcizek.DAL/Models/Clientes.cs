@@ -48,11 +48,6 @@ namespace Honcizek.DAL.Models
         public virtual ICollection<Tickets> Tickets { get; set; }
     }
 
-    public enum ClientesTipo
-    {
-        Persona,
-        Empresa
-    }
 }
 
 

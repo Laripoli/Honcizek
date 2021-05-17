@@ -41,15 +41,6 @@ namespace Honcizek.Controllers.Administrador
             return View("Views/Administrador/Clientes/Index.cshtml", await honcizekContext.ToListAsync());
         }
 
-        public string quitaTildes(string text)
-        {
-            if (string.IsNullOrWhiteSpace(text))
-                return text;
-
-            text = text.Normalize(NormalizationForm.FormD);
-            var chars = text.Where(c => CharUnicodeInfo.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark).ToArray();
-            return new string(chars).Normalize(NormalizationForm.FormC);
-        }
 
         // GET: Clientes/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -204,6 +195,15 @@ namespace Honcizek.Controllers.Administrador
         private bool ClientesExists(int id)
         {
             return _context.Clientes.Any(e => e.Id == id);
+        }
+
+        public String quita_tildes(String s)
+        {
+            s = s.Replace('Á', 'A');
+            s = s.Replace('á', 'a');
+            s = s.Replace('É', 'E');
+            s = s.Replace('é', 'e');
+            return s;
         }
     }
 }

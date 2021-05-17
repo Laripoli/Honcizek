@@ -9,11 +9,6 @@ namespace Honcizek.DAL.Models
 {
     public partial class Tareas
     {
-        public Tareas()
-        {
-            TiemposTareas = new HashSet<TiemposTareas>();
-        }
-
         public int Id { get; set; }
         public int TrabajoId { get; set; }
         public int UsuarioId { get; set; }
@@ -29,6 +24,5 @@ namespace Honcizek.DAL.Models
         public virtual Clientes Cliente { get; set; }
         public virtual Trabajos Trabajo { get; set; }
         public virtual Usuarios Usuario { get; set; }
-        public virtual ICollection<TiemposTareas> TiemposTareas { get; set; }
     }
 }

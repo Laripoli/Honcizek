@@ -13,7 +13,6 @@ namespace Honcizek.DAL.Models
         {
             PartesDeTrabajo = new HashSet<PartesDeTrabajo>();
             ProyectosParticipantes = new HashSet<ProyectosParticipantes>();
-            Servicios = new HashSet<Servicios>();
             Suscripciones = new HashSet<Suscripciones>();
             Tareas = new HashSet<Tareas>();
             Tickets = new HashSet<Tickets>();
@@ -29,7 +28,6 @@ namespace Honcizek.DAL.Models
 
         public virtual ICollection<PartesDeTrabajo> PartesDeTrabajo { get; set; }
         public virtual ICollection<ProyectosParticipantes> ProyectosParticipantes { get; set; }
-        public virtual ICollection<Servicios> Servicios { get; set; }
         public virtual ICollection<Suscripciones> Suscripciones { get; set; }
         public virtual ICollection<Tareas> Tareas { get; set; }
         public virtual ICollection<Tickets> Tickets { get; set; }

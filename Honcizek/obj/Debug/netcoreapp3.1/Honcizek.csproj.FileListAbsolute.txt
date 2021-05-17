@@ -471,3 +471,8 @@ C:\Users\alvar\Desktop\tuto\Proyectos\Honcizek\Honcizek\bin\Debug\netcoreapp3.1\
 C:\Users\alvar\Desktop\tuto\Proyectos\Honcizek\Honcizek\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation.dll
 C:\Users\alvar\Desktop\tuto\Proyectos\Honcizek\Honcizek\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout.cshtml.g.cs
 C:\Users\alvar\Desktop\tuto\Proyectos\Honcizek\Honcizek\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Administrador.cshtml.g.cs
+C:\Users\alvar\Desktop\tuto\Proyectos\Honcizek\Honcizek\obj\Debug\netcoreapp3.1\Razor\Views\Administrador\Proyectos\Create.cshtml.g.cs
+C:\Users\alvar\Desktop\tuto\Proyectos\Honcizek\Honcizek\obj\Debug\netcoreapp3.1\Razor\Views\Administrador\Proyectos\Delete.cshtml.g.cs
+C:\Users\alvar\Desktop\tuto\Proyectos\Honcizek\Honcizek\obj\Debug\netcoreapp3.1\Razor\Views\Administrador\Proyectos\Details.cshtml.g.cs
+C:\Users\alvar\Desktop\tuto\Proyectos\Honcizek\Honcizek\obj\Debug\netcoreapp3.1\Razor\Views\Administrador\Proyectos\Edit.cshtml.g.cs
+C:\Users\alvar\Desktop\tuto\Proyectos\Honcizek\Honcizek\obj\Debug\netcoreapp3.1\Razor\Views\Administrador\Proyectos\Index.cshtml.g.cs

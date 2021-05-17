@@ -14,80 +14,82 @@
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Tipo)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class = "col-sm-4">
             @Html.DisplayFor(model => model.Tipo)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Nombre)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class = "col-sm-4">
             @Html.DisplayFor(model => model.Nombre)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Descripcion)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class = "col-sm-4">
             @Html.DisplayFor(model => model.Descripcion)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.DescripcionDesarrollo)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class = "col-sm-4">
             @Html.DisplayFor(model => model.DescripcionDesarrollo)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.FechaRegistro)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class = "col-sm-4">
             @Html.DisplayFor(model => model.FechaRegistro)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.FechaInicio)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class = "col-sm-4">
             @Html.DisplayFor(model => model.FechaInicio)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.FechaFinPrevista)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class = "col-sm-4">
             @Html.DisplayFor(model => model.FechaFinPrevista)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.FechaFinReal)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class = "col-sm-4">
             @Html.DisplayFor(model => model.FechaFinReal)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.HorasInternasPrevistas)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class = "col-sm-4">
             @Html.DisplayFor(model => model.HorasInternasPrevistas)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Estado)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class = "col-sm-4">
             @Html.DisplayFor(model => model.Estado)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Fase)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class = "col-sm-4">
             @Html.DisplayFor(model => model.Fase)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Cliente)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class = "col-sm-4">
             @Html.DisplayFor(model => model.Cliente.Tipo)
         </dd class>
     </dl>
     
-    <form asp-action="Delete">
+    <form class="pb-3" asp-action="Delete">
         <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <input type="submit" value="Borrar" class="btn btn-danger" />
     </form>
+	<a asp-action="Index">
+			<button class="btn btn-primary">Volver al listado</button>
+		</a>
 </div>

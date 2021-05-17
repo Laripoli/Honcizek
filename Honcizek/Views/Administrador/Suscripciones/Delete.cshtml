@@ -1,0 +1,143 @@
+@model Honcizek.DAL.Models.Suscripciones
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Suscripciones</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.FechaDesde)
+        </dt>
+        <dd class = "col-sm-4">
+            @Html.DisplayFor(model => model.FechaDesde)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.FechaHasta)
+        </dt>
+        <dd class = "col-sm-4">
+            @Html.DisplayFor(model => model.FechaHasta)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.HorasContratadas)
+        </dt>
+        <dd class = "col-sm-4">
+            @Html.DisplayFor(model => model.HorasContratadas)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.AvisoCaducidad)
+        </dt>
+        <dd class = "col-sm-4">
+            @Html.DisplayFor(model => model.AvisoCaducidad)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ProximidadCaducidad)
+        </dt>
+        <dd class = "col-sm-4">
+            @Html.DisplayFor(model => model.ProximidadCaducidad)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Renovacion)
+        </dt>
+        <dd class = "col-sm-4">
+            @Html.DisplayFor(model => model.Renovacion)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.RenovacionId)
+        </dt>
+        <dd class = "col-sm-4">
+            @Html.DisplayFor(model => model.RenovacionId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Pendiente)
+        </dt>
+        <dd class = "col-sm-4">
+            @Html.DisplayFor(model => model.Pendiente)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Caducada)
+        </dt>
+        <dd class = "col-sm-4">
+            @Html.DisplayFor(model => model.Caducada)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PrecioAlta)
+        </dt>
+        <dd class = "col-sm-4">
+            @Html.DisplayFor(model => model.PrecioAlta)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PrecioPeriodo)
+        </dt>
+        <dd class = "col-sm-4">
+            @Html.DisplayFor(model => model.PrecioPeriodo)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PrecioConsumoNivel1)
+        </dt>
+        <dd class = "col-sm-4">
+            @Html.DisplayFor(model => model.PrecioConsumoNivel1)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PrecioConsumoNivel2)
+        </dt>
+        <dd class = "col-sm-4">
+            @Html.DisplayFor(model => model.PrecioConsumoNivel2)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PrecioConsumoNivel3)
+        </dt>
+        <dd class = "col-sm-4">
+            @Html.DisplayFor(model => model.PrecioConsumoNivel3)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Periodicidad)
+        </dt>
+        <dd class = "col-sm-4">
+            @Html.DisplayFor(model => model.Periodicidad)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Observaciones)
+        </dt>
+        <dd class = "col-sm-4">
+            @Html.DisplayFor(model => model.Observaciones)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Agente)
+        </dt>
+        <dd class = "col-sm-4">
+            @Html.DisplayFor(model => model.Agente.Id)
+        </dd class>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Cliente)
+        </dt>
+        <dd class = "col-sm-4">
+            @Html.DisplayFor(model => model.Cliente.Tipo)
+        </dd class>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Proyecto)
+        </dt>
+        <dd class = "col-sm-4">
+            @Html.DisplayFor(model => model.Proyecto.Estado)
+        </dd class>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Servicio)
+        </dt>
+        <dd class = "col-sm-4">
+            @Html.DisplayFor(model => model.Servicio.Nombre)
+        </dd class>
+    </dl>
+    
+    <form class="pb-3" asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Borrar" class="btn btn-danger" />
+    </form>
+	<a asp-action="Index">
+			<button class="btn btn-primary">Volver al listado</button>
+		</a>
+</div>

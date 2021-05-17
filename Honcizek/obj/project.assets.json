@@ -2,6 +2,19 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v3.1": {
+      "bootstrap/3.0.0": {
+        "type": "package",
+        "dependencies": {
+          "jquery": "1.9.0"
+        }
+      },
+      "bootstrap-select/1.13.18": {
+        "type": "package",
+        "dependencies": {
+          "bootstrap": "3.0.0",
+          "jQuery": "[1.9.1, 4.0.0)"
+        }
+      },
       "BouncyCastle.NetCore/1.8.3": {
         "type": "package",
         "dependencies": {
@@ -27,6 +40,9 @@
         "runtime": {
           "lib/netstandard2.0/Google.Protobuf.dll": {}
         }
+      },
+      "jQuery/1.9.1": {
+        "type": "package"
       },
       "K4os.Compression.LZ4/1.1.11": {
         "type": "package",
@@ -3274,6 +3290,165 @@
     }
   },
   "libraries": {
+    "bootstrap/3.0.0": {
+      "sha512": "d1JUd1ZjfbhGGTxjBSjCLIV+O//hZDcvI0hnaeTL3VHAD+6Z89vgPwV0K/nmPM4hZKq172iPV55lCSpohT6WmA==",
+      "type": "package",
+      "path": "bootstrap/3.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Content/Content/bootstrap-theme.css",
+        "Content/Content/bootstrap-theme.min.css",
+        "Content/Content/bootstrap.css",
+        "Content/Content/bootstrap.min.css",
+        "Content/Scripts/bootstrap.js",
+        "Content/Scripts/bootstrap.min.js",
+        "Content/fonts/glyphicons-halflings-regular.eot",
+        "Content/fonts/glyphicons-halflings-regular.svg",
+        "Content/fonts/glyphicons-halflings-regular.ttf",
+        "Content/fonts/glyphicons-halflings-regular.woff",
+        "bootstrap.3.0.0.nupkg.sha512",
+        "bootstrap.nuspec"
+      ]
+    },
+    "bootstrap-select/1.13.18": {
+      "sha512": "ArC0wRl1xqpwEdxRnodYo3qnhyiiGgAevYRGoQIjg/LqfY7nQ3dK0YYQFTrHyDvI5BbIzSgiG6uuR6OqbvxyHg==",
+      "type": "package",
+      "path": "bootstrap-select/1.13.18",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "bootstrap-select.1.13.18.nupkg.sha512",
+        "bootstrap-select.nuspec",
+        "content/Content/bootstrap-select.css",
+        "content/Content/bootstrap-select.css.map",
+        "content/Content/bootstrap-select.min.css",
+        "content/Scripts/bootstrap-select.js",
+        "content/Scripts/bootstrap-select.js.map",
+        "content/Scripts/bootstrap-select.min.js",
+        "content/Scripts/bootstrap-select.min.js.map",
+        "content/Scripts/i18n/defaults-am_ET.js",
+        "content/Scripts/i18n/defaults-am_ET.js.map",
+        "content/Scripts/i18n/defaults-am_ET.min.js",
+        "content/Scripts/i18n/defaults-ar_AR.js",
+        "content/Scripts/i18n/defaults-ar_AR.js.map",
+        "content/Scripts/i18n/defaults-ar_AR.min.js",
+        "content/Scripts/i18n/defaults-bg_BG.js",
+        "content/Scripts/i18n/defaults-bg_BG.js.map",
+        "content/Scripts/i18n/defaults-bg_BG.min.js",
+        "content/Scripts/i18n/defaults-cs_CZ.js",
+        "content/Scripts/i18n/defaults-cs_CZ.js.map",
+        "content/Scripts/i18n/defaults-cs_CZ.min.js",
+        "content/Scripts/i18n/defaults-da_DK.js",
+        "content/Scripts/i18n/defaults-da_DK.js.map",
+        "content/Scripts/i18n/defaults-da_DK.min.js",
+        "content/Scripts/i18n/defaults-de_DE.js",
+        "content/Scripts/i18n/defaults-de_DE.js.map",
+        "content/Scripts/i18n/defaults-de_DE.min.js",
+        "content/Scripts/i18n/defaults-en_US.js",
+        "content/Scripts/i18n/defaults-en_US.js.map",
+        "content/Scripts/i18n/defaults-en_US.min.js",
+        "content/Scripts/i18n/defaults-es_CL.js",
+        "content/Scripts/i18n/defaults-es_CL.js.map",
+        "content/Scripts/i18n/defaults-es_CL.min.js",
+        "content/Scripts/i18n/defaults-es_ES.js",
+        "content/Scripts/i18n/defaults-es_ES.js.map",
+        "content/Scripts/i18n/defaults-es_ES.min.js",
+        "content/Scripts/i18n/defaults-et_EE.js",
+        "content/Scripts/i18n/defaults-et_EE.js.map",
+        "content/Scripts/i18n/defaults-et_EE.min.js",
+        "content/Scripts/i18n/defaults-eu.js",
+        "content/Scripts/i18n/defaults-eu.js.map",
+        "content/Scripts/i18n/defaults-eu.min.js",
+        "content/Scripts/i18n/defaults-fa_IR.js",
+        "content/Scripts/i18n/defaults-fa_IR.js.map",
+        "content/Scripts/i18n/defaults-fa_IR.min.js",
+        "content/Scripts/i18n/defaults-fi_FI.js",
+        "content/Scripts/i18n/defaults-fi_FI.js.map",
+        "content/Scripts/i18n/defaults-fi_FI.min.js",
+        "content/Scripts/i18n/defaults-fr_FR.js",
+        "content/Scripts/i18n/defaults-fr_FR.js.map",
+        "content/Scripts/i18n/defaults-fr_FR.min.js",
+        "content/Scripts/i18n/defaults-hr_HR.js",
+        "content/Scripts/i18n/defaults-hr_HR.js.map",
+        "content/Scripts/i18n/defaults-hr_HR.min.js",
+        "content/Scripts/i18n/defaults-hu_HU.js",
+        "content/Scripts/i18n/defaults-hu_HU.js.map",
+        "content/Scripts/i18n/defaults-hu_HU.min.js",
+        "content/Scripts/i18n/defaults-id_ID.js",
+        "content/Scripts/i18n/defaults-id_ID.js.map",
+        "content/Scripts/i18n/defaults-id_ID.min.js",
+        "content/Scripts/i18n/defaults-it_IT.js",
+        "content/Scripts/i18n/defaults-it_IT.js.map",
+        "content/Scripts/i18n/defaults-it_IT.min.js",
+        "content/Scripts/i18n/defaults-ja_JP.js",
+        "content/Scripts/i18n/defaults-ja_JP.js.map",
+        "content/Scripts/i18n/defaults-ja_JP.min.js",
+        "content/Scripts/i18n/defaults-kh_KM.js",
+        "content/Scripts/i18n/defaults-kh_KM.js.map",
+        "content/Scripts/i18n/defaults-kh_KM.min.js",
+        "content/Scripts/i18n/defaults-ko_KR.js",
+        "content/Scripts/i18n/defaults-ko_KR.js.map",
+        "content/Scripts/i18n/defaults-ko_KR.min.js",
+        "content/Scripts/i18n/defaults-lt_LT.js",
+        "content/Scripts/i18n/defaults-lt_LT.js.map",
+        "content/Scripts/i18n/defaults-lt_LT.min.js",
+        "content/Scripts/i18n/defaults-lv_LV.js",
+        "content/Scripts/i18n/defaults-lv_LV.js.map",
+        "content/Scripts/i18n/defaults-lv_LV.min.js",
+        "content/Scripts/i18n/defaults-nb_NO.js",
+        "content/Scripts/i18n/defaults-nb_NO.js.map",
+        "content/Scripts/i18n/defaults-nb_NO.min.js",
+        "content/Scripts/i18n/defaults-nl_NL.js",
+        "content/Scripts/i18n/defaults-nl_NL.js.map",
+        "content/Scripts/i18n/defaults-nl_NL.min.js",
+        "content/Scripts/i18n/defaults-pl_PL.js",
+        "content/Scripts/i18n/defaults-pl_PL.js.map",
+        "content/Scripts/i18n/defaults-pl_PL.min.js",
+        "content/Scripts/i18n/defaults-pt_BR.js",
+        "content/Scripts/i18n/defaults-pt_BR.js.map",
+        "content/Scripts/i18n/defaults-pt_BR.min.js",
+        "content/Scripts/i18n/defaults-pt_PT.js",
+        "content/Scripts/i18n/defaults-pt_PT.js.map",
+        "content/Scripts/i18n/defaults-pt_PT.min.js",
+        "content/Scripts/i18n/defaults-ro_RO.js",
+        "content/Scripts/i18n/defaults-ro_RO.js.map",
+        "content/Scripts/i18n/defaults-ro_RO.min.js",
+        "content/Scripts/i18n/defaults-ru_RU.js",
+        "content/Scripts/i18n/defaults-ru_RU.js.map",
+        "content/Scripts/i18n/defaults-ru_RU.min.js",
+        "content/Scripts/i18n/defaults-sk_SK.js",
+        "content/Scripts/i18n/defaults-sk_SK.js.map",
+        "content/Scripts/i18n/defaults-sk_SK.min.js",
+        "content/Scripts/i18n/defaults-sl_SI.js",
+        "content/Scripts/i18n/defaults-sl_SI.js.map",
+        "content/Scripts/i18n/defaults-sl_SI.min.js",
+        "content/Scripts/i18n/defaults-sr_SP.js",
+        "content/Scripts/i18n/defaults-sr_SP.js.map",
+        "content/Scripts/i18n/defaults-sr_SP.min.js",
+        "content/Scripts/i18n/defaults-sv_SE.js",
+        "content/Scripts/i18n/defaults-sv_SE.js.map",
+        "content/Scripts/i18n/defaults-sv_SE.min.js",
+        "content/Scripts/i18n/defaults-th_TH.js",
+        "content/Scripts/i18n/defaults-th_TH.js.map",
+        "content/Scripts/i18n/defaults-th_TH.min.js",
+        "content/Scripts/i18n/defaults-tr_TR.js",
+        "content/Scripts/i18n/defaults-tr_TR.js.map",
+        "content/Scripts/i18n/defaults-tr_TR.min.js",
+        "content/Scripts/i18n/defaults-ua_UA.js",
+        "content/Scripts/i18n/defaults-ua_UA.js.map",
+        "content/Scripts/i18n/defaults-ua_UA.min.js",
+        "content/Scripts/i18n/defaults-vi_VN.js",
+        "content/Scripts/i18n/defaults-vi_VN.js.map",
+        "content/Scripts/i18n/defaults-vi_VN.min.js",
+        "content/Scripts/i18n/defaults-zh_CN.js",
+        "content/Scripts/i18n/defaults-zh_CN.js.map",
+        "content/Scripts/i18n/defaults-zh_CN.min.js",
+        "content/Scripts/i18n/defaults-zh_TW.js",
+        "content/Scripts/i18n/defaults-zh_TW.js.map",
+        "content/Scripts/i18n/defaults-zh_TW.min.js"
+      ]
+    },
     "BouncyCastle.NetCore/1.8.3": {
       "sha512": "jAy3uHN1U9DpoT/TgLqDTEhlccn/4doOVxhSmmNsnoSsGfHT9Lwr634ac9D0YFujAhNw61nWF4UIpHyzv0aQww==",
       "type": "package",
@@ -3319,6 +3494,26 @@
         "lib/netstandard2.0/Google.Protobuf.dll",
         "lib/netstandard2.0/Google.Protobuf.pdb",
         "lib/netstandard2.0/Google.Protobuf.xml"
+      ]
+    },
+    "jQuery/1.9.1": {
+      "sha512": "HiX9icLyiJGgiL5EOIn0d1MBPHVV2M9mzWT4mANdniDNR51RvAFTyKEXEd2+5yQJ4PJ5xePOR61Vjj/omQzYcw==",
+      "type": "package",
+      "path": "jquery/1.9.1",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Content/Scripts/jquery-1.9.1-vsdoc.js",
+        "Content/Scripts/jquery-1.9.1.js",
+        "Content/Scripts/jquery-1.9.1.min.js",
+        "Content/Scripts/jquery-1.9.1.min.map",
+        "Tools/common.ps1",
+        "Tools/install.ps1",
+        "Tools/jquery-1.9.1.intellisense.js",
+        "Tools/uninstall.ps1",
+        "jquery.1.9.1.nupkg.sha512",
+        "jquery.nuspec"
       ]
     },
     "K4os.Compression.LZ4/1.1.11": {
@@ -10202,7 +10397,8 @@
       "Microsoft.EntityFrameworkCore.Tools >= 3.1.13",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 3.1.5",
       "MySql.Data.EntityFrameworkCore >= 8.0.22",
-      "Pomelo.EntityFrameworkCore.MySql >= 3.2.5"
+      "Pomelo.EntityFrameworkCore.MySql >= 3.2.5",
+      "bootstrap-select >= 1.13.18"
     ]
   },
   "packageFolders": {
@@ -10305,6 +10501,10 @@
           "Pomelo.EntityFrameworkCore.MySql": {
             "target": "Package",
             "version": "[3.2.5, )"
+          },
+          "bootstrap-select": {
+            "target": "Package",
+            "version": "[1.13.18, )"
           }
         },
         "imports": [

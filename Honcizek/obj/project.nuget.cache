@@ -1,11 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "5BGrHhn1f47gP0f/CL4BOApDX+NGD+eK52iQ4bAP4UzmnOSDf4doTDcAfHA0hjMCIjT2R3kmX0Ft/QLUarOPVw==",
+  "dgSpecHash": "eoTFAhQBLWyyNm7b8pPjrLsZXnIhCzJRToJNwXBOfKCe/JcWz4TKvEydg+PGzUFj7NfiTmzgvIXCPK2XpTEy1g==",
   "success": true,
   "projectFilePath": "C:\\Users\\alvar\\Desktop\\tuto\\Proyectos\\Honcizek\\Honcizek\\Honcizek.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\alvar\\.nuget\\packages\\bootstrap\\3.0.0\\bootstrap.3.0.0.nupkg.sha512",
+    "C:\\Users\\alvar\\.nuget\\packages\\bootstrap-select\\1.13.18\\bootstrap-select.1.13.18.nupkg.sha512",
     "C:\\Users\\alvar\\.nuget\\packages\\bouncycastle.netcore\\1.8.3\\bouncycastle.netcore.1.8.3.nupkg.sha512",
     "C:\\Users\\alvar\\.nuget\\packages\\google.protobuf\\3.11.4\\google.protobuf.3.11.4.nupkg.sha512",
+    "C:\\Users\\alvar\\.nuget\\packages\\jquery\\1.9.1\\jquery.1.9.1.nupkg.sha512",
     "C:\\Users\\alvar\\.nuget\\packages\\k4os.compression.lz4\\1.1.11\\k4os.compression.lz4.1.1.11.nupkg.sha512",
     "C:\\Users\\alvar\\.nuget\\packages\\k4os.compression.lz4.streams\\1.1.11\\k4os.compression.lz4.streams.1.1.11.nupkg.sha512",
     "C:\\Users\\alvar\\.nuget\\packages\\k4os.hash.xxhash\\1.0.6\\k4os.hash.xxhash.1.0.6.nupkg.sha512",

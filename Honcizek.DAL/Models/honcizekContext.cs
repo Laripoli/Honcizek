@@ -137,16 +137,19 @@ namespace Honcizek.DAL.Models
                 entity.HasOne(d => d.Localidad)
                     .WithMany(p => p.Clientes)
                     .HasForeignKey(d => d.LocalidadId)
+                    .OnDelete(DeleteBehavior.SetNull)
                     .HasConstraintName("FK_clientes_localidades");
 
                 entity.HasOne(d => d.Pais)
                     .WithMany(p => p.Clientes)
                     .HasForeignKey(d => d.PaisId)
+                    .OnDelete(DeleteBehavior.SetNull)
                     .HasConstraintName("FK_clientes_paises");
 
                 entity.HasOne(d => d.Provincia)
                     .WithMany(p => p.Clientes)
                     .HasForeignKey(d => d.ProvinciaId)
+                    .OnDelete(DeleteBehavior.SetNull)
                     .HasConstraintName("FK_clientes_provincias");
             });
 
@@ -162,8 +165,10 @@ namespace Honcizek.DAL.Models
                     .HasColumnType("int(11)");
 
                 entity.Property(e => e.Nombre)
+                    .IsRequired()
                     .HasColumnName("nombre")
-                    .HasMaxLength(255);
+                    .HasMaxLength(255)
+                    .HasDefaultValueSql("''");
 
                 entity.Property(e => e.ProvinciaId)
                     .HasColumnName("provincia_id")
@@ -172,6 +177,7 @@ namespace Honcizek.DAL.Models
                 entity.HasOne(d => d.Provincia)
                     .WithMany(p => p.Localidades)
                     .HasForeignKey(d => d.ProvinciaId)
+                    .OnDelete(DeleteBehavior.SetNull)
                     .HasConstraintName("provincia_id");
             });
 
@@ -184,8 +190,10 @@ namespace Honcizek.DAL.Models
                     .HasColumnType("int(11)");
 
                 entity.Property(e => e.Nombre)
+                    .IsRequired()
                     .HasColumnName("nombre")
-                    .HasMaxLength(80);
+                    .HasMaxLength(80)
+                    .HasDefaultValueSql("''");
             });
 
             modelBuilder.Entity<PartesDeTrabajo>(entity =>
@@ -269,7 +277,9 @@ namespace Honcizek.DAL.Models
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
 
-                entity.Property(e => e.Nombre).HasColumnName("nombre");
+                entity.Property(e => e.Nombre)
+                    .IsRequired()
+                    .HasColumnName("nombre");
 
                 entity.Property(e => e.PaisId)
                     .HasColumnName("pais_id")
@@ -278,7 +288,7 @@ namespace Honcizek.DAL.Models
                 entity.HasOne(d => d.Pais)
                     .WithMany(p => p.Provincias)
                     .HasForeignKey(d => d.PaisId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .OnDelete(DeleteBehavior.SetNull)
                     .HasConstraintName("provincias_pais");
             });
 
@@ -859,8 +869,6 @@ namespace Honcizek.DAL.Models
 
             OnModelCreatingPartial(modelBuilder);
         }
-
-
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }

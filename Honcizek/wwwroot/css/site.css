@@ -26,8 +26,8 @@ a:hover{
     border-color: #1861ac;
 }
 
- Sticky footer styles
--------------------------------------------------- 
+/* Sticky footer styles
+-------------------------------------------------- */
 html {
     font-size: 14px;
 }
@@ -55,15 +55,15 @@ button.accept-policy {
     line-height: inherit;
 }
 
- Sticky footer styles
--------------------------------------------------- 
+/* Sticky footer styles
+-------------------------------------------------- */
 html {
     position: relative;
     min-height: 100%;
 }
 
-body {
      Margin bottom by footer height 
+body {
     margin-bottom: 60px;
 }
 
@@ -78,7 +78,7 @@ body {
 
 table {
     border-collapse: collapse;
-    border-spacing: 1;
+    border-spacing: 1px;
     background: #fff;
     border-radius: 10px;
     overflow: hidden;
@@ -143,6 +143,11 @@ table tbody tr td:last-child {
 table tbody tr td:last-child button{
     align-content:baseline;
 }
+
+table tbody td:last-child a {
+    display: ruby-base;
+}
+
 
     .tipo-persona {
         padding-left: -2vh;

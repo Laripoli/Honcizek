@@ -197,13 +197,5 @@ namespace Honcizek.Controllers.Administrador
             return _context.Clientes.Any(e => e.Id == id);
         }
 
-        public String quita_tildes(String s)
-        {
-            s = s.Replace('Á', 'A');
-            s = s.Replace('á', 'a');
-            s = s.Replace('É', 'E');
-            s = s.Replace('é', 'e');
-            return s;
-        }
     }
 }

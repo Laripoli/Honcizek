@@ -44,7 +44,7 @@
                     </span>
                 </div>
             </a>
-           <a asp-controller="Clientes" asp-action="Index">
+           <a asp-controller="Suscripciones" asp-action="Index">
                <div class="menu-option Suscripciones">
                    <span>
                        Suscripciones
@@ -73,11 +73,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    <script>
-        $(document).ready(function () {
-            console.log("patata");
-        });
-    </script>
+    
     @RenderSection("Scripts", required: false)
 </body>
 </html>

@@ -9,7 +9,7 @@ using Honcizek.DAL.Models;
 
 namespace Honcizek.Controllers_Administrador
 {
-    [Route("Administrador/[controller]/[action]")]
+	[Route("Administrador/[controller]/[action]")]
     public class ProyectosController : Controller
     {
         private readonly honcizekContext _context;
@@ -42,7 +42,7 @@ namespace Honcizek.Controllers_Administrador
                 return NotFound();
             }
 
-            return View("Views/Administrador/Proyectos/Details.cshtml", proyectos);
+            return View("Views/Administrador/Proyectos/Details.cshtml",proyectos);
         }
 
         // GET: Proyectos/Create
@@ -83,7 +83,7 @@ namespace Honcizek.Controllers_Administrador
                 return NotFound();
             }
             ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "Tipo", proyectos.ClienteId);
-            return View("Views/Administrador/Proyectos/Edit.cshtml", proyectos);
+            return View("Views/Administrador/Proyectos/Edit.cshtml",proyectos);
         }
 
         // POST: Proyectos/Edit/5
@@ -119,7 +119,7 @@ namespace Honcizek.Controllers_Administrador
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "Tipo", proyectos.ClienteId);
-            return View("Views/Administrador/Proyectos/Index.cshtml", proyectos);
+            return View("Views/Administrador/Proyectos/Index.cshtml",proyectos);
         }
 
         // GET: Proyectos/Delete/5
@@ -138,7 +138,7 @@ namespace Honcizek.Controllers_Administrador
                 return NotFound();
             }
 
-            return View("Views/Administrador/Proyectos/Delete.cshtml", proyectos);
+            return View("Views/Administrador/Proyectos/Delete.cshtml",proyectos);
         }
 
         // POST: Proyectos/Delete/5

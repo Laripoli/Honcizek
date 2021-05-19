@@ -1,8 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Login";
-    string s = Context.Request.Path;
-    var area = s.Split("/");
-    ViewData["Prueba"] = area[0];
+    Layout = null;
 }
 
 <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
@@ -22,10 +19,10 @@
 
         <!-- Login Form -->
         <form method="post">
+            <span class="text-danger text-center pb-3">@ViewData["Error"]</span><br />
             <input class="fadeIn second" type="text" name="username" placeholder="Usuario" />
             <input class="fadeIn third" type="password" name="password" placeholder="Contraseña" />
-            <input type="submit" value="Iniciar sesión" class="btn btn-primary fadeIn fourth">
-            <span class="text-danger">@ViewData["Error"]</span>
+            <input type="submit" value="Iniciar sesión" class="btn btn-primary fadeIn fourth" />
         </form>
         @*<form>
                 <input type="text" id="login"  name="login" placeholder="login">

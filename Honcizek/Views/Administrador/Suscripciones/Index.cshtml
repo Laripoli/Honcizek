@@ -16,46 +16,22 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.Tipo)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.FechaDesde)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.FechaHasta)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.HorasContratadas)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AvisoCaducidad)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProximidadCaducidad)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Renovacion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RenovacionId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Pendiente)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Caducada)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.PrecioAlta)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.PrecioPeriodo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PrecioConsumoNivel1)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PrecioConsumoNivel2)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PrecioConsumoNivel3)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Periodicidad)
@@ -72,9 +48,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.Proyecto)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Servicio)
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -82,46 +55,22 @@
 @foreach (var item in Model) {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.Tipo)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.FechaDesde)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.FechaHasta)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.HorasContratadas)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AvisoCaducidad)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProximidadCaducidad)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Renovacion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RenovacionId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Pendiente)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Caducada)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.PrecioAlta)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.PrecioPeriodo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PrecioConsumoNivel1)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PrecioConsumoNivel2)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PrecioConsumoNivel3)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Periodicidad)
@@ -137,9 +86,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Proyecto.Estado)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Servicio.Nombre)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">

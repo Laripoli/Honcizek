@@ -6,10 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Honcizek.DAL.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Honcizek.Controllers_Administrador
 {
-	[Route("Administrador/[controller]/[action]")]
+    [Authorize(Roles = "Administrador")]
+    [Route("Administrador/[controller]/[action]")]
     public class ProyectosController : Controller
     {
         private readonly honcizekContext _context;
@@ -48,7 +50,20 @@ namespace Honcizek.Controllers_Administrador
         // GET: Proyectos/Create
         public IActionResult Create()
         {
-            ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "Tipo");
+            DateTime hoy = DateTime.Today;
+            ViewData["hoy"] = hoy.ToString("d");
+            ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "FullName");
+            ViewData["Tipo"] = new List<SelectListItem>
+                {
+                    new SelectListItem {Text = "Cliente", Value = "Cliente"},
+                    new SelectListItem {Text = "Interno", Value = "Interno"}
+                };
+            ViewData["Estado"] = new List<SelectListItem>
+                {
+                    new SelectListItem {Text = "Pendiente", Value = "Pendiente"},
+                    new SelectListItem {Text = "En curso", Value = "En curso"},
+                    new SelectListItem {Text = "Finalizado", Value = "Finalizado"}
+                };
             return View("Views/Administrador/Proyectos/Create.cshtml");
         }
 
@@ -65,7 +80,7 @@ namespace Honcizek.Controllers_Administrador
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "Tipo", proyectos.ClienteId);
+            ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "FullName", proyectos.ClienteId);
             return View("Views/Administrador/Proyectos/Index.cshtml",proyectos);
         }
 
@@ -82,7 +97,18 @@ namespace Honcizek.Controllers_Administrador
             {
                 return NotFound();
             }
-            ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "Tipo", proyectos.ClienteId);
+            ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "FullName", proyectos.ClienteId);
+            ViewData["Tipo"] = new List<SelectListItem>
+                {
+                    new SelectListItem {Text = "Cliente", Value = "Cliente"},
+                    new SelectListItem {Text = "Interno", Value = "Interno"}
+                };
+            ViewData["Estado"] = new List<SelectListItem>
+                {
+                    new SelectListItem {Text = "Pendiente", Value = "Pendiente"},
+                    new SelectListItem {Text = "En curso", Value = "En curso"},
+                    new SelectListItem {Text = "Finalizado", Value = "Finalizado"}
+                };
             return View("Views/Administrador/Proyectos/Edit.cshtml",proyectos);
         }
 
@@ -118,7 +144,7 @@ namespace Honcizek.Controllers_Administrador
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "Tipo", proyectos.ClienteId);
+            ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "FullName", proyectos.ClienteId);
             return View("Views/Administrador/Proyectos/Index.cshtml",proyectos);
         }
 

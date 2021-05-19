@@ -11,6 +11,12 @@
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Tipo)
+        </dt>
+        <dd class = "col-sm-4">
+            @Html.DisplayFor(model => model.Tipo)
+        </dd>
+        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.FechaDesde)
         </dt>
         <dd class = "col-sm-4">
@@ -23,46 +29,10 @@
             @Html.DisplayFor(model => model.FechaHasta)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.HorasContratadas)
-        </dt>
-        <dd class = "col-sm-4">
-            @Html.DisplayFor(model => model.HorasContratadas)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AvisoCaducidad)
-        </dt>
-        <dd class = "col-sm-4">
-            @Html.DisplayFor(model => model.AvisoCaducidad)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ProximidadCaducidad)
-        </dt>
-        <dd class = "col-sm-4">
-            @Html.DisplayFor(model => model.ProximidadCaducidad)
-        </dd>
-        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Renovacion)
         </dt>
         <dd class = "col-sm-4">
             @Html.DisplayFor(model => model.Renovacion)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.RenovacionId)
-        </dt>
-        <dd class = "col-sm-4">
-            @Html.DisplayFor(model => model.RenovacionId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Pendiente)
-        </dt>
-        <dd class = "col-sm-4">
-            @Html.DisplayFor(model => model.Pendiente)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Caducada)
-        </dt>
-        <dd class = "col-sm-4">
-            @Html.DisplayFor(model => model.Caducada)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.PrecioAlta)
@@ -75,24 +45,6 @@
         </dt>
         <dd class = "col-sm-4">
             @Html.DisplayFor(model => model.PrecioPeriodo)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PrecioConsumoNivel1)
-        </dt>
-        <dd class = "col-sm-4">
-            @Html.DisplayFor(model => model.PrecioConsumoNivel1)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PrecioConsumoNivel2)
-        </dt>
-        <dd class = "col-sm-4">
-            @Html.DisplayFor(model => model.PrecioConsumoNivel2)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PrecioConsumoNivel3)
-        </dt>
-        <dd class = "col-sm-4">
-            @Html.DisplayFor(model => model.PrecioConsumoNivel3)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Periodicidad)
@@ -123,12 +75,6 @@
         </dt>
         <dd class = "col-sm-4">
             @Html.DisplayFor(model => model.Proyecto.Estado)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Servicio)
-        </dt>
-        <dd class = "col-sm-4">
-            @Html.DisplayFor(model => model.Servicio.Nombre)
         </dd>
     </dl>
 </div>

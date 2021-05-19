@@ -13,6 +13,7 @@ using System.Globalization;
 
 namespace Honcizek.Controllers.Administrador
 {
+    [Authorize(Roles = "Administrador")]
     [Route("Administrador/[controller]/[action]")]
     public class ClientesController : Controller
     {

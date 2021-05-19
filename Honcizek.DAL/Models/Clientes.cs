@@ -43,5 +43,21 @@ namespace Honcizek.DAL.Models
         public virtual ICollection<Suscripciones> Suscripciones { get; set; }
         public virtual ICollection<Tareas> Tareas { get; set; }
         public virtual ICollection<Tickets> Tickets { get; set; }
+
+        public string FullName
+        {
+            get
+            {
+                return this.Nombre+ " " + this.Apellidos;
+            }
+        }
+
+        public string Fecha
+        {
+            get
+            {
+                return this.FechaRegistro?.ToShortDateString();
+            }
+        }
     }
 }

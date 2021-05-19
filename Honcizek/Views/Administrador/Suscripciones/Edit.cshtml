@@ -14,9 +14,9 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
-                <label asp-for="ServicioId" class="control-label"></label>
-                <select asp-for="ServicioId" class="form-control" asp-items="ViewBag.ServicioId"></select>
-                <span asp-validation-for="ServicioId" class="text-danger"></span>
+                <label asp-for="Tipo" class="control-label"></label>
+                <input asp-for="Tipo" class="form-control" />
+                <span asp-validation-for="Tipo" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ClienteId" class="control-label"></label>
@@ -44,39 +44,9 @@
                 <span asp-validation-for="FechaHasta" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="HorasContratadas" class="control-label"></label>
-                <input asp-for="HorasContratadas" class="form-control" />
-                <span asp-validation-for="HorasContratadas" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AvisoCaducidad" class="control-label"></label>
-                <input asp-for="AvisoCaducidad" class="form-control" />
-                <span asp-validation-for="AvisoCaducidad" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ProximidadCaducidad" class="control-label"></label>
-                <input asp-for="ProximidadCaducidad" class="form-control" />
-                <span asp-validation-for="ProximidadCaducidad" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="Renovacion" class="control-label"></label>
                 <input asp-for="Renovacion" class="form-control" />
                 <span asp-validation-for="Renovacion" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="RenovacionId" class="control-label"></label>
-                <input asp-for="RenovacionId" class="form-control" />
-                <span asp-validation-for="RenovacionId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Pendiente" class="control-label"></label>
-                <input asp-for="Pendiente" class="form-control" />
-                <span asp-validation-for="Pendiente" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Caducada" class="control-label"></label>
-                <input asp-for="Caducada" class="form-control" />
-                <span asp-validation-for="Caducada" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="PrecioAlta" class="control-label"></label>
@@ -87,21 +57,6 @@
                 <label asp-for="PrecioPeriodo" class="control-label"></label>
                 <input asp-for="PrecioPeriodo" class="form-control" />
                 <span asp-validation-for="PrecioPeriodo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PrecioConsumoNivel1" class="control-label"></label>
-                <input asp-for="PrecioConsumoNivel1" class="form-control" />
-                <span asp-validation-for="PrecioConsumoNivel1" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PrecioConsumoNivel2" class="control-label"></label>
-                <input asp-for="PrecioConsumoNivel2" class="form-control" />
-                <span asp-validation-for="PrecioConsumoNivel2" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PrecioConsumoNivel3" class="control-label"></label>
-                <input asp-for="PrecioConsumoNivel3" class="form-control" />
-                <span asp-validation-for="PrecioConsumoNivel3" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Periodicidad" class="control-label"></label>

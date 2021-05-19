@@ -28,39 +28,8 @@ namespace Honcizek.Controllers
 
          public IActionResult Login()
          {
-            ViewData["Layout"] = "";
             return View();
          }
-
-        /* public IActionResult Privacy()
-         {
-             return View();
-         }*/
-
-        /*[HttpPost]
-        public async Task<IActionResult> Login(string username, string password, string ReturnUrl)
-        {
-
-            *//*
-             * Ya se como hacer todo, ahora necesito hacer un IUser para pasarme la informacion y a parte de checkear si es correcto tambien
-             * necesito obtener su rol.
-             * *//*
-            if (username == "Laripoli" && password == "123")
-            {
-                var claims = new List<Claim>
-                {
-                    new Claim(ClaimTypes.Name, username),
-                    new Claim(ClaimTypes.NameIdentifier, password),
-                    new Claim(ClaimTypes.Role, "Administrador")
-                };
-
-                var claimsIdentity = new ClaimsIdentity(claims, "Login");
-
-                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
-                return Redirect(ReturnUrl == null ? "/Escritorio" : ReturnUrl);
-            }
-            else return View();
-        }*/
 
         [HttpPost]
         public async Task<IActionResult> Logout()
@@ -100,7 +69,7 @@ namespace Honcizek.Controllers
                 return Redirect("/"+ usuarioDTO.Tipo +"/Escritorio");
             }
             else {
-                ViewData["Error"] = "Usuario incorrecto";
+                ViewData["Error"] = (ReturnUrl.Length > 0) ? "Usuario incorrecto" : "Debes iniciar sesión para acceder";
                 return View(); }
         }
     }

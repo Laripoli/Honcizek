@@ -22,15 +22,6 @@
                 @Html.DisplayNameFor(model => model.Nombre)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Descripcion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DescripcionDesarrollo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FechaRegistro)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.FechaInicio)
             </th>
             <th>
@@ -64,22 +55,13 @@
                 @Html.DisplayFor(modelItem => item.Nombre)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Descripcion)
+                @Html.DisplayFor(modelItem => item.Finicio)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DescripcionDesarrollo)
+                @Html.DisplayFor(modelItem => item.FFinPrevista)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.FechaRegistro)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaInicio)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaFinPrevista)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaFinReal)
+                @Html.DisplayFor(modelItem => item.FFin)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.HorasInternasPrevistas)
@@ -91,7 +73,14 @@
                 @Html.DisplayFor(modelItem => item.Fase)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Cliente.Tipo)
+                @if (item.Tipo == "Empresa")
+                {
+                    @Html.DisplayFor(modelItem => item.Cliente.RazonSocial)
+                }
+                else
+                {
+                    @Html.DisplayFor(modelItem => item.Cliente.FullName);
+                }
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">

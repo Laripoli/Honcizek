@@ -5,10 +5,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 using Honcizek.DAL.Models;
 
 namespace Honcizek.Controllers_Administrador
 {
+	[Authorize(Roles = "Administrador")]
 	[Route("Administrador/[controller]/[action]")]
     public class SuscripcionesController : Controller
     {
@@ -22,7 +24,7 @@ namespace Honcizek.Controllers_Administrador
         // GET: Suscripciones
         public async Task<IActionResult> Index()
         {
-            var honcizekContext = _context.Suscripciones.Include(s => s.Agente).Include(s => s.Cliente).Include(s => s.Proyecto).Include(s => s.Servicio);
+            var honcizekContext = _context.Suscripciones.Include(s => s.Agente).Include(s => s.Cliente).Include(s => s.Proyecto);
             return View("Views/Administrador/Suscripciones/Index.cshtml",await honcizekContext.ToListAsync());
         }
 
@@ -38,7 +40,6 @@ namespace Honcizek.Controllers_Administrador
                 .Include(s => s.Agente)
                 .Include(s => s.Cliente)
                 .Include(s => s.Proyecto)
-                .Include(s => s.Servicio)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (suscripciones == null)
             {
@@ -54,7 +55,6 @@ namespace Honcizek.Controllers_Administrador
             ViewData["AgenteId"] = new SelectList(_context.Usuarios, "Id", "Id");
             ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "Tipo");
             ViewData["ProyectoId"] = new SelectList(_context.Proyectos, "Id", "Estado");
-            ViewData["ServicioId"] = new SelectList(_context.Servicios, "Id", "Nombre");
             return View("Views/Administrador/Suscripciones/Create.cshtml");
         }
 
@@ -63,7 +63,7 @@ namespace Honcizek.Controllers_Administrador
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,ServicioId,ClienteId,ProyectoId,AgenteId,FechaDesde,FechaHasta,HorasContratadas,AvisoCaducidad,ProximidadCaducidad,Renovacion,RenovacionId,Pendiente,Caducada,PrecioAlta,PrecioPeriodo,PrecioConsumoNivel1,PrecioConsumoNivel2,PrecioConsumoNivel3,Periodicidad,Observaciones")] Suscripciones suscripciones)
+        public async Task<IActionResult> Create([Bind("Id,Tipo,ClienteId,ProyectoId,AgenteId,FechaDesde,FechaHasta,Renovacion,PrecioAlta,PrecioPeriodo,Periodicidad,Observaciones")] Suscripciones suscripciones)
         {
             if (ModelState.IsValid)
             {
@@ -74,7 +74,6 @@ namespace Honcizek.Controllers_Administrador
             ViewData["AgenteId"] = new SelectList(_context.Usuarios, "Id", "Id", suscripciones.AgenteId);
             ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "Tipo", suscripciones.ClienteId);
             ViewData["ProyectoId"] = new SelectList(_context.Proyectos, "Id", "Estado", suscripciones.ProyectoId);
-            ViewData["ServicioId"] = new SelectList(_context.Servicios, "Id", "Nombre", suscripciones.ServicioId);
             return View("Views/Administrador/Suscripciones/Index.cshtml",suscripciones);
         }
 
@@ -94,7 +93,6 @@ namespace Honcizek.Controllers_Administrador
             ViewData["AgenteId"] = new SelectList(_context.Usuarios, "Id", "Id", suscripciones.AgenteId);
             ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "Tipo", suscripciones.ClienteId);
             ViewData["ProyectoId"] = new SelectList(_context.Proyectos, "Id", "Estado", suscripciones.ProyectoId);
-            ViewData["ServicioId"] = new SelectList(_context.Servicios, "Id", "Nombre", suscripciones.ServicioId);
             return View("Views/Administrador/Suscripciones/Edit.cshtml",suscripciones);
         }
 
@@ -103,7 +101,7 @@ namespace Honcizek.Controllers_Administrador
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,ServicioId,ClienteId,ProyectoId,AgenteId,FechaDesde,FechaHasta,HorasContratadas,AvisoCaducidad,ProximidadCaducidad,Renovacion,RenovacionId,Pendiente,Caducada,PrecioAlta,PrecioPeriodo,PrecioConsumoNivel1,PrecioConsumoNivel2,PrecioConsumoNivel3,Periodicidad,Observaciones")] Suscripciones suscripciones)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Tipo,ClienteId,ProyectoId,AgenteId,FechaDesde,FechaHasta,Renovacion,PrecioAlta,PrecioPeriodo,Periodicidad,Observaciones")] Suscripciones suscripciones)
         {
             if (id != suscripciones.Id)
             {
@@ -133,7 +131,6 @@ namespace Honcizek.Controllers_Administrador
             ViewData["AgenteId"] = new SelectList(_context.Usuarios, "Id", "Id", suscripciones.AgenteId);
             ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "Tipo", suscripciones.ClienteId);
             ViewData["ProyectoId"] = new SelectList(_context.Proyectos, "Id", "Estado", suscripciones.ProyectoId);
-            ViewData["ServicioId"] = new SelectList(_context.Servicios, "Id", "Nombre", suscripciones.ServicioId);
             return View("Views/Administrador/Suscripciones/Index.cshtml",suscripciones);
         }
 
@@ -149,7 +146,6 @@ namespace Honcizek.Controllers_Administrador
                 .Include(s => s.Agente)
                 .Include(s => s.Cliente)
                 .Include(s => s.Proyecto)
-                .Include(s => s.Servicio)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (suscripciones == null)
             {

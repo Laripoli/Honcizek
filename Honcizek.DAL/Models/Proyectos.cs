@@ -34,5 +34,35 @@ namespace Honcizek.DAL.Models
         public virtual ICollection<ProyectosParticipantes> ProyectosParticipantes { get; set; }
         public virtual ICollection<Suscripciones> Suscripciones { get; set; }
         public virtual ICollection<Trabajos> Trabajos { get; set; }
+
+        public string FRegistro
+        {
+            get
+            {
+                return this.FechaRegistro.ToShortDateString();
+            }
+        }
+        public string Finicio
+        {
+            get
+            {
+                return this.FechaInicio.ToShortDateString();
+            }
+        }
+        public string FFin
+        {
+            get
+            {
+                return this.FechaFinReal?.ToShortDateString();
+            }
+        }
+        public string FFinPrevista
+        {
+            get
+            {
+                return this.FechaFinPrevista?.ToShortDateString();
+            }
+        }
+
     }
 }

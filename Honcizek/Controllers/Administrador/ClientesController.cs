@@ -96,7 +96,7 @@ namespace Honcizek.Controllers.Administrador
             ViewData["LocalidadId"] = new SelectList(_context.Localidades, "Id", "Id", clientes.LocalidadId);
             ViewData["PaisId"] = new SelectList(_context.Paises, "Id", "Id", clientes.PaisId);
             ViewData["ProvinciaId"] = new SelectList(_context.Provincias, "Id", "Id", clientes.ProvinciaId);
-            return View("Views/Administrador/Clientes/Index.cshtml", clientes);
+            return View("Views/Administrador/Clientes/Create.cshtml", clientes);
         }
 
         // GET: Clientes/Edit/5
@@ -158,7 +158,7 @@ namespace Honcizek.Controllers.Administrador
             ViewData["LocalidadId"] = new SelectList(_context.Localidades, "Id", "Id", clientes.LocalidadId);
             ViewData["PaisId"] = new SelectList(_context.Paises, "Id", "Id", clientes.PaisId);
             ViewData["ProvinciaId"] = new SelectList(_context.Provincias, "Id", "Id", clientes.ProvinciaId);
-            return View("Views/Administrador/Clientes/Index.cshtml", clientes);
+            return View("Views/Administrador/Clientes/Edit.cshtml", clientes);
         }
 
         // GET: Clientes/Delete/5

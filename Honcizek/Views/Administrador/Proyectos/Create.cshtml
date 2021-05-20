@@ -1,29 +1,29 @@
 @model Honcizek.DAL.Models.Proyectos
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Crear proyecto";
 }
 
-<h1>Create</h1>
+<h1>Crear</h1>
 
 <h4>Proyectos</h4>
 <hr />
 <div class="row">
     <div class="col-md-12">
         <form asp-action="Create">
-            <input type="hidden" asp-for="FechaRegistro" value="@ViewData["hoy"]" />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="FechaRegistro" value="@ViewData["hoy"]" />
             <div class="row col-12">
                 <div class="form-group col-4">
                     <label asp-for="Tipo" class="control-label"></label>
-                    <select asp-for="ClienteId" class="form-control" asp-items="ViewBag.Tipo"></select>
+                    <select asp-for="Tipo" class="form-control" asp-items="ViewBag.Tipo"></select>
                 </div>
                 <div class="form-group col-4">
                     <label asp-for="Nombre" class="control-label"></label>
-                    <input asp-for="Nombre" class="form-control" />
+                    <input data-val="true" asp-for="Nombre" class="form-control" />
                     <span asp-validation-for="Nombre" class="text-danger"></span>
                 </div>
-                <div class="form-group col-4">
+                <div class="form-group col-4 cliente-hide">
                     <label asp-for="ClienteId" class="control-label">Cliente</label>
                     <select asp-for="ClienteId" class="form-control" asp-items="ViewBag.ClienteId"></select>
                 </div>
@@ -32,40 +32,34 @@
                 <div class="form-group col-6">
                     <label asp-for="Descripcion" class="control-label">Descripci&oacute;n</label>
                     <textarea asp-for="Descripcion" class="form-control"></textarea>
-                    <span asp-validation-for="Descripcion" class="text-danger"></span>
                 </div>
                 <div class="form-group col-6">
                     <label asp-for="DescripcionDesarrollo" class="control-label">Descripci&oacute;n del desarrollo</label>
                     <textarea asp-for="DescripcionDesarrollo" class="form-control"></textarea>
-                    <span asp-validation-for="DescripcionDesarrollo" class="text-danger"></span>
+
                 </div>
             </div>
             <div class="row col-12">
                 <div class="form-group col-4">
-                    <label asp-for="FechaInicio" class="control-label"></label>
-                    <input type="date" asp-for="FechaInicio" class="form-control" />
-                    <span asp-validation-for="FechaInicio" class="text-danger"></span>
+                    <label asp-for="FechaInicio" class="control-label">Fecha de inicio</label>
+                    <input type="date" data-val="false" asp-for="FechaInicio" class="form-control" />
+
                 </div>
                 <div class="form-group col-4">
-                    <label asp-for="FechaFinPrevista" class="control-label"></label>
+                    <label asp-for="FechaFinPrevista" class="control-label">Fecha final prevista</label>
                     <input type="date" asp-for="FechaFinPrevista" class="form-control" />
-                    <span asp-validation-for="FechaFinPrevista" class="text-danger"></span>
-                </div>
-                <div class="form-group col-4">
-                    <label asp-for="FechaFinReal" class="control-label"></label>
-                    <input type="date" asp-for="FechaFinReal" class="form-control" />
-                    <span asp-validation-for="FechaFinReal" class="text-danger"></span>
+
                 </div>
             </div>
             <div class="row col-12">
                 <div class="form-group col-4">
-                    <label asp-for="HorasInternasPrevistas" class="control-label"></label>
-                    <input asp-for="HorasInternasPrevistas" class="form-control" />
-                    <span asp-validation-for="HorasInternasPrevistas" class="text-danger"></span>
+                    <label asp-for="HorasInternasPrevistas" class="control-label">Horas internas previstas</label>
+                    <input type="number" min="0" value="0" asp-for="HorasInternasPrevistas" class="form-control" />
+
                 </div>
                 <div class="form-group col-4">
                     <label asp-for="Estado" class="control-label"></label>
-                    <select asp-for="ClienteId" class="form-control" asp-items="ViewBag.Estado"></select>
+                    <select asp-for="Estado" class="form-control" asp-items="ViewBag.Estado"></select>
                 </div>
             </div>
             <div class="form-group pl-3">
@@ -81,5 +75,11 @@
 </div>
 
 @section Scripts {
+    <script type="text/javascript" src="~/js/Administrador/Proyectos/Proyectos.js"></script>
+    <script>
+        $(document).ready(function () {
+            Proyectos.init(true);
+        });
+    </script>
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

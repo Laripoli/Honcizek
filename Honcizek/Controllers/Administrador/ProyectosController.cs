@@ -80,8 +80,21 @@ namespace Honcizek.Controllers_Administrador
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "FullName", proyectos.ClienteId);
-            return View("Views/Administrador/Proyectos/Index.cshtml",proyectos);
+            ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "FullName");
+            ViewData["Tipo"] = new List<SelectListItem>
+                {
+                    new SelectListItem {Text = "Cliente", Value = "Cliente",Selected = (proyectos.Tipo=="Cliente")?true:false},
+                    new SelectListItem {Text = "Interno", Value = "Interno",Selected = (proyectos.Tipo=="Interno")?true:false}
+                };
+            ViewData["Estado"] = new List<SelectListItem>
+                {
+                    new SelectListItem {Text = "Pendiente", Value = "Pendiente",Selected = (proyectos.Estado=="Pendiente")?true:false},
+                    new SelectListItem {Text = "En curso", Value = "En curso",Selected = (proyectos.Estado=="En curso")?true:false},
+                    new SelectListItem {Text = "Finalizado", Value = "Finalizado",Selected = (proyectos.Estado=="Finalizado")?true:false}
+                };
+            DateTime hoy = DateTime.Today;
+            ViewData["hoy"] = hoy.ToString("d");
+            return View("Views/Administrador/Proyectos/Create.cshtml",proyectos);
         }
 
         // GET: Proyectos/Edit/5
@@ -145,7 +158,7 @@ namespace Honcizek.Controllers_Administrador
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "FullName", proyectos.ClienteId);
-            return View("Views/Administrador/Proyectos/Index.cshtml",proyectos);
+            return View("Views/Administrador/Proyectos/Edit.cshtml",proyectos);
         }
 
         // GET: Proyectos/Delete/5

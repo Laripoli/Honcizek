@@ -55,13 +55,34 @@
                 @Html.DisplayFor(modelItem => item.Nombre)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Finicio)
+                @if (item.FechaFinPrevista != null)
+                {
+                    @Html.DisplayFor(modelItem => item.Finicio)
+                }
+                else
+                {
+                    <span>Sin especificar</span>
+                }
             </td>
             <td>
+                @if (item.FechaFinPrevista != null)
+                {
                 @Html.DisplayFor(modelItem => item.FFinPrevista)
+                }
+                else
+                {
+                    <span>Sin especificar</span>
+                }
             </td>
             <td>
+                @if(item.FechaFinReal != null)
+                {
                 @Html.DisplayFor(modelItem => item.FFin)
+                }
+                else
+                {
+                    <span>Sin especificar</span>
+                }
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.HorasInternasPrevistas)

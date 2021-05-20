@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 // Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
 // If you have enabled NRTs for your project, then un-comment the following line:
@@ -19,11 +20,12 @@ namespace Honcizek.DAL.Models
         public int Id { get; set; }
         public int ClienteId { get; set; }
         public string Tipo { get; set; }
+        [Required]
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
         public string DescripcionDesarrollo { get; set; }
         public DateTime FechaRegistro { get; set; }
-        public DateTime FechaInicio { get; set; }
+        public DateTime? FechaInicio { get; set; }
         public DateTime? FechaFinPrevista { get; set; }
         public DateTime? FechaFinReal { get; set; }
         public int? HorasInternasPrevistas { get; set; }
@@ -46,7 +48,7 @@ namespace Honcizek.DAL.Models
         {
             get
             {
-                return this.FechaInicio.ToShortDateString();
+                return this.FechaInicio?.ToShortDateString();
             }
         }
         public string FFin

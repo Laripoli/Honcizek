@@ -29,7 +29,10 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Clave)
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Apellidos)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.FechaRegistro)
@@ -39,12 +42,6 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.RazonSocial)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Nombre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Apellidos)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Telefono)
@@ -63,22 +60,19 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Clave)
+                    @Html.DisplayFor(modelItem => item.Nombre)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.FechaRegistro)
+                    @Html.DisplayFor(modelItem => item.Apellidos)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fecha)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Tipo)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.RazonSocial)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nombre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Apellidos)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Telefono)

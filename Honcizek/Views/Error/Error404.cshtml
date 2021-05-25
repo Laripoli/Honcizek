@@ -3,4 +3,39 @@
 *@
 @{
 }
-<h1>404 error</h1>
+<style>
+    body {
+        background-image: url('/css/Error/404_background.png');
+        overflow: hidden;
+        min-height: 100vh;
+        background-color: #efeef0;
+        text-align: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        font-family: Arial;
+        font-size: larger;
+    }
+    body a {
+        text-decoration: none;
+        color: #c6a664;
+    }
+
+    body a:hover {
+        color: #0B1D6E;
+    }
+
+    body h2{
+        position: absolute;
+        top: 25%;
+        left: 15%;
+    }
+    body h3 {
+        position: absolute;
+        top: 35%;
+        left: 15%;
+    }
+</style>
+<body>
+    <h2>Parece que la página a la que intentas acceder no existe..</h2>
+    <h3>Prueba a volver a la página de <a asp-controller="Administrador" asp-action="Escritorio">Inicio</a></h3>
+</body>

@@ -1,5 +1,5 @@
 ﻿@{
-    if (Context.Request.Path != "/")
+    if (Context.Request.Path != "/" && ViewData["layout"] != "")
     {
         string s = Context.Request.Path;
         var area = s.Split("/");

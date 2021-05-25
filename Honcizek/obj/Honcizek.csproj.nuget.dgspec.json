@@ -295,10 +295,6 @@
             "Pomelo.EntityFrameworkCore.MySql": {
               "target": "Package",
               "version": "[3.2.5, )"
-            },
-            "bootstrap-select": {
-              "target": "Package",
-              "version": "[1.13.18, )"
             }
           },
           "imports": [

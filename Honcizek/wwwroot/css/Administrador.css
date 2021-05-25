@@ -35,6 +35,7 @@ aside {
 aside .menu-option {
     color: white;
     padding: 10%;
+    user-select: none;
 }
 
 aside .menu-option:hover {

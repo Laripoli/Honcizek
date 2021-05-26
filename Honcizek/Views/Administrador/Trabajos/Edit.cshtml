@@ -15,6 +15,10 @@
             <input type="hidden" asp-for="Id" />
             <input type="hidden" asp-for="ProyectoId" />
             <div class="form-group">
+                <label asp-for="AgenteId" class="control-label">Pais</label>
+                <select data-live-search="true" asp-for="AgenteId" class="form-control" asp-items="ViewBag.AgenteId"></select>
+            </div>
+            <div class="form-group">
                 <label asp-for="Nombre" class="control-label"></label>
                 <input asp-for="Nombre" class="form-control" />
                 <span asp-validation-for="Nombre" class="text-danger"></span>

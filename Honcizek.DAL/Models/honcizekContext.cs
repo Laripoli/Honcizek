@@ -27,7 +27,6 @@ namespace Honcizek.DAL.Models
         public virtual DbSet<Proyectos> Proyectos { get; set; }
         public virtual DbSet<ProyectosParticipantes> ProyectosParticipantes { get; set; }
         public virtual DbSet<Suscripciones> Suscripciones { get; set; }
-        public virtual DbSet<Tareas> Tareas { get; set; }
         public virtual DbSet<Tickets> Tickets { get; set; }
         public virtual DbSet<Trabajos> Trabajos { get; set; }
         public virtual DbSet<Usuarios> Usuarios { get; set; }
@@ -119,12 +118,16 @@ namespace Honcizek.DAL.Models
                     .HasColumnType("int(11)");
 
                 entity.Property(e => e.RazonSocial)
+                    .IsRequired()
                     .HasColumnName("razon_social")
-                    .HasMaxLength(250);
+                    .HasMaxLength(250)
+                    .HasDefaultValueSql("'Ninguna'");
 
                 entity.Property(e => e.Telefono)
+                    .IsRequired()
                     .HasColumnName("telefono")
-                    .HasMaxLength(50);
+                    .HasMaxLength(50)
+                    .HasDefaultValueSql("'Sin teléfono'");
 
                 entity.Property(e => e.Tipo)
                     .IsRequired()
@@ -212,11 +215,6 @@ namespace Honcizek.DAL.Models
                     .HasColumnName("agente_id")
                     .HasColumnType("int(11)");
 
-                entity.Property(e => e.ContactoNombre)
-                    .IsRequired()
-                    .HasColumnName("contacto_nombre")
-                    .HasMaxLength(250);
-
                 entity.Property(e => e.Descripcion)
                     .IsRequired()
                     .HasColumnName("descripcion");
@@ -245,10 +243,6 @@ namespace Honcizek.DAL.Models
 
                 entity.Property(e => e.TicketId)
                     .HasColumnName("ticket_id")
-                    .HasColumnType("int(11)");
-
-                entity.Property(e => e.Tiempo)
-                    .HasColumnName("tiempo")
                     .HasColumnType("int(11)");
 
                 entity.HasOne(d => d.Agente)
@@ -303,7 +297,8 @@ namespace Honcizek.DAL.Models
 
                 entity.Property(e => e.ClienteId)
                     .HasColumnName("cliente_id")
-                    .HasColumnType("int(11)");
+                    .HasColumnType("int(11)")
+                    .HasDefaultValueSql("'10'");
 
                 entity.Property(e => e.Descripcion).HasColumnName("descripcion");
 
@@ -312,7 +307,8 @@ namespace Honcizek.DAL.Models
                 entity.Property(e => e.Estado)
                     .IsRequired()
                     .HasColumnName("estado")
-                    .HasColumnType("enum('Pendiente','En curso','Finalizado')");
+                    .HasColumnType("enum('Pendiente','En curso','Finalizado')")
+                    .HasDefaultValueSql("'Pendiente'");
 
                 entity.Property(e => e.Fase)
                     .IsRequired()
@@ -341,19 +337,16 @@ namespace Honcizek.DAL.Models
                     .HasColumnType("int(11)");
 
                 entity.Property(e => e.Nombre)
-                    .IsRequired()
                     .HasColumnName("nombre")
                     .HasMaxLength(250);
 
                 entity.Property(e => e.Tipo)
-                    .IsRequired()
                     .HasColumnName("tipo")
                     .HasColumnType("enum('Cliente','Interno')");
 
                 entity.HasOne(d => d.Cliente)
                     .WithMany(p => p.Proyectos)
                     .HasForeignKey(d => d.ClienteId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("cliente_id");
             });
 
@@ -405,9 +398,6 @@ namespace Honcizek.DAL.Models
                 entity.HasIndex(e => e.ProyectoId)
                     .HasName("suscripciones_proyectos");
 
-                entity.HasIndex(e => e.Tipo)
-                    .HasName("sucripciones_servicios");
-
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -427,6 +417,10 @@ namespace Honcizek.DAL.Models
                 entity.Property(e => e.FechaHasta)
                     .HasColumnName("fecha_hasta")
                     .HasColumnType("date");
+
+                entity.Property(e => e.Nombre)
+                    .HasColumnName("nombre")
+                    .HasMaxLength(250);
 
                 entity.Property(e => e.Observaciones).HasColumnName("observaciones");
 
@@ -454,10 +448,9 @@ namespace Honcizek.DAL.Models
                     .HasDefaultValueSql("'0'");
 
                 entity.Property(e => e.Tipo)
-                    .IsRequired()
                     .HasColumnName("tipo")
-                    .HasColumnType("enum('Y','N')")
-                    .HasDefaultValueSql("'Y'");
+                    .HasColumnType("enum('Software','Hardware','Hosting')")
+                    .HasDefaultValueSql("'Software'");
 
                 entity.HasOne(d => d.Agente)
                     .WithMany(p => p.Suscripciones)
@@ -475,84 +468,6 @@ namespace Honcizek.DAL.Models
                     .WithMany(p => p.Suscripciones)
                     .HasForeignKey(d => d.ProyectoId)
                     .HasConstraintName("suscripciones_proyectos");
-            });
-
-            modelBuilder.Entity<Tareas>(entity =>
-            {
-                entity.ToTable("tareas");
-
-                entity.HasIndex(e => e.ClienteId)
-                    .HasName("FK_tareas_clientes");
-
-                entity.HasIndex(e => e.TrabajoId)
-                    .HasName("trabajo_id");
-
-                entity.HasIndex(e => e.UsuarioId)
-                    .HasName("tareas_usuarios");
-
-                entity.Property(e => e.Id)
-                    .HasColumnName("id")
-                    .HasColumnType("int(11)");
-
-                entity.Property(e => e.ClienteId)
-                    .HasColumnName("cliente_id")
-                    .HasColumnType("int(11)");
-
-                entity.Property(e => e.Descripcion).HasColumnName("descripcion");
-
-                entity.Property(e => e.Estado)
-                    .IsRequired()
-                    .HasColumnName("estado")
-                    .HasColumnType("enum('Pendiente','En curso','Finalizada')");
-
-                entity.Property(e => e.FechaCreacion)
-                    .HasColumnName("fecha_creacion")
-                    .HasColumnType("date");
-
-                entity.Property(e => e.HorasPrevistas)
-                    .HasColumnName("horas_previstas")
-                    .HasColumnType("int(11)")
-                    .HasDefaultValueSql("'0'");
-
-                entity.Property(e => e.MinutosPrevistos)
-                    .HasColumnName("minutos_previstos")
-                    .HasColumnType("int(11)")
-                    .HasDefaultValueSql("'0'");
-
-                entity.Property(e => e.Nombre)
-                    .IsRequired()
-                    .HasColumnName("nombre")
-                    .HasMaxLength(250);
-
-                entity.Property(e => e.TiempoPrevisto)
-                    .HasColumnName("tiempo_previsto")
-                    .HasColumnType("int(11)");
-
-                entity.Property(e => e.TrabajoId)
-                    .HasColumnName("trabajo_id")
-                    .HasColumnType("int(11)");
-
-                entity.Property(e => e.UsuarioId)
-                    .HasColumnName("usuario_id")
-                    .HasColumnType("int(11)");
-
-                entity.HasOne(d => d.Cliente)
-                    .WithMany(p => p.Tareas)
-                    .HasForeignKey(d => d.ClienteId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_tareas_clientes");
-
-                entity.HasOne(d => d.Trabajo)
-                    .WithMany(p => p.Tareas)
-                    .HasForeignKey(d => d.TrabajoId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("trabajo_id");
-
-                entity.HasOne(d => d.Usuario)
-                    .WithMany(p => p.Tareas)
-                    .HasForeignKey(d => d.UsuarioId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("tareas_usuarios");
             });
 
             modelBuilder.Entity<Tickets>(entity =>
@@ -579,11 +494,6 @@ namespace Honcizek.DAL.Models
                 entity.Property(e => e.ClienteId)
                     .HasColumnName("cliente_id")
                     .HasColumnType("int(11)");
-
-                entity.Property(e => e.ContactoNombre)
-                    .IsRequired()
-                    .HasColumnName("contacto_nombre")
-                    .HasMaxLength(250);
 
                 entity.Property(e => e.Descripcion)
                     .IsRequired()
@@ -643,11 +553,18 @@ namespace Honcizek.DAL.Models
             {
                 entity.ToTable("trabajos");
 
+                entity.HasIndex(e => e.AgenteId)
+                    .HasName("agente_id");
+
                 entity.HasIndex(e => e.ProyectoId)
                     .HasName("trabajos_proyectos");
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.AgenteId)
+                    .HasColumnName("agente_id")
                     .HasColumnType("int(11)");
 
                 entity.Property(e => e.Descripcion)
@@ -662,6 +579,12 @@ namespace Honcizek.DAL.Models
                 entity.Property(e => e.ProyectoId)
                     .HasColumnName("proyecto_id")
                     .HasColumnType("int(11)");
+
+                entity.HasOne(d => d.Agente)
+                    .WithMany(p => p.Trabajos)
+                    .HasForeignKey(d => d.AgenteId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_trabajos_usuarios");
 
                 entity.HasOne(d => d.Proyecto)
                     .WithMany(p => p.Trabajos)
@@ -704,7 +627,7 @@ namespace Honcizek.DAL.Models
 
                 entity.Property(e => e.Puesto)
                     .HasColumnName("puesto")
-                    .HasColumnType("enum('Administrador','Programador','Cliente')");
+                    .HasColumnType("enum('Administrador','Programador')");
             });
 
             OnModelCreatingPartial(modelBuilder);

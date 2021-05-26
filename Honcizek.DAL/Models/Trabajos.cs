@@ -10,18 +10,14 @@ namespace Honcizek.DAL.Models
 {
     public partial class Trabajos
     {
-        public Trabajos()
-        {
-            Tareas = new HashSet<Tareas>();
-        }
-
         public int Id { get; set; }
         public int ProyectoId { get; set; }
         [Required(ErrorMessage = "Debes introducir un nombre")]
         public string Nombre { get; set; }
+        public int AgenteId { get; set; }
         public string Descripcion { get; set; }
 
+        public virtual Usuarios Agente { get; set; }
         public virtual Proyectos Proyecto { get; set; }
-        public virtual ICollection<Tareas> Tareas { get; set; }
     }
 }

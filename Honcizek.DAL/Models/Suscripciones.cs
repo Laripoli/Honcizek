@@ -15,8 +15,9 @@ namespace Honcizek.DAL.Models
         }
 
         public int Id { get; set; }
-        public string Tipo { get; set; }
         public int ClienteId { get; set; }
+        public string Tipo { get; set; }
+        public string Nombre { get; set; }
         public int? ProyectoId { get; set; }
         public int AgenteId { get; set; }
         public DateTime FechaDesde { get; set; }

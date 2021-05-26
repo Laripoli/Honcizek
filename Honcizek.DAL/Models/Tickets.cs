@@ -18,7 +18,6 @@ namespace Honcizek.DAL.Models
         public int SuscripcionId { get; set; }
         public int AgenteId { get; set; }
         public int ClienteId { get; set; }
-        public string ContactoNombre { get; set; }
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
         public DateTime FechaRegistro { get; set; }

@@ -36,7 +36,7 @@ namespace Honcizek.Controllers_Administrador
                 ViewData["error"] = true;
             }
             string query = "Select * from trabajos where proyecto_id= {0}";
-            var honcizekContext = _context.Trabajos.FromSqlRaw(query, id).Include(t => t.Proyecto);
+            var honcizekContext = _context.Trabajos.FromSqlRaw(query, id).Include(t => t.Proyecto).Include(t => t.Agente);
             /*var honcizekContext = _context.Trabajos.Include(t => t.Proyecto);*/
             ViewData["proyecto_id"] = id;
             return View("Views/Administrador/Trabajos/Index.cshtml",await honcizekContext.ToListAsync());
@@ -71,6 +71,7 @@ namespace Honcizek.Controllers_Administrador
                 ViewData["error"] = true;
             }
             ViewData["proyecto_id"] = id;
+            ViewData["AgenteId"] = new SelectList(_context.Usuarios, "Id", "FullName");
             return View("Views/Administrador/Trabajos/Create.cshtml");
         }
 
@@ -79,7 +80,7 @@ namespace Honcizek.Controllers_Administrador
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,ProyectoId,Nombre,Descripcion")] Trabajos trabajos)
+        public async Task<IActionResult> Create([Bind("Id,ProyectoId,AgenteId,Nombre,Descripcion")] Trabajos trabajos)
         {
             if (ModelState.IsValid)
             {
@@ -88,6 +89,7 @@ namespace Honcizek.Controllers_Administrador
                 return RedirectToAction(nameof(Index), new { id = trabajos.ProyectoId });
             }
             ViewData["proyecto_id"] = trabajos.ProyectoId;
+            ViewData["AgenteId"] = new SelectList(_context.Usuarios, "Id", "FullName",trabajos.AgenteId);
             return View("Views/Administrador/Trabajos/Create.cshtml",trabajos);
         }
 
@@ -105,6 +107,7 @@ namespace Honcizek.Controllers_Administrador
                 return NotFound();
             }
             ViewData["proyecto_id"] = trabajos.ProyectoId;
+            ViewData["AgenteId"] = new SelectList(_context.Usuarios, "Id", "FullName",trabajos.AgenteId);
             return View("Views/Administrador/Trabajos/Edit.cshtml",trabajos);
         }
 
@@ -113,7 +116,7 @@ namespace Honcizek.Controllers_Administrador
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,ProyectoId,Nombre,Descripcion")] Trabajos trabajos)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,ProyectoId,AgenteId,Nombre,Descripcion")] Trabajos trabajos)
         {
             if (id != trabajos.Id)
             {
@@ -141,6 +144,7 @@ namespace Honcizek.Controllers_Administrador
                 return RedirectToAction(nameof(Index), new { id = trabajos.ProyectoId });
             }
             ViewData["proyecto_id"] = trabajos.ProyectoId;
+            ViewData["AgenteId"] = new SelectList(_context.Usuarios, "Id", "FullName",trabajos.AgenteId);
             return View("Views/Administrador/Trabajos/Edit.cshtml",trabajos);
         }
 

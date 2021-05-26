@@ -1,0 +1,35 @@
+@model Honcizek.DAL.Models.ProyectosParticipantes
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h3>Seguro que quieres eliminarlo?</h3>
+<div>
+    <h4>ProyectosParticipantes</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Proyecto)
+        </dt>
+        <dd class = "col-sm-4">
+            @Html.DisplayFor(model => model.Proyecto.Estado)
+        </dd class>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Usuario)
+        </dt>
+        <dd class = "col-sm-4">
+            @Html.DisplayFor(model => model.Usuario.Id)
+        </dd class>
+    </dl>
+    
+    <form class="pb-3" asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Borrar" class="btn btn-danger" />
+    </form>
+	<a asp-action="Index">
+			<button class="btn btn-primary">Volver al listado</button>
+		</a>
+</div>

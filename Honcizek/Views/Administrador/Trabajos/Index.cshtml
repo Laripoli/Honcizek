@@ -15,6 +15,7 @@
             </a>
         </p>
         <p class="float-lg-right">
+            
             <a asp-controller="Proyectos" asp-action="Edit" asp-route-id="@ViewData["proyecto_id"]">
                 <button class="btn btn-warning">
                     Volver al proyecto
@@ -29,7 +30,9 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Nombre)
                 </th>
-                
+                <th>
+                    @Html.DisplayNameFor(model => model.Agente)
+                </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Proyecto)
                 </th>
@@ -43,7 +46,9 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.Nombre)
                     </td>
-                    
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Agente.FullName)
+                    </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Proyecto.Nombre)
                     </td>
@@ -68,6 +73,13 @@
             }
         </tbody>
     </table>
+    <div class="float-right">
+        <a asp-controller="Proyectos" asp-action="Index">
+            <button class="btn btn-secondary">
+                Volver al listado de proyectos
+            </button>
+        </a>
+    </div>
 }
 else
 {

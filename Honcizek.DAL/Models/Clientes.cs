@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 // Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
 // If you have enabled NRTs for your project, then un-comment the following line:
@@ -13,12 +14,13 @@ namespace Honcizek.DAL.Models
         {
             Proyectos = new HashSet<Proyectos>();
             Suscripciones = new HashSet<Suscripciones>();
-            Tareas = new HashSet<Tareas>();
             Tickets = new HashSet<Tickets>();
         }
 
         public int Id { get; set; }
+        [Required(ErrorMessage = "Debes introducir un nombre de usuario")]
         public string Login { get; set; }
+        [Required(ErrorMessage = "Debes introducir una contraseña")]
         public string Clave { get; set; }
         public int? LocalidadId { get; set; }
         public int? ProvinciaId { get; set; }
@@ -41,14 +43,13 @@ namespace Honcizek.DAL.Models
         public virtual Provincias Provincia { get; set; }
         public virtual ICollection<Proyectos> Proyectos { get; set; }
         public virtual ICollection<Suscripciones> Suscripciones { get; set; }
-        public virtual ICollection<Tareas> Tareas { get; set; }
         public virtual ICollection<Tickets> Tickets { get; set; }
 
         public string FullName
         {
             get
             {
-                return this.Nombre+ " " + this.Apellidos;
+                return this.Nombre + " " + this.Apellidos;
             }
         }
 

@@ -188,7 +188,6 @@ C:\Users\alvar\Desktop\tuto\Proyectos\Honcizek\Honcizek\bin\Debug\netcoreapp3.1\
 C:\Users\alvar\Desktop\tuto\Proyectos\Honcizek\Honcizek\bin\Debug\netcoreapp3.1\Microsoft.Extensions.FileProviders.Embedded.dll
 C:\Users\alvar\Desktop\tuto\Proyectos\Honcizek\Honcizek\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Identity.Core.dll
 C:\Users\alvar\Desktop\tuto\Proyectos\Honcizek\Honcizek\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Identity.Stores.dll
-C:\Users\alvar\Desktop\tuto\Proyectos\Honcizek\Honcizek\obj\Debug\netcoreapp3.1\Honcizek.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\alvar\Desktop\tuto\Proyectos\Honcizek\honcizek\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 C:\Users\alvar\Desktop\tuto\Proyectos\Honcizek\Honcizek\bin\Debug\netcoreapp3.1\Honcizek.BL.dll
 C:\Users\alvar\Desktop\tuto\Proyectos\Honcizek\Honcizek\bin\Debug\netcoreapp3.1\Honcizek.Core.dll
@@ -481,3 +480,8 @@ C:\Users\alvar\Desktop\tuto\Proyectos\Honcizek\Honcizek\obj\Debug\netcoreapp3.1\
 C:\Users\alvar\Desktop\tuto\Proyectos\Honcizek\Honcizek\obj\Debug\netcoreapp3.1\Razor\Views\Administrador\Trabajos\Details.cshtml.g.cs
 C:\Users\alvar\Desktop\tuto\Proyectos\Honcizek\Honcizek\obj\Debug\netcoreapp3.1\Razor\Views\Administrador\Trabajos\Edit.cshtml.g.cs
 C:\Users\alvar\Desktop\tuto\Proyectos\Honcizek\Honcizek\obj\Debug\netcoreapp3.1\Razor\Views\Administrador\Trabajos\Index.cshtml.g.cs
+C:\Users\alvar\Desktop\tuto\Proyectos\Honcizek\Honcizek\obj\Debug\netcoreapp3.1\Razor\Views\Administrador\Participantes\Create.cshtml.g.cs
+C:\Users\alvar\Desktop\tuto\Proyectos\Honcizek\Honcizek\obj\Debug\netcoreapp3.1\Razor\Views\Administrador\Participantes\Delete.cshtml.g.cs
+C:\Users\alvar\Desktop\tuto\Proyectos\Honcizek\Honcizek\obj\Debug\netcoreapp3.1\Razor\Views\Administrador\Participantes\Details.cshtml.g.cs
+C:\Users\alvar\Desktop\tuto\Proyectos\Honcizek\Honcizek\obj\Debug\netcoreapp3.1\Razor\Views\Administrador\Participantes\Edit.cshtml.g.cs
+C:\Users\alvar\Desktop\tuto\Proyectos\Honcizek\Honcizek\obj\Debug\netcoreapp3.1\Razor\Views\Administrador\Participantes\Index.cshtml.g.cs

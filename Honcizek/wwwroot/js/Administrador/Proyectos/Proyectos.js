@@ -16,7 +16,6 @@
         }
 
 
-
         $('#Tipo').on('change', function () {
             if ($(this).val() == "Interno") {
                 $('.cliente-hide').addClass('d-none');
@@ -29,13 +28,14 @@
     }
 
     var _validar_descripciones = function () {
-        $('input[type="submit"]').on('click', function () {
+        $('form').submit(function () {
             if ($('#Descripcion').val() == "") {
                 $('#Descripcion').val("Sin descripción");
             }
             if ($('#DescripcionDesarrollo').val() == "") {
                 $('#DescripcionDesarrollo').val("Sin descripción del desarrollo");
             }
+            return true;
         })
         
     }

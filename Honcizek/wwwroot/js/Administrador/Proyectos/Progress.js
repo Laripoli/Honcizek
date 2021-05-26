@@ -1,8 +1,9 @@
 ﻿var Progress = function () {
 
-    var handler = function (id_proyecto) {
+    var handler = function (fase) {
         _style();
-        _faseradio(id_proyecto);
+        if(fase!=null)
+        _faseradio(fase);
     }
 
     var _style = function () {
@@ -15,74 +16,84 @@
 
         //Reaccion al click
         $('#Analisis').on('click', function () {
+            $('.fase').find('input').attr('checked', false);
             $pb.css('width', '11.2%');
             eliminarClase();
             $pb.addClass('bc-analisis');
+            $(this).attr('checked', true);
         });
 
-        $('#Diseño').on('click', function () {
+        $('#Diseno').on('click', function () {
+            $('.fase').find('input').attr('checked', false);
             $pb.css('width', '21.5%');
             eliminarClase();
-            $pb.addClass('bc-diseño');
+            $pb.addClass('bc-diseno');
+            $(this).attr('checked', true);
         });
 
         $('#Maquetacion').on('click', function () {
+            $('.fase').find('input').attr('checked', false);
             $pb.css('width', '33%');
             eliminarClase();
             $pb.addClass('bc-maquetacion');
+            $(this) .attr('checked', true);
         });
 
         $('#Desarrollo').on('click', function () {
+            $('.fase').find('input').attr('checked', false);
             $pb.css('width', '46.5%');
             eliminarClase();
             $pb.addClass('bc-desarrollo');
+            console.log("d");
+            $(this) .attr('checked', true);
         });
 
         $('#Pruebas\\ internas').on('click', function () {
+            $('.fase').find('input').attr('checked', false);
             $pb.css('width', '60%');
             eliminarClase();
             $pb.addClass('bc-pruebas-internas');
+            $(this) .attr('checked', true);
         });
 
         $('#Pruebas\\ cliente').on('click', function () {
+            $('.fase').find('input').attr('checked', false);
             $pb.css('width', '75%');
             eliminarClase();
             $pb.addClass('bc-pruebas-cliente');
+            $(this) .attr('checked', true);
         });
 
         $('#Implantacion').on('click', function () {
+            $('.fase').find('input').attr('checked', false);
             $pb.css('width', '100%');
             eliminarClase();
             $pb.addClass('bc-implantacion');
+            $(this) .attr('checked', true);
         });
     };
 
 
-    var _faseradio = function (id_proyecto) { //Sin esto al editar la barra no muestra el valor de la fase del proyecto seleccionado   
-        $.ajax('/administrador/proyectos/ajax_fases', {
-            type: 'post',
-            data: { 'proyecto_id': id_proyecto },
-            dataType: 'JSON',
-            success: function (response) {
-                switch (response.fase) {
-                    case "Pruebas internas":
-                        $("#Pruebas\\ internas").trigger('click');
-                        break;
+    var _faseradio = function (fase) { //Sin esto al editar la barra no muestra el valor de la fase del proyecto seleccionado   
+        switch (fase) {
+            case "Pruebas internas":
+                $("#Pruebas\\ internas").trigger('click');
+                break;
 
-                    case "Pruebas cliente":
-                        $("#Pruebas\\ cliente").trigger('click');
-                        break;
+            case "Pruebas cliente":
+                $("#Pruebas\\ cliente").trigger('click');
+                break;
 
-                    default:
-                        $("#" + response.fase).trigger('click');
-                }
-            }
-        });
+            default:
+                $("#" + fase).trigger('click');
+                console.log(fase);
+        }      
+       
     }
 
     return {
-        init: function (id_proyecto) {
-            handler(id_proyecto);
+        init: function (fase) {
+            handler(fase);
         },
     }
 }();

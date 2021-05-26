@@ -152,3 +152,98 @@ table tbody td:last-child a {
     .tipo-persona {
         padding-left: -2vh;
     }
+
+/*Colores radios fase de proyecto*/
+
+.c-analisis {
+    color: #8edb41
+}
+
+.c-diseno {
+    color: #E1C03B
+}
+
+.c-maquetacion {
+    color: #f65314;
+}
+
+.c-desarrollo {
+    color: #2E8DE7
+}
+
+.c-pruebas-internas {
+    color: #00C5DC
+}
+
+.c-pruebas-cliente {
+    color: #9918E7
+}
+
+.c-implantacion {
+    color: #7cbb00
+}
+
+.bc-analisis {
+    background-color: #8edb41;
+    color: white;
+}
+
+.bc-diseno {
+    background-color: #E1C03B;
+    color: white;
+}
+
+.bc-maquetacion {
+    background-color: #f65314;
+    color: white;
+}
+
+.bc-desarrollo {
+    background-color: #2E8DE7;
+    color: white;
+}
+
+.bc-pruebas-internas {
+    background-color: #00C5DC;
+    color: white;
+}
+
+.bc-pruebas-cliente {
+    background-color: #9918E7;
+    color: white;
+}
+
+.bc-implantacion {
+    background-color: #7cbb00;
+    color: white;
+}
+/*Fin colores radio*/
+.fase ul li,label{
+    user-select:none;
+    cursor: pointer;
+}
+
+.p-esfera {
+    font-size: 200%;
+    position: relative;
+    top: 4px;
+    left: 2px;
+}
+
+.p-label-fase {
+    padding: 5px 35px;
+    color: rgba(17, 17, 17, 0.801);
+    font-size: 15px !important;
+    font-weight: 500 !important;
+    cursor: pointer;
+    transition: all 0.8s;
+}
+
+.honci-link {
+    text-decoration: none;
+    color: #c6a664;
+}
+
+.honci-link:hover {
+    color: #0B1D6E;
+}

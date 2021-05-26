@@ -46,6 +46,11 @@ namespace Honcizek.Controllers_Administrador
 
             return View("Views/Administrador/Proyectos/Details.cshtml",proyectos);
         }
+        [HttpPost]
+        public int prueba(int proyecto_id)
+        {
+            return proyecto_id;
+        }
 
         // GET: Proyectos/Create
         public IActionResult Create()
@@ -76,6 +81,10 @@ namespace Honcizek.Controllers_Administrador
         {
             if (ModelState.IsValid)
             {
+                if(proyectos.Fase == "Diseno")
+                {
+                    proyectos.Fase = "Diseño";
+                }
                 _context.Add(proyectos);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -122,6 +131,7 @@ namespace Honcizek.Controllers_Administrador
                     new SelectListItem {Text = "En curso", Value = "En curso"},
                     new SelectListItem {Text = "Finalizado", Value = "Finalizado"}
                 };
+            proyectos.Fase = proyectos.Fase == "Diseño" ? "Diseno" : proyectos.Fase;
             return View("Views/Administrador/Proyectos/Edit.cshtml",proyectos);
         }
 

@@ -104,18 +104,26 @@
                 }
             </td>
             <td>
+                <a asp-controller="Trabajos" asp-action="Index" asp-route-id="@item.Id">
+                    <button class="btn btn-warning">
+                        Trabajos
+                    </button>
+                </a>
                 <a asp-action="Edit" asp-route-id="@item.Id">
-					<button class="btn btn-primary">Editar
-					</button>
-				</a>
-				<a asp-action="Details" asp-route-id="@item.Id">
-					<button class="btn btn-info">Detalles
-					</button>
-				</a>
-				<a asp-action="Delete" asp-route-id="@item.Id">
-					<button class="btn btn-danger">Eliminar
-					</button>
-				</a>
+                    <button class="btn btn-primary">
+                        Editar
+                    </button>
+                </a>
+                <a asp-action="Details" asp-route-id="@item.Id">
+                    <button class="btn btn-info">
+                        Detalles
+                    </button>
+                </a>
+                <a asp-action="Delete" asp-route-id="@item.Id">
+                    <button class="btn btn-danger">
+                        Eliminar
+                    </button>
+                </a>
             </td>
         </tr>
 }

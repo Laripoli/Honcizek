@@ -36,7 +36,7 @@
       <button class="btn btn-info">Editar</button>
     </a>
 	</div>
-	<a asp-action="Index">
-		<button class="btn btn-primary">Volver al listado</button>
-	</a>
+    <a asp-controller="Trabajos" asp-action="Index" asp-route-id="@Model.ProyectoId">
+        <button class="btn btn-primary">Volver al listado</button>
+    </a>
 </div>

@@ -9,31 +9,32 @@
 <hr />
 @if (!(bool)ViewData["error"])
 {
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Nombre" class="control-label"></label>
-                <input asp-for="Nombre" class="form-control" />
-                <span asp-validation-for="Nombre" class="text-danger"></span>
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="ProyectoId" value="@ViewData["proyecto_id"]" />
+                <div class="form-group">
+                    <label asp-for="Nombre" class="control-label"></label>
+                    <input asp-for="Nombre" class="form-control" />
+                    <span asp-validation-for="Nombre" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Descripcion" class="control-label"></label>
+                    <textarea asp-for="Descripcion" class="form-control"></textarea>
+                    <span asp-validation-for="Descripcion" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Crear" class="btn btn-info" />
+                </div>
+            </form>
+            <div class="pt-3 ">
+                <a asp-controller="Trabajos" asp-action="Index" asp-route-id="@ViewData["proyecto_id"]">
+                    <button class="btn btn-primary">Volver al listado</button>
+                </a>
             </div>
-            <div class="form-group">
-                <label asp-for="Descripcion" class="control-label"></label>
-                <input asp-for="Descripcion" class="form-control" />
-                <span asp-validation-for="Descripcion" class="text-danger"></span>
-            </div>
-            <div class="form-group pl-3">
-                <input type="submit" value="Crear" class="btn btn-info" />
-            </div>
-        </form>
-        <div class="pt-3 pl-3">
-            <a asp-controller="Trabajos" asp-action="Index" asp-route-id="@ViewData["proyecto_id"]">
-                <button class="btn btn-primary">Volver al listado</button>
-            </a>
         </div>
     </div>
-</div>
 }
 else
 {
@@ -42,5 +43,11 @@ else
 }
 
 @section Scripts {
+    <script type="text/javascript" src="~/js/Administrador/Trabajos/Trabajos.js"></script>
+    <script>
+        $(document).ready(function () {
+            Trabajos.init();
+        });
+    </script>
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

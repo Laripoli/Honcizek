@@ -28,6 +28,13 @@ namespace Honcizek.Controllers_Administrador
             {
                 return NotFound();
             }
+
+            ViewData["error"] = false;
+            var proyectos = await _context.Proyectos.FindAsync(id);
+            if (proyectos == null)
+            {
+                ViewData["error"] = true;
+            }
             string query = "Select * from trabajos where proyecto_id= {0}";
             var honcizekContext = _context.Trabajos.FromSqlRaw(query, id).Include(t => t.Proyecto);
             /*var honcizekContext = _context.Trabajos.Include(t => t.Proyecto);*/
@@ -80,7 +87,7 @@ namespace Honcizek.Controllers_Administrador
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index), new { id = trabajos.ProyectoId });
             }
-            ViewData["ProyectoId"] = new SelectList(_context.Proyectos, "Id", "Nombre", trabajos.ProyectoId);
+            ViewData["proyecto_id"] = trabajos.ProyectoId;
             return View("Views/Administrador/Trabajos/Create.cshtml",trabajos);
         }
 
@@ -97,7 +104,7 @@ namespace Honcizek.Controllers_Administrador
             {
                 return NotFound();
             }
-            ViewData["ProyectoId"] = new SelectList(_context.Proyectos, "Id", "Nombre", trabajos.ProyectoId);
+            ViewData["proyecto_id"] = trabajos.ProyectoId;
             return View("Views/Administrador/Trabajos/Edit.cshtml",trabajos);
         }
 
@@ -131,9 +138,9 @@ namespace Honcizek.Controllers_Administrador
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index), new { id = trabajos.ProyectoId });
             }
-            ViewData["ProyectoId"] = new SelectList(_context.Proyectos, "Id", "Nombre", trabajos.ProyectoId);
+            ViewData["proyecto_id"] = trabajos.ProyectoId;
             return View("Views/Administrador/Trabajos/Edit.cshtml",trabajos);
         }
 
@@ -144,6 +151,7 @@ namespace Honcizek.Controllers_Administrador
             {
                 return NotFound();
             }
+
 
             var trabajos = await _context.Trabajos
                 .Include(t => t.Proyecto)
@@ -164,7 +172,7 @@ namespace Honcizek.Controllers_Administrador
             var trabajos = await _context.Trabajos.FindAsync(id);
             _context.Trabajos.Remove(trabajos);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Index), new { id = trabajos.ProyectoId });
         }
 
         private bool TrabajosExists(int id)

@@ -30,6 +30,7 @@ namespace Honcizek.DAL.Models
         public DateTime? FechaFinReal { get; set; }
         public int? HorasInternasPrevistas { get; set; }
         public string Estado { get; set; }
+        [Required(ErrorMessage = "Debes seleccionar una fase del proyecto")]
         public string Fase { get; set; }
 
         public virtual Clientes Cliente { get; set; }

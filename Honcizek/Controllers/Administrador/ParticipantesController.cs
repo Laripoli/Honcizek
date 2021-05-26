@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using Honcizek.DAL.Models;
+using System.Collections;
 
 namespace Honcizek.Controllers_Administrador
 {
@@ -22,37 +23,69 @@ namespace Honcizek.Controllers_Administrador
         }
 
         // GET: Participantes
-        public async Task<IActionResult> Index()
-        {
-            var honcizekContext = _context.ProyectosParticipantes.Include(p => p.Proyecto).Include(p => p.Usuario);
-            return View("Views/Administrador/Participantes/Index.cshtml",await honcizekContext.ToListAsync());
-        }
-
-        // GET: Participantes/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Index(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
-
-            var proyectosParticipantes = await _context.ProyectosParticipantes
-                .Include(p => p.Proyecto)
-                .Include(p => p.Usuario)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (proyectosParticipantes == null)
+            ViewData["error"] = false;
+            var proyectos = await _context.Proyectos.FindAsync(id);
+            if (proyectos == null)
             {
-                return NotFound();
+                ViewData["error"] = true;
             }
+            string query = "Select * from proyectos_participantes where proyecto_id= {0}";
+            var honcizekContext = _context.ProyectosParticipantes.FromSqlRaw(query, id).Include(t => t.Proyecto).Include(t => t.Usuario);
+            /*var honcizekContext = _context.Trabajos.Include(t => t.Proyecto);*/
+            ViewData["proyecto_id"] = id;
 
-            return View("Views/Administrador/Participantes/Details.cshtml",proyectosParticipantes);
+            /*var honcizekContext = _context.ProyectosParticipantes.Include(p => p.Proyecto).Include(p => p.Usuario);*/
+            return View("Views/Administrador/Participantes/Index.cshtml",await honcizekContext.ToListAsync());
         }
 
         // GET: Participantes/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create(int? id)
         {
-            ViewData["ProyectoId"] = new SelectList(_context.Proyectos, "Id", "Estado");
-            ViewData["UsuarioId"] = new SelectList(_context.Usuarios, "Id", "Id");
+            if (id == null)
+            {
+                return NotFound();
+            }
+            ViewData["error"] = false;
+            ViewData["lleno"] = false;
+            var proyectos = await _context.Proyectos.FindAsync(id);
+            if (proyectos == null)
+            {
+                ViewData["error"] = true;
+            }
+
+            var usuariosExistentes = _context.Usuarios.FromSqlRaw("SELECT U.* FROM usuarios U" +
+                " LEFT JOIN proyectos_participantes PP ON U.id = PP.usuario_id"+
+                " WHERE PP.proyecto_id = 10").ToList();
+            var usuarios = _context.Usuarios.ToList();
+            var usuariosNoElegidos = new List<Usuarios>();
+            foreach(Usuarios usuario in usuarios)
+            {
+                bool repetido = false;
+                foreach(Usuarios seleccionado in usuariosExistentes)
+                {
+                    if(usuario.Id == seleccionado.Id)
+                    {
+                        repetido = true;
+                        break;
+                    }
+                }
+                if (!repetido)
+                {
+                    usuariosNoElegidos.Add(usuario);
+                }
+            }
+            if(!(usuariosNoElegidos.Count() > 0))
+            {
+                ViewData["lleno"] = true;
+            }
+            ViewData["UsuarioId"] = new SelectList(usuariosNoElegidos, "Id", "FullName");
+            ViewData["proyecto_id"] = id;
             return View("Views/Administrador/Participantes/Create.cshtml");
         }
 
@@ -67,66 +100,32 @@ namespace Honcizek.Controllers_Administrador
             {
                 _context.Add(proyectosParticipantes);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index), new { id = proyectosParticipantes.ProyectoId });
             }
-            ViewData["ProyectoId"] = new SelectList(_context.Proyectos, "Id", "Estado", proyectosParticipantes.ProyectoId);
-            ViewData["UsuarioId"] = new SelectList(_context.Usuarios, "Id", "Id", proyectosParticipantes.UsuarioId);
+            ViewData["proyecto_id"] = proyectosParticipantes.ProyectoId;
+            var usuariosExistentes = _context.Usuarios.FromSqlRaw("SELECT U.* FROM usuarios U" +
+                " LEFT JOIN proyectos_participantes PP ON U.id = PP.usuario_id" +
+                " WHERE PP.proyecto_id = 10").ToList();
+            var usuarios = _context.Usuarios.ToList();
+            var usuariosNoElegidos = new List<Usuarios>();
+            foreach (Usuarios usuario in usuarios)
+            {
+                bool repetido = false;
+                foreach (Usuarios seleccionado in usuariosExistentes)
+                {
+                    if (usuario.Id == seleccionado.Id)
+                    {
+                        repetido = true;
+                        break;
+                    }
+                }
+                if (!repetido)
+                {
+                    usuariosNoElegidos.Add(usuario);
+                }
+            }
+            ViewData["UsuarioId"] = new SelectList(usuariosNoElegidos, "Id", "FullName",proyectosParticipantes.UsuarioId);
             return View("Views/Administrador/Participantes/Create.cshtml",proyectosParticipantes);
-        }
-
-        // GET: Participantes/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var proyectosParticipantes = await _context.ProyectosParticipantes.FindAsync(id);
-            if (proyectosParticipantes == null)
-            {
-                return NotFound();
-            }
-            ViewData["ProyectoId"] = new SelectList(_context.Proyectos, "Id", "Estado", proyectosParticipantes.ProyectoId);
-            ViewData["UsuarioId"] = new SelectList(_context.Usuarios, "Id", "Id", proyectosParticipantes.UsuarioId);
-            return View("Views/Administrador/Participantes/Edit.cshtml",proyectosParticipantes);
-        }
-
-        // POST: Participantes/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,ProyectoId,UsuarioId")] ProyectosParticipantes proyectosParticipantes)
-        {
-            if (id != proyectosParticipantes.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(proyectosParticipantes);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ProyectosParticipantesExists(proyectosParticipantes.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["ProyectoId"] = new SelectList(_context.Proyectos, "Id", "Estado", proyectosParticipantes.ProyectoId);
-            ViewData["UsuarioId"] = new SelectList(_context.Usuarios, "Id", "Id", proyectosParticipantes.UsuarioId);
-            return View("Views/Administrador/Participantes/Edit.cshtml",proyectosParticipantes);
         }
 
         // GET: Participantes/Delete/5
@@ -157,7 +156,7 @@ namespace Honcizek.Controllers_Administrador
             var proyectosParticipantes = await _context.ProyectosParticipantes.FindAsync(id);
             _context.ProyectosParticipantes.Remove(proyectosParticipantes);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Index), new { id = proyectosParticipantes.ProyectoId });
         }
 
         private bool ProyectosParticipantesExists(int id)

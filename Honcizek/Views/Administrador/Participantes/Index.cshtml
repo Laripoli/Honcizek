@@ -4,50 +4,69 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Listado de ProyectosParticipantes</h1>
+<h1>Listado de participantes del proyecto</h1>
+@if (!(bool)ViewData["error"])
+{
+    <div class="py-4">
+        <p class="float-left">
+            <a asp-action="Create" asp-route-id="@ViewData["proyecto_id"]">
+                <button class="btn btn-info">
+                    A&ntilde;adir participante
+                </button>
+            </a>
+        </p>
+        <p class="float-lg-right">
 
-<p>
-    <a asp-action="Create">
-        <button class="btn btn-info">Crear nuevo
-		</button>
-    </a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Proyecto)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Usuario)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Proyecto.Nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Usuario.FullName)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">
-					<button class="btn btn-primary">Editar
-					</button>
-				</a>
-				<a asp-action="Details" asp-route-id="@item.Id">
-					<button class="btn btn-info">Detalles
-					</button>
-				</a>
-				<a asp-action="Delete" asp-route-id="@item.Id">
-					<button class="btn btn-danger">Eliminar
-					</button>
-				</a>
-            </td>
-        </tr>
+            <a asp-controller="Proyectos" asp-action="Edit" asp-route-id="@ViewData["proyecto_id"]">
+                <button class="btn btn-warning">
+                    Volver al proyecto
+                </button>
+            </a>
+        </p>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Proyecto)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Usuario)
+                </th>
+                <th class="w-25"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Proyecto.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Usuario.FullName)
+                    </td>
+                    <td class="float-right">
+                        <a asp-action="Delete" asp-route-id="@item.Id">
+                            <button class="btn btn-danger">
+                                Eliminar
+                            </button>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="float-right">
+        <a asp-controller="Proyectos" asp-action="Index">
+            <button class="btn btn-secondary">
+                Volver al listado de proyectos
+            </button>
+        </a>
+    </div>
 }
-    </tbody>
-</table>
+else
+{
+    <h4>Est&aacute;s intentando visualizar los participantes de un proyecto que no existe.</h4>
+    <span>Prueba a volver al <a class="honci-link" asp-controller="Proyectos" asp-action="Index">Listado de proyectos</a> e int&eacute;ntalo de nuevo</span>
+}

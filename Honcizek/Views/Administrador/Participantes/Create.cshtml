@@ -4,33 +4,41 @@
     ViewData["Title"] = "Crear";
 }
 
-<h1>Crear</h1>
+<h1>A&ntilde;adir nuevo participante</h1>
 
-<h4>ProyectosParticipantes</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="ProyectoId" class="control-label"></label>
-                <select asp-for="ProyectoId" class ="form-control" asp-items="ViewBag.ProyectoId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="UsuarioId" class="control-label"></label>
-                <select asp-for="UsuarioId" class ="form-control" asp-items="ViewBag.UsuarioId"></select>
-            </div>
-            <div class="form-group pl-3">
-                <input type="submit" value="Crear" class="btn btn-info" />
-            </div>
-        </form>
-        <div class="pt-3 pl-3">
-            <a asp-action="Index">
+@if (!(bool)ViewData["error"] && !(bool)ViewData["lleno"])
+{
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="ProyectoId" value="@ViewData["proyecto_id"]" />
+                <div class="form-group">
+                    <label asp-for="UsuarioId" class="control-label"></label>
+                    <select asp-for="UsuarioId" class="form-control" asp-items="ViewBag.UsuarioId"></select>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="A&ntilde;adir" class="btn btn-info" />
+                </div>
+            </form>
+            <a asp-controller="Participantes" asp-action="Index" asp-route-id="@ViewData["proyecto_id"]">
                 <button class="btn btn-primary">Volver al listado</button>
             </a>
         </div>
     </div>
-</div>
+}
+else if((bool)ViewData["error"])
+{
+    <h4>Est&aacute;s intentando a&ntilde;adir un trabajador a un proyecto que no existe.</h4>
+    <span>Prueba a volver al <a class="honci-link" asp-controller="Proyectos" asp-action="Index">Listado de proyectos</a> e int&eacute;ntalo de nuevo</span>
+}
+else
+{
+    <h4>Parece que todos los trabajadores de la empresa ya participan en este proyecto</h4>
+    <span>Prueba a volver al <a class="honci-link" asp-controller="Participantes" asp-action="Index" asp-route-id="@ViewData["proyecto_id"]">Listado de participantes</a> o si lo prefieres al <a class="honci-link" asp-controller="Proyectos" asp-action="Index">Listado de proyectos</a>.</span>
+
+}
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

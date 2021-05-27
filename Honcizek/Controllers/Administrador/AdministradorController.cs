@@ -12,7 +12,6 @@ namespace Honcizek.Controllers.Administrador
     {
         public IActionResult Escritorio()
         {
-            ViewData["Layout"] = "_Admin";
             return View();
         }
     }

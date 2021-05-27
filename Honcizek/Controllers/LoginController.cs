@@ -11,10 +11,13 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Security.Claims;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Honcizek.Controllers
 {
+    
     public class LoginController : Controller
     {
         /*private readonly ILogger<LoginController> _logger;*/
@@ -26,7 +29,7 @@ namespace Honcizek.Controllers
             _usuarioBL = usuarioBL;
         }
 
-         public IActionResult Login()
+        public IActionResult Login()
          {
             return View();
          }
@@ -50,7 +53,7 @@ namespace Honcizek.Controllers
             UsuarioDTO usuarioDTO = _usuarioBL.Login(new UsuarioDTO
             {
                 Login = username,
-                Password = password
+                Password = CreateMD5(password)
             });
             if (usuarioDTO != null)
             {
@@ -69,8 +72,26 @@ namespace Honcizek.Controllers
                 return Redirect("/"+ usuarioDTO.Tipo +"/Escritorio");
             }
             else {
-                ViewData["Error"] = (ReturnUrl.Length > 0) ? "Usuario incorrecto" : "Debes iniciar sesión para acceder";
+                ViewData["Error"] = "Usuario incorrecto";
                 return View(); }
+        }
+
+        public static string CreateMD5(string input)
+        {
+            // Use input string to calculate MD5 hash
+            using (System.Security.Cryptography.MD5 md5 = System.Security.Cryptography.MD5.Create())
+            {
+                byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(input);
+                byte[] hashBytes = md5.ComputeHash(inputBytes);
+
+                // Convert the byte array to hexadecimal string
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < hashBytes.Length; i++)
+                {
+                    sb.Append(hashBytes[i].ToString("X2"));
+                }
+                return sb.ToString();
+            }
         }
     }
 }

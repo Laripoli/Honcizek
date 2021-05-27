@@ -1,0 +1,71 @@
+@model Honcizek.DAL.Models.Usuarios
+
+@{
+    ViewData["Title"] = "Crear";
+}
+
+<h1>Crear</h1>
+
+<h4>Usuarios</h4>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row col-12">
+                <div class="form-group col-4">
+                    <label asp-for="Login" class="control-label"></label>
+                    <input asp-for="Login" class="form-control" />
+                    @if ((bool)ViewData["login-error"])
+                    {
+                    <span class="text-danger" id="login-error">Parece que ese nombre de usuario ya existe..</span>
+                    }
+                </div>
+                <div class="form-group col-4">
+                    <label asp-for="Clave" class="control-label"></label>
+                    <input type="password" asp-for="Clave" class="form-control" />
+                    <span asp-validation-for="Clave" class="text-danger"></span>
+                </div>
+                <div class="form-group col-4">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row col-12">
+                <div class="form-group col-4">
+                    <label asp-for="Nombre" class="control-label"></label>
+                    <input asp-for="Nombre" class="form-control" />
+                    <span asp-validation-for="Nombre" class="text-danger"></span>
+                </div>
+                <div class="form-group col-4">
+                    <label asp-for="Apellidos" class="control-label"></label>
+                    <input asp-for="Apellidos" class="form-control" />
+                    <span asp-validation-for="Apellidos" class="text-danger"></span>
+                </div>
+                <div class="form-group col-4">
+                    <label asp-for="Puesto" class="control-label"></label>
+                    <select asp-for="Puesto" class="form-control" asp-items="ViewBag.Puesto"></select>
+                </div>
+            </div>
+            <div class="form-group pl-3">
+                <input type="submit" value="Crear" class="btn btn-info" />
+            </div>
+        </form>
+        <div class="pt-3 pl-3">
+            <a asp-action="Index">
+                <button class="btn btn-primary">Volver al listado</button>
+            </a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript" src="~/js/Administrador/Trabajadores/Trabajadores.js"></script>
+    <script>
+        $(document).ready(function () {
+            Trabajadores.init();
+        });
+    </script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

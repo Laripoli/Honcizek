@@ -1,0 +1,56 @@
+@model Honcizek.DAL.Models.Usuarios
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Editar</h1>
+
+<h4>Usuarios</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Nombre" class="control-label"></label>
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Apellidos" class="control-label"></label>
+                <input asp-for="Apellidos" class="form-control" />
+                <span asp-validation-for="Apellidos" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Clave" class="control-label"></label>
+                <input asp-for="Clave" class="form-control" />
+                <span asp-validation-for="Clave" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Puesto" class="control-label"></label>
+                <input asp-for="Puesto" class="form-control" />
+                <span asp-validation-for="Puesto" class="text-danger"></span>
+            </div>
+             <div class="form-group pl-3">
+                <input type="submit" value="Guardar" class="btn btn-info" />
+            </div>
+        </form>
+        <div class="pt-3 pl-3">
+            <a asp-action="Index">
+                <button class="btn btn-primary">Volver al listado</button>
+            </a>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

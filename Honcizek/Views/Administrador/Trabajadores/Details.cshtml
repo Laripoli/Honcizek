@@ -1,0 +1,54 @@
+@model Honcizek.DAL.Models.Usuarios
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Detalles</h1>
+
+<div>
+    <h4>Usuarios</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Login)
+        </dt>
+        <dd class = "col-sm-4">
+            @Html.DisplayFor(model => model.Login)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+        <dd class = "col-sm-4">
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Apellidos)
+        </dt>
+        <dd class = "col-sm-4">
+            @Html.DisplayFor(model => model.Apellidos)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd class = "col-sm-4">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Puesto)
+        </dt>
+        <dd class = "col-sm-4">
+            @Html.DisplayFor(model => model.Puesto)
+        </dd>
+    </dl>
+</div>
+<div>
+    <div class="pb-3">
+    <a asp-action="Edit" asp-route-id="@Model.Id">
+      <button class="btn btn-info">Editar</button>
+    </a>
+	</div>
+	<a asp-action="Index">
+		<button class="btn btn-primary">Volver al listado</button>
+	</a>
+</div>

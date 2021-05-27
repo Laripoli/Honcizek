@@ -2,7 +2,6 @@
 
     var handler = function (nuevo) {
         _ocultar_campos();
-    /* _limpiar_filtros();*/
          _validar_descripciones();
     };
 

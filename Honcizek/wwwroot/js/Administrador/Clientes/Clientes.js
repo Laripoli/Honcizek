@@ -1,8 +1,11 @@
 ﻿var Clientes = function () {
 
-    var handler = function () {
+    var handler = function (clave) {
         _ocultar_campos();
         _limpiar_filtros();
+        if (clave != "") {
+            _esconde_contraseña(clave);
+        }
     };
 
     var _ocultar_campos = function () {
@@ -33,10 +36,20 @@
         });
     }
 
+    var _esconde_contraseña = function (clave) {
+        $('#Clave').val('');
+        $('form').submit(function () {
+            if ($('#Clave').val() == "") {
+                $('#Clave').val(clave);
+            }
+            return true;
+        });
+    }
+
     return {
         // public functions
-        init: function () {
-            handler();
+        init: function (clave) {
+            handler(clave);
         },
     };
 }();

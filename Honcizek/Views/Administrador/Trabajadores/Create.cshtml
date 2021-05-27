@@ -61,11 +61,5 @@
 </div>
 
 @section Scripts {
-    <script type="text/javascript" src="~/js/Administrador/Trabajadores/Trabajadores.js"></script>
-    <script>
-        $(document).ready(function () {
-            Trabajadores.init();
-        });
-    </script>
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

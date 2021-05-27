@@ -49,7 +49,9 @@ namespace Honcizek.DAL.Models
         {
             get
             {
+                if(this.Tipo=="Persona")
                 return this.Nombre + " " + this.Apellidos;
+                return this.RazonSocial;
             }
         }
 

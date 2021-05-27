@@ -67,6 +67,7 @@ namespace Honcizek.Controllers.Administrador
         // GET: Clientes/Create
         public IActionResult Create()
         {
+            ViewData["login-error"] = false;
             DateTime hoy = DateTime.Today;
             ViewData["hoy"] = hoy.ToString("d");
             ViewData["Tipo"] = new List<SelectListItem>
@@ -87,12 +88,20 @@ namespace Honcizek.Controllers.Administrador
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Login,Clave,LocalidadId,ProvinciaId,PaisId,FechaRegistro,Tipo,RazonSocial,Nombre,Apellidos,Nifcif,Telefono,Movil,Email,Direccion,Cp,Observaciones")] Clientes clientes)
         {
-            if (ModelState.IsValid)
+            ViewData["login-error"] = false;
+            if (!login_check(clientes.Login))
             {
-                clientes.Clave = CreateMD5(clientes.Clave);
-                _context.Add(clientes);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    clientes.Clave = CreateMD5(clientes.Clave);
+                    _context.Add(clientes);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+            }
+            else
+            {
+                ViewData["login-error"] = true;
             }
             ViewData["LocalidadId"] = new SelectList(_context.Localidades, "Id", "Id", clientes.LocalidadId);
             ViewData["PaisId"] = new SelectList(_context.Paises, "Id", "Id", clientes.PaisId);
@@ -103,6 +112,7 @@ namespace Honcizek.Controllers.Administrador
         // GET: Clientes/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            ViewData["login-error"] = false;
             ViewData["Tipo"] = new List<SelectListItem>
                 {
                     new SelectListItem {Text = "Empresa", Value = "Empresa"},
@@ -135,30 +145,44 @@ namespace Honcizek.Controllers.Administrador
             {
                 return NotFound();
             }
+            ViewData["login-error"] = false;
 
-            if (ModelState.IsValid)
+            if (!login_check(clientes.Id, clientes.Login))
             {
-                try
+                if (ModelState.IsValid)
                 {
-                    _context.Update(clientes);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ClientesExists(clientes.Id))
+                    try
                     {
-                        return NotFound();
+                        _context.Update(clientes);
+                        await _context.SaveChangesAsync();
                     }
-                    else
+                    catch (DbUpdateConcurrencyException)
                     {
-                        throw;
+                        if (!ClientesExists(clientes.Id))
+                        {
+                            return NotFound();
+                        }
+                        else
+                        {
+                            throw;
+                        }
                     }
+                    return RedirectToAction(nameof(Index));
                 }
-                return RedirectToAction(nameof(Index));
             }
+            else
+            {
+                ViewData["login-error"] = true;
+            }
+
             ViewData["LocalidadId"] = new SelectList(_context.Localidades, "Id", "Id", clientes.LocalidadId);
             ViewData["PaisId"] = new SelectList(_context.Paises, "Id", "Id", clientes.PaisId);
             ViewData["ProvinciaId"] = new SelectList(_context.Provincias, "Id", "Id", clientes.ProvinciaId);
+            ViewData["Tipo"] = new List<SelectListItem>
+                {
+                    new SelectListItem {Text = "Empresa", Value = "Empresa",Selected = (clientes.Tipo=="Empresa")?true:false},
+                    new SelectListItem {Text = "Persona", Value = "Persona",Selected = (clientes.Tipo=="Persona")?true:false}
+                };
             return View("Views/Administrador/Clientes/Edit.cshtml", clientes);
         }
 
@@ -197,6 +221,16 @@ namespace Honcizek.Controllers.Administrador
         private bool ClientesExists(int id)
         {
             return _context.Clientes.Any(e => e.Id == id);
+        }
+
+        public bool login_check(string login)
+        {
+            return _context.Clientes.Any(e => e.Login == login);
+        }
+
+        public bool login_check(int Id, string Login)
+        {
+            return _context.Clientes.Any(e => e.Login == Login && e.Id != Id);
         }
 
         public static string CreateMD5(string input)

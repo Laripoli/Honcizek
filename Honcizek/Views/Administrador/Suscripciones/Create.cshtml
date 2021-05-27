@@ -1,0 +1,98 @@
+@model Honcizek.DAL.Models.Suscripciones
+
+@{
+    ViewData["Title"] = "Crear";
+}
+
+<h1>Crear</h1>
+
+<h4>Suscripciones</h4>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row col-12">
+                <div class="form-group col-4">
+                    <label asp-for="ClienteId" class="control-label">Cliente</label>
+                    <select asp-for="ClienteId" class="form-control" asp-items="ViewBag.ClienteId"></select>
+                </div>
+                <div class="form-group col-4">
+                    <label asp-for="Tipo" class="control-label"></label>
+                    <select asp-for="Tipo" class="form-control" asp-items="ViewBag.Tipo"></select>
+                </div>
+                <div class="form-group col-4 proyecto">
+                    <label asp-for="ProyectoId" class="control-label">Proyecto</label>
+                    <select asp-for="ProyectoId" class="form-control" asp-items="ViewBag.ProyectoId"></select>
+                </div>
+            </div>
+            <div class="row col-12">
+                <div class="form-group col-4">
+                    <label asp-for="Nombre" class="control-label"></label>
+                    <input asp-for="Nombre" class="form-control" />
+                    <span asp-validation-for="Nombre" class="text-danger"></span>
+                </div>
+                <div class="form-group col-4">
+                    <label asp-for="AgenteId" class="control-label">Programador encargado</label>
+                    <select asp-for="AgenteId" class="form-control" asp-items="ViewBag.AgenteId"></select>
+                </div>
+            </div>
+            <div class="row col-12">
+                <div class="form-group col-4">
+                    <label asp-for="Periodicidad" class="control-label"></label>
+                    <select asp-for="Periodicidad" class="form-control" asp-items="ViewBag.Periodicidad"></select>
+                </div>
+                <div class="form-group col-4">
+                    <label asp-for="FechaDesde" class="control-label">Fecha inicio</label>
+                    <input type="date" asp-for="FechaDesde" value="@ViewData["hoy"]" class="form-control" />
+                    <span asp-validation-for="FechaDesde" class="text-danger"></span>
+                </div>
+                <div class="form-group col-4 periodicidad">
+                    <label asp-for="FechaHasta" class="control-label">Fecha finalizaci&oacute;n</label>
+                    <input type="date" disabled asp-for="FechaHasta" class="form-control" />
+                    <span asp-validation-for="FechaHasta" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row col-12">
+                <div class="form-group col-4">
+                    <label asp-for="PrecioAlta" class="control-label"></label>
+                    <input type="number" asp-for="PrecioAlta" class="form-control" />
+                    <span asp-validation-for="PrecioAlta" class="text-danger"></span>
+                </div>
+                <div class="form-group col-4">
+                    <label asp-for="PrecioPeriodo" class="control-label"></label>
+                    <input type="number" asp-for="PrecioPeriodo" class="form-control" />
+                    <span asp-validation-for="PrecioPeriodo" class="text-danger"></span>
+                </div>
+                <div class="form-group col-4">
+                    <label asp-for="Renovacion" class="control-label"></label>
+                    <input type="checkbox" asp-for="Renovacion" class="form-control" />
+                    <span asp-validation-for="Renovacion" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Observaciones" class="control-label"></label>
+                <textarea asp-for="Observaciones" class="form-control"></textarea>
+                <span asp-validation-for="Observaciones" class="text-danger"></span>
+            </div>
+            <div class="form-group pl-3">
+                <input type="submit" value="Crear" class="btn btn-info" />
+            </div>
+        </form>
+        <div class="pt-3 pl-3">
+            <a asp-action="Index">
+                <button class="btn btn-primary">Volver al listado</button>
+            </a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript" src="~/js/Administrador/Suscripciones/Suscripciones.js"></script>
+    <script>
+        $(document).ready(function () {
+            Suscripciones.init();
+        });
+    </script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

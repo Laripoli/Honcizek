@@ -95,7 +95,7 @@ namespace Honcizek.Controllers_Administrador
             {
                 return NotFound();
             }
-
+            ViewData["login-error"] = false;
             var usuarios = await _context.Usuarios.FindAsync(id);
             if (usuarios == null)
             {
@@ -120,8 +120,11 @@ namespace Honcizek.Controllers_Administrador
             {
                 return NotFound();
             }
+            ViewData["login-error"] = false;
+            if (!login_check(usuarios.Id,usuarios.Login))
+            {
 
-            if (ModelState.IsValid)
+                if (ModelState.IsValid)
             {
                 try
                 {
@@ -140,6 +143,11 @@ namespace Honcizek.Controllers_Administrador
                     }
                 }
                 return RedirectToAction(nameof(Index));
+            }
+            }
+            else
+            {
+                ViewData["login-error"] = true;
             }
             ViewData["Puesto"] = new List<SelectListItem>
                 {
@@ -186,6 +194,11 @@ namespace Honcizek.Controllers_Administrador
         public bool login_check(string login)
         {
             return _context.Usuarios.Any(e => e.Login == login);
+        }
+
+        public bool login_check(int Id,string Login)
+        {
+            return _context.Usuarios.Any(e => e.Login == Login && e.Id!= Id);
         }
 
         public static string CreateMD5(string input)

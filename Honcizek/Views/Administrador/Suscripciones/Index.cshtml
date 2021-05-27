@@ -1,0 +1,123 @@
+@model IEnumerable<Honcizek.DAL.Models.Suscripciones>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Listado de Suscripciones</h1>
+
+<p>
+    <a asp-action="Create">
+        <button class="btn btn-info">Crear nuevo
+		</button>
+    </a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Tipo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaDesde)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaHasta)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Renovacion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Periodicidad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Agente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cliente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Proyecto)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tipo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @if (item.FechaDesde != null)
+                {
+                    @Html.DisplayFor(modelItem => item.FDesde)
+                }
+                else
+                {
+                    <span>Sin especificar</span>
+                }
+            </td>
+            <td>
+                @if (item.FechaHasta != null)
+                {
+                    @Html.DisplayFor(modelItem => item.FHasta)
+                }
+                else
+                {
+                    <span>Sin especificar</span>
+                }
+            </td>
+            <td>
+                @if (item.Renovacion == 1)
+                {
+                    <span>Activa</span>
+                }
+                else
+                {
+                    <span>Inactiva</span>
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Periodicidad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Agente.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cliente.FullName)
+            </td>
+            <td>
+                @if (item.Tipo != "Hardware")
+                {
+                    @Html.DisplayFor(modelItem => item.Proyecto.Nombre)
+                }
+                else
+                {
+                    <span>Sin proyecto</span>
+                }
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">
+					<button class="btn btn-primary">Editar
+					</button>
+				</a>
+				<a asp-action="Details" asp-route-id="@item.Id">
+					<button class="btn btn-info">Detalles
+					</button>
+				</a>
+				<a asp-action="Delete" asp-route-id="@item.Id">
+					<button class="btn btn-danger">Eliminar
+					</button>
+				</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

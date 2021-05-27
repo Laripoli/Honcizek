@@ -21,7 +21,7 @@ namespace Honcizek.DAL.Models
         public int? ProyectoId { get; set; }
         public int AgenteId { get; set; }
         public DateTime FechaDesde { get; set; }
-        public DateTime FechaHasta { get; set; }
+        public DateTime? FechaHasta { get; set; }
         public int? Renovacion { get; set; }
         public decimal? PrecioAlta { get; set; }
         public decimal? PrecioPeriodo { get; set; }
@@ -32,5 +32,21 @@ namespace Honcizek.DAL.Models
         public virtual Clientes Cliente { get; set; }
         public virtual Proyectos Proyecto { get; set; }
         public virtual ICollection<Tickets> Tickets { get; set; }
+
+        public string FDesde
+        {
+            get
+            {
+                return this.FechaDesde.ToShortDateString();
+            }
+        }
+
+        public string FHasta
+        {
+            get
+            {
+                return this.FechaHasta?.ToShortDateString();
+            }
+        }
     }
 }

@@ -95,16 +95,23 @@
     }
 
     var _check_precio = function () {
+
+
+        $('#PrecioAlta').val(parseInt($('#PrecioAlta').val()));
+        $('#PrecioPeriodo').val(parseInt($('#PrecioPeriodo').val()));
+
         $('form').submit(function () {
             if (!($('#PrecioAlta').val() > 0) && !($('#PrecioPeriodo').val() > 0)) {
                 $('#ErrorPrecio').removeClass('d-none');
                 return false;
+            } else {
+            $('#ErrorPrecio').addClass('d-none');
+            if ($('#Observaciones').val() == "") {
+                $('#Observaciones').val("Sin Observaciones");
             }
-            $('#ErroPrecio').addClass('d-none');
             return true;
+            }
         })
-        $('#PrecioAlta').val(parseInt($('#PrecioAlta').val()));
-        $('#PrecioPeriodo').val(parseInt($('#PrecioPeriodo').val()));
     }
 
     function formatDate(date) {

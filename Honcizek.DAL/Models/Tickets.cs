@@ -16,8 +16,8 @@ namespace Honcizek.DAL.Models
 
         public int Id { get; set; }
         public int SuscripcionId { get; set; }
-        public int AgenteId { get; set; }
         public int ClienteId { get; set; }
+        public int AgenteId { get; set; }
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
         public DateTime FechaRegistro { get; set; }
@@ -30,5 +30,20 @@ namespace Honcizek.DAL.Models
         public virtual Clientes Cliente { get; set; }
         public virtual Suscripciones Suscripcion { get; set; }
         public virtual ICollection<PartesDeTrabajo> PartesDeTrabajo { get; set; }
+
+        public string FRegistro
+        {
+            get
+            {
+                return this.FechaRegistro.ToShortDateString();
+            }
+        }
+        public string FFin
+        {
+            get
+            {
+                return this.FechaFinalizacion?.ToShortDateString();
+            }
+        }
     }
 }

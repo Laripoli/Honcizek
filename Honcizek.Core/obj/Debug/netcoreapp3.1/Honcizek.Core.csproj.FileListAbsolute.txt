@@ -1,4 +1,3 @@
-C:\Users\alvar\Desktop\tuto\Proyectos\Honcizek\Honcizek.Core\obj\Debug\netcoreapp3.1\Honcizek.Core.csprojAssemblyReference.cache
 C:\Users\alvar\Desktop\tuto\Proyectos\Honcizek\Honcizek.Core\obj\Debug\netcoreapp3.1\Honcizek.Core.AssemblyInfoInputs.cache
 C:\Users\alvar\Desktop\tuto\Proyectos\Honcizek\Honcizek.Core\obj\Debug\netcoreapp3.1\Honcizek.Core.AssemblyInfo.cs
 C:\Users\alvar\Desktop\tuto\Proyectos\Honcizek\Honcizek.Core\obj\Debug\netcoreapp3.1\Honcizek.Core.csproj.CoreCompileInputs.cache
@@ -13,3 +12,4 @@ C:\Users\alvar\Desktop\tuto\Proyectos\Honcizek\Honcizek.Core\obj\Debug\netcoreap
 C:\Users\alvar\Desktop\tuto\Proyectos\Honcizek\Honcizek.Core\obj\Debug\netcoreapp3.1\Honcizek.Core.RazorTargetAssemblyInfo.cache
 C:\Users\alvar\Desktop\tuto\Proyectos\Honcizek\Honcizek.Core\obj\Debug\netcoreapp3.1\Honcizek.Core.dll
 C:\Users\alvar\Desktop\tuto\Proyectos\Honcizek\Honcizek.Core\obj\Debug\netcoreapp3.1\Honcizek.Core.pdb
+C:\Users\alvar\Desktop\tuto\Proyectos\Honcizek\Honcizek.Core\obj\Debug\netcoreapp3.1\Honcizek.Core.csprojAssemblyReference.cache

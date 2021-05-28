@@ -230,5 +230,7 @@ namespace Honcizek.Controllers_Administrador
         {
             return _context.Suscripciones.Any(e => e.Id == id);
         }
+
+        
     }
 }

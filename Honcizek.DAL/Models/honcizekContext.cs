@@ -444,8 +444,7 @@ namespace Honcizek.DAL.Models
 
                 entity.Property(e => e.Renovacion)
                     .HasColumnName("renovacion")
-                    .HasColumnType("int(1)")
-                    .HasDefaultValueSql("'0'");
+                    .HasColumnType("int(1)");
 
                 entity.Property(e => e.Tipo)
                     .HasColumnName("tipo")
@@ -478,7 +477,7 @@ namespace Honcizek.DAL.Models
                     .HasName("FK_tickets_usuarios");
 
                 entity.HasIndex(e => e.ClienteId)
-                    .HasName("FK_tickets_clientes");
+                    .HasName("cliente_id");
 
                 entity.HasIndex(e => e.SuscripcionId)
                     .HasName("tickets_suscripciones");

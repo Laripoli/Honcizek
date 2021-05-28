@@ -49,34 +49,39 @@
                 </div>
                 <div class="form-group col-4 periodicidad">
                     <label asp-for="FechaHasta" class="control-label">Fecha finalizaci&oacute;n</label>
-                    <input type="date" disabled asp-for="FechaHasta" class="form-control" />
+                    <input type="date" readonly asp-for="FechaHasta" class="form-control" />
                     <span asp-validation-for="FechaHasta" class="text-danger"></span>
                 </div>
             </div>
             <div class="row col-12">
                 <div class="form-group col-4">
-                    <label asp-for="PrecioAlta" class="control-label"></label>
-                    <input type="number" asp-for="PrecioAlta" class="form-control" />
+                    <label asp-for="PrecioAlta" class="control-label">Precio alta</label>
+                    <input type="number" min="0" value="0" asp-for="PrecioAlta" class="form-control" />
                     <span asp-validation-for="PrecioAlta" class="text-danger"></span>
                 </div>
                 <div class="form-group col-4">
-                    <label asp-for="PrecioPeriodo" class="control-label"></label>
-                    <input type="number" asp-for="PrecioPeriodo" class="form-control" />
+                    <label asp-for="PrecioPeriodo" class="control-label">Precio por periodo</label>
+                    <input type="number" min="0" value="0" asp-for="PrecioPeriodo" class="form-control" />
                     <span asp-validation-for="PrecioPeriodo" class="text-danger"></span>
                 </div>
                 <div class="form-group col-4">
                     <label asp-for="Renovacion" class="control-label"></label>
-                    <input type="checkbox" asp-for="Renovacion" class="form-control" />
+                    <input type="checkbox" name="Renovacion" value="1" class="form-control check w-25" />
                     <span asp-validation-for="Renovacion" class="text-danger"></span>
                 </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Observaciones" class="control-label"></label>
-                <textarea asp-for="Observaciones" class="form-control"></textarea>
-                <span asp-validation-for="Observaciones" class="text-danger"></span>
-            </div>
-            <div class="form-group pl-3">
-                <input type="submit" value="Crear" class="btn btn-info" />
+            <div class="row col-12">
+                <div class="form-group col-6">
+                    <label asp-for="Observaciones" class="control-label"></label>
+                    <textarea asp-for="Observaciones" class="form-control"></textarea>
+                    <span asp-validation-for="Observaciones" class="text-danger"></span>
+                </div>
+                <div class="form-group col-6">
+                    <span id="ErrorPrecio" class="text-danger d-none">Debes introducir 1 precio de alta y/o 1 precio por periodo</span>
+                </div>
+                <div class="form-group pl-3">
+                    <input type="submit" value="Crear" class="btn btn-info" />
+                </div>
             </div>
         </form>
         <div class="pt-3 pl-3">

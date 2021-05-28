@@ -25,32 +25,53 @@
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.FechaDesde)
         </dt>
-        <dd class = "col-sm-4">
-            @Html.DisplayFor(model => model.FechaDesde)
+        <dd class="col-sm-4">
+            @if (Model.FechaDesde != null)
+            {
+                @Html.DisplayFor(model => model.FDesde)
+            }
+            else
+            {
+                <span>Sin especificar</span>
+            }
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.FechaHasta)
         </dt>
-        <dd class = "col-sm-4">
-            @Html.DisplayFor(model => model.FechaHasta)
+        <dd class="col-sm-4">
+            @if (Model.FechaHasta != null)
+            {
+                @Html.DisplayFor(model => model.FHasta)
+            }
+            else
+            {
+                <span>Sin especificar</span>
+            }
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Renovacion)
         </dt>
-        <dd class = "col-sm-4">
-            @Html.DisplayFor(model => model.Renovacion)
+        <dd class="col-sm-4">
+            @if (Model.Renovacion == 1)
+            {
+                <span>Activa</span>
+            }
+            else
+            {
+                <span>Inactiva</span>
+            }
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.PrecioAlta)
         </dt>
-        <dd class = "col-sm-4">
-            @Html.DisplayFor(model => model.PrecioAlta)
+        <dd class="col-sm-4">
+            @Html.DisplayFor(model => model.PrecioAlta) &euro;
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.PrecioPeriodo)
         </dt>
-        <dd class = "col-sm-4">
-            @Html.DisplayFor(model => model.PrecioPeriodo)
+        <dd class="col-sm-4">
+            @Html.DisplayFor(model => model.PrecioPeriodo) &euro;
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Periodicidad)
@@ -61,26 +82,40 @@
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Observaciones)
         </dt>
-        <dd class = "col-sm-4">
-            @Html.DisplayFor(model => model.Observaciones)
+        <dd class="col-sm-4">
+            @if (Model.Observaciones != "" || Model.Observaciones != null)
+            {
+                @Html.DisplayFor(model => model.Observaciones)
+            }
+            else
+            {
+                <span>Sin Observaciones</span>
+            }
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Agente)
         </dt>
         <dd class = "col-sm-4">
-            @Html.DisplayFor(model => model.Agente.Clave)
+            @Html.DisplayFor(model => model.Agente.FullName)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Cliente)
         </dt>
         <dd class = "col-sm-4">
-            @Html.DisplayFor(model => model.Cliente.Clave)
+            @Html.DisplayFor(model => model.Cliente.FullName)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Proyecto)
         </dt>
-        <dd class = "col-sm-4">
-            @Html.DisplayFor(model => model.Proyecto.Estado)
+        <dd class="col-sm-4">
+            @if (Model.Tipo != "Hardware")
+            {
+                @Html.DisplayFor(model => model.Proyecto.Nombre)
+            }
+            else
+            {
+                <span>Sin proyecto</span>
+            }
         </dd>
     </dl>
 </div>

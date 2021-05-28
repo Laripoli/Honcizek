@@ -247,3 +247,24 @@ table tbody td:last-child a {
 .honci-link:hover {
     color: #0B1D6E;
 }
+
+.check {
+    position: absolute;
+    right: 74%;
+    height: 25%;
+    top: 59%;
+}
+@media (max-width: 670px) {
+    .check {
+        position: absolute;
+        right: 58%;
+        height: 25%;
+        top: 59%;
+    }
+}
+
+#ErrorPrecio {
+    display: inline-flex;
+    align-items: center;
+    height:100%;
+}

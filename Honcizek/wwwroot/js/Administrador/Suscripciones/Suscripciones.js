@@ -3,6 +3,7 @@
     var handler = function () {
         _ocultar_campos();
         _periodicidad();
+        _check_precio();
     };
 
     var _ocultar_campos = function () {
@@ -51,6 +52,8 @@
             }
         });
 
+        
+
 
 
     }
@@ -66,50 +69,6 @@
     }
 
     var _set_fechas = function () {
-        /*var fecha = new Date($('#FechaDesde').val());
-        var periodicidad = $('#Periodicidad').val();
-        switch (periodicidad) {
-            case "Anual":
-                fecha.setMonth(fecha.getMonth() + 12);
-                break;
-            case "Mensual":
-                fecha.setMonth(fecha.getMonth() + 1);
-                break;
-            case "Trimestral":
-                fecha.setMonth(fecha.getMonth() + 3);
-                break;
-            case "Semestral":
-                fecha.setMonth(fecha.getMonth() + 6);
-                break;
-            default: 
-                break;
-        }
-        $('#FechaHasta').val(formatDate(fecha));
-
-        $('#Periodicidad').on('change', function () {
-            fecha = new Date($('#FechaDesde').val());
-            periodicidad = $('#Periodicidad').val();
-            console.log(formatDate(fecha));
-            if (periodicidad != "Abierta") {
-            switch (periodicidad) {
-                case "Anual":
-                    fecha.setMonth(fecha.getMonth() + 12);
-                    break;
-                case "Mensual":
-                    fecha.setMonth(fecha.getMonth() + 1);
-                    break;
-                case "Trimestral":
-                    fecha.setMonth(fecha.getMonth() + 3);
-                    break;
-                case "Semestral":
-                    fecha.setMonth(fecha.getMonth() + 6);
-                    break;
-                default:
-                    break;
-            }
-            $('#FechaHasta').val(formatDate(fecha));
-            }
-        });*/
        
             var fecha = new Date($('#FechaDesde').val());
             var periodicidad = $('#Periodicidad').val();
@@ -133,6 +92,19 @@
                 }
                 $('#FechaHasta').val(formatDate(fecha));
             }
+    }
+
+    var _check_precio = function () {
+        $('form').submit(function () {
+            if (!($('#PrecioAlta').val() > 0) && !($('#PrecioPeriodo').val() > 0)) {
+                $('#ErrorPrecio').removeClass('d-none');
+                return false;
+            }
+            $('#ErroPrecio').addClass('d-none');
+            return true;
+        })
+        $('#PrecioAlta').val(parseInt($('#PrecioAlta').val()));
+        $('#PrecioPeriodo').val(parseInt($('#PrecioPeriodo').val()));
     }
 
     function formatDate(date) {

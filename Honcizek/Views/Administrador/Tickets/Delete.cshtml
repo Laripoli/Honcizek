@@ -11,66 +11,87 @@
     <h4>Tickets</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Nombre)
         </dt>
-        <dd class = "col-sm-4">
+        <dd class="col-sm-4">
             @Html.DisplayFor(model => model.Nombre)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Descripcion)
         </dt>
-        <dd class = "col-sm-4">
+        <dd class="col-sm-4">
             @Html.DisplayFor(model => model.Descripcion)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.FechaRegistro)
         </dt>
-        <dd class = "col-sm-4">
-            @Html.DisplayFor(model => model.FechaRegistro)
+        <dd class="col-sm-4">
+            @if (Model.FechaRegistro != null)
+            {
+                @Html.DisplayFor(model => model.FRegistro)
+            }
+            else
+            {
+                <span>Sin especificar</span>
+            }
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.HoraRegistro)
         </dt>
-        <dd class = "col-sm-4">
+        <dd class="col-sm-4">
             @Html.DisplayFor(model => model.HoraRegistro)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Estado)
         </dt>
-        <dd class = "col-sm-4">
+        <dd class="col-sm-4">
             @Html.DisplayFor(model => model.Estado)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.FechaFinalizacion)
         </dt>
-        <dd class = "col-sm-4">
-            @Html.DisplayFor(model => model.FechaFinalizacion)
+        <dd class="col-sm-4">
+            @if (Model.FechaFinalizacion != null)
+            {
+                @Html.DisplayFor(model => model.FFin)
+            }
+            else
+            {
+                <span>Sin especificar</span>
+            }
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.HoraFinalizacion)
         </dt>
-        <dd class = "col-sm-4">
-            @Html.DisplayFor(model => model.HoraFinalizacion)
+        <dd class="col-sm-4">
+            @if (Model.HoraFinalizacion != null)
+            {
+                @Html.DisplayFor(model => model.HoraFinalizacion)
+            }
+            else
+            {
+                <span>Sin especificar</span>
+            }
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Agente)
         </dt>
-        <dd class = "col-sm-4">
-            @Html.DisplayFor(model => model.Agente.Clave)
-        </dd class>
-        <dt class = "col-sm-2">
+        <dd class="col-sm-4">
+            @Html.DisplayFor(model => model.Agente.FullName)
+        </dd>
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Cliente)
         </dt>
-        <dd class = "col-sm-4">
-            @Html.DisplayFor(model => model.Cliente.Clave)
-        </dd class>
-        <dt class = "col-sm-2">
+        <dd class="col-sm-4">
+            @Html.DisplayFor(model => model.Cliente.FullName)
+        </dd>
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Suscripcion)
         </dt>
-        <dd class = "col-sm-4">
+        <dd class="col-sm-4">
             @Html.DisplayFor(model => model.Suscripcion.Nombre)
-        </dd class>
+        </dd>
     </dl>
     
     <form class="pb-3" asp-action="Delete">

@@ -62,8 +62,13 @@ namespace Honcizek.Controllers_Administrador
         }
 
         // GET: Trabajos/Create
-        public async Task<IActionResult> Create(int id)
+        public async Task<IActionResult> Create(int? id)
         {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
             ViewData["error"] = false;
             var proyectos = await _context.Proyectos.FindAsync(id);
             if (proyectos == null)
@@ -88,6 +93,7 @@ namespace Honcizek.Controllers_Administrador
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index), new { id = trabajos.ProyectoId });
             }
+            ViewData["error"] = false;
             ViewData["proyecto_id"] = trabajos.ProyectoId;
             ViewData["AgenteId"] = new SelectList(_context.Usuarios, "Id", "FullName",trabajos.AgenteId);
             return View("Views/Administrador/Trabajos/Create.cshtml",trabajos);

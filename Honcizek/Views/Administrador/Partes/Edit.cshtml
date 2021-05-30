@@ -1,0 +1,73 @@
+@model Honcizek.DAL.Models.PartesDeTrabajo
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Editar</h1>
+
+<h4>PartesDeTrabajo</h4>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="TicketId" />
+            <input type="hidden" asp-for="Fecha" />
+            <input type="hidden" asp-for="Hora" />
+            <div class="row col-12">
+                <div class="form-group col-5">
+                    <label asp-for="Nombre" class="control-label"></label>
+                    <input asp-for="Nombre" class="form-control" />
+                    <span asp-validation-for="Nombre" class="text-danger"></span>
+                </div>
+                <div class="form-group col-5">
+                    <label asp-for="AgenteId" class="control-label">Programador</label>
+                    <select asp-for="AgenteId" class="form-control" asp-items="ViewBag.AgenteId"></select>
+                </div>
+            </div>
+            <div class="row col-12">
+                <div class="form-group col-5">
+                    <label asp-for="Horas" class="control-label"></label>
+                    <input type="number" asp-for="Horas" min="0" value="0" class="form-control" />
+                    <span asp-validation-for="Horas" class="text-danger"></span>
+                </div>
+                <div class="form-group col-5">
+                    <label asp-for="Minutos" class="control-label"></label>
+                    <input type="number" asp-for="Minutos" min="0" value="0" step="5" class="form-control" />
+                    <span asp-validation-for="Minutos" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row col-12">
+                <div class="form-group col-5">
+                    <label asp-for="Descripcion" class="control-label">Descripci&oacute;n</label>
+                    <textarea asp-for="Descripcion" class="form-control"></textarea>
+                    <span asp-validation-for="Descripcion" class="text-danger"></span>
+                </div>
+                <div class="form-group col-6">
+                    <span id="ErrorHoras" class="text-danger d-none">Debes introducir el tiempo de la tarea</span>
+                </div>
+            </div>
+            <div class="form-group pl-3">
+                <input type="submit" value="Crear" class="btn btn-info" />
+            </div>
+        </form>
+        <div class="pt-3 pl-3">
+            <a asp-action="Index" asp-route-id="@ViewData["TicketId"]">
+                <button class="btn btn-primary">Volver al listado</button>
+            </a>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script type="text/javascript" src="~/js/Administrador/Partes/Partes.js"></script>
+    <script>
+        $(document).ready(function () {
+            Partes.init();
+        });
+    </script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

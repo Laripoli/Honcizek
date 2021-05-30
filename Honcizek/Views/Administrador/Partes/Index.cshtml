@@ -1,0 +1,109 @@
+@model IEnumerable<Honcizek.DAL.Models.PartesDeTrabajo>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Listado de Partes de trabajo</h1>
+@if (!(bool)ViewData["error"])
+{
+
+    <div>
+
+        <p class="float-left">
+            <a asp-action="Create" asp-route-id="@ViewData["TicketId"]">
+                <button class="btn btn-info">
+                    Crear nuevo
+                </button>
+            </a>
+        </p>
+        <p class="float-lg-right">
+
+            <a asp-controller="Tickets" asp-action="Edit" asp-route-id="@ViewData["TicketId"]">
+                <button class="btn btn-warning">
+                    Volver al ticket
+                </button>
+            </a>
+        </p>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nombre)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Fecha)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Hora)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Horas)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Minutos)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Agente)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Ticket)
+                </th>
+                <th class="w-25"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FRegistro)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Hora)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Horas)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Minutos)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Agente.FullName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Ticket.Nombre)
+                    </td>
+                    <td class="float-right">
+                        <a asp-action="Edit" asp-route-id="@item.Id">
+                            <button class="btn btn-primary">
+                                Editar
+                            </button>
+                        </a>
+                        <a asp-action="Delete" asp-route-id="@item.Id">
+                            <button class="btn btn-danger">
+                                Eliminar
+                            </button>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="float-right">
+        <a asp-controller="Tickets" asp-action="Index">
+            <button class="btn btn-secondary">
+                Volver al listado de tickets
+            </button>
+        </a>
+    </div>
+}
+else
+{
+    <h4>Est&aacute;s intentando ver los partes de trabajo de un ticket que no existe.</h4>
+    <span>Prueba a volver al <a class="honci-link" asp-controller="Tickets" asp-action="Index">Listado de tickets</a> e int&eacute;ntalo de nuevo</span>
+}

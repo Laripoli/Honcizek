@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 // Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
 // If you have enabled NRTs for your project, then un-comment the following line:
@@ -18,7 +19,9 @@ namespace Honcizek.DAL.Models
         public int SuscripcionId { get; set; }
         public int ClienteId { get; set; }
         public int AgenteId { get; set; }
+        [Required(ErrorMessage = "Debes introducir un nombre")]
         public string Nombre { get; set; }
+        [Required(ErrorMessage = "Debes introducir una descripción")]
         public string Descripcion { get; set; }
         public DateTime FechaRegistro { get; set; }
         public string HoraRegistro { get; set; }

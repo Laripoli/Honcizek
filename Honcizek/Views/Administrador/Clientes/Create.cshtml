@@ -12,10 +12,12 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="FechaRegistro" value="@ViewData["hoy"]" />
+            <input type="hidden" asp-for="PaisId" value="73" />
             <div class="row col-12">
                 <div class="form-group col-4">
                     <label asp-for="Login" class="control-label"></label>
                     <input asp-for="Login" class="form-control" />
+                    <span asp-validation-for="Login" class="text-danger"></span>
                     @if ((bool)ViewData["login-error"])
                     {
                         <span class="text-danger" id="login-error">Parece que ese nombre de usuario ya existe..</span>
@@ -23,22 +25,24 @@
                 </div>
                 <div class="form-group col-4">
                     <label asp-for="Clave" class="control-label"></label>
-                    <input asp-for="Clave" class="form-control" />
+                    <input type="password" asp-for="Clave" class="form-control" />
                     <span asp-validation-for="Clave" class="text-danger"></span>
                 </div>
             </div>
             <div class="row col-12">
-                <div class="form-group col-4">
-                    <label asp-for="PaisId" class="control-label">Pais</label>
-                    <select data-live-search="true" asp-for="PaisId" class="form-control" asp-items="ViewBag.PaisId"></select>
-                </div>
+                @*<div class="form-group col-4">
+                <label asp-for="PaisId" class="control-label">Pais</label>
+                <select data-live-search="true" asp-for="PaisId" class="form-control" asp-items="ViewBag.PaisId"></select>
+            </div>*@
                 <div class="form-group col-4">
                     <label asp-for="ProvinciaId" class="control-label">Provincia</label>
                     <select data-live-search="true" asp-for="ProvinciaId" class="form-control" asp-items="ViewBag.ProvinciaId"></select>
                 </div>
                 <div class="form-group col-4">
                     <label asp-for="LocalidadId" class="control-label">Localidad</label>
-                    <select data-live-search="true" id="localidad"asp-for="LocalidadId" class="form-control " asp-items="ViewBag.LocalidadId"></select>
+                    <select data-live-search="true" asp-for="LocalidadId" disabled class="form-control" asp-items="ViewBag.LocalidadId"></select>
+                    <span id="LocalidadError" class="text-danger d-none">Parece que ha habido un error al cargar las localidades, prueba a volver a 
+                    seleccionar una provincia</span>
                 </div>
             </div>
             <div class="row col-12">
@@ -51,19 +55,19 @@
                 <div class="form-group col-4">
                     <label asp-for="RazonSocial" class="control-label"></label>
                     <input asp-for="RazonSocial" class="form-control" />
-                    <span asp-validation-for="RazonSocial" class="text-danger"></span>
+                    <span id="ErrorEmpresa" class="text-danger d-none">Debes introducir un nombre</span>
                 </div>
             </div>
             <div class="row col-12 tipo-persona d-none">
                 <div class="form-group col-6">
                     <label asp-for="Nombre" class="control-label"></label>
                     <input asp-for="Nombre" class="form-control" />
-                    <span asp-validation-for="Nombre" class="text-danger"></span>
+                    <span id="ErrorNombre" class="text-danger d-none">Debes introducir un nombre</span>
                 </div>
                 <div class="form-group col-6">
                     <label asp-for="Apellidos" class="control-label"></label>
                     <input asp-for="Apellidos" class="form-control" />
-                    <span asp-validation-for="Apellidos" class="text-danger"></span>
+                    <span id="ErrorApellidos" class="text-danger d-none">Debes introducir un apellido</span>
                 </div>
             </div>
             <div class="row col-12">
@@ -121,8 +125,6 @@
 
 @section Scripts {
     <script type="text/javascript" src="~/js/Administrador/Clientes/Clientes.js"></script>
-    <script type="text/javascript" src="~/lib/bootstrap-select/dist/js/bootstrap-select.min.js" ></script>
-    <script type="text/css" src="~/lib/bootstrap-select/dist/css/bootstrap-select.min.css" ></script>
     <script>
         $(document).ready(function () {
             Clientes.init();

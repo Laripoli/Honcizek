@@ -1,0 +1,102 @@
+﻿html, body {
+    height: 100%;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    height: 10vh;
+    display: table;
+}
+
+    header .left-side {
+        display: table-cell;
+        background-color: #001059;
+        min-width: 20vh;
+        width: 20vh;
+        height: inherit;
+    }
+
+    header img{
+        width: 15vh;
+    }
+
+aside {
+    background-color: #0B1D6E;
+    height: 100%;
+    min-height: 100%;
+    min-width: 20vh;
+    width: 10%;
+    position: relative;
+}
+
+aside .menu-option {
+    color: white;
+    padding: 10%;
+    user-select: none;
+}
+
+aside .menu-option:hover {
+    background-color: #001059;
+    color: yellow;
+    cursor: pointer;
+}
+
+aside .active {
+    background-color: #001059;
+    color: yellow;
+}
+
+
+aside a:hover .menu-option span {
+    color: inherit;
+    text-decoration: none;
+}
+
+aside a .menu-option span {
+    vertical-align: middle;
+}
+
+.main {
+    min-height: 90%;
+    background-color: #F7F8FC;
+}
+
+.content {
+    background-color: #F7F8FC;
+    min-height: 100%;
+}
+
+section {
+    width: 100%;
+    overflow: auto;
+    max-height: 94%;
+    padding-left: 2vh;
+    padding-right: 2vh;
+    scrollbar-color: #D2D2D2 #0B1D6E;
+}
+
+@media screen and (max-height: 710px) {
+    section{
+        max-height: 90.7%;
+    }
+}
+
+    .container {
+        max-width: 100%;
+    }
+
+    footer {
+        position: relative;
+        background-color: #F7F8FC;
+    }
+
+
+    header .rest-header {
+        display: table-cell;
+        background-color: #fff;
+        width: auto;
+        height: inherit;
+    }

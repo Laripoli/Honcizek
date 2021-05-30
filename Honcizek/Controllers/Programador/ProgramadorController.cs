@@ -5,15 +5,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Honcizek.Controllers.Administrador
+namespace Honcizek.Controllers.Programador
 {
-    [Authorize(Roles = "Administrador")]
+    [Authorize(Roles = "Programador")]
     public class ProgramadorController : Controller
     {
-        [Route("Administrador/Escritorio")]
+        [Route("Programador/Escritorio")]
         public IActionResult Escritorio()
         {
-            return View("Views/Administrador/Escritorio.cshtml");
+            return View("Views/Programador/Escritorio.cshtml");
         }
     }
 }

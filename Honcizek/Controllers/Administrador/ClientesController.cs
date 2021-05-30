@@ -10,7 +10,8 @@ using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 using System.Text;
 using System.Globalization;
-
+using System.Text.Json;
+using System.Text.Json.Serialization;
 namespace Honcizek.Controllers.Administrador
 {
     [Authorize(Roles = "Administrador")]
@@ -103,9 +104,14 @@ namespace Honcizek.Controllers.Administrador
             {
                 ViewData["login-error"] = true;
             }
-            ViewData["LocalidadId"] = new SelectList(_context.Localidades, "Id", "Id", clientes.LocalidadId);
-            ViewData["PaisId"] = new SelectList(_context.Paises, "Id", "Id", clientes.PaisId);
-            ViewData["ProvinciaId"] = new SelectList(_context.Provincias, "Id", "Id", clientes.ProvinciaId);
+            ViewData["LocalidadId"] = new SelectList(_context.Localidades, "Id", "Nombre", clientes.LocalidadId);
+            ViewData["PaisId"] = new SelectList(_context.Paises, "Id", "Nombre", clientes.PaisId);
+            ViewData["ProvinciaId"] = new SelectList(_context.Provincias, "Id", "Nombre", clientes.ProvinciaId);
+            ViewData["Tipo"] = new List<SelectListItem>
+                {
+                    new SelectListItem {Text = "Empresa", Value = "Empresa",Selected = (clientes.Tipo=="Empresa")?true:false},
+                    new SelectListItem {Text = "Persona", Value = "Persona",Selected = (clientes.Tipo=="Persona")?true:false}
+                };
             return View("Views/Administrador/Clientes/Create.cshtml", clientes);
         }
 
@@ -175,9 +181,9 @@ namespace Honcizek.Controllers.Administrador
                 ViewData["login-error"] = true;
             }
 
-            ViewData["LocalidadId"] = new SelectList(_context.Localidades, "Id", "Id", clientes.LocalidadId);
-            ViewData["PaisId"] = new SelectList(_context.Paises, "Id", "Id", clientes.PaisId);
-            ViewData["ProvinciaId"] = new SelectList(_context.Provincias, "Id", "Id", clientes.ProvinciaId);
+            ViewData["LocalidadId"] = new SelectList(_context.Localidades, "Id", "Nombre", clientes.LocalidadId);
+            ViewData["PaisId"] = new SelectList(_context.Paises, "Id", "Nombre", clientes.PaisId);
+            ViewData["ProvinciaId"] = new SelectList(_context.Provincias, "Id", "Nombre", clientes.ProvinciaId);
             ViewData["Tipo"] = new List<SelectListItem>
                 {
                     new SelectListItem {Text = "Empresa", Value = "Empresa",Selected = (clientes.Tipo=="Empresa")?true:false},
@@ -249,6 +255,16 @@ namespace Honcizek.Controllers.Administrador
                 }
                 return sb.ToString();
             }
+        }
+
+        [HttpPost]
+        public string cargar_localidades(int provincia_id)
+        {
+            List<string> list = new List<string>();
+            var localidades = _context.Localidades.Where(l => l.ProvinciaId == provincia_id);
+            
+            IEnumerable<string> ids = list;
+            return JsonSerializer.Serialize(localidades);
         }
 
     }

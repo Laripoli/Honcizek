@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="ISO-8859-1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Honcizek</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/Programador.css" />
+</head>
+<body>
+    <header>
+        <div class="left-side d-flex justify-content-center">
+            <a asp-controller="Programador" asp-action="Escritorio" class="d-flex justify-content-center">
+                <img class="p-2" id="logo" src="~/css/Programador/logo_white_large.png" alt="Logo" />
+            </a>
+
+        </div>
+        <div class="rest-header"></div>
+    </header>
+    <div class="d-flex main">
+        <aside class="d-flex flex-column">
+
+            <a asp-controller="Proyectos" asp-action="Index">
+                <div class="menu-option Proyectos">
+                    <span>Proyectos</span>
+                </div>
+            </a>
+
+            <a asp-controller="Tickets" asp-action="Index">
+                <div class="menu-option Tickets">
+                    <span>
+                        Tickets
+                    </span>
+                </div>
+            </a>
+
+        </aside>
+            <section>
+                @RenderBody()
+            </section>
+        <footer class="border-top footer text-muted ">
+            <div class="container">
+                <span class="float-right">&copy; 2021 - Honcizek - Todos los derechos reservados</span>
+            </div>
+        </footer>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

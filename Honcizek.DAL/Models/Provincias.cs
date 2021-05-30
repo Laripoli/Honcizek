@@ -17,9 +17,7 @@ namespace Honcizek.DAL.Models
 
         public int Id { get; set; }
         public string Nombre { get; set; }
-        public int? PaisId { get; set; }
 
-        public virtual Paises Pais { get; set; }
         public virtual ICollection<Clientes> Clientes { get; set; }
         public virtual ICollection<Localidades> Localidades { get; set; }
     }

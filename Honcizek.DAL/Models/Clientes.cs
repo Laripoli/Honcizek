@@ -24,7 +24,6 @@ namespace Honcizek.DAL.Models
         public string Clave { get; set; }
         public int? LocalidadId { get; set; }
         public int? ProvinciaId { get; set; }
-        public int? PaisId { get; set; }
         public DateTime? FechaRegistro { get; set; }
         public string Tipo { get; set; }
         public string RazonSocial { get; set; }
@@ -39,7 +38,6 @@ namespace Honcizek.DAL.Models
         public string Observaciones { get; set; }
 
         public virtual Localidades Localidad { get; set; }
-        public virtual Paises Pais { get; set; }
         public virtual Provincias Provincia { get; set; }
         public virtual ICollection<Proyectos> Proyectos { get; set; }
         public virtual ICollection<Suscripciones> Suscripciones { get; set; }
@@ -49,8 +47,8 @@ namespace Honcizek.DAL.Models
         {
             get
             {
-                if(this.Tipo=="Persona")
-                return this.Nombre + " " + this.Apellidos;
+                if (this.Tipo == "Persona")
+                    return this.Nombre + " " + this.Apellidos;
                 return this.RazonSocial;
             }
         }

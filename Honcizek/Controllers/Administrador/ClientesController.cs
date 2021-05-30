@@ -28,13 +28,13 @@ namespace Honcizek.Controllers.Administrador
         public async Task<IActionResult> Index(String search)
         {
             ViewData["CurrentFilter"] = search;
-            var honcizekContext = _context.Clientes.Include(c => c.Localidad).Include(c => c.Pais).Include(c => c.Provincia);
+            var honcizekContext = _context.Clientes.Include(c => c.Localidad).Include(c => c.Provincia);
 
             if (!String.IsNullOrEmpty(search))
             {
 
                 honcizekContext = _context.Clientes.Where(s => s.Apellidos.Contains(search)
-                               || s.Nombre.Contains(search)).Include(c => c.Localidad).Include(c => c.Pais).Include(c => c.Provincia);
+                               || s.Nombre.Contains(search)).Include(c => c.Localidad).Include(c => c.Provincia);
 
             }
             
@@ -53,9 +53,9 @@ namespace Honcizek.Controllers.Administrador
             }
 
             var clientes = await _context.Clientes
-                .Include(c => c.Localidad)
-                .Include(c => c.Pais)
-                .Include(c => c.Provincia)
+               .Include(c => c.Localidad)
+                 
+               .Include(c => c.Provincia)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (clientes == null)
             {
@@ -77,7 +77,7 @@ namespace Honcizek.Controllers.Administrador
                     new SelectListItem {Text = "Persona", Value = "Persona"}
                 };
             ViewData["LocalidadId"] = new SelectList(_context.Localidades, "Id", "Nombre");
-            ViewData["PaisId"] = new SelectList(_context.Paises, "Id", "Nombre");
+             
             ViewData["ProvinciaId"] = new SelectList(_context.Provincias, "Id", "Nombre");
             return View("Views/Administrador/Clientes/Create.cshtml");
         }
@@ -87,7 +87,7 @@ namespace Honcizek.Controllers.Administrador
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Login,Clave,LocalidadId,ProvinciaId,PaisId,FechaRegistro,Tipo,RazonSocial,Nombre,Apellidos,Nifcif,Telefono,Movil,Email,Direccion,Cp,Observaciones")] Clientes clientes)
+        public async Task<IActionResult> Create([Bind("Id,Login,Clave,LocalidadId,ProvinciaId,FechaRegistro,Tipo,RazonSocial,Nombre,Apellidos,Nifcif,Telefono,Movil,Email,Direccion,Cp,Observaciones")] Clientes clientes)
         {
             ViewData["login-error"] = false;
             if (!login_check(clientes.Login))
@@ -105,7 +105,7 @@ namespace Honcizek.Controllers.Administrador
                 ViewData["login-error"] = true;
             }
             ViewData["LocalidadId"] = new SelectList(_context.Localidades, "Id", "Nombre", clientes.LocalidadId);
-            ViewData["PaisId"] = new SelectList(_context.Paises, "Id", "Nombre", clientes.PaisId);
+             
             ViewData["ProvinciaId"] = new SelectList(_context.Provincias, "Id", "Nombre", clientes.ProvinciaId);
             ViewData["Tipo"] = new List<SelectListItem>
                 {
@@ -135,7 +135,7 @@ namespace Honcizek.Controllers.Administrador
                 return NotFound();
             }
             ViewData["LocalidadId"] = new SelectList(_context.Localidades, "Id", "Nombre", clientes.LocalidadId);
-            ViewData["PaisId"] = new SelectList(_context.Paises, "Id", "Nombre", clientes.PaisId);
+             
             ViewData["ProvinciaId"] = new SelectList(_context.Provincias, "Id", "Nombre", clientes.ProvinciaId);
             return View("Views/Administrador/Clientes/Edit.cshtml", clientes);
         }
@@ -145,7 +145,7 @@ namespace Honcizek.Controllers.Administrador
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Login,Clave,LocalidadId,ProvinciaId,PaisId,FechaRegistro,Tipo,RazonSocial,Nombre,Apellidos,Nifcif,Telefono,Movil,Email,Direccion,Cp,Observaciones")] Clientes clientes)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Login,Clave,LocalidadId,ProvinciaId,FechaRegistro,Tipo,RazonSocial,Nombre,Apellidos,Nifcif,Telefono,Movil,Email,Direccion,Cp,Observaciones")] Clientes clientes)
         {
             if (id != clientes.Id)
             {
@@ -182,7 +182,7 @@ namespace Honcizek.Controllers.Administrador
             }
 
             ViewData["LocalidadId"] = new SelectList(_context.Localidades, "Id", "Nombre", clientes.LocalidadId);
-            ViewData["PaisId"] = new SelectList(_context.Paises, "Id", "Nombre", clientes.PaisId);
+             
             ViewData["ProvinciaId"] = new SelectList(_context.Provincias, "Id", "Nombre", clientes.ProvinciaId);
             ViewData["Tipo"] = new List<SelectListItem>
                 {
@@ -201,9 +201,9 @@ namespace Honcizek.Controllers.Administrador
             }
 
             var clientes = await _context.Clientes
-                .Include(c => c.Localidad)
-                .Include(c => c.Pais)
-                .Include(c => c.Provincia)
+               .Include(c => c.Localidad)
+                 
+               .Include(c => c.Provincia)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (clientes == null)
             {

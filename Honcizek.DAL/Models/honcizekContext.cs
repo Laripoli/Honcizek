@@ -21,7 +21,6 @@ namespace Honcizek.DAL.Models
 
         public virtual DbSet<Clientes> Clientes { get; set; }
         public virtual DbSet<Localidades> Localidades { get; set; }
-        public virtual DbSet<Paises> Paises { get; set; }
         public virtual DbSet<PartesDeTrabajo> PartesDeTrabajo { get; set; }
         public virtual DbSet<Provincias> Provincias { get; set; }
         public virtual DbSet<Proyectos> Proyectos { get; set; }
@@ -52,9 +51,6 @@ namespace Honcizek.DAL.Models
                 entity.HasIndex(e => e.Login)
                     .HasName("login")
                     .IsUnique();
-
-                entity.HasIndex(e => e.PaisId)
-                    .HasName("FK_clientes_paises");
 
                 entity.HasIndex(e => e.ProvinciaId)
                     .HasName("FK_clientes_provincias");
@@ -109,10 +105,6 @@ namespace Honcizek.DAL.Models
 
                 entity.Property(e => e.Observaciones).HasColumnName("observaciones");
 
-                entity.Property(e => e.PaisId)
-                    .HasColumnName("pais_id")
-                    .HasColumnType("int(11)");
-
                 entity.Property(e => e.ProvinciaId)
                     .HasColumnName("provincia_id")
                     .HasColumnType("int(11)");
@@ -140,12 +132,6 @@ namespace Honcizek.DAL.Models
                     .HasForeignKey(d => d.LocalidadId)
                     .OnDelete(DeleteBehavior.SetNull)
                     .HasConstraintName("FK_clientes_localidades");
-
-                entity.HasOne(d => d.Pais)
-                    .WithMany(p => p.Clientes)
-                    .HasForeignKey(d => d.PaisId)
-                    .OnDelete(DeleteBehavior.SetNull)
-                    .HasConstraintName("FK_clientes_paises");
 
                 entity.HasOne(d => d.Provincia)
                     .WithMany(p => p.Clientes)
@@ -180,21 +166,6 @@ namespace Honcizek.DAL.Models
                     .HasForeignKey(d => d.ProvinciaId)
                     .OnDelete(DeleteBehavior.SetNull)
                     .HasConstraintName("provincia_id");
-            });
-
-            modelBuilder.Entity<Paises>(entity =>
-            {
-                entity.ToTable("paises");
-
-                entity.Property(e => e.Id)
-                    .HasColumnName("id")
-                    .HasColumnType("int(11)");
-
-                entity.Property(e => e.Nombre)
-                    .IsRequired()
-                    .HasColumnName("nombre")
-                    .HasMaxLength(80)
-                    .HasDefaultValueSql("''");
             });
 
             modelBuilder.Entity<PartesDeTrabajo>(entity =>
@@ -262,9 +233,6 @@ namespace Honcizek.DAL.Models
             {
                 entity.ToTable("provincias");
 
-                entity.HasIndex(e => e.PaisId)
-                    .HasName("provincias_pais");
-
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -272,16 +240,6 @@ namespace Honcizek.DAL.Models
                 entity.Property(e => e.Nombre)
                     .IsRequired()
                     .HasColumnName("nombre");
-
-                entity.Property(e => e.PaisId)
-                    .HasColumnName("pais_id")
-                    .HasColumnType("int(11)");
-
-                entity.HasOne(d => d.Pais)
-                    .WithMany(p => p.Provincias)
-                    .HasForeignKey(d => d.PaisId)
-                    .OnDelete(DeleteBehavior.SetNull)
-                    .HasConstraintName("provincias_pais");
             });
 
             modelBuilder.Entity<Proyectos>(entity =>

@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using Honcizek.DAL.Models;
+using Newtonsoft.Json;
+using System.Security.Claims;
 
 namespace Honcizek.Controllers_Administrador
 {
@@ -24,8 +26,41 @@ namespace Honcizek.Controllers_Administrador
         // GET: Tickets
         public async Task<IActionResult> Index()
         {
+            ViewData["error"] = false;
+            ViewData["forbidden"] = false;
             var honcizekContext = _context.Tickets.Include(t => t.Agente).Include(t => t.Cliente).Include(t => t.Suscripcion);
+            ViewData["general"] = true;
+            var Id = Int32.Parse(HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.UserData)?.Value);
+            ViewData["usuario_id"] = Id;
             return View("Views/Administrador/Tickets/Index.cshtml",await honcizekContext.ToListAsync());
+        }
+
+        public async Task<IActionResult> IndexUsuario(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            ViewData["error"] = false;
+            ViewData["forbidden"] = false;
+            var usuario = await _context.Usuarios.FindAsync(id);
+            var Id = Int32.Parse(HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.UserData)?.Value);
+            if (usuario == null)
+            {
+                ViewData["error"] = true;
+            }
+            else
+            {
+                if (usuario.Id != Id)
+                {
+                    ViewData["forbidden"] = true;
+                }
+            }
+            ViewData["usuario_id"] = Id;
+            ViewData["general"] = false;
+            var honcizekContext = _context.Tickets.Where(t => t.AgenteId == id).Include(t => t.Agente).Include(t => t.Cliente).Include(t => t.Suscripcion);
+
+            return View("Views/Administrador/Tickets/Index.cshtml", await honcizekContext.ToListAsync());
         }
 
         // GET: Tickets/Details/5

@@ -33,6 +33,7 @@ namespace Honcizek.DAL.Repositories.Implementations
             }
             var encontrado = new UsuarioDTO
             {
+                Id = buscaUsuario.Id,
                 Login = buscaUsuario.Login,
                 Password = buscaUsuario.Clave,
                 Nombre = buscaUsuario.Nombre,

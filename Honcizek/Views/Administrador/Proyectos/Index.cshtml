@@ -6,14 +6,24 @@
 
 <h1>Listado de Proyectos</h1>
 
-
-    <p>
+@if (!(bool)ViewData["error"] && !(bool)ViewData["forbidden"])
+{
+<div>
+    <p class="float-left">
         <a asp-action="Create">
             <button class="btn btn-info">
                 Crear nuevo
             </button>
         </a>
     </p>
+    <p class="float-right">
+        <a asp-action="@((bool)ViewData["general"] ? "IndexUsuario":"Index")" asp-route-id="@((bool)ViewData["general"] ? ViewData["usuario_id"]:"")">
+            <button class="btn btn-@((bool)ViewData["general"] ? "primary":"warning")">
+                @((bool)ViewData["general"] ? "Ver mis proyectos":"Ver todos los proyectos")
+            </button>
+        </a>
+    </p>
+</div>
     <table class="table">
         <thead>
             <tr>
@@ -132,4 +142,21 @@
             }
         </tbody>
     </table>
+
+}
+@if ((bool)ViewData["error"])
+{
+    <h4>Est&aacute;s intentando ver los proyectos de un usuario que no existe.</h4>
+    <hr />
+    <h5>Prueba a ver el <a class="honci-link" asp-controller="Proyectos" asp-action="Index">Listado completo de proyectos</a> e int&eacute;ntalo de nuevo</h5>
+    <hr />
+    <h5>Tambi&eacute;n puedes probar a ver <a class="honci-link" asp-controller="Proyectos" asp-action="IndexUsuario" 
+    asp-route-id="@ViewData["usuario_id"]">Listado de tus proyectos</a> e int&eacute;ntalo de nuevo</h5>
+}
+@if ((bool)ViewData["forbidden"])
+{
+    <h4>Est&aacute;s intentando ver los proyectos de otro programador...</h4>
+    <hr />
+    <h5>Prueba a ver el <a class="honci-link" asp-controller="Proyectos" asp-action="Index">listado completo de proyectos</a> e int&eacute;ntalo de nuevo</h5>
+}
 

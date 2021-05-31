@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Honcizek.DAL.Models;
 using Microsoft.AspNetCore.Authorization;
+using Newtonsoft.Json;
+using System.Security.Claims;
 
 namespace Honcizek.Controllers_Administrador
 {
@@ -24,8 +26,46 @@ namespace Honcizek.Controllers_Administrador
         // GET: Proyectos
         public async Task<IActionResult> Index()
         {
+            ViewData["error"] = false;
+            ViewData["forbidden"] = false;
+            ViewData["general"] = true;
+            var Id = Int32.Parse(HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.UserData)?.Value);
+            ViewData["usuario_id"] = Id;
             var honcizekContext = _context.Proyectos.Include(p => p.Cliente);
             return View("Views/Administrador/Proyectos/Index.cshtml",await honcizekContext.ToListAsync());
+        }
+        public async Task<IActionResult> IndexUsuario(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            ViewData["error"] = false;
+            ViewData["forbidden"] = false;
+            var usuario = await _context.Usuarios.FindAsync(id);
+            var Id = Int32.Parse(HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.UserData)?.Value);
+
+            if (usuario == null)
+            {
+                ViewData["error"] = true;
+            }
+            else
+            {
+                if (usuario.Id != Id)
+                {
+                    ViewData["forbidden"] = true;
+                }
+            }
+            var query = "SELECT P.* FROM proyectos P " +
+            "LEFT JOIN proyectos_participantes PP ON PP.proyecto_id = P.id " +
+            "LEFT JOIN usuarios U ON U.id = PP.usuario_id " +
+            "WHERE U.id = {0}";
+
+            ViewData["usuario_id"] = Id;
+            ViewData["general"] = false;
+            var honcizekContext = _context.Proyectos.FromSqlRaw(query,id).Include(p => p.Cliente);
+            /*var honcizekContext = _context.Proyectos.Include(p => p.Cliente);*/
+            return View("Views/Administrador/Proyectos/Index.cshtml", await honcizekContext.ToListAsync());
         }
 
         // GET: Proyectos/Details/5

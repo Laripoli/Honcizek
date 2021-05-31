@@ -66,6 +66,7 @@ namespace Honcizek.Controllers
                 {
                     new Claim(ClaimTypes.Name, usuarioDTO.Nombre),
                     new Claim(ClaimTypes.NameIdentifier, str),
+                    new Claim(ClaimTypes.UserData, usuarioDTO.Id.ToString()),
                     new Claim(ClaimTypes.Role, usuarioDTO.Tipo)
                 };
 

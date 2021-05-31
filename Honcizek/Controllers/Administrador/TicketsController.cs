@@ -26,9 +26,9 @@ namespace Honcizek.Controllers_Administrador
         // GET: Tickets
         public async Task<IActionResult> Index()
         {
+            var honcizekContext = _context.Tickets.Include(t => t.Agente).Include(t => t.Cliente).Include(t => t.Suscripcion);
             ViewData["error"] = false;
             ViewData["forbidden"] = false;
-            var honcizekContext = _context.Tickets.Include(t => t.Agente).Include(t => t.Cliente).Include(t => t.Suscripcion);
             ViewData["general"] = true;
             var Id = Int32.Parse(HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.UserData)?.Value);
             ViewData["usuario_id"] = Id;

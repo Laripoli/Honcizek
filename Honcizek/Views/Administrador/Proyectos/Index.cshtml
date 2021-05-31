@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Listado de Proyectos</h1>
+<h1>Listado de @(!(bool)ViewData["general"]?"mis":"") proyectos</h1>
 
 @if (!(bool)ViewData["error"] && !(bool)ViewData["forbidden"])
 {

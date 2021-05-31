@@ -4,120 +4,150 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Listado de Suscripciones</h1>
-
-<p>
-    <a asp-action="Create">
-        <button class="btn btn-info">Crear nuevo
-		</button>
-    </a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Tipo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Nombre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FechaDesde)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FechaHasta)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Renovacion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Periodicidad)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Agente)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cliente)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Proyecto)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Tipo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nombre)
-            </td>
-            <td>
-                @if (item.FechaDesde != null)
-                {
-                    @Html.DisplayFor(modelItem => item.FDesde)
-                }
-                else
-                {
-                    <span>Sin especificar</span>
-                }
-            </td>
-            <td>
-                @if (item.FechaHasta != null)
-                {
-                    @Html.DisplayFor(modelItem => item.FHasta)
-                }
-                else
-                {
-                    <span>Sin especificar</span>
-                }
-            </td>
-            <td>
-                @if (item.Renovacion == 1)
-                {
-                    <span>Activa</span>
-                }
-                else
-                {
-                    <span>Inactiva</span>
-                }
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Periodicidad)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Agente.FullName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cliente.FullName)
-            </td>
-            <td>
-                @if (item.Tipo != "Hardware" && item.ProyectoId != null)
-                {
-                    @Html.DisplayFor(modelItem => item.Proyecto.Nombre)
-                }
-                else
-                {
-                    <span>Sin proyecto</span>
-                }
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">
-					<button class="btn btn-primary">Editar
-					</button>
-				</a>
-				<a asp-action="Details" asp-route-id="@item.Id">
-					<button class="btn btn-info">Detalles
-					</button>
-				</a>
-				<a asp-action="Delete" asp-route-id="@item.Id">
-					<button class="btn btn-danger">Eliminar
-					</button>
-				</a>
-            </td>
-        </tr>
+<h1>Listado de @(!(bool)ViewData["general"]?"mis":"") suscripciones</h1>
+@if (!(bool)ViewData["error"] && !(bool)ViewData["forbidden"])
+{
+    <div>
+        <p class="float-left">
+            <a asp-action="Create">
+                <button class="btn btn-info">
+                    Crear nuevo
+                </button>
+            </a>
+        </p>
+        <p class="float-right">
+            <a asp-action="@((bool)ViewData["general"] ? "IndexUsuario":"Index")" asp-route-id="@((bool)ViewData["general"] ? ViewData["usuario_id"]:"")">
+                <button class="btn btn-@((bool)ViewData["general"] ? "primary":"warning")">
+                    @((bool)ViewData["general"] ? "Ver mis suscripciones":"Ver todas las suscripciones")
+                </button>
+            </a>
+        </p>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Tipo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nombre)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FechaDesde)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FechaHasta)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Renovacion)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Periodicidad)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Agente)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Cliente)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Proyecto)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Tipo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nombre)
+                    </td>
+                    <td>
+                        @if (item.FechaDesde != null)
+                        {
+                            @Html.DisplayFor(modelItem => item.FDesde)
+                        }
+                        else
+                        {
+                            <span>Sin especificar</span>
+                        }
+                    </td>
+                    <td>
+                        @if (item.FechaHasta != null)
+                        {
+                            @Html.DisplayFor(modelItem => item.FHasta)
+                        }
+                        else
+                        {
+                            <span>Sin especificar</span>
+                        }
+                    </td>
+                    <td>
+                        @if (item.Renovacion == 1)
+                        {
+                            <span>Activa</span>
+                        }
+                        else
+                        {
+                            <span>Inactiva</span>
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Periodicidad)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Agente.FullName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cliente.FullName)
+                    </td>
+                    <td>
+                        @if (item.Tipo != "Hardware" && item.ProyectoId != null)
+                        {
+                            @Html.DisplayFor(modelItem => item.Proyecto.Nombre)
+                        }
+                        else
+                        {
+                            <span>Sin proyecto</span>
+                        }
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">
+                            <button class="btn btn-primary">
+                                Editar
+                            </button>
+                        </a>
+                        <a asp-action="Details" asp-route-id="@item.Id">
+                            <button class="btn btn-info">
+                                Detalles
+                            </button>
+                        </a>
+                        <a asp-action="Delete" asp-route-id="@item.Id">
+                            <button class="btn btn-danger">
+                                Eliminar
+                            </button>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 }
-    </tbody>
-</table>
+@if ((bool)ViewData["error"])
+{
+    <h4>Est&aacute;s intentando ver los tickets de un usuario que no existe.</h4>
+    <hr />
+    <h5>Prueba a ver el <a class="honci-link" asp-controller="Tickets" asp-action="Index">Listado completo de tickets</a> e int&eacute;ntalo de nuevo</h5>
+    <hr />
+    <h5>Tambi&eacute;n puedes probar a ver <a class="honci-link" asp-controller="Tickets" asp-action="IndexUsuario" asp-route-id="@ViewData["usuario_id"]">Listado de tus tickets</a> e int&eacute;ntalo de nuevo</h5>
+}
+@if ((bool)ViewData["forbidden"])
+{
+    <h4>Est&aacute;s intentando ver los tickets de otro programador...</h4>
+    <hr />
+    <h5>Prueba a ver el <a class="honci-link" asp-controller="Tickets" asp-action="Index">Listado completo de tickets</a> e int&eacute;ntalo de nuevo</h5>
+}

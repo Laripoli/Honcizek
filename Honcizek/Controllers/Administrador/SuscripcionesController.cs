@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using Honcizek.DAL.Models;
 using System.Text.Json;
+using System.Security.Claims;
 
 namespace Honcizek.Controllers_Administrador
 {
@@ -26,7 +27,40 @@ namespace Honcizek.Controllers_Administrador
         public async Task<IActionResult> Index()
         {
             var honcizekContext = _context.Suscripciones.Include(s => s.Agente).Include(s => s.Cliente).Include(s => s.Proyecto);
+            ViewData["error"] = false;
+            ViewData["forbidden"] = false;
+            ViewData["general"] = true;
+            var Id = Int32.Parse(HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.UserData)?.Value);
+            ViewData["usuario_id"] = Id;
             return View("Views/Administrador/Suscripciones/Index.cshtml",await honcizekContext.ToListAsync());
+        }
+
+        public async Task<IActionResult> IndexUsuario(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            ViewData["error"] = false;
+            ViewData["forbidden"] = false;
+            var usuario = await _context.Usuarios.FindAsync(id);
+            var Id = Int32.Parse(HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.UserData)?.Value);
+            if (usuario == null)
+            {
+                ViewData["error"] = true;
+            }
+            else
+            {
+                if (usuario.Id != Id)
+                {
+                    ViewData["forbidden"] = true;
+                }
+            }
+            ViewData["usuario_id"] = Id;
+            ViewData["general"] = false;
+            var honcizekContext = _context.Suscripciones.Where(s => s.AgenteId == id).Include(s => s.Agente).Include(s => s.Cliente).Include(s => s.Proyecto);
+
+            return View("Views/Administrador/Suscripciones/Index.cshtml", await honcizekContext.ToListAsync());
         }
 
         // GET: Suscripciones/Details/5

@@ -45,19 +45,40 @@
             @Html.DisplayNameFor(model => model.FechaInicio)
         </dt>
         <dd class="col-sm-4">
-            @Html.DisplayFor(model => model.Finicio)
+            @if (@Model.FechaFinPrevista != null)
+            {
+                @Html.DisplayFor(model => model.Finicio)
+            }
+            else
+            {
+                <span>Sin especificar</span>
+            }
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.FechaFinPrevista)
         </dt>
         <dd class="col-sm-4">
-            @Html.DisplayFor(model => model.FFinPrevista)
+            @if (@Model.FechaFinPrevista != null)
+            {
+                @Html.DisplayFor(model => model.FFinPrevista)
+            }
+            else
+            {
+                <span>Sin finalizar</span>
+            }
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.FechaFinReal)
         </dt>
         <dd class="col-sm-4">
-            @Html.DisplayFor(model => model.FFin)
+            @if (@Model.FechaFinReal != null)
+            {
+                @Html.DisplayFor(model => model.FFin)
+            }
+            else
+            {
+                <span>Sin especificar</span>
+            }
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.HorasInternasPrevistas)
@@ -81,15 +102,15 @@
             @Html.DisplayNameFor(model => model.Cliente)
         </dt>
         <dd class="col-sm-4">
-            @Html.DisplayFor(model => model.Cliente.Tipo)
+            @Html.DisplayFor(model => model.Cliente.FullName)
         </dd>
     </dl>
-    
+
     <form class="pb-3" asp-action="Delete">
         <input type="hidden" asp-for="Id" />
         <input type="submit" value="Borrar" class="btn btn-danger" />
     </form>
-	<a asp-action="Index">
-			<button class="btn btn-primary">Volver al listado</button>
-		</a>
+    <a asp-action="Index">
+        <button class="btn btn-primary">Volver al listado</button>
+    </a>
 </div>

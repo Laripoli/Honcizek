@@ -1,0 +1,139 @@
+@model Honcizek.DAL.Models.Proyectos
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Editar</h1>
+
+<h4>Proyectos</h4>
+<hr />
+<div class="row">
+    <div class="col-md-12 readonly">
+        <form>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="row col-12">
+                <div class="form-group col-4">
+                    <label asp-for="Tipo" class="control-label"></label>
+                    <select disabled asp-for="Tipo" class="form-control" asp-items="ViewBag.Tipo"></select>
+                </div>
+                <div class="form-group col-4">
+                    <label asp-for="Nombre" class="control-label"></label>
+                    <input disabled data-val="true" asp-for="Nombre" class="form-control" />
+                    <span asp-validation-for="Nombre" class="text-danger"></span>
+                </div>
+                <div class="form-group col-4 cliente-hide">
+                    <label asp-for="ClienteId" class="control-label">Cliente</label>
+                    <select disabled asp-for="ClienteId" class="form-control" asp-items="ViewBag.ClienteId"></select>
+                </div>
+            </div>
+            <div class="row col-12">
+                <div class="form-group col-6">
+                    <label asp-for="Descripcion" class="control-label">Descripci&oacute;n</label>
+                    <textarea disabled asp-for="Descripcion" class="form-control"></textarea>
+                </div>
+                <div class="form-group col-6">
+                    <label asp-for="DescripcionDesarrollo" class="control-label">Descripci&oacute;n del desarrollo</label>
+                    <textarea disabled asp-for="DescripcionDesarrollo" class="form-control"></textarea>
+
+                </div>
+            </div>
+            <div class="row col-12">
+                <div class="form-group col-4">
+                    <label asp-for="FechaInicio" class="control-label">Fecha de inicio</label>
+                    <input disabled type="date" data-val="false" asp-for="FechaInicio" class="form-control" />
+
+                </div>
+                <div class="form-group col-4">
+                    <label asp-for="FechaFinPrevista" class="control-label">Fecha final prevista</label>
+                    <input disabled type="date" asp-for="FechaFinPrevista" class="form-control" />
+
+                </div>
+            </div>
+            <div class="row col-12">
+                <div class="form-group col-4">
+                    <label asp-for="HorasInternasPrevistas" class="control-label">Horas internas previstas</label>
+                    <input disabled type="number" min="0" value="0" asp-for="HorasInternasPrevistas" class="form-control" />
+
+                </div>
+                <div class="form-group col-4">
+                    <label asp-for="Estado" class="control-label"></label>
+                    <select disabled asp-for="Estado" class="form-control" asp-items="ViewBag.Estado"></select>
+                </div>
+            </div>
+            <div class="row eq-height fase pl-3">
+                <div class="col-12 mb-4 text-center">
+                    <h2 class="d-block mb-0 text-dark">Fase</h2> <br>
+
+                    <ul class="d-inline-block list-unstyled h-25">
+                        <li class="d-inline-block mb-4">
+                            <label class="p-label-fase" for="Analisis">
+                                <input value="Analisis" type="radio" class="d-none" name="Fase" id="Analisis">
+                                <span class="p-esfera c-analisis"> &bull; </span>
+                                An&aacute;lisis
+                            </label>
+                        </li>
+                        <li class="d-inline-block mb-4">
+                            <label class="p-label-fase" for="Diseno">
+                                <input value="Diseno" type="radio" class="d-none" name="Fase" id="Diseno">
+                                <span class="p-esfera c-diseno"> &bull; </span>
+                                Dise&ntilde;o
+                            </label>
+                        </li>
+                        <li class="d-inline-block mb-4">
+                            <label class="p-label-fase" for="Maquetacion">
+                                <input value="Maquetacion" type="radio" class="d-none" name="Fase" id="Maquetacion">
+                                <span class="p-esfera c-maquetacion"> &bull; </span>
+                                Maquetaci&oacute;n
+                            </label>
+                        </li>
+                        <li class="d-inline-block mb-4">
+                            <label class="p-label-fase" for="Desarrollo">
+                                <input value="Desarrollo" type="radio" class="d-none" name="Fase" id="Desarrollo">
+                                <span class="p-esfera c-desarrollo"> &bull; </span>
+                                Desarrollo
+                            </label>
+                        </li>
+                        <li class="d-inline-block mb-4">
+                            <label class="p-label-fase" for="Pruebas internas">
+                                <input value="Pruebas internas" type="radio" class="d-none" name="Fase" id="Pruebas internas">
+                                <span class="p-esfera c-pruebas-internas"> &bull; </span>
+                                Pruebas internas
+                            </label>
+                        </li>
+                        <li class="d-inline-block mb-4">
+                            <label class="p-label-fase" for="Pruebas cliente">
+                                <input value="Pruebas cliente" type="radio" class="d-none" name="Fase" id="Pruebas cliente">
+                                <span class="p-esfera c-pruebas-cliente"> &bull; </span>
+                                Pruebas clientes
+                            </label>
+                        </li>
+                        <li class="d-inline-block mb-4">
+                            <label class="p-label-fase" for="Implantacion">
+                                <input value="Implantacion" type="radio" class="d-none" name="Fase" id="Implantacion">
+                                <span class="p-esfera c-implantacion"> &bull; </span>
+                                Implantaci&oacute;n
+                            </label>
+                        </li>
+                    </ul>
+                    <div class="progress">
+                        <div class="progress-bar" id="fases"></div>
+                    </div>
+                    <span asp-validation-for="Fase" class="text-danger"></span>
+                </div>
+            </div>
+        </form>
+        <div class="pt-3 pl-3">
+            <a asp-action="Index">
+                <button class="btn btn-primary">Volver al listado</button>
+            </a>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

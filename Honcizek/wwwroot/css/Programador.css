@@ -100,3 +100,15 @@ section {
         width: auto;
         height: inherit;
     }
+
+.readonly input[readonly]{
+    background-color: white;
+}
+
+.readonly input:disabled, .readonly select:disabled, .readonly textarea:disabled {
+    background-color: white;
+}
+
+.fase {
+    pointer-events: none;
+}

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using Honcizek.DAL.Models;
+using System.Text.Json;
 
 namespace Honcizek.Controllers_Administrador
 {
@@ -231,6 +232,15 @@ namespace Honcizek.Controllers_Administrador
             return _context.Suscripciones.Any(e => e.Id == id);
         }
 
-        
+        [HttpPost]
+        public string cargar_proyectos(int cliente_id)
+        {
+            List<string> list = new List<string>();
+            var proyectos = _context.Proyectos.Where(p => p.ClienteId == cliente_id);
+
+            IEnumerable<string> ids = list;
+            return JsonSerializer.Serialize(proyectos);
+        }
+
     }
 }

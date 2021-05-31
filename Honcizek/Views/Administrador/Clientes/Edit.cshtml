@@ -116,7 +116,7 @@
     <script type="text/javascript" src="~/js/Administrador/Clientes/Clientes.js"></script>
     <script>
     $(document).ready(function () {
-        Clientes.init(@Model.Clave);
+        Clientes.init();
     });
     </script>
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial.cshtml");}

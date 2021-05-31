@@ -94,7 +94,7 @@
                 @Html.DisplayFor(modelItem => item.Cliente.FullName)
             </td>
             <td>
-                @if (item.Tipo != "Hardware")
+                @if (item.Tipo != "Hardware" && item.ProyectoId != null)
                 {
                     @Html.DisplayFor(modelItem => item.Proyecto.Nombre)
                 }

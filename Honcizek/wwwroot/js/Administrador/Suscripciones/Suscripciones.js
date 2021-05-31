@@ -1,8 +1,9 @@
 ﻿var Suscripciones = function () {
 
-    var handler = function () {
+    var handler = function (proyecto_id) {
         _ocultar_campos();
         _periodicidad();
+        _cargar_proyectos(proyecto_id);
         _check_precio();
     };
 
@@ -72,7 +73,6 @@
        
             var fecha = new Date($('#FechaDesde').val());
             var periodicidad = $('#Periodicidad').val();
-            console.log(formatDate(fecha));
             if (periodicidad != "Abierta") {
                 switch (periodicidad) {
                     case "Anual":
@@ -99,7 +99,6 @@
 
         $('#PrecioAlta').val(parseInt($('#PrecioAlta').val()));
         $('#PrecioPeriodo').val(parseInt($('#PrecioPeriodo').val()));
-
         $('form').submit(function () {
             if (!($('#PrecioAlta').val() > 0) && !($('#PrecioPeriodo').val() > 0)) {
                 $('#ErrorPrecio').removeClass('d-none');
@@ -112,6 +111,60 @@
             return true;
             }
         })
+    }
+
+    var _cargar_proyectos = function (proyecto_id) {
+        var ProyectoId = proyecto_id;
+        var cliente_id = $('#ClienteId').val();
+        const clientes = $('#ClienteId');
+        const proyectos = $('#ProyectoId');
+        const error = $("#ProyectoError");
+        proyectos.empty();
+        $.ajax('/administrador/suscripciones/cargar_proyectos', {
+            type: 'post',
+            data: { 'cliente_id': cliente_id },
+            dataType: 'JSON',
+            success: function (response) {
+                error.addClass("d-none");
+                proyectos.empty();
+                if (response.length > 0) {
+                    error.addClass("d-none");
+                    response.forEach(proyecto => proyectos.append(new Option(proyecto.Nombre, proyecto.Id)));
+                    proyectos.removeAttr("disabled");
+                    if ($("#ProyectoId option[value='" + ProyectoId + "']").length > 0) {
+                        proyectos.val(ProyectoId);
+                    }
+                } else {
+                    proyectos.append(new Option("Sin proyectos", null));
+                }
+            }
+        }).fail(function () {
+            error.removeClass("d-none");
+        });
+
+        clientes.on('change', function () {
+            cliente_id = $('#ClienteId').val();
+            proyectos.attr("disabled", true);
+            $.ajax('/administrador/suscripciones/cargar_proyectos', {
+                type: 'post',
+                data: { 'cliente_id': cliente_id },
+                dataType: 'JSON',
+                success: function (response) {
+                    error.addClass("d-none");
+                    proyectos.empty();
+                    if (response.length > 0) {
+                        error.addClass("d-none");
+                        response.forEach(proyecto => proyectos.append(new Option(proyecto.Nombre, proyecto.Id)));
+                        proyectos.removeAttr("disabled");
+                    } else {
+                        proyectos.append(new Option("Sin proyectos", null))
+                    }
+                }
+            }).fail(function () {
+                error.removeClass("d-none");
+            });
+        });
+
     }
 
     function formatDate(date) {
@@ -131,8 +184,8 @@
 
     return {
         // public functions
-        init: function () {
-            handler();
+        init: function (proyecto_id) {
+            handler(proyecto_id);
         },
     };
 }();

@@ -99,7 +99,7 @@
     <script type="text/javascript" src="~/js/Administrador/Suscripciones/Suscripciones.js"></script>
     <script>
         $(document).ready(function () {
-            Suscripciones.init();
+            Suscripciones.init(@Model.ProyectoId);
         });
     </script>
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

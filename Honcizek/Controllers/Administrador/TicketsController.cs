@@ -64,7 +64,7 @@ namespace Honcizek.Controllers_Administrador
                 };
             DateTime hoy = DateTime.Now;
             ViewData["hoy"] = hoy.ToString("yyyy-MM-dd");
-            ViewData["hora"] = hoy.ToString("H:m");
+            ViewData["hora"] = hoy.ToString("HH:mm");
             return View("Views/Administrador/Tickets/Create.cshtml");
         }
 

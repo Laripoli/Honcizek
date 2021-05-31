@@ -50,6 +50,10 @@ namespace Honcizek.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(string username, string password, string ReturnUrl)
         {
+            if(username == null || username == "")
+            {
+
+            }
             UsuarioDTO usuarioDTO = _usuarioBL.Login(new UsuarioDTO
             {
                 Login = username,
@@ -66,7 +70,7 @@ namespace Honcizek.Controllers
                 };
 
                 var claimsIdentity = new ClaimsIdentity(claims, "Login");
-                var a = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
+                
 
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
                 return Redirect("/"+ usuarioDTO.Tipo +"/Escritorio");

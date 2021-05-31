@@ -18,10 +18,10 @@
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.Tipo)
+                    @Html.DisplayNameFor(model => model.Nombre)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Nombre)
+                    @Html.DisplayNameFor(model => model.Tipo)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.FechaInicio)
@@ -52,10 +52,10 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Tipo)
+                        @Html.DisplayFor(modelItem => item.Nombre)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Nombre)
+                        @Html.DisplayFor(modelItem => item.Tipo)
                     </td>
                     <td>
                         @if (item.FechaFinPrevista != null)

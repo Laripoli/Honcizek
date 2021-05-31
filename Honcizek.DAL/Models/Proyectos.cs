@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 // Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
@@ -25,9 +26,13 @@ namespace Honcizek.DAL.Models
         public string Descripcion { get; set; }
         public string DescripcionDesarrollo { get; set; }
         public DateTime FechaRegistro { get; set; }
+        [DisplayName("Fecha de inicio")]
         public DateTime? FechaInicio { get; set; }
+        [DisplayName("Fecha final prevista")]
         public DateTime? FechaFinPrevista { get; set; }
+        [DisplayName("Fecha final real")]
         public DateTime? FechaFinReal { get; set; }
+        [DisplayName("Horas previstas")]
         public int? HorasInternasPrevistas { get; set; }
         public string Estado { get; set; }
         [Required(ErrorMessage = "Debes seleccionar una fase del proyecto")]

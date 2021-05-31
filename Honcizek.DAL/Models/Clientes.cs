@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 // Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
@@ -24,13 +25,16 @@ namespace Honcizek.DAL.Models
         public string Clave { get; set; }
         public int? LocalidadId { get; set; }
         public int? ProvinciaId { get; set; }
+        [DisplayName("Fecha de registro")]
         public DateTime? FechaRegistro { get; set; }
         public string Tipo { get; set; }
         public string RazonSocial { get; set; }
         public string Nombre { get; set; }
         public string Apellidos { get; set; }
         public string Nifcif { get; set; }
+        [DisplayName("Teléfono")]
         public string Telefono { get; set; }
+        [DisplayName("Móvil")]
         public string Movil { get; set; }
         public string Email { get; set; }
         public string Direccion { get; set; }

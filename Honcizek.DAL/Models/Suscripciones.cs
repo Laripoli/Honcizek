@@ -28,6 +28,7 @@ namespace Honcizek.DAL.Models
         public DateTime FechaDesde { get; set; }
         [DisplayName("Fecha finalización")]
         public DateTime? FechaHasta { get; set; }
+        [DisplayName("Renovación")]
         public int Renovacion { get; set; }
         public decimal? PrecioAlta { get; set; }
         public decimal? PrecioPeriodo { get; set; }

@@ -3,8 +3,8 @@
 }
 
 <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-<link rel="stylesheet" href="~/css/site.css" />
 <link rel="stylesheet" href="~/css/style.bundle.css" />
+<link rel="stylesheet" href="~/css/site.css" />
 <link rel="stylesheet" href="~/css/Login/Login.css" />
 <!------ Include the above in your HEAD tag ---------->
 
@@ -20,10 +20,21 @@
         <!-- Login Form -->
         <form method="post">
             <span class="text-danger text-center pb-3">@ViewData["Error"]</span><br />
-            <input class="fadeIn second" type="text" name="username" placeholder="Usuario" />
-            <input class="fadeIn third" type="password" name="password" placeholder="Contraseña" />
+            <input class="fadeIn second" type="text" id="login" name="username" placeholder="Usuario" /><br />
+            <span class="text-danger d-none" id="login-error">Debes introducir un nombre de usuario</span>
+            <input class="fadeIn third" type="password" id="password" name="password" placeholder="Contraseña" /><br />
+            <span class="text-danger d-none" id="password-error">Debes introducir una contraseña</span>
             <input type="submit" value="Iniciar sesión" class="btn btn-primary fadeIn fourth" />
         </form>
 
     </div>
 </div>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+<script type="text/javascript" src="~/js/Login/Login.js"></script>
+<script>
+    $(document).ready(function () {
+        Login.init();
+    });
+</script>

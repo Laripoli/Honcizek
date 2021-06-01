@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Listado de Trabajos</h1>
+<h1>Listado de @((bool)ViewData["general"] ? "":"mis") Trabajos</h1>
 @if (!(bool)ViewData["error"])
 {
     <div>

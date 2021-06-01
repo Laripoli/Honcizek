@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using Honcizek.DAL.Models;
+using System.Security.Claims;
 
 namespace Honcizek.Controllers_Administrador
 {
@@ -36,12 +37,35 @@ namespace Honcizek.Controllers_Administrador
             {
                 ViewData["error"] = true;
             }
+            ViewData["general"] = true;
             ViewData["TicketId"] = id;
-            string query = "Select * from partes_de_trabajo where ticket_id= {0}";
-            var honcizekContext = _context.PartesDeTrabajo.FromSqlRaw(query, id).Include(p => p.Agente).Include(p => p.Ticket);
+            /*string query = "Select * from partes_de_trabajo where ticket_id= {0}";
+            var honcizekContext = _context.PartesDeTrabajo.FromSqlRaw(query, id).Include(p => p.Agente).Include(p => p.Ticket);*/
+            var honcizekContext = _context.PartesDeTrabajo.Where(p => p.TicketId == id).Include(p => p.Agente).Include(p => p.Ticket);
             return View("Views/Administrador/Partes/Index.cshtml",await honcizekContext.ToListAsync());
         }
 
+        public async Task<IActionResult> IndexUsuario(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            ViewData["error"] = false;
+            ViewData["forbidden"] = false;
+            var Id = Int32.Parse(HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.UserData)?.Value);
+            var usuario = await _context.Usuarios.FindAsync(Id);
+            if (usuario == null)
+            {
+                ViewData["error"] = true;
+            }
+            ViewData["TicketId"] = id;
+            ViewData["usuario_id"] = Id;
+            ViewData["general"] = false;
+            var honcizekContext = _context.PartesDeTrabajo.Where(t => t.AgenteId == Id).Include(p => p.Agente).Include(p => p.Ticket);
+
+            return View("Views/Administrador/Partes/Index.cshtml", await honcizekContext.ToListAsync());
+        }
         // GET: Partes/Details/5
         public async Task<IActionResult> Details(int? id)
         {

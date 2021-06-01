@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Listado de Partes de trabajo</h1>
+<h1>Listado de @((bool)ViewData["general"] ? "":"mis") partes de trabajo</h1>
 @if (!(bool)ViewData["error"])
 {
 
@@ -17,11 +17,16 @@
                 </button>
             </a>
         </p>
-        <p class="float-lg-right">
 
+        <p class="float-lg-right">
             <a asp-controller="Tickets" asp-action="Edit" asp-route-id="@ViewData["TicketId"]">
-                <button class="btn btn-warning">
+                <button class="btn btn-primary">
                     Volver al ticket
+                </button>
+            </a>
+            <a asp-action="@((bool)ViewData["general"] ? "IndexUsuario":"Index")" asp-route-id="@ViewData["TicketId"]">
+                <button class="btn btn-@((bool)ViewData["general"] ? "warning":"info")">
+                    @((bool)ViewData["general"] ? "Ver mis trabajos":"Ver todos los trabajos")
                 </button>
             </a>
         </p>

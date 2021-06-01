@@ -46,8 +46,8 @@ namespace Honcizek.Controllers_Administrador
                 }
                 if (!String.IsNullOrEmpty(nombre) && !String.IsNullOrEmpty(cliente))
                 {
-                    query += " And CONCAT(C.nombre,' ',C.apellidos) LIKE '%" + cliente + "%'" +
-                         " OR C.razon_social like '%" + cliente + "%'";
+                    query += " And (CONCAT(C.nombre,' ',C.apellidos) LIKE '%" + cliente + "%'" +
+                         " OR C.razon_social like '%" + cliente + "%')";
                 }
                 if (String.IsNullOrEmpty(nombre) && !String.IsNullOrEmpty(cliente))
                 {
@@ -89,8 +89,8 @@ namespace Honcizek.Controllers_Administrador
             }
             if (!String.IsNullOrEmpty(cliente))
             {
-                query += " AND CONCAT(C.nombre,' ',C.apellidos) LIKE '%" + cliente + "%'" +
-                     " OR C.razon_social like '%" + cliente + "%'";
+                query += " AND (CONCAT(C.nombre,' ',C.apellidos) LIKE '%" + cliente + "%'" +
+                     " OR C.razon_social like '%" + cliente + "%')";
             }
             ViewData["nombreFilter"] = nombre;
             ViewData["clienteFilter"] = cliente;

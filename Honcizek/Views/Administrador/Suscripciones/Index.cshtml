@@ -8,7 +8,7 @@
 @if (!(bool)ViewData["error"])
 {
     <div>
-        
+
         <p class="float-right">
             <a asp-action="@((bool)ViewData["general"] ? "IndexUsuario":"Index")">
                 <button class="btn btn-@((bool)ViewData["general"] ? "primary":"warning")">
@@ -24,12 +24,29 @@
             </a>
         </p>
     </div>
+    <form id="filtrador" class="float-left pl-3 row" asp-action="@((bool)ViewData["general"] ? "Index":"IndexUsuario")" method="get">
+        <div class="form-actions no-color px-3">
+            <label for="nombre">
+                Buscar nombre: <input id="filtro" type="text" name="nombre" value="@ViewData["nombreFilter"]" />
+            </label>
+            <label for="cliente">
+                Buscar cliente: <input id="filtro" type="text" name="cliente" value="@ViewData["clienteFilter"]" />
+            </label>
+        </div>
+        <div class="row pl-5 pt-3">
+            <a class="pr-2">
+                <button class="btn btn-primary">Buscar</button>
+            </a>
+            <a asp-action="Index">
+                <button class="btn btn-dark" id="limpia-filtros">
+                    Limpiar filtro
+                </button>
+            </a>
+        </div>
+    </form> 
     <table class="table">
         <thead>
             <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Tipo)
-                </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Nombre)
                 </th>
@@ -64,9 +81,6 @@
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Tipo)
-                        </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Nombre)
                         </td>
@@ -125,11 +139,6 @@
                                     Editar
                                 </button>
                             </a>
-                            <a asp-action="Details" asp-route-id="@item.Id">
-                                <button class="btn btn-info">
-                                    Detalles
-                                </button>
-                            </a>
                             <a asp-action="Delete" asp-route-id="@item.Id">
                                 <button class="btn btn-danger">
                                     Eliminar
@@ -158,4 +167,12 @@
     </div>
     <hr />
     <h5>O puedes ver el <a class="honci-link" asp-controller="Suscripciones" asp-action="Index">Listado completo de suscripciones</a>.</h5>
+}
+@section Scripts {
+    <script type="text/javascript" src="~/js/Administrador/Suscripciones/Listado.js"></script>
+    <script>
+        $(document).ready(function () {
+            Listado.init();
+        });
+    </script>
 }

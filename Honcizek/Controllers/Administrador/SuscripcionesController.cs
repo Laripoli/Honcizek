@@ -24,17 +24,42 @@ namespace Honcizek.Controllers_Administrador
         }
 
         // GET: Suscripciones
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(String nombre, String cliente)
         {
-            var honcizekContext = _context.Suscripciones.Include(s => s.Agente).Include(s => s.Cliente).Include(s => s.Proyecto);
+            
             ViewData["error"] = false;
             ViewData["general"] = true;
-            var Id = Int32.Parse(HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.UserData)?.Value);
-             
+            ViewData["nombreFilter"] = nombre;
+            ViewData["clienteFilter"] = cliente;
+
+            var query = "SELECT S.* FROM suscripciones S " +
+                "LEFT JOIN usuarios U ON U.id = S.agente_id " +
+                "LEFT JOIN clientes C ON C.id = S.cliente_id " +
+                "LEFT JOIN proyectos P ON S.id = S.proyecto_id ";
+
+            if (!String.IsNullOrEmpty(nombre) || !String.IsNullOrEmpty(cliente))
+            {
+                query += " WHERE ";
+                if (!String.IsNullOrEmpty(nombre))
+                {
+                    query += " S.nombre like '%" + nombre + "%'";
+                }
+                if (!String.IsNullOrEmpty(nombre) && !String.IsNullOrEmpty(cliente))
+                {
+                    query += " And (CONCAT(C.nombre,' ',C.apellidos) LIKE '%" + cliente + "%'" +
+                         " OR C.razon_social like '%" + cliente + "%')";
+                }
+                if (String.IsNullOrEmpty(nombre) && !String.IsNullOrEmpty(cliente))
+                {
+                    query += " CONCAT(C.nombre,' ',C.apellidos) LIKE '%" + cliente + "%'" +
+                         " OR C.razon_social like '%" + cliente + "%'";
+                }
+            }
+            var honcizekContext = _context.Suscripciones.FromSqlRaw(query).Include(s => s.Agente).Include(s => s.Cliente).Include(s => s.Proyecto);
             return View("Views/Administrador/Suscripciones/Index.cshtml",await honcizekContext.ToListAsync());
         }
 
-        public async Task<IActionResult> IndexUsuario()
+        public async Task<IActionResult> IndexUsuario(String nombre, String cliente)
         {
             ViewData["error"] = false;
             var Id = Int32.Parse(HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.UserData)?.Value);
@@ -44,7 +69,26 @@ namespace Honcizek.Controllers_Administrador
                 ViewData["error"] = true;
             }
             ViewData["general"] = false;
-            var honcizekContext = _context.Suscripciones.Where(s => s.AgenteId == Id).Include(s => s.Agente).Include(s => s.Cliente).Include(s => s.Proyecto);
+
+            var query = "SELECT S.* FROM suscripciones S " +
+                "LEFT JOIN usuarios U ON U.id = S.agente_id " +
+                "LEFT JOIN clientes C ON C.id = S.cliente_id " +
+                "LEFT JOIN proyectos P ON S.id = S.proyecto_id "+
+                "WHERE S.agente_id = {0}";
+
+            if (!String.IsNullOrEmpty(nombre))
+            {
+                query += " AND S.nombre like '%" + nombre + "%'";
+            }
+            if (!String.IsNullOrEmpty(cliente))
+            {
+                query += " AND (CONCAT(C.nombre,' ',C.apellidos) LIKE '%" + cliente + "%'" +
+                     " OR C.razon_social like '%" + cliente + "%')";
+            }
+            ViewData["nombreFilter"] = nombre;
+            ViewData["clienteFilter"] = cliente;
+
+            var honcizekContext = _context.Suscripciones.FromSqlRaw(query,Id).Include(s => s.Agente).Include(s => s.Cliente).Include(s => s.Proyecto);
 
             return View("Views/Administrador/Suscripciones/Index.cshtml", await honcizekContext.ToListAsync());
         }

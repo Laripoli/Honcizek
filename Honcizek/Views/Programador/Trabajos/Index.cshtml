@@ -4,12 +4,23 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Listado de Trabajos</h1>
+<h1>Listado de @((bool)ViewData["general"] ? "":"mis") trabajos</h1>
 
-<p>
-    <a asp-action="Create">
-        <button class="btn btn-info">Crear nuevo
-		</button>
+<p class="float-left">
+    <a asp-action="Create" asp-route-id="@ViewData["proyecto_id"]">
+        <button class="btn btn-info">Crear nuevo</button>
+    </a>
+</p>
+<p class="float-lg-right">
+    <a asp-controller="ProyectosP" asp-action="Edit" asp-route-id="@ViewData["proyecto_id"]">
+        <button class="btn btn-primary">
+            Volver al proyecto
+        </button>
+    </a>
+    <a asp-controller="TrabajosP" asp-action="@((bool)ViewData["general"] ? "IndexUsuario":"Index")" asp-route-id="@ViewData["proyecto_id"]">
+        <button class="btn btn-warning">
+            @((bool)ViewData["general"] ? "Ver mis trabajos":"Ver todos los trabajos")
+        </button>
     </a>
 </p>
 <table class="table">
@@ -17,9 +28,6 @@
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Nombre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Descripcion)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Agente)
@@ -31,35 +39,36 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Descripcion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Agente.Clave)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Proyecto.Estado)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">
-					<button class="btn btn-primary">Editar
-					</button>
-				</a>
-				<a asp-action="Details" asp-route-id="@item.Id">
-					<button class="btn btn-info">Detalles
-					</button>
-				</a>
-				<a asp-action="Delete" asp-route-id="@item.Id">
-					<button class="btn btn-danger">Eliminar
-					</button>
-				</a>
-            </td>
-        </tr>
-}
+        @if (Model.Count() > 0)
+        {
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Agente.FullName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Proyecto.Nombre)
+                    </td>
+                    <td class="float-right">
+                        <a asp-action="Edit" asp-route-id="@item.Id">
+                            <button class="btn btn-primary">
+                                @(item.AgenteId != (int)ViewData["usuario_id"] ? "Ver":"Editar")
+                            </button>
+                        </a>
+                        @if (item.AgenteId == (int)ViewData["usuario_id"]) { 
+                        <a asp-action="Delete" asp-route-id="@item.Id">
+                            <button class="btn btn-danger">
+                                Eliminar
+                            </button>
+                        </a>
+                        }
+                    </td>
+                </tr>
+            }
+        }
     </tbody>
 </table>

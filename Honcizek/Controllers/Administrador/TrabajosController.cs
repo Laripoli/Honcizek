@@ -49,7 +49,6 @@ namespace Honcizek.Controllers_Administrador
                 return NotFound();
             }
             ViewData["error"] = false;
-            var usuario = await _context.Usuarios.FindAsync(id);
             var Id = Int32.Parse(HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.UserData)?.Value);
 
             var proyectos = await _context.Proyectos.FindAsync(id);
@@ -134,6 +133,7 @@ namespace Honcizek.Controllers_Administrador
             {
                 return NotFound();
             }
+            
             ViewData["proyecto_id"] = trabajos.ProyectoId;
             ViewData["AgenteId"] = new SelectList(_context.Usuarios, "Id", "FullName",trabajos.AgenteId);
             return View("Views/Administrador/Trabajos/Edit.cshtml",trabajos);

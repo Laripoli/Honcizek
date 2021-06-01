@@ -36,10 +36,12 @@ namespace Honcizek.Controllers_Programador
             {
                 ViewData["error"] = true;
             }
+            var Id = Int32.Parse(HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.UserData)?.Value);
+            ViewData["usuario_id"] = Id;
             ViewData["general"] = true;
             var honcizekContext = _context.Trabajos.Where(t => t.ProyectoId == id).Include(t => t.Proyecto).Include(t => t.Agente).OrderByDescending(t => t.AgenteId);
             ViewData["proyecto_id"] = id;
-            return View("Views/Administrador/Trabajos/Index.cshtml", await honcizekContext.ToListAsync());
+            return View("Views/Programador/Trabajos/Index.cshtml", await honcizekContext.ToListAsync());
         }
 
         public async Task<IActionResult> IndexUsuario(int? id)
@@ -49,9 +51,8 @@ namespace Honcizek.Controllers_Programador
                 return NotFound();
             }
             ViewData["error"] = false;
-            var usuario = await _context.Usuarios.FindAsync(id);
             var Id = Int32.Parse(HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.UserData)?.Value);
-
+            ViewData["usuario_id"] = Id;
             var proyectos = await _context.Proyectos.FindAsync(id);
             if (proyectos == null)
             {
@@ -62,7 +63,7 @@ namespace Honcizek.Controllers_Programador
             var honcizekContext = _context.Trabajos.Where(t => t.ProyectoId == id && t.AgenteId == Id)
                 .Include(t => t.Proyecto).Include(t => t.Agente).OrderByDescending(t => t.AgenteId);
             ViewData["proyecto_id"] = id;
-            return View("Views/Administrador/Trabajos/Index.cshtml", await honcizekContext.ToListAsync());
+            return View("Views/Programador/Trabajos/Index.cshtml", await honcizekContext.ToListAsync());
         }
 
         // GET: Trabajos/Details/5
@@ -86,10 +87,23 @@ namespace Honcizek.Controllers_Programador
         }
 
         // GET: Trabajos/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create(int? id)
         {
-            ViewData["AgenteId"] = new SelectList(_context.Usuarios, "Id", "Clave");
-            ViewData["ProyectoId"] = new SelectList(_context.Proyectos, "Id", "Estado");
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            ViewData["error"] = false;
+            var proyectos = await _context.Proyectos.FindAsync(id);
+            if (proyectos == null)
+            {
+                ViewData["error"] = true;
+            }
+            ViewData["proyecto_id"] = id;
+
+            var Id = Int32.Parse(HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.UserData)?.Value);
+            ViewData["usuario_id"] = Id;
             return View("Views/Programador/Trabajos/Create.cshtml");
         }
 
@@ -104,10 +118,14 @@ namespace Honcizek.Controllers_Programador
             {
                 _context.Add(trabajos);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(IndexUsuario), new { id = trabajos.ProyectoId });
             }
-            ViewData["AgenteId"] = new SelectList(_context.Usuarios, "Id", "Clave", trabajos.AgenteId);
-            ViewData["ProyectoId"] = new SelectList(_context.Proyectos, "Id", "Estado", trabajos.ProyectoId);
+            
+            var Id = Int32.Parse(HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.UserData)?.Value);
+
+            ViewData["error"] = false;
+            ViewData["proyecto_id"] = trabajos.ProyectoId;
+            ViewData["usuario_id"] = Id;
             return View("Views/Programador/Trabajos/Create.cshtml",trabajos);
         }
 
@@ -124,8 +142,12 @@ namespace Honcizek.Controllers_Programador
             {
                 return NotFound();
             }
-            ViewData["AgenteId"] = new SelectList(_context.Usuarios, "Id", "Clave", trabajos.AgenteId);
-            ViewData["ProyectoId"] = new SelectList(_context.Proyectos, "Id", "Estado", trabajos.ProyectoId);
+            var Id = Int32.Parse(HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.UserData)?.Value);
+
+            ViewData["readonly"] = trabajos.AgenteId != Id;
+            ViewData["usuario_id"] = Id;
+            ViewData["AgenteId"] = new SelectList(_context.Usuarios, "Id", "FullName", trabajos.AgenteId);
+            ViewData["ProyectoId"] = new SelectList(_context.Proyectos, "Id", "Nombre", trabajos.ProyectoId);
             return View("Views/Programador/Trabajos/Edit.cshtml",trabajos);
         }
 
@@ -159,10 +181,13 @@ namespace Honcizek.Controllers_Programador
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(IndexUsuario), new { id = trabajos.ProyectoId });
             }
-            ViewData["AgenteId"] = new SelectList(_context.Usuarios, "Id", "Clave", trabajos.AgenteId);
-            ViewData["ProyectoId"] = new SelectList(_context.Proyectos, "Id", "Estado", trabajos.ProyectoId);
+            var Id = Int32.Parse(HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.UserData)?.Value);
+            ViewData["usuario_id"] = Id;
+            ViewData["readonly"] = false;
+            ViewData["AgenteId"] = new SelectList(_context.Usuarios, "Id", "FullName", trabajos.AgenteId);
+            ViewData["ProyectoId"] = new SelectList(_context.Proyectos, "Id", "Nombre", trabajos.ProyectoId);
             return View("Views/Programador/Trabajos/Edit.cshtml",trabajos);
         }
 
@@ -194,7 +219,7 @@ namespace Honcizek.Controllers_Programador
             var trabajos = await _context.Trabajos.FindAsync(id);
             _context.Trabajos.Remove(trabajos);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(IndexUsuario), new { id = trabajos.ProyectoId });
         }
 
         private bool TrabajosExists(int id)

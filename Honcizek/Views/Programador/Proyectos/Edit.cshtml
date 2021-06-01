@@ -4,10 +4,17 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Editar</h1>
-
-<h4>Proyectos</h4>
-<hr />
+<div class="d-flex">
+    <div class="mr-auto p-2">
+        <h1>Editar</h1>
+        <h4>Proyectos</h4>
+    </div>
+    <div class="align-self-end pr-3">
+        <a asp-controller="TrabajosP" asp-action="IndexUsuario" asp-route-id="@Model.Id">
+            <button class="btn btn-warning">Consultar trabajos</button>
+        </a>
+    </div>
+</div>
 <div class="row">
     <div class="col-md-12 readonly">
         <form>

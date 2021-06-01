@@ -27,7 +27,6 @@ namespace Honcizek.Controllers_Administrador
         public async Task<IActionResult> Index()
         {
             ViewData["error"] = false;
-            ViewData["forbidden"] = false;
             ViewData["general"] = true;
             var Id = Int32.Parse(HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.UserData)?.Value);
             ViewData["usuario_id"] = Id;
@@ -38,7 +37,6 @@ namespace Honcizek.Controllers_Administrador
         {
             
             ViewData["error"] = false;
-            ViewData["forbidden"] = false;
             var Id = Int32.Parse(HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.UserData)?.Value);
             var usuario = await _context.Usuarios.FindAsync(Id);
 

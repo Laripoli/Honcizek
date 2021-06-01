@@ -6,7 +6,7 @@
 
 <h1>Listado de @(!(bool)ViewData["general"]?"mis":"") proyectos</h1>
 
-@if (!(bool)ViewData["error"] && !(bool)ViewData["forbidden"])
+@if (!(bool)ViewData["error"])
 {
 <div>
     <p class="float-left">
@@ -58,105 +58,110 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model)
+            @if (Model.Count() > 0)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Nombre)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Tipo)
-                    </td>
-                    <td>
-                        @if (item.FechaFinPrevista != null)
-                        {
-                            @Html.DisplayFor(modelItem => item.Finicio)
-                        }
-                        else
-                        {
-                            <span>Sin especificar</span>
-                        }
-                    </td>
-                    <td>
-                        @if (item.FechaFinPrevista != null)
-                        {
-                            @Html.DisplayFor(modelItem => item.FFinPrevista)
-                        }
-                        else
-                        {
-                            <span>Sin especificar</span>
-                        }
-                    </td>
-                    <td>
-                        @if (item.FechaFinReal != null)
-                        {
-                            @Html.DisplayFor(modelItem => item.FFin)
-                        }
-                        else
-                        {
-                            <span>Sin finalizar</span>
-                        }
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.HorasInternasPrevistas)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Estado)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Fase)
-                    </td>
-                    <td>
-                        @if (item.Tipo == "Empresa")
-                        {
-                            @Html.DisplayFor(modelItem => item.Cliente.RazonSocial)
-                        }
-                        else
-                        {
-                            @Html.DisplayFor(modelItem => item.Cliente.FullName);
-                        }
-                    </td>
-                    <td>
-                        <a asp-controller="Trabajos" asp-action="IndexUsuario" asp-route-id="@item.Id">
-                            <button class="btn btn-warning">
-                                Trabajos
-                            </button>
-                        </a>
-                        <a asp-action="Edit" asp-route-id="@item.Id">
-                            <button class="btn btn-primary">
-                                Editar
-                            </button>
-                        </a>
-                        <a asp-controller="Participantes" asp-action="Index" asp-route-id="@item.Id">
-                            <button class="btn btn-info">
-                                Participantes
-                            </button>
-                        </a>
-                        <a asp-action="Delete" asp-route-id="@item.Id">
-                            <button class="btn btn-danger">
-                                Eliminar
-                            </button>
-                        </a>
-                    </td>
-                </tr>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Tipo)
+                        </td>
+                        <td>
+                            @if (item.FechaFinPrevista != null)
+                            {
+                                @Html.DisplayFor(modelItem => item.Finicio)
+                            }
+                            else
+                            {
+                                <span>Sin especificar</span>
+                            }
+                        </td>
+                        <td>
+                            @if (item.FechaFinPrevista != null)
+                            {
+                                @Html.DisplayFor(modelItem => item.FFinPrevista)
+                            }
+                            else
+                            {
+                                <span>Sin especificar</span>
+                            }
+                        </td>
+                        <td>
+                            @if (item.FechaFinReal != null)
+                            {
+                                @Html.DisplayFor(modelItem => item.FFin)
+                            }
+                            else
+                            {
+                                <span>Sin finalizar</span>
+                            }
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.HorasInternasPrevistas)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Estado)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Fase)
+                        </td>
+                        <td>
+                            @if (item.Tipo == "Empresa")
+                            {
+                                @Html.DisplayFor(modelItem => item.Cliente.RazonSocial)
+                            }
+                            else
+                            {
+                                @Html.DisplayFor(modelItem => item.Cliente.FullName);
+                            }
+                        </td>
+                        <td>
+                            <a asp-controller="Trabajos" asp-action="IndexUsuario" asp-route-id="@item.Id">
+                                <button class="btn btn-warning">
+                                    Trabajos
+                                </button>
+                            </a>
+                            <a asp-action="Edit" asp-route-id="@item.Id">
+                                <button class="btn btn-primary">
+                                    Editar
+                                </button>
+                            </a>
+                            <a asp-controller="Participantes" asp-action="Index" asp-route-id="@item.Id">
+                                <button class="btn btn-info">
+                                    Participantes
+                                </button>
+                            </a>
+                            <a asp-action="Delete" asp-route-id="@item.Id">
+                                <button class="btn btn-danger">
+                                    Eliminar
+                                </button>
+                            </a>
+                        </td>
+                    </tr>
+                }
             }
         </tbody>
     </table>
+            @if (!(Model.Count() > 0))
+            {
+                <h2 style="text-align: center;width: 100%">A&uacute;n no hay registros</h2>
+            }
 
 }
 @if ((bool)ViewData["error"])
 {
-    <h4>Est&aacute;s intentando ver los proyectos de un usuario que no existe.</h4>
+<div class="row col-12">
+    <h4 class="">
+        Parece que ha habido un error con tu usuario, puedes intentar cerrar sesi&oacute;n y volver a entrar.
+    </h4>
+    <form class="pl-3" asp-controller="Login" asp-action="Logout" method="post">
+        <button class="btn btn-danger">Cerrar sesi&oacute;n</button>
+    </form>
+</div>
     <hr />
-    <h5>Prueba a ver el <a class="honci-link" asp-controller="Proyectos" asp-action="Index">Listado completo de proyectos</a> e int&eacute;ntalo de nuevo</h5>
-    <hr />
-    <h5>Tambi&eacute;n puedes probar a ver <a class="honci-link" asp-controller="Proyectos" asp-action="IndexUsuario" 
-    asp-route-id="@ViewData["usuario_id"]">Listado de tus proyectos</a> e int&eacute;ntalo de nuevo</h5>
-}
-@if ((bool)ViewData["forbidden"])
-{
-    <h4>Est&aacute;s intentando ver los proyectos de otro programador...</h4>
-    <hr />
-    <h5>Prueba a ver el <a class="honci-link" asp-controller="Proyectos" asp-action="Index">listado completo de proyectos</a> e int&eacute;ntalo de nuevo</h5>
+    <h5>O puedes ver el <a class="honci-link" asp-controller="Proyectos" asp-action="Index">Listado completo de proyectos</a>.</h5>
 }
 

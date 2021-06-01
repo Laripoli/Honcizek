@@ -113,7 +113,7 @@ table thead th {
 }
 
 table thead tr th:last-child {
-    width: auto;
+    width: 15%;
 }
 
 table tbody tr {
@@ -273,4 +273,13 @@ table tbody td:last-child a {
     display: inline-flex;
     align-items: center;
     height:100%;
+}
+
+.card-custom a{
+    color: white;
+    font-weight: bolder;
+}
+
+.card-custom a:hover{
+    color: black;
 }

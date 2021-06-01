@@ -17,7 +17,7 @@
         <p>
             Buscar cliente por nombre: <input id="filtro" type="text" name="search" value="@ViewData["CurrentFilter"]" />
             <input type="submit" value="Buscar" class="btn btn-primary" />
-            <a asp-action="Index" >
+            <a asp-action="Index">
                 <button class="btn btn-dark" id="limpia-filtros">
                     Limpiar filtro
                 </button>
@@ -47,49 +47,55 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @if (Model.Count() > 0)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FullName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Tipo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Fecha)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Telefono)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Movil)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">
-                        <button class="btn btn-primary">Editar</button>
-                    </a>
-                    <a asp-action="Details" asp-route-id="@item.Id">
-                        <button class="btn btn-info">Detalles</button>
-                    </a>
-                    <a asp-action="Delete" asp-route-id="@item.Id">
-                        <button class="btn btn-danger">Eliminar</button>
-                    </a>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FullName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Tipo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Fecha)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Telefono)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Movil)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">
+                            <button class="btn btn-primary">Editar</button>
+                        </a>
+                        <a asp-action="Details" asp-route-id="@item.Id">
+                            <button class="btn btn-info">Detalles</button>
+                        </a>
+                        <a asp-action="Delete" asp-route-id="@item.Id">
+                            <button class="btn btn-danger">Eliminar</button>
+                        </a>
 
 
-                </td>
-            </tr>
+                    </td>
+                </tr>
+            }
         }
     </tbody>
 </table>
-
+@if (!(Model.Count() > 0))
+{
+    <h2 style="text-align: center;width: 100%">A&uacute;n no hay registros</h2>
+}
 
 @section Scripts {
     <script type="text/javascript" src="~/js/Administrador/Clientes/Clientes.js"></script>
     <script>
-    $(document).ready(function () {
-        Clientes.init();
-    });
+        $(document).ready(function () {
+            Clientes.init();
+        });
     </script>
 }
 

@@ -7,7 +7,7 @@
     var _limpiar_filtros = function () {
         $('#limpia-filtros').on('click', function (e) {
             console.log("a");
-            $('#filtro').val('');
+            $(':input').val('');
         });
     }
 

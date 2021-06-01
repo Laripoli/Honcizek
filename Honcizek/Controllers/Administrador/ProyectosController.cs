@@ -51,11 +51,13 @@ namespace Honcizek.Controllers_Administrador
                 }
                 if(!String.IsNullOrEmpty(nombre) && !String.IsNullOrEmpty(cliente))
                 {
-                    query += " And CONCAT(C.nombre,' ',C.apellidos) like '%" + cliente + "%'";
+                    query += " And CONCAT(C.nombre,' ',C.apellidos) LIKE '%" + cliente + "%'" +
+                         " OR C.razon_social like '%" + cliente + "%'";
                 }
                 if (String.IsNullOrEmpty(nombre) && !String.IsNullOrEmpty(cliente)) 
                 { 
-                    query += " CONCAT(C.nombre,' ',C.apellidos) like '%" + cliente + "%'";
+                    query += " CONCAT(C.nombre,' ',C.apellidos) LIKE '%" + cliente + "%'" +
+                         " OR C.razon_social like '%" + cliente + "%'";
                 }
             }
 
@@ -94,8 +96,9 @@ namespace Honcizek.Controllers_Administrador
                 }
                 if(!String.IsNullOrEmpty(cliente))
                 {
-                    query += " AND CONCAT(C.nombre,' ',C.apellidos) like '%" + cliente + "%'";
-                }
+                    query += " AND CONCAT(C.nombre,' ',C.apellidos) LIKE '%" + cliente + "%'" +
+                         " OR C.razon_social like '%" + cliente + "%'";
+            }
             
             var honcizekContext = _context.Proyectos.FromSqlRaw(query, Id).Include(p => p.Cliente);
             return View("Views/Administrador/Proyectos/Index.cshtml", await honcizekContext.ToListAsync());

@@ -24,22 +24,42 @@ namespace Honcizek.Controllers_Administrador
         }
 
         // GET: Tickets
-        public async Task<IActionResult> Index(String nombre)
+        public async Task<IActionResult> Index(String nombre, String cliente)
         {
-            var honcizekContext = _context.Tickets.Include(t => t.Agente).Include(t => t.Cliente).Include(t => t.Suscripcion);
+            
             ViewData["error"] = false;
             ViewData["general"] = true;
 
             ViewData["nombreFilter"] = nombre;
-            if (!String.IsNullOrEmpty(nombre))
-            {
-                honcizekContext = _context.Tickets.Where(t => t.Nombre.Contains(nombre)).Include(t => t.Cliente).Include(t => t.Suscripcion);
-            }
+            ViewData["clienteFilter"] = cliente;
+            var query = "SELECT T.* FROM tickets T " +
+                "LEFT JOIN usuarios U ON U.id = T.agente_id " +
+                "LEFT JOIN clientes C ON C.id = T.cliente_id " +
+                "LEFT JOIN suscripciones S ON S.id = T.suscripcion_id";
 
+            if (!String.IsNullOrEmpty(nombre) || !String.IsNullOrEmpty(cliente))
+            {
+                query += " Where ";
+                if (!String.IsNullOrEmpty(nombre))
+                {
+                    query += " T.nombre like '%" + nombre + "%'";
+                }
+                if (!String.IsNullOrEmpty(nombre) && !String.IsNullOrEmpty(cliente))
+                {
+                    query += " And CONCAT(C.nombre,' ',C.apellidos) LIKE '%" + cliente + "%'" +
+                         " OR C.razon_social like '%" + cliente + "%'";
+                }
+                if (String.IsNullOrEmpty(nombre) && !String.IsNullOrEmpty(cliente))
+                {
+                    query += " CONCAT(C.nombre,' ',C.apellidos) LIKE '%" + cliente + "%'" +
+                         " OR C.razon_social like '%" + cliente + "%'";
+                }
+            }
+            var honcizekContext = _context.Tickets.FromSqlRaw(query).Include(t => t.Agente).Include(t => t.Cliente).Include(t => t.Suscripcion);
             return View("Views/Administrador/Tickets/Index.cshtml",await honcizekContext.ToListAsync());
         }
 
-        public async Task<IActionResult> IndexUsuario(String nombre)
+        public async Task<IActionResult> IndexUsuario(String nombre, String cliente)
         {
 
             ViewData["error"] = false;
@@ -49,16 +69,33 @@ namespace Honcizek.Controllers_Administrador
             {
                 ViewData["error"] = true;
             }
-            
             ViewData["general"] = false;
-            var honcizekContext = _context.Tickets.Where(t => t.AgenteId == Id).Include(t => t.Agente).Include(t => t.Cliente).Include(t => t.Suscripcion);
-            if (!String.IsNullOrEmpty(nombre))
+
+            var query = "SELECT T.* FROM tickets T " +
+                "LEFT JOIN usuarios U ON U.id = T.agente_id " +
+                "LEFT JOIN clientes C ON C.id = T.cliente_id " +
+                "LEFT JOIN suscripciones S ON S.id = T.suscripcion_id " +
+                "WHERE T.agente_id = {0}";
+
+
+            /*if (!String.IsNullOrEmpty(nombre))
             {
                 honcizekContext = _context.Tickets.Where(t => t.AgenteId == Id && t.Nombre.Contains(nombre))
                     .Include(t => t.Cliente).Where(t => t.Cliente.FullName == "Álvaro").Include(t => t.Suscripcion);
+            }*/
+            if (!String.IsNullOrEmpty(nombre))
+            {
+                query += " AND T.nombre like '%" + nombre + "%'";
+            }
+            if (!String.IsNullOrEmpty(cliente))
+            {
+                query += " AND CONCAT(C.nombre,' ',C.apellidos) LIKE '%" + cliente + "%'" +
+                     " OR C.razon_social like '%" + cliente + "%'";
             }
             ViewData["nombreFilter"] = nombre;
+            ViewData["clienteFilter"] = cliente;
 
+            var honcizekContext = _context.Tickets.FromSqlRaw(query,Id).Include(t => t.Agente).Include(t => t.Cliente).Include(t => t.Suscripcion);
             return View("Views/Administrador/Tickets/Index.cshtml", await honcizekContext.ToListAsync());
         }
 

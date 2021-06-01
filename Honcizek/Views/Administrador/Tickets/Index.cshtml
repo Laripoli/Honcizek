@@ -7,35 +7,45 @@
 <h1>Listado de @(!(bool)ViewData["general"]?"mis":"") tickets</h1>
 @if (!(bool)ViewData["error"])
 {
-    <div>
-        <p class="float-right">
-            <a asp-action="@((bool)ViewData["general"] ? "IndexUsuario":"Index")">
-                <button class="btn btn-@((bool)ViewData["general"] ? "primary":"warning")">
-                    @((bool)ViewData["general"] ? "Ver mis tickets":"Ver todos los tickets")
+<div>
+    <p class="float-right">
+        <a asp-action="@((bool)ViewData["general"] ? "IndexUsuario":"Index")">
+            <button class="btn btn-@((bool)ViewData["general"] ? "primary":"warning")">
+                @((bool)ViewData["general"] ? "Ver mis tickets":"Ver todos los tickets")
+            </button>
+        </a>
+    </p>
+    <p class="float-right pr-2">
+        <a asp-action="Create">
+            <button class="btn btn-info">
+                Crear nuevo
+            </button>
+        </a>
+    </p>
+</div>
+<div>
+    <form id="filtrador" class="float-left pl-3 row" asp-action="@((bool)ViewData["general"] ? "Index":"IndexUsuario")" method="get">
+        <div class="form-actions no-color px-3">
+            <label for="nombre">
+                Buscar nombre: <input id="filtro" type="text" name="nombre" value="@ViewData["nombreFilter"]" />
+            </label>
+            <label for="cliente">
+                Buscar cliente: <input id="filtro" type="text" name="cliente" value="@ViewData["clienteFilter"]" />
+            </label>
+        </div>
+        <div class="row pl-5 pt-3">
+            <a class="pr-2">
+                <button class="btn btn-primary">Buscar</button>
+            </a>
+            <a asp-action="Index">
+                <button class="btn btn-dark" id="limpia-filtros">
+                    Limpiar filtro
                 </button>
             </a>
-        </p>
-        <p class="float-right pr-2">
-            <a asp-action="Create">
-                <button class="btn btn-info">
-                    Crear nuevo
-                </button>
-            </a>
-        </p>
-        <form class="float-left pl-3" asp-action="@((bool)ViewData["general"] ? "Index":"IndexUsuario")" method="get">
-            <div class="form-actions no-color">
-                <p>
-                    Buscar ticket por nombre: <input id="filtro" type="text" name="nombre" value="@ViewData["nombreFilter"]" />
-                    <input type="submit" value="Buscar" class="btn btn-primary" />
-                    <a asp-action="Index">
-                        <button class="btn btn-dark" id="limpia-filtros">
-                            Limpiar filtro
-                        </button>
-                    </a>
-                </p>
-            </div>
-        </form>
-    </div>
+        </div>
+    </form>
+</div>
+    
     <table class="table">
         <thead>
             <tr>

@@ -133,14 +133,7 @@
                             @Html.DisplayFor(modelItem => item.Fase)
                         </td>
                         <td>
-                            @if (item.Tipo == "Empresa")
-                            {
-                                @Html.DisplayFor(modelItem => item.Cliente.RazonSocial)
-                            }
-                            else
-                            {
-                                @Html.DisplayFor(modelItem => item.Cliente.FullName);
-                            }
+                                @Html.DisplayFor(modelItem => item.Cliente.FullName)
                         </td>
                         <td>
                             <a asp-controller="Trabajos" asp-action="IndexUsuario" asp-route-id="@item.Id">

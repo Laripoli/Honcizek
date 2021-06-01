@@ -33,8 +33,7 @@ namespace Honcizek.Controllers.Administrador
             if (!String.IsNullOrEmpty(search))
             {
 
-                honcizekContext = _context.Clientes.Where(s => s.Apellidos.Contains(search)
-                               || s.Nombre.Contains(search)).Include(c => c.Localidad).Include(c => c.Provincia);
+                honcizekContext = _context.Clientes.Where(s => s.FullName.Contains(search)).Include(c => c.Localidad).Include(c => c.Provincia);
 
             }
             

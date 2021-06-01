@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Honcizek.Controllers
@@ -12,6 +13,7 @@ namespace Honcizek.Controllers
         public IActionResult Error404()
         {
             ViewData["layout"] = "";
+            ViewData["rol"] = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Role)?.Value;
             return View("Error404");
         }
     }

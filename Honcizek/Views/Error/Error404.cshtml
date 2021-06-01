@@ -2,11 +2,29 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-}
+    string rol;
+    switch (ViewData["rol"])
+    {
+        case "Administrador":
+            rol = (string)ViewData["rol"];
+            break;
+        case "Programador":
+            rol = (string)ViewData["rol"];
+            break;
+        case "Cliente":
+            rol = (string)ViewData["rol"];
+            break;
+        default :
+            rol = "Login";
+            break;
+    }
+    string accion = rol != "Login"? "Escritorio":"Login";
+
+            }
 <style>
     body {
         background-image: url('/css/Error/404_background.png');
-        overflow: hidden;
+            overflow: hidden;
         min-height: 100vh;
         background-color: #efeef0;
         text-align: center;
@@ -15,12 +33,12 @@
         font-family: Arial;
         font-size: larger;
     }
-    body a {
-        text-decoration: none;
-        color: #c6a664;
+        body a {
+            text-decoration: none;
+            color: #c6a664;
     }
 
-    body a:hover {
+        body a:hover {
         color: #0B1D6E;
     }
 
@@ -36,6 +54,10 @@
     }
 </style>
 <body>
-    <h2>Parece que la página a la que intentas acceder no existe..</h2>
-    <h3>Prueba a volver a la página de <a asp-controller="Administrador" asp-action="Escritorio">Inicio</a></h3>
+    <h2>Parece que la página a la que intentas acceder no existe..@ViewData["rol"]</h2>
+    <h3>Prueba a volver a la página de 
+        <a asp-controller="@rol" asp-action="@accion">
+            @accion
+        </a>
+    </h3>
 </body>

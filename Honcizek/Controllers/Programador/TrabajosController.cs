@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using Honcizek.DAL.Models;
+using System.Security.Claims;
 
 namespace Honcizek.Controllers_Programador
 {
@@ -24,20 +25,44 @@ namespace Honcizek.Controllers_Programador
         // GET: Trabajos
         public async Task<IActionResult> Index(int? id)
         {
-            
             if (id == null)
             {
                 return NotFound();
             }
+
             ViewData["error"] = false;
             var proyectos = await _context.Proyectos.FindAsync(id);
             if (proyectos == null)
             {
                 ViewData["error"] = true;
             }
+            ViewData["general"] = true;
+            var honcizekContext = _context.Trabajos.Where(t => t.ProyectoId == id).Include(t => t.Proyecto).Include(t => t.Agente).OrderByDescending(t => t.AgenteId);
+            ViewData["proyecto_id"] = id;
+            return View("Views/Administrador/Trabajos/Index.cshtml", await honcizekContext.ToListAsync());
+        }
 
-            var honcizekContext = _context.Trabajos.Where(t => t.ProyectoId == id).Include(t => t.Proyecto).Include(t => t.Agente).OrderByDescending(t => t.AgenteId == id);
-            return View("Views/Programador/Trabajos/Index.cshtml",await honcizekContext.ToListAsync());
+        public async Task<IActionResult> IndexUsuario(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            ViewData["error"] = false;
+            var usuario = await _context.Usuarios.FindAsync(id);
+            var Id = Int32.Parse(HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.UserData)?.Value);
+
+            var proyectos = await _context.Proyectos.FindAsync(id);
+            if (proyectos == null)
+            {
+                ViewData["error"] = true;
+            }
+
+            ViewData["general"] = false;
+            var honcizekContext = _context.Trabajos.Where(t => t.ProyectoId == id && t.AgenteId == Id)
+                .Include(t => t.Proyecto).Include(t => t.Agente).OrderByDescending(t => t.AgenteId);
+            ViewData["proyecto_id"] = id;
+            return View("Views/Administrador/Trabajos/Index.cshtml", await honcizekContext.ToListAsync());
         }
 
         // GET: Trabajos/Details/5

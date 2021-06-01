@@ -34,27 +34,17 @@ namespace Honcizek.Controllers_Administrador
             var honcizekContext = _context.Proyectos.Include(p => p.Cliente);
             return View("Views/Administrador/Proyectos/Index.cshtml",await honcizekContext.ToListAsync());
         }
-        public async Task<IActionResult> IndexUsuario(int? id)
+        public async Task<IActionResult> IndexUsuario()
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            
             ViewData["error"] = false;
             ViewData["forbidden"] = false;
-            var usuario = await _context.Usuarios.FindAsync(id);
             var Id = Int32.Parse(HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.UserData)?.Value);
+            var usuario = await _context.Usuarios.FindAsync(Id);
 
             if (usuario == null)
             {
                 ViewData["error"] = true;
-            }
-            else
-            {
-                if (usuario.Id != Id)
-                {
-                    ViewData["forbidden"] = true;
-                }
             }
             var query = "SELECT P.* FROM proyectos P " +
             "LEFT JOIN proyectos_participantes PP ON PP.proyecto_id = P.id " +
@@ -63,8 +53,8 @@ namespace Honcizek.Controllers_Administrador
 
             ViewData["usuario_id"] = Id;
             ViewData["general"] = false;
-            var honcizekContext = _context.Proyectos.FromSqlRaw(query,id).Include(p => p.Cliente);
-            /*var honcizekContext = _context.Proyectos.Include(p => p.Cliente);*/
+            var honcizekContext = _context.Proyectos.FromSqlRaw(query,Id).Include(p => p.Cliente);
+
             return View("Views/Administrador/Proyectos/Index.cshtml", await honcizekContext.ToListAsync());
         }
 

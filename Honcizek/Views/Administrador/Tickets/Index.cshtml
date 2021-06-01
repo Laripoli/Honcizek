@@ -16,7 +16,7 @@
         </a>
     </p>
     <p class="float-right">
-        <a asp-action="@((bool)ViewData["general"] ? "IndexUsuario":"Index")" asp-route-id="@((bool)ViewData["general"] ? ViewData["usuario_id"]:"")">
+        <a asp-action="@((bool)ViewData["general"] ? "IndexUsuario":"Index")">
             <button class="btn btn-@((bool)ViewData["general"] ? "primary":"warning")">
                 @((bool)ViewData["general"] ? "Ver mis tickets":"Ver todos los tickets")
             </button>

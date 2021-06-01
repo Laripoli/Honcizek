@@ -135,5 +135,11 @@
 
 
 @section Scripts {
+    <script type="text/javascript" src="~/js/Programador/Proyectos/Progress.js"></script>
+    <script>
+        $(document).ready(function () {
+            Progress.init("@Model.Fase");
+        });
+    </script>
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

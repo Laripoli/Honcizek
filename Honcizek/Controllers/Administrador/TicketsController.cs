@@ -35,30 +35,20 @@ namespace Honcizek.Controllers_Administrador
             return View("Views/Administrador/Tickets/Index.cshtml",await honcizekContext.ToListAsync());
         }
 
-        public async Task<IActionResult> IndexUsuario(int? id)
+        public async Task<IActionResult> IndexUsuario()
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+
             ViewData["error"] = false;
             ViewData["forbidden"] = false;
-            var usuario = await _context.Usuarios.FindAsync(id);
             var Id = Int32.Parse(HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.UserData)?.Value);
+            var usuario = await _context.Usuarios.FindAsync(Id);
             if (usuario == null)
             {
                 ViewData["error"] = true;
             }
-            else
-            {
-                if (usuario.Id != Id)
-                {
-                    ViewData["forbidden"] = true;
-                }
-            }
             ViewData["usuario_id"] = Id;
             ViewData["general"] = false;
-            var honcizekContext = _context.Tickets.Where(t => t.AgenteId == id).Include(t => t.Agente).Include(t => t.Cliente).Include(t => t.Suscripcion);
+            var honcizekContext = _context.Tickets.Where(t => t.AgenteId == Id).Include(t => t.Agente).Include(t => t.Cliente).Include(t => t.Suscripcion);
 
             return View("Views/Administrador/Tickets/Index.cshtml", await honcizekContext.ToListAsync());
         }

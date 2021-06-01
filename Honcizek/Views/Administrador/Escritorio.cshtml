@@ -4,6 +4,7 @@
 @{
     bool proyectosPersonalizado = (int)ViewData["proyectos"] > 0;
     bool ticketsPersonalizado = (int)ViewData["tickets"] > 0;
+    bool suscripcionesPersonalizado = (int)ViewData["suscripciones"] > 0;
 }
 <h1>Bienvenido al escritorio, @ViewData["nombre"]</h1>
 <div class="pt-4">
@@ -11,7 +12,7 @@
         @((int)ViewData["proyectos"] > 0 ? "Participas en" : "No participas en ningún ")
         @ViewData["proyectos"]
         <a class="honci-link" asp-controller="Proyectos"
-           asp-action="@(proyectosPersonalizado ? "IndexUsuario":"Index")" asp-route-id="@(proyectosPersonalizado ? ViewData["usuario_id"]:"")">
+           asp-action="@(proyectosPersonalizado ? "IndexUsuario":"Index")">
             @((int)ViewData["proyectos"] > 1 ? "proyectos":"proyecto")
         </a>
     </h4>
@@ -20,8 +21,17 @@
         @((int)ViewData["tickets"] > 0 ? "Tienes " : "No tienes ningún ")
         @((int)ViewData["tickets"] > 0 ? ViewData["tickets"]:"")
         <a class="honci-link" asp-controller="Tickets"
-           asp-action="@(ticketsPersonalizado ? "IndexUsuario":"Index")" asp-route-id="@(ticketsPersonalizado ? ViewData["usuario_id"]:"")">
+           asp-action="@(ticketsPersonalizado ? "IndexUsuario":"Index")">
             @((int)ViewData["tickets"] > 1 ? "tickets pendientes" : "ticket pendiente")
+        </a>
+    </h4>
+    <hr />
+    <h4>
+        @((int)ViewData["suscripciones"] > 0 ? "Participas en " : "No participas en ninguna ")
+        @((int)ViewData["suscripciones"] > 0 ? ViewData["suscripciones"]:"")
+        <a class="honci-link" asp-controller="Suscripciones"
+           asp-action="@(suscripcionesPersonalizado ? "IndexUsuario":"Index")">
+            @((int)ViewData["suscripciones"] > 1 ? "suscripciones" : "suscripción")
         </a>
     </h4>
 </div>

@@ -24,19 +24,24 @@ namespace Honcizek.Controllers.Administrador
         [Route("Administrador/Escritorio")]
         public IActionResult Escritorio()
         {
-            var json  = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
-            Usuarios user = JsonConvert.DeserializeObject<Usuarios>(json);
-            var usuario_id = user.Id;
+            DateTime hoy = DateTime.Now;
+            var fecha = hoy.ToString("yyyy-MM-dd");
+            var usuario_id = Int32.Parse(HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.UserData)?.Value);
             var proyectoQuery = "SELECT P.* FROM proyectos P " +
             "LEFT JOIN proyectos_participantes PP ON PP.proyecto_id = P.id " +
             "LEFT JOIN usuarios U ON U.id = PP.usuario_id " +
             "WHERE U.id = {0}";
-            var proyectos = _context.Proyectos.FromSqlRaw(proyectoQuery, user.Id).Count();
+
+            var proyectos = _context.Proyectos.FromSqlRaw(proyectoQuery, usuario_id).Count();
             var tickets = _context.Tickets.Where(t =>t.AgenteId == usuario_id && (t.Estado != "Finalizado" && t.Estado != "Cancelado")).Count();
-            ViewData["nombre"] = user.FullName;
+            var suscripciones = _context.Suscripciones.Where(s => s.AgenteId == usuario_id && s.FechaHasta > hoy).Count();
+
+            ViewData["nombre"] = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.Value;
             ViewData["proyectos"] = proyectos;
             ViewData["tickets"] = tickets;
             ViewData["usuario_id"] = usuario_id;
+            ViewData["suscripciones"] = suscripciones;
+
             return View("Views/Administrador/Escritorio.cshtml");
         }
     }

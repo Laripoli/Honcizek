@@ -60,7 +60,7 @@ namespace Honcizek.Controllers_Administrador
                 ViewData["error"] = true;
             }
             ViewData["TicketId"] = id;
-            ViewData["usuario_id"] = Id;
+             
             ViewData["general"] = false;
             var honcizekContext = _context.PartesDeTrabajo.Where(t => t.AgenteId == Id).Include(p => p.Agente).Include(p => p.Ticket);
 

@@ -28,24 +28,21 @@ namespace Honcizek.Controllers_Administrador
         {
             var honcizekContext = _context.Suscripciones.Include(s => s.Agente).Include(s => s.Cliente).Include(s => s.Proyecto);
             ViewData["error"] = false;
-            ViewData["forbidden"] = false;
             ViewData["general"] = true;
             var Id = Int32.Parse(HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.UserData)?.Value);
-            ViewData["usuario_id"] = Id;
+             
             return View("Views/Administrador/Suscripciones/Index.cshtml",await honcizekContext.ToListAsync());
         }
 
         public async Task<IActionResult> IndexUsuario()
         {
             ViewData["error"] = false;
-            ViewData["forbidden"] = false;
             var Id = Int32.Parse(HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.UserData)?.Value);
             var usuario = await _context.Usuarios.FindAsync(Id);
             if (usuario == null)
             {
                 ViewData["error"] = true;
             }
-            ViewData["usuario_id"] = Id;
             ViewData["general"] = false;
             var honcizekContext = _context.Suscripciones.Where(s => s.AgenteId == Id).Include(s => s.Agente).Include(s => s.Cliente).Include(s => s.Proyecto);
 

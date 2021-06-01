@@ -29,7 +29,7 @@ namespace Honcizek.Controllers_Administrador
             ViewData["error"] = false;
             ViewData["general"] = true;
             var Id = Int32.Parse(HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.UserData)?.Value);
-            ViewData["usuario_id"] = Id;
+             
             var honcizekContext = _context.Proyectos.Include(p => p.Cliente);
             return View("Views/Administrador/Proyectos/Index.cshtml",await honcizekContext.ToListAsync());
         }
@@ -49,7 +49,7 @@ namespace Honcizek.Controllers_Administrador
             "LEFT JOIN usuarios U ON U.id = PP.usuario_id " +
             "WHERE U.id = {0}";
 
-            ViewData["usuario_id"] = Id;
+             
             ViewData["general"] = false;
             var honcizekContext = _context.Proyectos.FromSqlRaw(query,Id).Include(p => p.Cliente);
 
@@ -111,7 +111,7 @@ namespace Honcizek.Controllers_Administrador
             {
                 if(proyectos.Fase == "Diseno")
                 {
-                    proyectos.Fase = "Diseño";
+                    proyectos.Fase = "Diseï¿½o";
                 }
                 _context.Add(proyectos);
                 await _context.SaveChangesAsync();
@@ -159,7 +159,7 @@ namespace Honcizek.Controllers_Administrador
                     new SelectListItem {Text = "En curso", Value = "En curso"},
                     new SelectListItem {Text = "Finalizado", Value = "Finalizado"}
                 };
-            proyectos.Fase = proyectos.Fase == "Diseño" ? "Diseno" : proyectos.Fase;
+            proyectos.Fase = proyectos.Fase == "Diseï¿½o" ? "Diseno" : proyectos.Fase;
             return View("Views/Administrador/Proyectos/Edit.cshtml",proyectos);
         }
 

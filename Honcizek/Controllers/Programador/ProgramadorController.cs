@@ -38,7 +38,7 @@ namespace Honcizek.Controllers.Programador
             ViewData["nombre"] = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.Value;
             ViewData["proyectos"] = proyectos;
             ViewData["tickets"] = tickets;
-            ViewData["usuario_id"] = usuario_id;
+             
             ViewData["suscripciones"] = suscripciones;
             return View("Views/Programador/Escritorio.cshtml");
         }

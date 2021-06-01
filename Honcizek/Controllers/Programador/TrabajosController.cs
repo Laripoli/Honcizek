@@ -37,8 +37,6 @@ namespace Honcizek.Controllers_Programador
             }
 
             var honcizekContext = _context.Trabajos.Where(t => t.ProyectoId == id).Include(t => t.Proyecto).Include(t => t.Agente).OrderByDescending(t => t.AgenteId == id);
-           /* var honcizekContext = _context.Trabajos.Where(t => t.ProyectoId == id);*/
-            /*var honcizekContext = _context.Trabajos.Include(t => t.Agente).Include(t => t.Proyecto);*/
             return View("Views/Programador/Trabajos/Index.cshtml",await honcizekContext.ToListAsync());
         }
 

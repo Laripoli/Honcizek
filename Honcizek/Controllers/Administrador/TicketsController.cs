@@ -30,7 +30,7 @@ namespace Honcizek.Controllers_Administrador
             ViewData["error"] = false;
             ViewData["general"] = true;
             var Id = Int32.Parse(HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.UserData)?.Value);
-            ViewData["usuario_id"] = Id;
+             
             return View("Views/Administrador/Tickets/Index.cshtml",await honcizekContext.ToListAsync());
         }
 
@@ -44,7 +44,6 @@ namespace Honcizek.Controllers_Administrador
             {
                 ViewData["error"] = true;
             }
-            ViewData["usuario_id"] = Id;
             ViewData["general"] = false;
             var honcizekContext = _context.Tickets.Where(t => t.AgenteId == Id).Include(t => t.Agente).Include(t => t.Cliente).Include(t => t.Suscripcion);
 

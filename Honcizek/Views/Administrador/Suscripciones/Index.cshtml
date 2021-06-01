@@ -5,7 +5,7 @@
 }
 
 <h1>Listado de @(!(bool)ViewData["general"]?"mis":"") suscripciones</h1>
-@if (!(bool)ViewData["error"] && !(bool)ViewData["forbidden"])
+@if (!(bool)ViewData["error"])
 {
     <div>
         <p class="float-left">
@@ -147,15 +147,14 @@
 }
 @if ((bool)ViewData["error"])
 {
-    <h4>Est&aacute;s intentando ver los tickets de un usuario que no existe.</h4>
+    <div class="row col-12">
+        <h4 class="">
+            Parece que ha habido un error con tu usuario, puedes intentar cerrar sesi&oacute;n y volver a entrar.
+        </h4>
+        <form class="pl-3" asp-controller="Login" asp-action="Logout" method="post">
+            <button class="btn btn-danger">Cerrar sesi&oacute;n</button>
+        </form>
+    </div>
     <hr />
-    <h5>Prueba a ver el <a class="honci-link" asp-controller="Tickets" asp-action="Index">Listado completo de tickets</a> e int&eacute;ntalo de nuevo</h5>
-    <hr />
-    <h5>Tambi&eacute;n puedes probar a ver <a class="honci-link" asp-controller="Tickets" asp-action="IndexUsuario" asp-route-id="@ViewData["usuario_id"]">Listado de tus tickets</a> e int&eacute;ntalo de nuevo</h5>
-}
-@if ((bool)ViewData["forbidden"])
-{
-    <h4>Est&aacute;s intentando ver los tickets de otro programador...</h4>
-    <hr />
-    <h5>Prueba a ver el <a class="honci-link" asp-controller="Tickets" asp-action="Index">Listado completo de tickets</a> e int&eacute;ntalo de nuevo</h5>
+    <h5>O puedes ver el <a class="honci-link" asp-controller="Suscripciones" asp-action="Index">Listado completo de suscripciones</a>.</h5>
 }

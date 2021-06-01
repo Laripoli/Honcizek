@@ -28,15 +28,17 @@ namespace Honcizek.Controllers.Administrador
         public async Task<IActionResult> Index(String search)
         {
             ViewData["CurrentFilter"] = search;
-            var honcizekContext = _context.Clientes.Include(c => c.Localidad).Include(c => c.Provincia);
-
+            var query = "SELECT C.* FROM clientes C " +
+                "LEFT JOIN localidades L ON L.id = C.localidad_id " +
+                "LEFT JOIN provincias P ON P.id = C.provincia_id ";
             if (!String.IsNullOrEmpty(search))
             {
-
-                honcizekContext = _context.Clientes.Where(s => s.FullName.Contains(search)).Include(c => c.Localidad).Include(c => c.Provincia);
+                query += "WHERE CONCAT(C.nombre,' ',C.apellidos) LIKE '%" + search + "%'" +
+                         " OR C.razon_social like '%" + search + "%'" ;
 
             }
             
+            var honcizekContext = _context.Clientes.FromSqlRaw(query).Include(c => c.Localidad).Include(c => c.Provincia);
 
 
             return View("Views/Administrador/Clientes/Index.cshtml", await honcizekContext.ToListAsync());

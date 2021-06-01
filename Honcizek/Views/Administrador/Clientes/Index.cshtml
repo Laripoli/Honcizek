@@ -12,17 +12,21 @@
     </a>
 </p>
 
-<form asp-action="Index" method="get">
-    <div class="form-actions no-color">
-        <p>
-            Buscar cliente por nombre: <input id="filtro" type="text" name="search" value="@ViewData["CurrentFilter"]" />
-            <input type="submit" value="Buscar" class="btn btn-primary" />
-            <a asp-action="Index">
-                <button class="btn btn-dark" id="limpia-filtros">
-                    Limpiar filtro
-                </button>
-            </a>
-        </p>
+<form id="filtrador" class="float-left pl-3 row" asp-action="Index" method="get">
+    <div class="form-actions no-color px-3">
+        <label for="nombre">
+            Buscar nombre: <input id="filtro" type="text" name="search" value="@ViewData["currentFilter"]" />
+        </label>
+    </div>
+    <div class="row pl-5 pt-3">
+        <a class="pr-2">
+            <button class="btn btn-primary">Buscar</button>
+        </a>
+        <a asp-action="Index">
+            <button class="btn btn-dark" id="limpia-filtros">
+                Limpiar filtro
+            </button>
+        </a>
     </div>
 </form>
 <table>

@@ -8,17 +8,18 @@
 @if (!(bool)ViewData["error"])
 {
     <div>
-        <p class="float-left">
-            <a asp-action="Create">
-                <button class="btn btn-info">
-                    Crear nuevo
-                </button>
-            </a>
-        </p>
+        
         <p class="float-right">
             <a asp-action="@((bool)ViewData["general"] ? "IndexUsuario":"Index")">
                 <button class="btn btn-@((bool)ViewData["general"] ? "primary":"warning")">
                     @((bool)ViewData["general"] ? "Ver mis suscripciones":"Ver todas las suscripciones")
+                </button>
+            </a>
+        </p>
+        <p class="float-right pr-2">
+            <a asp-action="Create">
+                <button class="btn btn-info">
+                    Crear nuevo
                 </button>
             </a>
         </p>

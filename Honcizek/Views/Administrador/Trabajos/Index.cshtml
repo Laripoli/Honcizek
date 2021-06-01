@@ -7,14 +7,12 @@
 <h1>Listado de @((bool)ViewData["general"] ? "":"mis") trabajos</h1>
 @if (!(bool)ViewData["error"])
 {
-    <div>
+    <div class="float-right">
 
-        <p class="float-left">
+        <p>
             <a asp-action="Create" asp-route-id="@ViewData["proyecto_id"]">
                 <button class="btn btn-info">Crear nuevo</button>
             </a>
-        </p>
-        <p class="float-lg-right">
             <a asp-controller="Proyectos" asp-action="Edit" asp-route-id="@ViewData["proyecto_id"]">
                 <button class="btn btn-primary">
                     Volver al proyecto
@@ -25,6 +23,7 @@
                     @((bool)ViewData["general"] ? "Ver mis trabajos":"Ver todos los trabajos")
                 </button>
             </a>
+       
         </p>
     </div>
 

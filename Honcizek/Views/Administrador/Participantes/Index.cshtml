@@ -8,14 +8,12 @@
 @if (!(bool)ViewData["error"])
 {
     <div class="py-4">
-        <p class="float-left">
+        <p class="float-right">
             <a asp-action="Create" asp-route-id="@ViewData["proyecto_id"]">
                 <button class="btn btn-info">
                     A&ntilde;adir participante
                 </button>
             </a>
-        </p>
-        <p class="float-lg-right">
 
             <a asp-controller="Proyectos" asp-action="Edit" asp-route-id="@ViewData["proyecto_id"]">
                 <button class="btn btn-warning">

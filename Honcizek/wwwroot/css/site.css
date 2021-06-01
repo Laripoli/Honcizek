@@ -283,3 +283,16 @@ table tbody td:last-child a {
 .card-custom a:hover{
     color: black;
 }
+
+#filtrador label{
+    display: inline-block;
+    padding-right: .5rem;
+}
+
+#filtrador input{
+    display: block;
+}
+
+#filtrador input[type="button"]{
+    display: inline-block;
+}

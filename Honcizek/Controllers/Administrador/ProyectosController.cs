@@ -24,16 +24,47 @@ namespace Honcizek.Controllers_Administrador
         }
 
         // GET: Proyectos
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(String nombre, String cliente)
         {
             ViewData["error"] = false;
             ViewData["general"] = true;
             var Id = Int32.Parse(HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.UserData)?.Value);
              
-            var honcizekContext = _context.Proyectos.Include(p => p.Cliente);
+            
+
+            ViewData["nombreFilter"] = nombre;
+            ViewData["clienteFilter"] = cliente;
+            /*if (!String.IsNullOrEmpty(nombre))
+            {
+                honcizekContext = _context.Proyectos.Where(p => p.Nombre == nombre).Include(p => p.Cliente);
+            }*/
+
+            var query = "SELECT P.* FROM proyectos P "+
+            "LEFT JOIN clientes C ON C.id = P.cliente_id ";
+
+            if (!String.IsNullOrEmpty(nombre) || !String.IsNullOrEmpty(cliente))
+            {
+                query += " Where ";
+                if (!String.IsNullOrEmpty(nombre)) 
+                {
+                    query += " P.nombre like '%"+nombre+"%'";
+                }
+                if(!String.IsNullOrEmpty(nombre) && !String.IsNullOrEmpty(cliente))
+                {
+                    query += " And CONCAT(C.nombre,' ',C.apellidos) like '%" + cliente + "%'";
+                }
+                if (String.IsNullOrEmpty(nombre) && !String.IsNullOrEmpty(cliente)) 
+                { 
+                    query += " CONCAT(C.nombre,' ',C.apellidos) like '%" + cliente + "%'";
+                }
+            }
+
+            var honcizekContext = _context.Proyectos.FromSqlRaw(query).Include(p => p.Cliente);
+
+
             return View("Views/Administrador/Proyectos/Index.cshtml",await honcizekContext.ToListAsync());
         }
-        public async Task<IActionResult> IndexUsuario()
+        public async Task<IActionResult> IndexUsuario(String search)
         {
             
             ViewData["error"] = false;
@@ -51,7 +82,17 @@ namespace Honcizek.Controllers_Administrador
 
              
             ViewData["general"] = false;
+
             var honcizekContext = _context.Proyectos.FromSqlRaw(query,Id).Include(p => p.Cliente);
+
+            ViewData["CurrentFilter"] = search;
+
+            if (!String.IsNullOrEmpty(search))
+            {
+                query += " AND P.nombre = {1}";
+                honcizekContext = _context.Proyectos.FromSqlRaw(query, Id,search).Include(p => p.Cliente);
+
+            }
 
             return View("Views/Administrador/Proyectos/Index.cshtml", await honcizekContext.ToListAsync());
         }

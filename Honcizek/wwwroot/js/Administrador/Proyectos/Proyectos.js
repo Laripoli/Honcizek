@@ -2,7 +2,7 @@
 
     var handler = function (nuevo) {
         _ocultar_campos();
-         _validar_descripciones();
+        _validar_descripciones();
     };
 
     var _ocultar_campos = function () {
@@ -37,12 +37,6 @@
             return true;
         })
         
-    }
-
-    var _limpiar_filtros = function () {
-        $('#limpia-filtros').on('click', function (e) {
-            $('#filtro').val('');
-        });
     }
 
     return {

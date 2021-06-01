@@ -8,21 +8,45 @@
 
 @if (!(bool)ViewData["error"])
 {
-<div>
-    <p class="float-left">
+<div class="row float-right pt-3">
+    <p class="pr-2">
         <a asp-action="Create">
             <button class="btn btn-info">
                 Crear nuevo
             </button>
         </a>
     </p>
-    <p class="float-right">
+    <p class="">
         <a asp-action="@((bool)ViewData["general"] ? "IndexUsuario":"Index")">
             <button class="btn btn-@((bool)ViewData["general"] ? "primary":"warning")">
                 @((bool)ViewData["general"] ? "Ver mis proyectos":"Ver todos los proyectos")
             </button>
         </a>
     </p>
+
+
+</div>
+<div>
+    <form id="filtrador" class="float-left pl-3 row" asp-action="@((bool)ViewData["general"] ? "Index":"IndexUsuario")" method="get">
+        <div class="form-actions no-color px-3">
+                <label for="nombre">
+                Buscar nombre: <input id="filtro" type="text" name="nombre" value="@ViewData["nombreFilter"]" />
+                </label>
+                <label for="cliente">
+                Buscar cliente: <input id="filtro" type="text" name="cliente" value="@ViewData["clienteFilter"]" />
+                </label>
+        </div>
+        <div class="row pl-5 pt-3">
+            <a class="pr-2">
+                <button class="btn btn-primary">Buscar</button>
+            </a>
+                <a asp-action="Index">
+                    <button class="btn btn-dark" id="limpia-filtros">
+                        Limpiar filtro
+                    </button>
+                </a>
+        </div>
+    </form>
 </div>
     <table class="table">
         <thead>
@@ -145,23 +169,31 @@
             }
         </tbody>
     </table>
-            @if (!(Model.Count() > 0))
-            {
-                <h2 style="text-align: center;width: 100%">A&uacute;n no hay registros</h2>
-            }
+    @if (!(Model.Count() > 0))
+    {
+        <h2 style="text-align: center;width: 100%">A&uacute;n no hay registros</h2>
+    }
 
 }
 @if ((bool)ViewData["error"])
 {
-<div class="row col-12">
-    <h4 class="">
-        Parece que ha habido un error con tu usuario, puedes intentar cerrar sesi&oacute;n y volver a entrar.
-    </h4>
-    <form class="pl-3" asp-controller="Login" asp-action="Logout" method="post">
-        <button class="btn btn-danger">Cerrar sesi&oacute;n</button>
-    </form>
-</div>
+    <div class="row col-12">
+        <h4 class="">
+            Parece que ha habido un error con tu usuario, puedes intentar cerrar sesi&oacute;n y volver a entrar.
+        </h4>
+        <form class="pl-3" asp-controller="Login" asp-action="Logout" method="post">
+            <button class="btn btn-danger">Cerrar sesi&oacute;n</button>
+        </form>
+    </div>
     <hr />
     <h5>O puedes ver el <a class="honci-link" asp-controller="Proyectos" asp-action="Index">Listado completo de proyectos</a>.</h5>
 }
 
+@section Scripts {
+    <script type="text/javascript" src="~/js/Administrador/Proyectos/Listado.js"></script>
+    <script>
+        $(document).ready(function () {
+            Listado.init();
+        });
+    </script>
+}

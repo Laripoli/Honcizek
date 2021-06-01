@@ -8,13 +8,6 @@
 @if (!(bool)ViewData["error"])
 {
     <div>
-        <p class="float-left">
-            <a asp-action="Create">
-                <button class="btn btn-info">
-                    Crear nuevo
-                </button>
-            </a>
-        </p>
         <p class="float-right">
             <a asp-action="@((bool)ViewData["general"] ? "IndexUsuario":"Index")">
                 <button class="btn btn-@((bool)ViewData["general"] ? "primary":"warning")">
@@ -22,6 +15,26 @@
                 </button>
             </a>
         </p>
+        <p class="float-right pr-2">
+            <a asp-action="Create">
+                <button class="btn btn-info">
+                    Crear nuevo
+                </button>
+            </a>
+        </p>
+        <form class="float-left pl-3" asp-action="@((bool)ViewData["general"] ? "Index":"IndexUsuario")" method="get">
+            <div class="form-actions no-color">
+                <p>
+                    Buscar ticket por nombre: <input id="filtro" type="text" name="nombre" value="@ViewData["nombreFilter"]" />
+                    <input type="submit" value="Buscar" class="btn btn-primary" />
+                    <a asp-action="Index">
+                        <button class="btn btn-dark" id="limpia-filtros">
+                            Limpiar filtro
+                        </button>
+                    </a>
+                </p>
+            </div>
+        </form>
     </div>
     <table class="table">
         <thead>
@@ -148,4 +161,12 @@
     </div>
     <hr />
     <h5>O puedes ver el <a class="honci-link" asp-controller="Tickets" asp-action="Index">Listado completo de tickets</a>.</h5>
+}
+@section Scripts {
+    <script type="text/javascript" src="~/js/Administrador/Tickets/Listado.js"></script>
+    <script>
+        $(document).ready(function () {
+            Listado.init();
+        });
+    </script>
 }

@@ -42,6 +42,7 @@ namespace Honcizek.Controllers_Programador
             var honcizekContext = _context.Trabajos.Where(t => t.ProyectoId == id).Include(t => t.Proyecto).Include(t => t.Agente).OrderByDescending(t => t.AgenteId);
             ViewData["proyecto_id"] = id;
             return View("Views/Programador/Trabajos/Index.cshtml", await honcizekContext.ToListAsync());
+            
         }
 
         public async Task<IActionResult> IndexUsuario(int? id)

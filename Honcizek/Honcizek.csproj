@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\css\LoginC\Login.css" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.13" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.13" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.14" />
@@ -32,6 +36,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\css\LoginC\Login.css" />
     <None Include="wwwroot\css\Login\Login.css" />
   </ItemGroup>
 

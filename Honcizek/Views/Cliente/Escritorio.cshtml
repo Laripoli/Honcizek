@@ -1,0 +1,54 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{ 
+    bool proyectosPersonalizado = (int)ViewData["proyectos"] > 0;
+    bool ticketsPersonalizado = (int)ViewData["tickets"] > 0;
+    bool suscripcionesPersonalizado = (int)ViewData["suscripciones"] > 0;
+}
+<h1>Bienvenido al escritorio, @ViewData["nombre"]</h1>
+
+<div class="row col-12 p-5">
+    <div class="col-3">
+        <div class="card card-custom card-stretch gutter-b bg-success">
+            <div class="card-body">
+                <span class="card-title font-weight-bolder font-size-h2 mb-0 mt-6 d-block text-white">
+                    @((int)ViewData["proyectos"] > 0 ? "Participas en "+ViewData["proyectos"] : "No participas en ningún ")
+                </span>
+                <a asp-controller="ProyectosP" asp-action="Index">
+                    @((int)ViewData["proyectos"] > 1 ? "proyectos":"proyecto")
+                </a>
+            </div>
+        </div>
+    </div>
+    @ViewData["hola"]
+    <div class="col-3">
+        <div class="card card-custom card-stretch gutter-b bg-warning">
+            <div class="card-body">
+                <span class="card-title font-weight-bolder font-size-h2 mb-0 mt-6 d-block text-white">
+                    @((int)ViewData["tickets"] > 0 ? "Tienes " + ViewData["tickets"] : "No tienes ningún ")
+                </span>
+                <a asp-controller="TicketsP" asp-action="Index">
+                    @((int)ViewData["tickets"] > 1 ? "tickets pendientes" : "ticket pendiente")
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="col-3">
+        <div class="card card-custom card-stretch gutter-b bg-primary">
+            <div class="card-body">
+                <span class="card-title font-weight-bolder font-size-h2 mb-0 mt-6 d-block text-white">
+                    @((int)ViewData["suscripciones"] > 0 ? "Participas en " + ViewData["suscripciones"] : "No participas en ninguna ")
+                </span>
+                <a class="honci-link" asp-controller="SuscripcionesP" asp-action="Index">
+                    @((int)ViewData["suscripciones"] > 1 ? "suscripciones" : "suscripción")
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<form class="pt-4" asp-controller="LoginC" asp-action="Logout" method="post">
+    <button class="btn btn-danger">Cerrar sesión</button>
+</form>
+<h2>Rol: @ViewData["hola"]</h2>

@@ -52,6 +52,8 @@ namespace Honcizek
             services.AddDbContext<honcizekContext>(opts => opts.UseMySql(Configuration["ConnectionString:honcizek"]));
             services.AddScoped<IUsuarioBL, UsuarioBL>();
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+            services.AddScoped<IClienteBL, ClienteBL>();
+            services.AddScoped<IClienteRepository, ClienteRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -82,7 +84,7 @@ namespace Honcizek
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Login}/{action=Login}/{id?}");
+                    pattern: "{controller=LoginC}/{action=Login}/{id?}");
             });
         }
     }

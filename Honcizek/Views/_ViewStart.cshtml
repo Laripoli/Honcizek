@@ -1,10 +1,34 @@
 ﻿@{
-    if (Context.Request.Path != "/" && ViewData["layout"] != "")
+
+    @*Layout = (string)ViewData["layout"];*@
+
+
+    string s = "";
+    var claimsIdentity = User.Identity as System.Security.Claims.ClaimsIdentity;
+
+    if (claimsIdentity != null)
     {
-        string s = Context.Request.Path;
-        var area = s.Split("/");
-        Layout = area[1];
+        var c = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.Role);
+
+        if (c != null)
+        {
+            s = c.Value.ToString();
+
+            @*ViewData["hola"] = c.Value.ToString();*@
+
+        }
     }
-    @*else
-    Layout = (string)ViewData["Layout"] ?? "_Admin";*@
+    if (!String.IsNullOrEmpty(s))
+    {
+        Layout = s;
+        ViewData["hola"] = s;
+    }
+    else if(!String.IsNullOrEmpty((string)ViewData["layout"]))
+    {
+        Layout = (string)ViewData["layout"];
+    }
+    else
+    {
+        Layout = "";
+    }
 }

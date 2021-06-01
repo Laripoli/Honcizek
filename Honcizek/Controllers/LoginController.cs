@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 
 namespace Honcizek.Controllers
 {
-    
+    [Route("[action]")]
     public class LoginController : Controller
     {
         /*private readonly ILogger<LoginController> _logger;*/
@@ -29,9 +29,9 @@ namespace Honcizek.Controllers
             _usuarioBL = usuarioBL;
         }
 
-        public IActionResult Login()
+        public IActionResult Admin()
          {
-            return View();
+            return View("Views/Login/Login.cshtml");
          }
 
         [HttpPost]

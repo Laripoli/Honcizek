@@ -7,7 +7,11 @@
 <link rel="stylesheet" href="~/css/site.css" />
 <link rel="stylesheet" href="~/css/Login/Login.css" />
 <!------ Include the above in your HEAD tag ---------->
-
+<div id="cambioLogin">
+        <a class="justify-content-end pr-5"asp-controller="LoginC" asp-action="Login">
+            <button class="btn btn-primary">Login p&uacute;blico</button>
+        </a>
+</div>
 <div class="wrapper fadeInDown">
 
     <div id="formContent">
@@ -16,7 +20,6 @@
         <div class="fadeIn first">
             <img id="logo" src="~/css/Login/logo_small.png" alt="" />
         </div>
-
         <!-- Login Form -->
         <form method="post">
             <span class="text-danger text-center pb-3">@ViewData["Error"]</span><br />

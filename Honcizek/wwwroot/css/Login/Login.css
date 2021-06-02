@@ -300,3 +300,9 @@ input[type=text], input[type=password] {
     padding-right: .5rem;
     padding-top: .25rem;
 }
+
+#Titulo{
+    text-align: center;
+    padding-top: .5rem;
+    font-size: larger
+}

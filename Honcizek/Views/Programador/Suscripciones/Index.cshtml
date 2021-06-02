@@ -1,0 +1,152 @@
+@model IEnumerable<Honcizek.DAL.Models.Suscripciones>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 class="pb-4">Listado de mis suscripciones</h1>
+
+@if (!(bool)ViewData["error"])
+{
+    <form id="filtrador" class="float-left pl-3 row" asp-action="Index" method="get">
+        <div class="form-actions no-color px-3">
+            <label for="nombre">
+                Buscar nombre: <input id="filtro" type="text" name="nombre" value="@ViewData["nombreFilter"]" />
+            </label>
+            <label for="cliente">
+                Buscar cliente: <input id="filtro" type="text" name="cliente" value="@ViewData["clienteFilter"]" />
+            </label>
+        </div>
+        <div class="row pl-5 pt-3">
+            <a class="pr-2">
+                <button class="btn btn-primary">Buscar</button>
+            </a>
+            <a asp-action="Index">
+                <button class="btn btn-dark" id="limpia-filtros">
+                    Limpiar filtro
+                </button>
+            </a>
+        </div>
+    </form>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nombre)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FechaDesde)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FechaHasta)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Renovacion)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Periodicidad)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Cliente)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Proyecto)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Count() > 0)
+            {
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nombre)
+                        </td>
+                        <td>
+                            @if (item.FechaDesde != null)
+                            {
+                                @Html.DisplayFor(modelItem => item.FDesde)
+                            }
+                            else
+                            {
+                                <span>Sin especificar</span>
+                            }
+                        </td>
+                        <td>
+                            @if (item.FechaHasta != null)
+                            {
+                                @Html.DisplayFor(modelItem => item.FHasta)
+                            }
+                            else
+                            {
+                                <span>Sin especificar</span>
+                            }
+                        </td>
+                        <td>
+                            @if (item.Renovacion == 1)
+                            {
+                                <span>Activa</span>
+                            }
+                            else
+                            {
+                                <span>Inactiva</span>
+                            }
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Periodicidad)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Cliente.FullName)
+                        </td>
+                        <td>
+                            @if (item.Tipo != "Hardware" && item.ProyectoId != null)
+                            {
+                                @Html.DisplayFor(modelItem => item.Proyecto.Nombre)
+                            }
+                            else
+                            {
+                                <span>Sin proyecto</span>
+                            }
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.Id">
+                                <button class="btn btn-primary">
+                                    Ver
+                                </button>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+    @if (!(Model.Count() > 0))
+    {
+        <h2 style="text-align: center;width: 100%">A&uacute;n no hay registros</h2>
+    }
+}
+@if ((bool)ViewData["error"])
+{
+    <div class="row col-12">
+        <h4 class="">
+            Parece que ha habido un error con tu usuario, puedes intentar cerrar sesi&oacute;n y volver a entrar.
+        </h4>
+        <form class="pl-3" asp-controller="Login" asp-action="Logout" method="post">
+            <button class="btn btn-danger">Cerrar sesi&oacute;n</button>
+        </form>
+    </div>
+    <hr />
+    <h5>O puedes ver el <a class="honci-link" asp-controller="Suscripciones" asp-action="Index">Listado completo de suscripciones</a>.</h5>
+}
+@section Scripts {
+    <script type="text/javascript" src="~/js/Programador/Suscripciones/Listado.js"></script>
+    <script>
+        $(document).ready(function () {
+            Listado.init();
+        });
+    </script>
+}

@@ -1,0 +1,97 @@
+@model Honcizek.DAL.Models.Suscripciones
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Editar</h1>
+
+<h4>Suscripciones</h4>
+<hr />
+<div class="row">
+    <div class="col-md-12 readonly">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="row col-12">
+                
+                <div class="form-group col-4">
+                    <label asp-for="Nombre" class="control-label"></label>
+                    <input disabled asp-for="Nombre" class="form-control" />
+                    <span asp-validation-for="Nombre" class="text-danger"></span>
+                </div>
+                <div class="form-group col-4">
+                    <label asp-for="Tipo" class="control-label"></label>
+                    <select disabled asp-for="Tipo" class="form-control" asp-items="ViewBag.Tipo"></select>
+                </div>
+                @if(Model.Tipo != "Hardware")
+                {
+                <div class="form-group col-4 proyecto">
+                    <label asp-for="ProyectoId" class="control-label">Proyecto</label>
+                    <select disabled asp-for="ProyectoId" class="form-control" asp-items="ViewBag.ProyectoId"></select>
+                </div>
+                }
+            </div>
+            <div class="row col-12">
+                <div class="form-group col-4">
+                    <label asp-for="ClienteId" class="control-label">Cliente</label>
+                    <select disabled asp-for="ClienteId" class="form-control" asp-items="ViewBag.ClienteId"></select>
+                </div>
+                <div class="form-group col-4">
+                    <label asp-for="AgenteId" class="control-label">Programador encargado</label>
+                    <select disabled asp-for="AgenteId" class="form-control" asp-items="ViewBag.AgenteId"></select>
+                </div>
+            </div>
+            <div class="row col-12">
+                <div class="form-group col-4">
+                    <label asp-for="Periodicidad" class="control-label"></label>
+                    <select disabled asp-for="Periodicidad" class="form-control" asp-items="ViewBag.Periodicidad"></select>
+                </div>
+                <div class="form-group col-4">
+                    <label asp-for="FechaDesde" class="control-label">Fecha inicio</label>
+                    <input disabled type="date" asp-for="FechaDesde" class="form-control" />
+                    <span asp-validation-for="FechaDesde" class="text-danger"></span>
+                </div>
+                <div class="form-group col-4 periodicidad">
+                    <label asp-for="FechaHasta" class="control-label">Fecha finalizaci&oacute;n</label>
+                    <input disabled type="date" readonly asp-for="FechaHasta" class="form-control" />
+                    <span asp-validation-for="FechaHasta" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row col-12">
+                <div class="form-group col-4">
+                    <label asp-for="PrecioAlta" class="control-label"></label>
+                    <input disabled type="number" min="0" value="@Model.PrecioAlta" asp-for="PrecioAlta" class="form-control" />
+                    <span asp-validation-for="PrecioAlta" class="text-danger"></span>
+                </div>
+                <div class="form-group col-4">
+                    <label asp-for="PrecioPeriodo" class="control-label"></label>
+                    <input disabled type="number" min="0" value="@Model.PrecioPeriodo" asp-for="PrecioPeriodo" class="form-control" />
+                    <span asp-validation-for="PrecioPeriodo" class="text-danger"></span>
+                </div>
+                <div class="form-group col-4">
+                    <label asp-for="Renovacion" class="control-label"></label>
+                    <input disabled type="checkbox" name="Renovacion" value="1" @(Model.Renovacion == 1 ? "checked" : "") class="form-control check w-25" />
+                    <span asp-validation-for="Renovacion" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row col-12">
+                <div class="form-group col-6">
+                    <label asp-for="Observaciones" class="control-label"></label>
+                    <textarea disabled asp-for="Observaciones" class="form-control"></textarea>
+                    <span asp-validation-for="Observaciones" class="text-danger"></span>
+                </div>
+            </div>
+        </form>
+        <div class="pt-3 pl-3">
+            <a asp-action="Index">
+                <button class="btn btn-primary">Volver al listado</button>
+            </a>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -84,71 +84,78 @@
             {
                 @foreach (var item in Model)
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Nombre)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Estado)
-                        </td>
-                        <td>
-                            @if (item.FechaRegistro != null)
-                            {
-                                @Html.DisplayFor(modelItem => item.FRegistro)
-                            }
-                            else
-                            {
-                                <span>Sin especificar</span>
-                            }
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.HoraRegistro)
-                        </td>
-                        <td>
-                            @if (item.FechaFinalizacion != null)
-                            {
-                                @Html.DisplayFor(modelItem => item.FFin)
-                            }
-                            else
-                            {
-                                <span>Sin especificar</span>
-                            }
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.HoraFinalizacion)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Agente.FullName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Cliente.FullName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Suscripcion.Nombre)
-                        </td>
-                        <td>
-                            <a asp-controller="Partes" asp-action="IndexUsuario" asp-route-id="@item.Id">
-                                <button class="btn btn-warning">
-                                    Trabajos
-                                </button>
-                            </a>
-                            <a asp-action="Edit" asp-route-id="@item.Id">
-                                <button class="btn btn-primary">
-                                    Editar
-                                </button>
-                            </a>
-                            <a asp-action="Details" asp-route-id="@item.Id">
-                                <button class="btn btn-info">
-                                    Detalles
-                                </button>
-                            </a>
-                            <a asp-action="Delete" asp-route-id="@item.Id">
-                                <button class="btn btn-danger">
-                                    Eliminar
-                                </button>
-                            </a>
-                        </td>
-                    </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Estado)
+                </td>
+                <td>
+                    @if (item.FechaRegistro != null)
+                    {
+                        @Html.DisplayFor(modelItem => item.FRegistro)
+                    }
+                    else
+                    {
+                        <span>Sin especificar</span>
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HoraRegistro)
+                </td>
+                <td>
+                    @if (item.FechaFinalizacion != null)
+                    {
+                        @Html.DisplayFor(modelItem => item.FFin)
+                    }
+                    else
+                    {
+                        <span>Sin finalizar</span>
+                    }
+                </td>
+                <td>
+                    @if (item.HoraFinalizacion != null)
+                    {
+                        @Html.DisplayFor(modelItem => item.HoraFinalizacion)
+                    }
+                    else
+                    {
+                        <span>Sin finalizar</span>
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Agente.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cliente.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Suscripcion.Nombre)
+                </td>
+                <td>
+                    <a asp-controller="Partes" asp-action="IndexUsuario" asp-route-id="@item.Id">
+                        <button class="btn btn-warning">
+                            Trabajos
+                        </button>
+                    </a>
+                    <a asp-action="Edit" asp-route-id="@item.Id">
+                        <button class="btn btn-primary">
+                            Editar
+                        </button>
+                    </a>
+                    <a asp-action="Details" asp-route-id="@item.Id">
+                        <button class="btn btn-info">
+                            Detalles
+                        </button>
+                    </a>
+                    <a asp-action="Delete" asp-route-id="@item.Id">
+                        <button class="btn btn-danger">
+                            Eliminar
+                        </button>
+                    </a>
+                </td>
+            </tr>
                 }
             }
         </tbody>

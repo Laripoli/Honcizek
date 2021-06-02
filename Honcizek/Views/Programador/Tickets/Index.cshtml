@@ -1,0 +1,173 @@
+@model IEnumerable<Honcizek.DAL.Models.Tickets>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Listado de @(!(bool)ViewData["general"]?"mis":"") tickets</h1>
+@if(!(bool)ViewData["error"])
+{
+    <div>
+        <p class="float-right">
+            <a asp-action="@((bool)ViewData["general"] ? "IndexUsuario":"Index")">
+                <button class="btn btn-@((bool)ViewData["general"] ? "primary":"warning")">
+                    @((bool)ViewData["general"] ? "Ver mis tickets pendientes":"Ver todos mis tickets")
+                </button>
+            </a>
+        </p>
+    </div>
+        <div>
+            <form id="filtrador" class="float-left pl-3 row" asp-action="Index" method="get">
+                <div class="form-actions no-color px-3">
+                    <label for="nombre">
+                        Buscar nombre: <input id="filtro" type="text" name="nombre" value="@ViewData["nombreFilter"]" />
+                    </label>
+                    <label for="cliente">
+                        Buscar cliente: <input id="filtro" type="text" name="cliente" value="@ViewData["clienteFilter"]" />
+                    </label>
+                </div>
+                <div class="row pl-5 pt-3">
+                    <a class="pr-2">
+                        <button class="btn btn-primary">Buscar</button>
+                    </a>
+                    <a asp-action="Index">
+                        <button class="btn btn-dark" id="limpia-filtros">
+                            Limpiar filtro
+                        </button>
+                    </a>
+                </div>
+            </form>
+        </div>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Nombre)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Estado)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FechaRegistro)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.HoraRegistro)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FechaFinalizacion)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.HoraFinalizacion)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Agente)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Cliente)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Suscripcion)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Count() > 0)
+                {
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Nombre)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Estado)
+                            </td>
+                            <td>
+                                @if (item.FechaRegistro != null)
+                                {
+                                    @Html.DisplayFor(modelItem => item.FRegistro)
+                                }
+                                else
+                                {
+                                    <span>Sin especificar</span>
+                                }
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.HoraRegistro)
+                            </td>
+                            <td>
+                                @if (item.FechaFinalizacion != null)
+                                {
+                                    @Html.DisplayFor(modelItem => item.FFin)
+                                }
+                                else
+                                {
+                                    <span>Sin finalizar</span>
+                                }
+                            </td>
+                            <td>
+                                @if (item.HoraFinalizacion != null)
+                                {
+                                    @Html.DisplayFor(modelItem => item.HoraFinalizacion)
+                                }
+                                else
+                                {
+                                    <span>Sin finalizar</span>
+                                }
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Agente.FullName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Cliente.FullName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Suscripcion.Nombre)
+                            </td>
+                            <td>
+                                <a asp-controller="PartesP" asp-action="IndexUsuario" asp-route-id="@item.Id">
+                                    <button class="btn btn-warning">
+                                        Trabajos
+                                    </button>
+                                </a>
+                                <a asp-action="Edit" asp-route-id="@item.Id">
+                                    <button class="btn btn-primary">
+                                        Ver
+                                    </button>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+        
+        @if (!(Model.Count() > 0))
+        {
+            <h2 style="text-align: center;width: 100%">A&uacute;n no hay registros</h2>
+        }
+        }
+
+        @if ((bool)ViewData["error"])
+        {
+            <div class="row col-12">
+                <h4 class="">
+                    Parece que ha habido un error con tu usuario, puedes intentar cerrar sesi&oacute;n y volver a entrar.
+                </h4>
+                <form class="pl-3" asp-controller="Login" asp-action="Logout" method="post">
+                    <button class="btn btn-danger">Cerrar sesi&oacute;n</button>
+                </form>
+            </div>
+            <hr />
+            <h5>O puedes ver el <a class="honci-link" asp-controller="Tickets" asp-action="Index">Listado completo de tickets</a>.</h5>
+        }
+        @section Scripts {
+            <script type="text/javascript" src="~/js/Administrador/Tickets/Listado.js"></script>
+            <script>
+                $(document).ready(function () {
+                    Listado.init();
+                });
+            </script>
+        }

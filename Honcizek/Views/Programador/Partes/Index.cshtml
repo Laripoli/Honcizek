@@ -1,0 +1,89 @@
+@model IEnumerable<Honcizek.DAL.Models.PartesDeTrabajo>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Listado de PartesDeTrabajo</h1>
+
+<p>
+    <a asp-action="Create">
+        <button class="btn btn-info">Crear nuevo
+		</button>
+    </a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fecha)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Hora)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Horas)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Minutos)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Agente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ticket)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fecha)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hora)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Horas)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Minutos)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Agente.Clave)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ticket.Descripcion)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">
+					<button class="btn btn-primary">Editar
+					</button>
+				</a>
+				<a asp-action="Details" asp-route-id="@item.Id">
+					<button class="btn btn-info">Detalles
+					</button>
+				</a>
+				<a asp-action="Delete" asp-route-id="@item.Id">
+					<button class="btn btn-danger">Eliminar
+					</button>
+				</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

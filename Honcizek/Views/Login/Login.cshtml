@@ -6,13 +6,11 @@
 <link rel="stylesheet" href="~/css/style.bundle.css" />
 <link rel="stylesheet" href="~/css/site.css" />
 <link rel="stylesheet" href="~/css/Login/Login.css" />
-<!------ Include the above in your HEAD tag ---------->
-<div id="cambioLogin">
-        <a class="justify-content-end pr-5"asp-controller="LoginC" asp-action="Login">
-            <button class="btn btn-primary">Login p&uacute;blico</button>
-        </a>
-</div>
+<!------ Include the above in your HEAD tag ---------->     
+
+
 <div class="wrapper fadeInDown">
+<h1 class="fadeIn first" id="Titulo">Acceso empleados</h1>
 
     <div id="formContent">
         <!-- Tabs Titles -->
@@ -29,7 +27,9 @@
             <span class="text-danger d-none" id="password-error">Debes introducir una contraseña</span>
             <input type="submit" value="Iniciar sesión" class="btn btn-primary fadeIn fourth" />
         </form>
-
+        <a class="float-left pl-2 pb-2 fadeIn fourth" asp-controller="LoginC" asp-action="Login">
+            <button class="btn btn-success">&#8617; Volver al login de clientes</button>
+        </a>
     </div>
 </div>
 <script src="~/lib/jquery/dist/jquery.min.js"></script>

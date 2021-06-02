@@ -20,7 +20,7 @@ if (claimsIdentity != null)
 if (ViewData["layout"] == "Vacio") {
     Layout = "";
 }
-if (!String.IsNullOrEmpty(s))
+else if (!String.IsNullOrEmpty(s))
 {
     Layout = s;
 }

@@ -45,8 +45,8 @@ namespace Honcizek
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                     .AddCookie(o =>
                     {
-                        o.LoginPath = "/Login/Login";
-                        o.AccessDeniedPath = "/Login/Login";
+                        o.LoginPath = "/";
+                        o.AccessDeniedPath = "/";
                     });
 
             services.AddDbContext<honcizekContext>(opts => opts.UseMySql(Configuration["ConnectionString:honcizek"]));

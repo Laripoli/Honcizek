@@ -31,9 +31,24 @@ namespace Honcizek.Controllers
 
         public IActionResult Admin()
          {
-            ViewData["layout"] = "Vacio";
-            return View("Views/Login/Login.cshtml");
-         }
+            var rol = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Role)?.Value;
+            if (!String.IsNullOrEmpty(rol))
+            {
+                if (rol == "Cliente")
+                {
+                    return Redirect("/Escritorio");
+                }
+                else
+                {
+                    return Redirect(rol + "/Escritorio");
+                }
+            }
+            else
+            {
+                ViewData["layout"] = "Vacio";
+                return View("Views/Login/Login.cshtml");
+            }
+        }
 
         [HttpPost]
         public async Task<IActionResult> Logout()
@@ -45,7 +60,9 @@ namespace Honcizek.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            
+            /*return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });*/
+            return View("Views/Programador/Escritorio");
         }
 
         [HttpPost]

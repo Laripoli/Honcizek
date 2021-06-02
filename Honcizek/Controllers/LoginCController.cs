@@ -29,10 +29,25 @@ namespace Honcizek.Controllers
             _clienteBL = clienteBL;
         }
 
-        public IActionResult Login()
+        public  IActionResult Login()
         {
+            var rol = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Role)?.Value;
+            if (!String.IsNullOrEmpty(rol))
+            {
+                if(rol == "Cliente")
+                {
+                    return Redirect("/Escritorio");
+                }
+                else
+                {
+                    return Redirect(rol + "/Escritorio");
+                }
+            }
+            else
+            {
             ViewData["layout"] = "Vacio";
             return View("Views/LoginC/Login.cshtml");
+            }
         }
 
         [HttpPost]

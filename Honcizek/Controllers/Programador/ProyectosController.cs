@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using Honcizek.DAL.Models;
 using System.Security.Claims;
 
-namespace Honcizek.Controllers_Programador
+namespace Honcizek.Controllers.Programador
 {
 	[Authorize(Roles = "Programador")]
 	[Route("Programador/[controller]/[action]")]

@@ -44,28 +44,6 @@ namespace Honcizek.Controllers.Administrador
             return View("Views/Administrador/Clientes/Index.cshtml", await honcizekContext.ToListAsync());
         }
 
-
-        // GET: Clientes/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var clientes = await _context.Clientes
-               .Include(c => c.Localidad)
-                 
-               .Include(c => c.Provincia)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (clientes == null)
-            {
-                return NotFound();
-            }
-
-            return View("Views/Administrador/Clientes/Details.cshtml", clientes); ;
-        }
-
         // GET: Clientes/Create
         public IActionResult Create()
         {

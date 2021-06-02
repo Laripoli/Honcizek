@@ -41,25 +41,6 @@ namespace Honcizek.Controllers.Programador
             return View("Views/Programador/Proyectos/Index.cshtml",await honcizekContext.ToListAsync());
         }
 
-        // GET: Proyectos/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var proyectos = await _context.Proyectos
-                .Include(p => p.Cliente)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (proyectos == null)
-            {
-                return NotFound();
-            }
-
-            return View("Views/Programador/Proyectos/Details.cshtml",proyectos);
-        }
-
         // GET: Proyectos/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -73,7 +54,7 @@ namespace Honcizek.Controllers.Programador
             {
                 return NotFound();
             }
-            if (proyectos.Fase == "Diseño")
+            if (proyectos.Fase == "Diseï¿½o")
             {
                 proyectos.Fase = "Diseno";
             }

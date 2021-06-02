@@ -28,24 +28,6 @@ namespace Honcizek.Controllers_Administrador
             return View("Views/Administrador/Trabajadores/Index.cshtml", await _context.Usuarios.OrderBy(u=> u.Nombre).ToListAsync());
         }
 
-        // GET: Trabajadores/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var usuarios = await _context.Usuarios
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (usuarios == null)
-            {
-                return NotFound();
-            }
-
-            return View("Views/Administrador/Trabajadores/Details.cshtml",usuarios);
-        }
-
         // GET: Trabajadores/Create
         public IActionResult Create()
         {

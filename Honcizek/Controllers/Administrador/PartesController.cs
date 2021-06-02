@@ -68,26 +68,7 @@ namespace Honcizek.Controllers.Administrador
 
             return View("Views/Administrador/Partes/Index.cshtml", await honcizekContext.ToListAsync());
         }
-        // GET: Partes/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var partesDeTrabajo = await _context.PartesDeTrabajo
-                .Include(p => p.Agente)
-                .Include(p => p.Ticket)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (partesDeTrabajo == null)
-            {
-                return NotFound();
-            }
-
-            return View("Views/Administrador/Partes/Details.cshtml",partesDeTrabajo);
-        }
-
+   
         // GET: Partes/Create
         public async Task<IActionResult> Create(int? id)
         {

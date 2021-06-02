@@ -104,24 +104,6 @@ namespace Honcizek.Controllers.Administrador
             return View("Views/Administrador/Proyectos/Index.cshtml", await honcizekContext.ToListAsync());
         }
 
-        // GET: Proyectos/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var proyectos = await _context.Proyectos
-                .Include(p => p.Cliente)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (proyectos == null)
-            {
-                return NotFound();
-            }
-
-            return View("Views/Administrador/Proyectos/Details.cshtml",proyectos);
-        }
         [HttpPost]
         public int prueba(int proyecto_id)
         {

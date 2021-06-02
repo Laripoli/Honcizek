@@ -81,7 +81,7 @@ namespace Honcizek.Controllers.Administrador
             /*if (!String.IsNullOrEmpty(nombre))
             {
                 honcizekContext = _context.Tickets.Where(t => t.AgenteId == Id && t.Nombre.Contains(nombre))
-                    .Include(t => t.Cliente).Where(t => t.Cliente.FullName == "Álvaro").Include(t => t.Suscripcion);
+                    .Include(t => t.Cliente).Where(t => t.Cliente.FullName == "ï¿½lvaro").Include(t => t.Suscripcion);
             }*/
             if (!String.IsNullOrEmpty(nombre))
             {
@@ -97,27 +97,6 @@ namespace Honcizek.Controllers.Administrador
 
             var honcizekContext = _context.Tickets.FromSqlRaw(query,Id).Include(t => t.Agente).Include(t => t.Cliente).Include(t => t.Suscripcion);
             return View("Views/Administrador/Tickets/Index.cshtml", await honcizekContext.ToListAsync());
-        }
-
-        // GET: Tickets/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var tickets = await _context.Tickets
-                .Include(t => t.Agente)
-                .Include(t => t.Cliente)
-                .Include(t => t.Suscripcion)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (tickets == null)
-            {
-                return NotFound();
-            }
-
-            return View("Views/Administrador/Tickets/Details.cshtml",tickets);
         }
 
         // GET: Tickets/Create

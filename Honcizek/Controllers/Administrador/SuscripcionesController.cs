@@ -93,27 +93,6 @@ namespace Honcizek.Controllers_Administrador
             return View("Views/Administrador/Suscripciones/Index.cshtml", await honcizekContext.ToListAsync());
         }
 
-        // GET: Suscripciones/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var suscripciones = await _context.Suscripciones
-                .Include(s => s.Agente)
-                .Include(s => s.Cliente)
-                .Include(s => s.Proyecto)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (suscripciones == null)
-            {
-                return NotFound();
-            }
-
-            return View("Views/Administrador/Suscripciones/Details.cshtml",suscripciones);
-        }
-
         // GET: Suscripciones/Create
         public IActionResult Create()
         {

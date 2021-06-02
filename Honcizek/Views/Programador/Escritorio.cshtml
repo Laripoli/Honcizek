@@ -27,7 +27,7 @@
                 <span class="card-title font-weight-bolder font-size-h2 mb-0 mt-6 d-block text-white">
                     @((int)ViewData["tickets"] > 0 ? "Tienes " + ViewData["tickets"] : "No tienes ningún ")
                 </span>
-                <a asp-controller="TicketsP" asp-action="Index">
+                <a asp-controller="TicketsP" asp-action="IndexUsuario">
                     @((int)ViewData["tickets"] > 1 ? "tickets pendientes" : "ticket pendiente")
                 </a>
             </div>

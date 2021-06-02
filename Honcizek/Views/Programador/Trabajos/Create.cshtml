@@ -44,5 +44,11 @@ else
 }
 
 @section Scripts {
+    <script type="text/javascript" src="~/js/Programador/Trabajos/Trabajos.js"></script>
+    <script>
+        $(document).ready(function () {
+            Trabajos.init();
+        });
+    </script>
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

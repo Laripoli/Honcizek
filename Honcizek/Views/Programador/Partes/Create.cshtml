@@ -14,7 +14,6 @@
             <form asp-action="Create">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="TicketId" value="@ViewData["TicketId"]" />
-                <input type="hidden" asp-for="AgenteId" value="@ViewData["AgenteId"]" />
                 <input type="hidden" asp-for="Fecha" value="@ViewData["hoy"]" />
                 <input type="hidden" asp-for="Hora" value="@ViewData["hora"]" />
                 <div class="row col-12">

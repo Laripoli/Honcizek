@@ -6,7 +6,6 @@
     };
 
     var _cargar_hidden = function () {
-        console.log("hola");
         var suscripcion_id = $('#SuscripcionId').val();
         $.ajax('/administrador/tickets/cargar_hidden', {
             type: 'post',

@@ -11,12 +11,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Honcizek.Controllers.Administrador
 {
-    [Authorize(Roles = "Cliente")]
-    public class ClienteController : Controller
+    [Authorize(Roles = "Administrador")]
+    public class AdministradorController : Controller
     {
         private readonly honcizekContext _context;
 
-        public ClienteController(honcizekContext context)
+        public AdministradorController(honcizekContext context)
         {
             _context = context;
         }

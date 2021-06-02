@@ -3,32 +3,33 @@
     @*Layout = (string)ViewData["layout"];*@
 
 
-    string s = "";
-    var claimsIdentity = User.Identity as System.Security.Claims.ClaimsIdentity;
+string s = "";
+var claimsIdentity = User.Identity as System.Security.Claims.ClaimsIdentity;
 
-    if (claimsIdentity != null)
-    {
-        var c = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.Role);
 
-        if (c != null)
-        {
-            s = c.Value.ToString();
+if (claimsIdentity != null)
+{
+    var c = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.Role);
 
-            @*ViewData["hola"] = c.Value.ToString();*@
+    if (c != null)
+    {
+        s = c.Value.ToString();
 
-        }
     }
-    if (!String.IsNullOrEmpty(s))
-    {
-        Layout = s;
-        ViewData["hola"] = s;
-    }
-    else if(!String.IsNullOrEmpty((string)ViewData["layout"]))
-    {
-        Layout = (string)ViewData["layout"];
-    }
-    else
-    {
-        Layout = "";
-    }
+}
+if (ViewData["layout"] == "Vacio") {
+    Layout = "";
+}
+if (!String.IsNullOrEmpty(s))
+{
+    Layout = s;
+}
+else if(!String.IsNullOrEmpty((string)ViewData["layout"]))
+{
+    Layout = (string)ViewData["layout"];
+}
+else
+{
+    Layout = "";
+}
 }

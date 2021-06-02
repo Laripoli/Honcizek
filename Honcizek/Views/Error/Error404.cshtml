@@ -18,7 +18,8 @@
             rol = "Login";
             break;
     }
-    string accion = rol != "Login"? "Escritorio":"Login";
+    string accion = rol != "Login"? "Escritorio":"Admin";
+    string texto = rol != "Login" ? "Escritorio" : "Login";
 
             }
 <style>
@@ -57,7 +58,7 @@
     <h2>Parece que la página a la que intentas acceder no existe..@ViewData["rol"]</h2>
     <h3>Prueba a volver a la página de 
         <a asp-controller="@rol" asp-action="@accion">
-            @accion
+            @texto
         </a>
     </h3>
 </body>

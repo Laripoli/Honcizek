@@ -303,3 +303,7 @@ input[type=text], input[type=password] {
     padding-right: .5rem;
     padding-top: .25rem;
 }
+
+#login-link{
+    cursor: default;
+}

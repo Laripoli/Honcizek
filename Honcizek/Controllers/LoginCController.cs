@@ -31,6 +31,7 @@ namespace Honcizek.Controllers
 
         public IActionResult Login()
         {
+            ViewData["layout"] = "Vacio";
             return View("Views/LoginC/Login.cshtml");
         }
 

@@ -31,6 +31,7 @@ namespace Honcizek.Controllers
 
         public IActionResult Admin()
          {
+            ViewData["layout"] = "Vacio";
             return View("Views/Login/Login.cshtml");
          }
 
@@ -38,7 +39,7 @@ namespace Honcizek.Controllers
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync();
-            return RedirectToAction("Login");
+            return RedirectToAction("Admin");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
@@ -48,7 +49,7 @@ namespace Honcizek.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(string username, string password, string ReturnUrl)
+        public async Task<IActionResult> Admin(string username, string password, string ReturnUrl)
         {
             if(username == null || username == "")
             {

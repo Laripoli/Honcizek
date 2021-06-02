@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using Honcizek.DAL.Models;
+using System.Security.Claims;
 
 namespace Honcizek.Controllers.Programador
 {
@@ -22,37 +23,50 @@ namespace Honcizek.Controllers.Programador
         }
 
         // GET: Partes
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? id)
         {
-            var honcizekContext = _context.PartesDeTrabajo.Include(p => p.Agente).Include(p => p.Ticket);
-            return View("Views/Programador/Partes/Index.cshtml",await honcizekContext.ToListAsync());
+
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            ViewData["error"] = false;
+            var tickets = await _context.Tickets.FindAsync(id);
+            if (tickets == null)
+            {
+                ViewData["error"] = true;
+            }
+            ViewData["general"] = true;
+            ViewData["TicketId"] = id;
+            /*string query = "Select * from partes_de_trabajo where ticket_id= {0}";
+            var honcizekContext = _context.PartesDeTrabajo.FromSqlRaw(query, id).Include(p => p.Agente).Include(p => p.Ticket);*/
+            var honcizekContext = _context.PartesDeTrabajo.Where(p => p.TicketId == id).Include(p => p.Agente).Include(p => p.Ticket);
+            return View("Views/Programador/Partes/Index.cshtml", await honcizekContext.ToListAsync());
         }
 
-        // GET: Partes/Details/5
-        public async Task<IActionResult> Details(int? id)
+        // GET: Partes/Create
+        public async Task<IActionResult> Create(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var partesDeTrabajo = await _context.PartesDeTrabajo
-                .Include(p => p.Agente)
-                .Include(p => p.Ticket)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (partesDeTrabajo == null)
+            ViewData["error"] = false;
+            var tickets = await _context.Tickets.FindAsync(id);
+            if (tickets == null)
             {
-                return NotFound();
+                ViewData["error"] = true;
             }
 
-            return View("Views/Programador/Partes/Details.cshtml",partesDeTrabajo);
-        }
+            var Id = Int32.Parse(HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.UserData)?.Value);
 
-        // GET: Partes/Create
-        public IActionResult Create()
-        {
-            ViewData["AgenteId"] = new SelectList(_context.Usuarios, "Id", "Clave");
-            ViewData["TicketId"] = new SelectList(_context.Tickets, "Id", "Descripcion");
+            ViewData["AgenteId"] = 0;
+            ViewData["TicketId"] = id;
+            DateTime hoy = DateTime.Now;
+            ViewData["hoy"] = hoy.ToString("yyyy-MM-dd");
+            ViewData["hora"] = hoy.ToString("H:m");
             return View("Views/Programador/Partes/Create.cshtml");
         }
 
@@ -63,14 +77,21 @@ namespace Honcizek.Controllers.Programador
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,TicketId,AgenteId,Nombre,Fecha,Hora,Descripcion,Horas,Minutos")] PartesDeTrabajo partesDeTrabajo)
         {
+            var Id = Int32.Parse(HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.UserData)?.Value);
+            partesDeTrabajo.AgenteId = Id;
             if (ModelState.IsValid)
             {
                 _context.Add(partesDeTrabajo);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index), new { id = partesDeTrabajo.TicketId });
             }
-            ViewData["AgenteId"] = new SelectList(_context.Usuarios, "Id", "Clave", partesDeTrabajo.AgenteId);
-            ViewData["TicketId"] = new SelectList(_context.Tickets, "Id", "Descripcion", partesDeTrabajo.TicketId);
+            ViewData["error"] = false;
+
+            ViewData["AgenteId"] = 0;
+            ViewData["TicketId"] = partesDeTrabajo.TicketId;
+            DateTime hoy = DateTime.Now;
+            ViewData["hoy"] = hoy.ToString("yyyy-MM-dd");
+            ViewData["hora"] = hoy.ToString("H:m");
             return View("Views/Programador/Partes/Create.cshtml",partesDeTrabajo);
         }
 
@@ -87,8 +108,10 @@ namespace Honcizek.Controllers.Programador
             {
                 return NotFound();
             }
-            ViewData["AgenteId"] = new SelectList(_context.Usuarios, "Id", "Clave", partesDeTrabajo.AgenteId);
-            ViewData["TicketId"] = new SelectList(_context.Tickets, "Id", "Descripcion", partesDeTrabajo.TicketId);
+            var Id = Int32.Parse(HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.UserData)?.Value);
+
+            ViewData["AgenteId"] = 0;
+            ViewData["TicketId"] = partesDeTrabajo.TicketId;
             return View("Views/Programador/Partes/Edit.cshtml",partesDeTrabajo);
         }
 
@@ -103,6 +126,8 @@ namespace Honcizek.Controllers.Programador
             {
                 return NotFound();
             }
+            var Id = Int32.Parse(HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.UserData)?.Value);
+            partesDeTrabajo.AgenteId = Id;
 
             if (ModelState.IsValid)
             {
@@ -122,10 +147,11 @@ namespace Honcizek.Controllers.Programador
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index), new { id = partesDeTrabajo.TicketId });
             }
-            ViewData["AgenteId"] = new SelectList(_context.Usuarios, "Id", "Clave", partesDeTrabajo.AgenteId);
-            ViewData["TicketId"] = new SelectList(_context.Tickets, "Id", "Descripcion", partesDeTrabajo.TicketId);
+
+            ViewData["AgenteId"] = 0;
+            ViewData["TicketId"] = partesDeTrabajo.TicketId;
             return View("Views/Programador/Partes/Edit.cshtml",partesDeTrabajo);
         }
 

@@ -4,86 +4,92 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Listado de PartesDeTrabajo</h1>
+<h1>Listado de @((bool)ViewData["general"] ? "":"mis") partes de trabajo</h1>
+@if (!(bool)ViewData["error"])
+{
 
-<p>
-    <a asp-action="Create">
-        <button class="btn btn-info">Crear nuevo
-		</button>
-    </a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Nombre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Fecha)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Hora)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Descripcion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Horas)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Minutos)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Agente)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Ticket)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Fecha)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Hora)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Descripcion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Horas)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Minutos)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Agente.Clave)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ticket.Descripcion)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">
-					<button class="btn btn-primary">Editar
-					</button>
-				</a>
-				<a asp-action="Details" asp-route-id="@item.Id">
-					<button class="btn btn-info">Detalles
-					</button>
-				</a>
-				<a asp-action="Delete" asp-route-id="@item.Id">
-					<button class="btn btn-danger">Eliminar
-					</button>
-				</a>
-            </td>
-        </tr>
+    <div class="float-right">
+
+        <p class="float-left">
+            <a asp-action="Create" asp-route-id="@ViewData["TicketId"]">
+                <button class="btn btn-info">
+                    Crear nuevo
+                </button>
+            </a>
+            <a asp-controller="TicketsP" asp-action="Edit" asp-route-id="@ViewData["TicketId"]">
+                <button class="btn btn-warning">
+                    Volver al ticket
+                </button>
+            </a>
+        </p>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nombre)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Fecha)
+                </th>
+                <th>
+                    Tiempo empleado
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Ticket)
+                </th>
+                <th class="w-25"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Count() > 0)
+            {
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FRegistro)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Tiempo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Ticket.Nombre)
+                        </td>
+                        <td class="float-right">
+                            <a asp-action="Edit" asp-route-id="@item.Id">
+                                <button class="btn btn-primary">
+                                    Editar
+                                </button>
+                            </a>
+                            <a asp-action="Delete" asp-route-id="@item.Id">
+                                <button class="btn btn-danger">
+                                    Eliminar
+                                </button>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+    @if (!(Model.Count() > 0))
+    {
+        <h2 style="text-align: center;width: 100%">A&uacute;n no hay registros</h2>
+    }
+    <div class="float-right">
+        <a asp-controller="TicketsP" asp-action="Index">
+            <button class="btn btn-secondary">
+                Volver al listado de tickets
+            </button>
+        </a>
+    </div>
 }
-    </tbody>
-</table>
+else
+{
+    <h4>Est&aacute;s intentando ver los partes de trabajo de un ticket que no existe.</h4>
+    <span>Prueba a volver al <a class="honci-link" asp-controller="Tickets" asp-action="Index">Listado de tickets</a> e int&eacute;ntalo de nuevo</span>
+}

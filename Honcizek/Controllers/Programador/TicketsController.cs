@@ -119,5 +119,12 @@ namespace Honcizek.Controllers.Programador
         {
             return _context.Tickets.Any(e => e.Id == id);
         }
+
+        public int tiempo(int id)
+        {
+            var partes = _context.PartesDeTrabajo.Where(p => p.TicketId == id);
+
+            return 1;
+        }
     }
 }

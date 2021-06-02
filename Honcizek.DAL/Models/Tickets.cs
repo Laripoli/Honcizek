@@ -54,5 +54,6 @@ namespace Honcizek.DAL.Models
                 return this.FechaFinalizacion?.ToShortDateString();
             }
         }
+
     }
 }

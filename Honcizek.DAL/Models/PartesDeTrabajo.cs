@@ -29,7 +29,25 @@ namespace Honcizek.DAL.Models
         {
             get
             {
-                return this.Fecha.ToShortDateString();
+                return Fecha.ToShortDateString();
+            }
+        }
+
+        public string Tiempo
+        {
+            get
+            {
+                if (Minutos > 0 && Minutos < 60 && Horas <= 0) {
+                    return Minutos.ToString() + " minutos";
+                }
+                else if (Minutos > 0)
+                {
+                    return Math.Round((decimal)Horas + ((decimal)Minutos / 60),1).ToString() + (Horas == 1 ? " hora" : " horas");
+                }
+                else
+                {
+                    return Horas.ToString() + (Horas > 1 ? " horas":" hora");
+                }
             }
         }
     }

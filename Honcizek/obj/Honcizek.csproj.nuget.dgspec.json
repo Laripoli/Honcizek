@@ -1,7 +1,7 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\alvar\\Desktop\\tuto\\Proyectos\\Honcizek\\honcizek\\Honcizek.csproj": {}
+    "C:\\Users\\alvar\\Desktop\\tuto\\Proyectos\\Honcizek\\Honcizek\\Honcizek.csproj": {}
   },
   "projects": {
     "C:\\Users\\alvar\\Desktop\\tuto\\Proyectos\\Honcizek\\Honcizek.BL\\Honcizek.BL.csproj": {
@@ -198,14 +198,14 @@
         }
       }
     },
-    "C:\\Users\\alvar\\Desktop\\tuto\\Proyectos\\Honcizek\\honcizek\\Honcizek.csproj": {
+    "C:\\Users\\alvar\\Desktop\\tuto\\Proyectos\\Honcizek\\Honcizek\\Honcizek.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\alvar\\Desktop\\tuto\\Proyectos\\Honcizek\\honcizek\\Honcizek.csproj",
+        "projectUniqueName": "C:\\Users\\alvar\\Desktop\\tuto\\Proyectos\\Honcizek\\Honcizek\\Honcizek.csproj",
         "projectName": "Honcizek",
-        "projectPath": "C:\\Users\\alvar\\Desktop\\tuto\\Proyectos\\Honcizek\\honcizek\\Honcizek.csproj",
+        "projectPath": "C:\\Users\\alvar\\Desktop\\tuto\\Proyectos\\Honcizek\\Honcizek\\Honcizek.csproj",
         "packagesPath": "C:\\Users\\alvar\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\alvar\\Desktop\\tuto\\Proyectos\\Honcizek\\honcizek\\obj\\",
+        "outputPath": "C:\\Users\\alvar\\Desktop\\tuto\\Proyectos\\Honcizek\\Honcizek\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\alvar\\AppData\\Roaming\\NuGet\\NuGet.Config",

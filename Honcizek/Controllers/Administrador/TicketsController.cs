@@ -10,7 +10,7 @@ using Honcizek.DAL.Models;
 using Newtonsoft.Json;
 using System.Security.Claims;
 
-namespace Honcizek.Controllers_Administrador
+namespace Honcizek.Controllers.Administrador
 {
 	[Authorize(Roles = "Administrador")]
 	[Route("Administrador/[controller]/[action]")]

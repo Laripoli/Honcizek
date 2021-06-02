@@ -15,6 +15,8 @@
             </button>
         </a>
     </p>
+
+
     <p class="float-right pr-2">
         <a asp-action="Create">
             <button class="btn btn-info">
@@ -22,6 +24,7 @@
             </button>
         </a>
     </p>
+    
 </div>
 <div>
     <form id="filtrador" class="float-left pl-3 row" asp-action="@((bool)ViewData["general"] ? "Index":"IndexUsuario")" method="get">
@@ -142,11 +145,6 @@
                     <a asp-action="Edit" asp-route-id="@item.Id">
                         <button class="btn btn-primary">
                             Editar
-                        </button>
-                    </a>
-                    <a asp-action="Details" asp-route-id="@item.Id">
-                        <button class="btn btn-info">
-                            Detalles
                         </button>
                     </a>
                     <a asp-action="Delete" asp-route-id="@item.Id">

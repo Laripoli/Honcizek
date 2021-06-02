@@ -36,9 +36,11 @@ namespace Honcizek.Controllers.Administrador
             if (tickets == null)
             {
                 ViewData["error"] = true;
+
             }
             ViewData["general"] = true;
             ViewData["TicketId"] = id;
+
             /*string query = "Select * from partes_de_trabajo where ticket_id= {0}";
             var honcizekContext = _context.PartesDeTrabajo.FromSqlRaw(query, id).Include(p => p.Agente).Include(p => p.Ticket);*/
             var honcizekContext = _context.PartesDeTrabajo.Where(p => p.TicketId == id).Include(p => p.Agente).Include(p => p.Ticket);

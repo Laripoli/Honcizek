@@ -207,7 +207,7 @@ namespace Honcizek.Controllers.Administrador
                     new SelectListItem {Text = "En curso", Value = "En curso",Selected = (proyectos.Estado=="En curso")?true:false},
                     new SelectListItem {Text = "Finalizado", Value = "Finalizado",Selected = (proyectos.Estado=="Finalizado")?true:false}
                 };
-            proyectos.Fase = proyectos.Fase == "Dise�o" ? "Diseno" : proyectos.Fase;
+            proyectos.Fase = proyectos.Fase == "Diseño" ? "Diseno" : proyectos.Fase;
             return View("Views/Administrador/Proyectos/Edit.cshtml",proyectos);
         }
 
@@ -221,6 +221,7 @@ namespace Honcizek.Controllers.Administrador
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,ClienteId,Tipo,Nombre,Descripcion,DescripcionDesarrollo,FechaRegistro,FechaInicio,FechaFinPrevista,FechaFinReal,HorasInternasPrevistas,Estado,Fase")] Proyectos proyectos)
         {
+            proyectos.Fase = proyectos.Fase == "Diseño" ? "Diseno" : proyectos.Fase;
             if (id != proyectos.Id)
             {
                 return NotFound();
@@ -258,6 +259,7 @@ namespace Honcizek.Controllers.Administrador
                     new SelectListItem {Text = "En curso", Value = "En curso",Selected = (proyectos.Estado=="En curso")?true:false},
                     new SelectListItem {Text = "Finalizado", Value = "Finalizado",Selected = (proyectos.Estado=="Finalizado")?true:false}
                 };
+            
             return View("Views/Administrador/Proyectos/Edit.cshtml",proyectos);
         }
 

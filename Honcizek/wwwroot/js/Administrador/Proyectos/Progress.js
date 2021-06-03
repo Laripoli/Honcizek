@@ -2,7 +2,6 @@
 
     var handler = function (fase) {
         _style();
-        if(fase!=null)
         _faseradio(fase);
     }
 
@@ -83,10 +82,17 @@
             case "Pruebas cliente":
                 $("#Pruebas\\ cliente").trigger('click');
                 break;
-
-            default:
+            case "Analisis":
+            case "Diseno":
+            case "Diseño":
+            case "Desarrollo":
+            case "Maquetacion":
+            case "Implantacion":
                 $("#" + fase).trigger('click');
-                console.log(fase);
+                break;
+            default:
+                $('#Analisis').trigger("click");
+                break;
         }      
        
     }

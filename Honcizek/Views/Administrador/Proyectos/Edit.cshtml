@@ -156,7 +156,7 @@
         <script>
         $(document).ready(function () {
             Proyectos.init(true);
-            Progress.init("@Model.Fase");
+            Progress.init("@((string)Model.Fase)");
         });
         </script>
         @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

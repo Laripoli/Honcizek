@@ -34,10 +34,12 @@
             if ($('#DescripcionDesarrollo').val() == "") {
                 $('#DescripcionDesarrollo').val("Sin descripción del desarrollo");
             }
+            if($('#Fase'))
             return true;
         })
         
     }
+
 
     return {
         // public functions

@@ -130,7 +130,7 @@ namespace Honcizek.Controllers.Administrador
             {
                 return NotFound();
             }
-            ViewData["LocalidadId"] = new SelectList(_context.Localidades, "Id", "Nombre", clientes.LocalidadId);
+            ViewData["LocalidadId"] = clientes.LocalidadId;
              
             ViewData["ProvinciaId"] = new SelectList(_context.Provincias, "Id", "Nombre", clientes.ProvinciaId);
             return View("Views/Administrador/Clientes/Edit.cshtml", clientes);
@@ -180,7 +180,7 @@ namespace Honcizek.Controllers.Administrador
                 ViewData["login-error"] = true;
             }
 
-            ViewData["LocalidadId"] = new SelectList(_context.Localidades, "Id", "Nombre", clientes.LocalidadId);
+            ViewData["LocalidadId"] = clientes.LocalidadId;
              
             ViewData["ProvinciaId"] = new SelectList(_context.Provincias, "Id", "Nombre", clientes.ProvinciaId);
             ViewData["Tipo"] = new List<SelectListItem>

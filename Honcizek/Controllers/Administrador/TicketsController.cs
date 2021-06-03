@@ -168,7 +168,7 @@ namespace Honcizek.Controllers.Administrador
                 };
             DateTime hoy = DateTime.Now;
             ViewData["hoy"] = hoy.ToString("yyyy-MM-dd");
-            ViewData["hora"] = hoy.ToString("H:m");
+            ViewData["hora"] = hoy.ToString("HH:mm");
             return View("Views/Administrador/Tickets/Create.cshtml",tickets);
         }
 
@@ -191,7 +191,7 @@ namespace Honcizek.Controllers.Administrador
             }
             DateTime hoy = DateTime.Now;
             ViewData["hoy"] = hoy.ToString("yyyy-MM-dd");
-            ViewData["hora"] = hoy.ToString("H:m");
+            ViewData["hora"] = hoy.ToString("HH:mm");
             ViewData["AgenteId"] = new SelectList(_context.Usuarios, "Id", "FullName", tickets.AgenteId);
             ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "FullName", tickets.ClienteId);
             ViewData["SuscripcionId"] = new SelectList(_context.Suscripciones, "Id", "Nombre", tickets.SuscripcionId);
@@ -243,7 +243,7 @@ namespace Honcizek.Controllers.Administrador
             }
             DateTime hoy = DateTime.Now;
             ViewData["hoy"] = hoy.ToString("yyyy-MM-dd");
-            ViewData["hora"] = hoy.ToString("H:m");
+            ViewData["hora"] = hoy.ToString("HH:mm");
             ViewData["AgenteId"] = new SelectList(_context.Usuarios, "Id", "FullName", tickets.AgenteId);
             ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "FullName", tickets.ClienteId);
             ViewData["SuscripcionId"] = new SelectList(_context.Suscripciones, "Id", "Nombre", tickets.SuscripcionId);

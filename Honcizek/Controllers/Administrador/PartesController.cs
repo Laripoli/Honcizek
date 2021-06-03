@@ -68,7 +68,7 @@ namespace Honcizek.Controllers.Administrador
 
 
         /// <summary>
-        /// Redirección a la vista de crear un parte de trabajo para un ticket en específico
+        /// Redirecciï¿½n a la vista de crear un parte de trabajo para un ticket en especï¿½fico
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -90,12 +90,12 @@ namespace Honcizek.Controllers.Administrador
             ViewData["TicketId"] = id;
             DateTime hoy = DateTime.Now;
             ViewData["hoy"] = hoy.ToString("yyyy-MM-dd");
-            ViewData["hora"] = hoy.ToString("H:m");
+            ViewData["hora"] = hoy.ToString("HH:mm");
             return View("Views/Administrador/Partes/Create.cshtml");
         }
 
         /// <summary>
-        /// Validación del parte de trabajo creado y en caso de error devuelve a la vista de creación de parte de trabajo
+        /// Validaciï¿½n del parte de trabajo creado y en caso de error devuelve a la vista de creaciï¿½n de parte de trabajo
         /// </summary>
         /// <param name="partesDeTrabajo"></param>
         /// <returns></returns>
@@ -115,12 +115,12 @@ namespace Honcizek.Controllers.Administrador
             ViewData["TicketId"] = partesDeTrabajo.TicketId;
             DateTime hoy = DateTime.Now;
             ViewData["hoy"] = hoy.ToString("yyyy-MM-dd");
-            ViewData["hora"] = hoy.ToString("H:m");
+            ViewData["hora"] = hoy.ToString("HH:mm");
             return View("Views/Administrador/Partes/Create.cshtml",partesDeTrabajo);
         }
 
         /// <summary>
-        /// Redirección a la vista de editar un parte de trabajo
+        /// Redirecciï¿½n a la vista de editar un parte de trabajo
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -142,7 +142,7 @@ namespace Honcizek.Controllers.Administrador
         }
 
         /// <summary>
-        /// Validación del parte de trabajo editado y en caso de error devuelve a la vista de edición de parte de trabajo
+        /// Validaciï¿½n del parte de trabajo editado y en caso de error devuelve a la vista de ediciï¿½n de parte de trabajo
         /// </summary>
         /// <param name="id"></param>
         /// <param name="partesDeTrabajo"></param>
@@ -182,7 +182,7 @@ namespace Honcizek.Controllers.Administrador
         }
 
         /// <summary>
-        /// Redirección a la vista de eliminación de parte de trabajo
+        /// Redirecciï¿½n a la vista de eliminaciï¿½n de parte de trabajo
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -206,7 +206,7 @@ namespace Honcizek.Controllers.Administrador
         }
 
         /// <summary>
-        /// Confirmación de eliminación y redirecciona al listado
+        /// Confirmaciï¿½n de eliminaciï¿½n y redirecciona al listado
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -229,7 +229,7 @@ namespace Honcizek.Controllers.Administrador
             return _context.PartesDeTrabajo.Any(e => e.Id == id);
         }
         /// <summary>
-        /// Comprueba si el ticket sigue pendiente, si está pendiente pasa a estar en proceso
+        /// Comprueba si el ticket sigue pendiente, si estï¿½ pendiente pasa a estar en proceso
         /// </summary>
         /// <param name="id"></param>
         private async void checkEstadoTicket(int id)

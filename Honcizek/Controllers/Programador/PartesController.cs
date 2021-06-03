@@ -66,7 +66,7 @@ namespace Honcizek.Controllers.Programador
             ViewData["TicketId"] = id;
             DateTime hoy = DateTime.Now;
             ViewData["hoy"] = hoy.ToString("yyyy-MM-dd");
-            ViewData["hora"] = hoy.ToString("H:m");
+            ViewData["hora"] = hoy.ToString("HH:mm");
             return View("Views/Programador/Partes/Create.cshtml");
         }
 
@@ -91,7 +91,7 @@ namespace Honcizek.Controllers.Programador
             ViewData["TicketId"] = partesDeTrabajo.TicketId;
             DateTime hoy = DateTime.Now;
             ViewData["hoy"] = hoy.ToString("yyyy-MM-dd");
-            ViewData["hora"] = hoy.ToString("H:m");
+            ViewData["hora"] = hoy.ToString("HH:mm");
             return View("Views/Programador/Partes/Create.cshtml",partesDeTrabajo);
         }
 

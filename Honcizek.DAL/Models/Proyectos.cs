@@ -19,7 +19,7 @@ namespace Honcizek.DAL.Models
         }
 
         public int Id { get; set; }
-        public int ClienteId { get; set; }
+        public int? ClienteId { get; set; }
         public string Tipo { get; set; }
         [Required(ErrorMessage = "Debes introducir un nombre de proyecto")]
         public string Nombre { get; set; }

@@ -133,7 +133,13 @@
                             @Html.DisplayFor(modelItem => item.Fase)
                         </td>
                         <td>
+                            @if (item.Cliente == null)
+                            {
+                                <span>El cliente ha sido eliminado</span>
+                            }else
+                            {
                                 @Html.DisplayFor(modelItem => item.Cliente.FullName)
+                            }
                         </td>
                         <td>
                             <a asp-controller="Trabajos" asp-action="IndexUsuario" asp-route-id="@item.Id">

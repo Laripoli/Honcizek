@@ -112,7 +112,14 @@
                             @Html.DisplayFor(modelItem => item.Fase)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Cliente.FullName);
+                            @if (item.Cliente == null)
+                            {
+                                <span>El cliente ha sido eliminado</span>
+                            }
+                            else
+                            {
+                                @Html.DisplayFor(modelItem => item.Cliente.FullName)
+                            }
                         </td>
                         <td class="w-auto">
                             <a asp-action="Edit" asp-route-id="@item.Id">

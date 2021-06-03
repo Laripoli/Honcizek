@@ -8,6 +8,9 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Honcizek.DAL.Models
 {
+    /// <summary>
+    /// Contexto de la bd del proyecto
+    /// </summary>
     public partial class honcizekContext : DbContext
     {
         public honcizekContext()

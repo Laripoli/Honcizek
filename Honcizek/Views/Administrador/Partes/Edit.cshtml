@@ -13,6 +13,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <input type="hidden" asp-for="TicketId" />
+            <input type="hidden" asp-for="AgenteId" />
             <input type="hidden" asp-for="Fecha" />
             <input type="hidden" asp-for="Hora" />
             <div class="row col-12">
@@ -21,20 +22,17 @@
                     <input asp-for="Nombre" class="form-control" />
                     <span asp-validation-for="Nombre" class="text-danger"></span>
                 </div>
-                <div class="form-group col-5">
-                    <label asp-for="AgenteId" class="control-label">Programador</label>
-                    <select asp-for="AgenteId" class="form-control" asp-items="ViewBag.AgenteId"></select>
-                </div>
             </div>
             <div class="row col-12">
                 <div class="form-group col-5">
                     <label asp-for="Horas" class="control-label"></label>
-                    <input type="number" asp-for="Horas" min="0" value="0" class="form-control" />
-                    <span asp-validation-for="Horas" class="text-danger"></span>
+                    <input type="number" asp-for="Horas" min="0" class="form-control" />
+                    <span asp-validation-for="Horas" class="text-danger d-none"></span>
+                    <span id="formatoHoras" class="text-danger d-none">Las horas han de ser n&uacute;meros enteros</span>
                 </div>
                 <div class="form-group col-5">
                     <label asp-for="Minutos" class="control-label"></label>
-                    <input type="number" asp-for="Minutos" min="0" value="0" step="5" class="form-control" />
+                    <input type="number" asp-for="Minutos" min="0" step="5" class="form-control" />
                     <span asp-validation-for="Minutos" class="text-danger"></span>
                 </div>
             </div>

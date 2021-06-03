@@ -55,7 +55,9 @@ namespace Honcizek.Controllers.Administrador
                          " OR C.razon_social like '%" + cliente + "%'";
                 }
             }
-            var honcizekContext = _context.Tickets.FromSqlRaw(query).Include(t => t.Agente).Include(t => t.Cliente).Include(t => t.Suscripcion);
+            var honcizekContext = _context.Tickets.FromSqlRaw(query)
+                .Include(t => t.Agente).Include(t => t.Cliente).Include(t => t.Suscripcion)
+                .OrderByDescending(t => t.FechaRegistro).ThenByDescending(T => T.HoraRegistro);
             return View("Views/Administrador/Tickets/Index.cshtml",await honcizekContext.ToListAsync());
         }
 
@@ -75,7 +77,7 @@ namespace Honcizek.Controllers.Administrador
                 "LEFT JOIN usuarios U ON U.id = T.agente_id " +
                 "LEFT JOIN clientes C ON C.id = T.cliente_id " +
                 "LEFT JOIN suscripciones S ON S.id = T.suscripcion_id " +
-                "WHERE T.agente_id = {0}";
+                "WHERE T.agente_id = {0} AND T.Estado IN('En proceso','Pendiente') ";
 
 
             /*if (!String.IsNullOrEmpty(nombre))
@@ -95,7 +97,9 @@ namespace Honcizek.Controllers.Administrador
             ViewData["nombreFilter"] = nombre;
             ViewData["clienteFilter"] = cliente;
 
-            var honcizekContext = _context.Tickets.FromSqlRaw(query,Id).Include(t => t.Agente).Include(t => t.Cliente).Include(t => t.Suscripcion);
+            var honcizekContext = _context.Tickets.FromSqlRaw(query,Id)
+                .Include(t => t.Agente).Include(t => t.Cliente).Include(t => t.Suscripcion)
+                .OrderByDescending(t => t.FechaRegistro).ThenByDescending(T => T.HoraRegistro);
             return View("Views/Administrador/Tickets/Index.cshtml", await honcizekContext.ToListAsync());
         }
 
@@ -141,7 +145,7 @@ namespace Honcizek.Controllers.Administrador
                     new SelectListItem {Text = "Finalizado", Value = "Finalizado",Selected = (tickets.Estado=="Finalizado")?true:false},
                     new SelectListItem {Text = "Cancelado", Value = "Cancelado",Selected = (tickets.Estado=="Cancelado")?true:false}
                 };
-            DateTime hoy = DateTime.Today;
+            DateTime hoy = DateTime.Now;
             ViewData["hoy"] = hoy.ToString("yyyy-MM-dd");
             ViewData["hora"] = hoy.ToString("H:m");
             return View("Views/Administrador/Tickets/Create.cshtml",tickets);
@@ -160,6 +164,9 @@ namespace Honcizek.Controllers.Administrador
             {
                 return NotFound();
             }
+            DateTime hoy = DateTime.Now;
+            ViewData["hoy"] = hoy.ToString("yyyy-MM-dd");
+            ViewData["hora"] = hoy.ToString("H:m");
             ViewData["AgenteId"] = new SelectList(_context.Usuarios, "Id", "FullName", tickets.AgenteId);
             ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "FullName", tickets.ClienteId);
             ViewData["SuscripcionId"] = new SelectList(_context.Suscripciones, "Id", "Nombre", tickets.SuscripcionId);
@@ -170,6 +177,7 @@ namespace Honcizek.Controllers.Administrador
                     new SelectListItem {Text = "Finalizado", Value = "Finalizado",Selected = (tickets.Estado=="Finalizado")?true:false},
                     new SelectListItem {Text = "Cancelado", Value = "Cancelado",Selected = (tickets.Estado=="Cancelado")?true:false}
                 };
+
             return View("Views/Administrador/Tickets/Edit.cshtml",tickets);
         }
 
@@ -205,6 +213,9 @@ namespace Honcizek.Controllers.Administrador
                 }
                 return RedirectToAction(nameof(Index));
             }
+            DateTime hoy = DateTime.Now;
+            ViewData["hoy"] = hoy.ToString("yyyy-MM-dd");
+            ViewData["hora"] = hoy.ToString("H:m");
             ViewData["AgenteId"] = new SelectList(_context.Usuarios, "Id", "FullName", tickets.AgenteId);
             ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "FullName", tickets.ClienteId);
             ViewData["SuscripcionId"] = new SelectList(_context.Suscripciones, "Id", "Nombre", tickets.SuscripcionId);

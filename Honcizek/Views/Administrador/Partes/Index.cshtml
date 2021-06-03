@@ -8,26 +8,34 @@
 @if (!(bool)ViewData["error"])
 {
 
-    <div class="float-right">
+<div>
+        @if ((bool)ViewData["aviso"])
+        {
+    <p class="text-danger float-left">
 
-        <p class="float-left">
+            Estas visualizando los partes de un ticket de otro programador
+    </p>
+       }
+    <p class="float-right">
+        @if (!(bool)ViewData["finalizado"])
+        {
             <a asp-action="Create" asp-route-id="@ViewData["TicketId"]">
                 <button class="btn btn-info">
                     Crear nuevo
                 </button>
             </a>
-            <a asp-controller="Tickets" asp-action="Edit" asp-route-id="@ViewData["TicketId"]">
-                <button class="btn btn-primary">
-                    Volver al ticket
-                </button>
-            </a>
-            <a asp-action="@((bool)ViewData["general"] ? "IndexUsuario":"Index")" asp-route-id="@ViewData["TicketId"]">
-                <button class="btn btn-@((bool)ViewData["general"] ? "success":"warning")">
-                    @((bool)ViewData["general"] ? "Ver mis trabajos":"Ver todos los trabajos")
-                </button>
-            </a>
-        </p>
-    </div>
+        }
+        else
+        {
+            <span class="text-danger">Este ticket se encuentra finalizado o cancelado</span>
+        }
+        <a asp-controller="Tickets" asp-action="Edit" asp-route-id="@ViewData["TicketId"]">
+            <button class="btn btn-primary">
+                Volver al ticket
+            </button>
+        </a>
+    </p>
+</div>
     <table class="table">
         <thead>
             <tr>

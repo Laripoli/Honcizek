@@ -14,6 +14,8 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="ClienteId" />
             <input type="hidden" asp-for="AgenteId" />
+            <input type="hidden" asp-for="FechaFinalizacion" />
+            <input type="hidden" asp-for="HoraFinalizacion" />
             <input type="hidden" asp-for="FechaRegistro" value="@ViewData["hoy"]" />
             <input type="hidden" asp-for="HoraRegistro" value="@ViewData["hora"]" />
             <div class="row col-12">
@@ -34,16 +36,6 @@
                 <div class="form-group col-4">
                     <label asp-for="Estado" class="control-label"></label>
                     <select asp-for="Estado" class="form-control" asp-items="ViewBag.Estado"></select>
-                </div>
-                <div class="form-group col-4">
-                    <label asp-for="FechaFinalizacion" class="control-label"></label>
-                    <input type="date" asp-for="FechaFinalizacion" class="form-control" />
-                    <span asp-validation-for="FechaFinalizacion" class="text-danger"></span>
-                </div>
-                <div class="form-group col-4">
-                    <label asp-for="HoraFinalizacion" class="control-label"></label>
-                    <input type="time" asp-for="HoraFinalizacion" class="form-control" />
-                    <span asp-validation-for="HoraFinalizacion" class="text-danger"></span>
                 </div>
             </div>
             <div class="form-group col-4">

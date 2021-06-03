@@ -14,6 +14,9 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 namespace Honcizek.Controllers.Administrador
 {
+    /// <summary>
+    /// Gestiona la identidad clientes del lado administrador
+    /// </summary>
     [Authorize(Roles = "Administrador")]
     [Route("Administrador/[controller]/[action]")]
     public class ClientesController : Controller
@@ -25,6 +28,11 @@ namespace Honcizek.Controllers.Administrador
             _context = context;
         }
 
+        /// <summary>
+        /// Listado de clientes tanto general como filtrado
+        /// </summary>
+        /// <param name="search"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Index(String search)
         {
             ViewData["CurrentFilter"] = search;
@@ -44,7 +52,10 @@ namespace Honcizek.Controllers.Administrador
             return View("Views/Administrador/Clientes/Index.cshtml", await honcizekContext.ToListAsync());
         }
 
-        // GET: Clientes/Create
+        /// <summary>
+        /// Redirección a la vista de crear un cliente
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Create()
         {
             ViewData["login-error"] = false;
@@ -61,9 +72,11 @@ namespace Honcizek.Controllers.Administrador
             return View("Views/Administrador/Clientes/Create.cshtml");
         }
 
-        // POST: Clientes/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Validación del cliente creado y en caso de error devuelve a la vista de creación de cliente
+        /// </summary>
+        /// <param name="clientes"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Login,Clave,LocalidadId,ProvinciaId,FechaRegistro,Tipo,RazonSocial,Nombre,Apellidos,Nifcif,Telefono,Movil,Email,Direccion,Cp,Observaciones")] Clientes clientes)
@@ -94,7 +107,11 @@ namespace Honcizek.Controllers.Administrador
             return View("Views/Administrador/Clientes/Create.cshtml", clientes);
         }
 
-        // GET: Clientes/Edit/5
+        /// <summary>
+        /// Redireccion a la vista de edición de un cliente en base al id pasado.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Edit(int? id)
         {
             ViewData["login-error"] = false;
@@ -119,9 +136,12 @@ namespace Honcizek.Controllers.Administrador
             return View("Views/Administrador/Clientes/Edit.cshtml", clientes);
         }
 
-        // POST: Clientes/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Validación y guardado del cliente editado, en caso de error devuelve a la vista de edición
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="clientes"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Login,Clave,LocalidadId,ProvinciaId,FechaRegistro,Tipo,RazonSocial,Nombre,Apellidos,Nifcif,Telefono,Movil,Email,Direccion,Cp,Observaciones")] Clientes clientes)
@@ -171,7 +191,11 @@ namespace Honcizek.Controllers.Administrador
             return View("Views/Administrador/Clientes/Edit.cshtml", clientes);
         }
 
-        // GET: Clientes/Delete/5
+        /// <summary>
+        /// Devuelve la vista de eliminación de un cliente
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -192,7 +216,11 @@ namespace Honcizek.Controllers.Administrador
             return View("Views/Administrador/Clientes/Delete.cshtml", clientes);
         }
 
-        // POST: Clientes/Delete/5
+        /// <summary>
+        /// Elimina el cliente
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -203,21 +231,43 @@ namespace Honcizek.Controllers.Administrador
             return RedirectToAction(nameof(Index));
         }
 
+        /// <summary>
+        /// Comprueba si existe el cliente
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         private bool ClientesExists(int id)
         {
             return _context.Clientes.Any(e => e.Id == id);
         }
 
+
+        /// <summary>
+        /// Comprueba que el login aportado no exista
+        /// </summary>
+        /// <param name="login"></param>
+        /// <returns>True si está intentando utilizar un login ya existente</returns>
         public bool login_check(string login)
         {
             return _context.Clientes.Any(e => e.Login == login);
         }
-
+       
+        /// <summary>
+        /// Comprueba si el login aportado ya existe y no pertenece al cliente
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <param name="Login"></param>
+        /// <returns>True si está intentando utilizar un login ya existente utilizado por otro cliente</returns>
         public bool login_check(int Id, string Login)
         {
             return _context.Clientes.Any(e => e.Login == Login && e.Id != Id);
         }
 
+        /// <summary>
+        /// Crea un hash md5 basado en el string pasado como parametro
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public static string CreateMD5(string input)
         {
             // Use input string to calculate MD5 hash
@@ -235,7 +285,12 @@ namespace Honcizek.Controllers.Administrador
                 return sb.ToString();
             }
         }
-
+        
+        /// <summary>
+        /// Carga las localidades en base al id de provincia aportado
+        /// </summary>
+        /// <param name="provincia_id"></param>
+        /// <returns></returns>
         [HttpPost]
         public string cargar_localidades(int provincia_id)
         {

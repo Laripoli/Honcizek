@@ -11,6 +11,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Honcizek.Controllers.Administrador
 {
+    /// <summary>
+    /// Gestiona el escritorio del lado administrador
+    /// </summary>
     [Authorize(Roles = "Administrador")]
     public class AdministradorController : Controller
     {

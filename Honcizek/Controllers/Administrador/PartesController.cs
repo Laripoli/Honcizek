@@ -11,6 +11,9 @@ using System.Security.Claims;
 
 namespace Honcizek.Controllers.Administrador
 {
+    /// <summary>
+    /// Controlador de partes de trabajo de un ticket
+    /// </summary>
 	[Authorize(Roles = "Administrador")]
 	[Route("Administrador/[controller]/[action]")]
     public class PartesController : Controller
@@ -22,21 +25,37 @@ namespace Honcizek.Controllers.Administrador
             _context = context;
         }
 
-        // GET: Partes
+        /// <summary>
+        /// Listado de partes de trabajo de un ticket en concreto
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Index(int? id)
         {
-
+            ViewData["finalizado"] = false;
             if (id == null)
             {
                 return NotFound();
             }
-
+            var Id = Int32.Parse(HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.UserData)?.Value);
+            ViewData["aviso"] = false;
             ViewData["error"] = false;
             var tickets = await _context.Tickets.FindAsync(id);
             if (tickets == null)
             {
                 ViewData["error"] = true;
 
+            }
+            else
+            {
+                if (tickets.Estado == "Finalizado" || tickets.Estado == "Cancelado") 
+                {
+                    ViewData["finalizado"] = true;
+                }
+                if (tickets.AgenteId != Id)
+                {
+                    ViewData["aviso"] = true;
+                }
             }
             ViewData["general"] = true;
             ViewData["TicketId"] = id;
@@ -47,27 +66,6 @@ namespace Honcizek.Controllers.Administrador
             return View("Views/Administrador/Partes/Index.cshtml",await honcizekContext.ToListAsync());
         }
 
-        public async Task<IActionResult> IndexUsuario(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-            ViewData["error"] = false;
-            ViewData["forbidden"] = false;
-            var Id = Int32.Parse(HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.UserData)?.Value);
-            var usuario = await _context.Usuarios.FindAsync(Id);
-            if (usuario == null)
-            {
-                ViewData["error"] = true;
-            }
-            ViewData["TicketId"] = id;
-             
-            ViewData["general"] = false;
-            var honcizekContext = _context.PartesDeTrabajo.Where(t => t.AgenteId == Id).Include(p => p.Agente).Include(p => p.Ticket);
-
-            return View("Views/Administrador/Partes/Index.cshtml", await honcizekContext.ToListAsync());
-        }
    
         // GET: Partes/Create
         public async Task<IActionResult> Create(int? id)
@@ -83,8 +81,8 @@ namespace Honcizek.Controllers.Administrador
             {
                 ViewData["error"] = true;
             }
-
-            ViewData["AgenteId"] = new SelectList(_context.Usuarios, "Id", "FullName");
+            
+            ViewData["AgenteId"] = tickets.AgenteId;
             ViewData["TicketId"] = id;
             DateTime hoy = DateTime.Now;
             ViewData["hoy"] = hoy.ToString("yyyy-MM-dd");
@@ -101,6 +99,7 @@ namespace Honcizek.Controllers.Administrador
         {
             if (ModelState.IsValid)
             {
+                checkEstadoTicket(partesDeTrabajo.TicketId);
                 _context.Add(partesDeTrabajo);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index), new { id = partesDeTrabajo.TicketId });
@@ -203,6 +202,19 @@ namespace Honcizek.Controllers.Administrador
         private bool PartesDeTrabajoExists(int id)
         {
             return _context.PartesDeTrabajo.Any(e => e.Id == id);
+        }
+        /// <summary>
+        /// Comprueba si el ticket sigue pendiente, si está pendiente pasa a estar en proceso
+        /// </summary>
+        /// <param name="id"></param>
+        private async void checkEstadoTicket(int id)
+        {
+            var tickets = await _context.Tickets.FindAsync(id);
+            if(tickets.Estado == "Pendiente")
+            {
+                tickets.Estado = "En proceso";
+                _context.Update(tickets);
+            }
         }
     }
 }

@@ -22,8 +22,8 @@
             <input type="hidden" asp-for="Id" />
             <input type="hidden" asp-for="ClienteId" />
             <input type="hidden" asp-for="AgenteId" />
-            <input type="hidden" asp-for="FechaRegistro" value="@ViewData["hoy"]" />
-            <input type="hidden" asp-for="HoraRegistro" value="@ViewData["hora"]" />
+            <input type="hidden" asp-for="FechaRegistro" />
+            <input type="hidden" asp-for="HoraRegistro" />
             <div class="row col-12">
                 <div class="form-group col-4">
                     <label asp-for="Nombre" class="control-label"></label>
@@ -36,7 +36,7 @@
                 </div>
             </div>
 
-            
+
             <div class="row col-12">
 
                 <div class="form-group col-4">
@@ -45,12 +45,12 @@
                 </div>
                 <div class="form-group col-4">
                     <label asp-for="FechaFinalizacion" class="control-label"></label>
-                    <input type="date" asp-for="FechaFinalizacion" class="form-control" />
+                    <input readonly type="date" asp-for="FechaFinalizacion" class="form-control" />
                     <span asp-validation-for="FechaFinalizacion" class="text-danger"></span>
                 </div>
                 <div class="form-group col-4">
                     <label asp-for="HoraFinalizacion" class="control-label"></label>
-                    <input type="time" asp-for="HoraFinalizacion" class="form-control" />
+                    <input readonly type="time" asp-for="HoraFinalizacion" class="form-control" />
                     <span asp-validation-for="HoraFinalizacion" class="text-danger"></span>
                 </div>
             </div>
@@ -73,5 +73,11 @@
 
 
 @section Scripts {
+    <script type="text/javascript" src="~/js/Administrador/Tickets/TicketsEdit.js"></script>
+    <script>
+        $(document).ready(function () {
+            Tickets.init("@ViewData["hoy"]","@ViewData["hora"]");
+        });
+    </script>
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

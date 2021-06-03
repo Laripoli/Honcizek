@@ -31,7 +31,7 @@
                 </div>
                 <div class="form-group col-4">
                     <label asp-for="LocalidadId" class="control-label">Localidad</label>
-                    <select asp-for="LocalidadId" id="localidad" class="form-control" asp-items="ViewBag.LocalidadId"></select>
+                    <select asp-for="LocalidadId" class="form-control" asp-items="ViewBag.LocalidadId"></select>
                 </div>
             </div>
             <div class="row col-12 d-none">
@@ -44,19 +44,19 @@
                 <div class="form-group col-4">
                     <label asp-for="RazonSocial" class="control-label"></label>
                     <input asp-for="RazonSocial" class="form-control" />
-                    <span asp-validation-for="RazonSocial" class="text-danger"></span>
+                    <span id="ErrorEmpresa" class="text-danger d-none">Debes introducir un nombre</span>
                 </div>
             </div>
             <div class="row col-12 tipo-persona d-none">
                 <div class="form-group col-6">
                     <label asp-for="Nombre" class="control-label"></label>
                     <input asp-for="Nombre" class="form-control" />
-                    <span asp-validation-for="Nombre" class="text-danger"></span>
+                    <span id="ErrorNombre" class="text-danger d-none">Debes introducir un nombre</span>
                 </div>
                 <div class="form-group col-6">
                     <label asp-for="Apellidos" class="control-label"></label>
                     <input asp-for="Apellidos" class="form-control" />
-                    <span asp-validation-for="Apellidos" class="text-danger"></span>
+                    <span id="ErrorApellidos" class="text-danger d-none">Debes introducir un apellido</span>
                 </div>
             </div>
             <div class="row col-12">
@@ -79,7 +79,7 @@
             <div class="row col-12">
                 <div class="form-group col-4">
                     <label asp-for="Email" class="control-label"></label>
-                    <input asp-for="Email" class="form-control" />
+                    <input type="email" asp-for="Email" class="form-control" />
                     <span asp-validation-for="Email" class="text-danger"></span>
                 </div>
                 <div class="form-group col-4">

@@ -17,12 +17,6 @@
             @Html.DisplayFor(model => model.Login)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Clave)
-        </dt>
-        <dd class="col-sm-4">
-            @Html.DisplayFor(model => model.Clave)
-        </dd>
-        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.FechaRegistro)
         </dt>
         <dd class="col-sm-4">
@@ -35,78 +29,78 @@
             @Html.DisplayFor(model => model.Tipo)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.RazonSocial)
-        </dt>
-        <dd class="col-sm-4">
-            @Html.DisplayFor(model => model.RazonSocial)
-        </dd>
-        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Nombre)
         </dt>
         <dd class="col-sm-4">
-            @Html.DisplayFor(model => model.Nombre)
+            @Html.DisplayFor(model => model.FullName)
         </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Apellidos)
-        </dt>
-        <dd class="col-sm-4">
-            @Html.DisplayFor(model => model.Apellidos)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Nifcif)
-        </dt>
-        <dd class="col-sm-4">
-            @Html.DisplayFor(model => model.Nifcif)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Telefono)
-        </dt>
-        <dd class="col-sm-4">
-            @Html.DisplayFor(model => model.Telefono)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Movil)
-        </dt>
-        <dd class="col-sm-4">
-            @Html.DisplayFor(model => model.Movil)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd class="col-sm-4">
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Direccion)
-        </dt>
-        <dd class="col-sm-4">
-            @Html.DisplayFor(model => model.Direccion)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Cp)
-        </dt>
-        <dd class="col-sm-4">
-            @Html.DisplayFor(model => model.Cp)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Observaciones)
-        </dt>
-        <dd class="col-sm-4">
-            @Html.DisplayFor(model => model.Observaciones)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Localidad)
-        </dt>
-        <dd class="col-sm-4">
-            @Html.DisplayFor(model => model.Localidad.Nombre)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Provincia)
-        </dt>
-        <dd class="col-sm-4">
-            @Html.DisplayFor(model => model.Provincia.Nombre)
-        </dd>
-    </dl>
+        @if (!String.IsNullOrEmpty(Model.Nifcif))
+        {
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Nifcif)
+            </dt>
+            <dd class="col-sm-4">
+                @Html.DisplayFor(model => model.Nifcif)
+            </dd>
+        }
+        @if (!String.IsNullOrEmpty(Model.Telefono))
+        {
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Telefono)
+            </dt>
+            <dd class="col-sm-4">
+                @Html.DisplayFor(model => model.Telefono)
+            </dd>
+        }
+        @if (!String.IsNullOrEmpty(Model.Movil))
+        {
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Movil)
+            </dt>
+            <dd class="col-sm-4">
+                @Html.DisplayFor(model => model.Movil)
+            </dd>
+        }
+        @if (!String.IsNullOrEmpty(Model.Email))
+        {
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+            <dd class="col-sm-4">
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+        }
+        @if (!String.IsNullOrEmpty(Model.Direccion))
+        {
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Direccion)
+            </dt>
+            <dd class="col-sm-4">
+                @Html.DisplayFor(model => model.Direccion)
+            </dd>
+        }
+        @if (!String.IsNullOrEmpty(Model.Cp))
+        {
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Cp)
+            </dt>
+            <dd class="col-sm-4">
+                @Html.DisplayFor(model => model.Cp)
+            </dd>
+        }
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Localidad)
+            </dt>
+            <dd class="col-sm-4">
+                @Html.DisplayFor(model => model.Localidad.Nombre)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Provincia)
+            </dt>
+            <dd class="col-sm-4">
+                @Html.DisplayFor(model => model.Provincia.Nombre)
+            </dd>
+        </dl>
     
     <form class="pb-3" asp-action="Delete">
             <input type="hidden" asp-for="Id" />

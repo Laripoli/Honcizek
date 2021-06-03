@@ -66,8 +66,12 @@ namespace Honcizek.Controllers.Administrador
             return View("Views/Administrador/Partes/Index.cshtml",await honcizekContext.ToListAsync());
         }
 
-   
-        // GET: Partes/Create
+
+        /// <summary>
+        /// Redirección a la vista de crear un parte de trabajo para un ticket en específico
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Create(int? id)
         {
             if (id == null)
@@ -90,9 +94,11 @@ namespace Honcizek.Controllers.Administrador
             return View("Views/Administrador/Partes/Create.cshtml");
         }
 
-        // POST: Partes/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Validación del parte de trabajo creado y en caso de error devuelve a la vista de creación de parte de trabajo
+        /// </summary>
+        /// <param name="partesDeTrabajo"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,TicketId,AgenteId,Nombre,Fecha,Hora,Descripcion,Horas,Minutos")] PartesDeTrabajo partesDeTrabajo)
@@ -113,7 +119,11 @@ namespace Honcizek.Controllers.Administrador
             return View("Views/Administrador/Partes/Create.cshtml",partesDeTrabajo);
         }
 
-        // GET: Partes/Edit/5
+        /// <summary>
+        /// Redirección a la vista de editar un parte de trabajo
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -131,9 +141,12 @@ namespace Honcizek.Controllers.Administrador
             return View("Views/Administrador/Partes/Edit.cshtml",partesDeTrabajo);
         }
 
-        // POST: Partes/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Validación del parte de trabajo editado y en caso de error devuelve a la vista de edición de parte de trabajo
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="partesDeTrabajo"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,TicketId,AgenteId,Nombre,Fecha,Hora,Descripcion,Horas,Minutos")] PartesDeTrabajo partesDeTrabajo)
@@ -168,7 +181,11 @@ namespace Honcizek.Controllers.Administrador
             return View("Views/Administrador/Partes/Edit.cshtml",partesDeTrabajo);
         }
 
-        // GET: Partes/Delete/5
+        /// <summary>
+        /// Redirección a la vista de eliminación de parte de trabajo
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -188,7 +205,11 @@ namespace Honcizek.Controllers.Administrador
             return View("Views/Administrador/Partes/Delete.cshtml",partesDeTrabajo);
         }
 
-        // POST: Partes/Delete/5
+        /// <summary>
+        /// Confirmación de eliminación y redirecciona al listado
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -198,7 +219,11 @@ namespace Honcizek.Controllers.Administrador
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index), new { id = partesDeTrabajo.TicketId });
         }
-
+        /// <summary>
+        /// Comprueba si el parte de trabajo existe
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         private bool PartesDeTrabajoExists(int id)
         {
             return _context.PartesDeTrabajo.Any(e => e.Id == id);

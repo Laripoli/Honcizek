@@ -12,6 +12,9 @@ using System.Security.Claims;
 
 namespace Honcizek.Controllers_Administrador
 {
+    /// <summary>
+    /// Controlador de suscripciones
+    /// </summary>
 	[Authorize(Roles = "Administrador")]
 	[Route("Administrador/[controller]/[action]")]
     public class SuscripcionesController : Controller
@@ -23,7 +26,13 @@ namespace Honcizek.Controllers_Administrador
             _context = context;
         }
 
-        // GET: Suscripciones
+        /// <summary>
+        /// Redirecciona al listado de suscripciones
+        /// Gestiona tanto el listado como el filtrado de suscripciones
+        /// </summary>
+        /// <param name="nombre"></param>
+        /// <param name="cliente"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Index(String nombre, String cliente)
         {
             
@@ -59,6 +68,13 @@ namespace Honcizek.Controllers_Administrador
             return View("Views/Administrador/Suscripciones/Index.cshtml",await honcizekContext.ToListAsync());
         }
 
+        /// <summary>
+        /// Redirecciona al listado de suscripciones en las que participa el usuario
+        /// Gestiona tanto el listado como el listado filtrado
+        /// </summary>
+        /// <param name="nombre"></param>
+        /// <param name="cliente"></param>
+        /// <returns></returns>
         public async Task<IActionResult> IndexUsuario(String nombre, String cliente)
         {
             ViewData["error"] = false;
@@ -93,7 +109,10 @@ namespace Honcizek.Controllers_Administrador
             return View("Views/Administrador/Suscripciones/Index.cshtml", await honcizekContext.ToListAsync());
         }
 
-        // GET: Suscripciones/Create
+        /// <summary>
+        /// Redirecciona a la creación de una nueva suscripción
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Create()
         {
             DateTime hoy = DateTime.Today;
@@ -118,9 +137,11 @@ namespace Honcizek.Controllers_Administrador
             return View("Views/Administrador/Suscripciones/Create.cshtml");
         }
 
-        // POST: Suscripciones/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Valida y guarda la nueva suscripción, en caso de error devuelve a la vista de creación
+        /// </summary>
+        /// <param name="suscripciones"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,ClienteId,Tipo,Nombre,ProyectoId,AgenteId,FechaDesde,FechaHasta,Renovacion,PrecioAlta,PrecioPeriodo,Periodicidad,Observaciones")] Suscripciones suscripciones)
@@ -153,7 +174,11 @@ namespace Honcizek.Controllers_Administrador
             return View("Views/Administrador/Suscripciones/Create.cshtml",suscripciones);
         }
 
-        // GET: Suscripciones/Edit/5
+        /// <summary>
+        /// Redirecciona a la vista de edición de un usuario
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -186,9 +211,12 @@ namespace Honcizek.Controllers_Administrador
             return View("Views/Administrador/Suscripciones/Edit.cshtml",suscripciones);
         }
 
-        // POST: Suscripciones/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Valida y actualiza la suscripción y redirecciona al listado, en caso de error devuelve a la edición
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="suscripciones"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,ClienteId,Tipo,Nombre,ProyectoId,AgenteId,FechaDesde,FechaHasta,Renovacion,PrecioAlta,PrecioPeriodo,Periodicidad,Observaciones")] Suscripciones suscripciones)
@@ -238,7 +266,11 @@ namespace Honcizek.Controllers_Administrador
             return View("Views/Administrador/Suscripciones/Edit.cshtml",suscripciones);
         }
 
-        // GET: Suscripciones/Delete/5
+        /// <summary>
+        /// Redirecciona a la vista de eliminación de suscripción
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -259,7 +291,11 @@ namespace Honcizek.Controllers_Administrador
             return View("Views/Administrador/Suscripciones/Delete.cshtml",suscripciones);
         }
 
-        // POST: Suscripciones/Delete/5
+        /// <summary>
+        /// Elimina la suscripción y redirecciona al listado de suscripciones
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -270,18 +306,26 @@ namespace Honcizek.Controllers_Administrador
             return RedirectToAction(nameof(Index));
         }
 
+        /// <summary>
+        /// Comprueba si la suscripción existe
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         private bool SuscripcionesExists(int id)
         {
             return _context.Suscripciones.Any(e => e.Id == id);
         }
 
+        /// <summary>
+        /// Carga los proyectos de un cliente
+        /// </summary>
+        /// <param name="cliente_id"></param>
+        /// <returns></returns>
         [HttpPost]
         public string cargar_proyectos(int cliente_id)
         {
-            List<string> list = new List<string>();
             var proyectos = _context.Proyectos.Where(p => p.ClienteId == cliente_id);
 
-            IEnumerable<string> ids = list;
             return JsonSerializer.Serialize(proyectos);
         }
 

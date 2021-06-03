@@ -24,6 +24,10 @@ namespace Honcizek.Controllers.Administrador
             _context = context;
         }
 
+        /// <summary>
+        /// Redirecciona al escritorio de administradores
+        /// </summary>
+        /// <returns></returns>
         [Route("Administrador/Escritorio")]
         public IActionResult Escritorio()
         {

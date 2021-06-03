@@ -12,6 +12,9 @@ using System.Security.Claims;
 
 namespace Honcizek.Controllers.Administrador
 {
+    /// <summary>
+    /// Controlador de tickets
+    /// </summary>
 	[Authorize(Roles = "Administrador")]
 	[Route("Administrador/[controller]/[action]")]
     public class TicketsController : Controller
@@ -23,7 +26,13 @@ namespace Honcizek.Controllers.Administrador
             _context = context;
         }
 
-        // GET: Tickets
+        /// <summary>
+        /// Redirecciona al listado de tickets
+        /// Gestiona tanto el listado como el listado filtrado
+        /// </summary>
+        /// <param name="nombre"></param>
+        /// <param name="cliente"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Index(String nombre, String cliente)
         {
             
@@ -61,6 +70,13 @@ namespace Honcizek.Controllers.Administrador
             return View("Views/Administrador/Tickets/Index.cshtml",await honcizekContext.ToListAsync());
         }
 
+        /// <summary>
+        /// Redirecciona al listado de tickets pendientes del usuario
+        /// Gestiona tanto el listado como el listado filtrado
+        /// </summary>
+        /// <param name="nombre"></param>
+        /// <param name="cliente"></param>
+        /// <returns></returns>
         public async Task<IActionResult> IndexUsuario(String nombre, String cliente)
         {
 
@@ -103,7 +119,10 @@ namespace Honcizek.Controllers.Administrador
             return View("Views/Administrador/Tickets/Index.cshtml", await honcizekContext.ToListAsync());
         }
 
-        // GET: Tickets/Create
+        /// <summary>
+        /// Redirecciona a la creación de un ticket
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Create()
         {
             ViewData["AgenteId"] = new SelectList(_context.Usuarios, "Id", "FullName");
@@ -122,9 +141,11 @@ namespace Honcizek.Controllers.Administrador
             return View("Views/Administrador/Tickets/Create.cshtml");
         }
 
-        // POST: Tickets/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Valida y guarda el nuevo ticket y redirecciona al listado, en caso de error devuelve a la creación
+        /// </summary>
+        /// <param name="tickets"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,SuscripcionId,ClienteId,AgenteId,Nombre,Descripcion,FechaRegistro,HoraRegistro,Estado,FechaFinalizacion,HoraFinalizacion")] Tickets tickets)
@@ -151,7 +172,11 @@ namespace Honcizek.Controllers.Administrador
             return View("Views/Administrador/Tickets/Create.cshtml",tickets);
         }
 
-        // GET: Tickets/Edit/5
+        /// <summary>
+        /// Redirecciona a la edición de un ticket
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -181,9 +206,12 @@ namespace Honcizek.Controllers.Administrador
             return View("Views/Administrador/Tickets/Edit.cshtml",tickets);
         }
 
-        // POST: Tickets/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Valida y actualiza el ticket y redirecciona al listado, en caso de error devuelve a la edición
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="tickets"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,SuscripcionId,ClienteId,AgenteId,Nombre,Descripcion,FechaRegistro,HoraRegistro,Estado,FechaFinalizacion,HoraFinalizacion")] Tickets tickets)
@@ -229,7 +257,11 @@ namespace Honcizek.Controllers.Administrador
             return View("Views/Administrador/Tickets/Edit.cshtml",tickets);
         }
 
-        // GET: Tickets/Delete/5
+        /// <summary>
+        /// Redirecciona a la eliminación de un ticket
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -250,7 +282,11 @@ namespace Honcizek.Controllers.Administrador
             return View("Views/Administrador/Tickets/Delete.cshtml",tickets);
         }
 
-        // POST: Tickets/Delete/5
+        /// <summary>
+        /// Elimina el ticket y redirecciona al listado
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -261,10 +297,21 @@ namespace Honcizek.Controllers.Administrador
             return RedirectToAction(nameof(Index));
         }
 
+        /// <summary>
+        /// Comprueba si el ticket existe
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         private bool TicketsExists(int id)
         {
             return _context.Tickets.Any(e => e.Id == id);
         }
+
+        /// <summary>
+        /// Devuelve el id del cliente y el programador de una suscripción
+        /// </summary>
+        /// <param name="suscripcion_id"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IEnumerable<int>> cargar_hidden(int suscripcion_id)
         {

@@ -11,6 +11,9 @@ using System.Collections;
 
 namespace Honcizek.Controllers_Administrador
 {
+    /// <summary>
+    ///  Controlador de participantes de un proyecto
+    /// </summary>
 	[Authorize(Roles = "Administrador")]
 	[Route("Administrador/[controller]/[action]")]
     public class ParticipantesController : Controller
@@ -22,7 +25,11 @@ namespace Honcizek.Controllers_Administrador
             _context = context;
         }
 
-        // GET: Participantes
+        /// <summary>
+        ///  Listado de participantes de un proyecto en concreto
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Index(int? id)
         {
             if (id == null)
@@ -44,7 +51,11 @@ namespace Honcizek.Controllers_Administrador
             return View("Views/Administrador/Participantes/Index.cshtml",await honcizekContext.ToListAsync());
         }
 
-        // GET: Participantes/Create
+        /// <summary>
+        /// Redirecciona a la vista de añadir participante
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Create(int? id)
         {
             if (id == null)
@@ -89,9 +100,11 @@ namespace Honcizek.Controllers_Administrador
             return View("Views/Administrador/Participantes/Create.cshtml");
         }
 
-        // POST: Participantes/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Valida la creación del nuevo participante y redirige al listado, en caso de error devuelve la vista de creación
+        /// </summary>
+        /// <param name="proyectosParticipantes"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,ProyectoId,UsuarioId")] ProyectosParticipantes proyectosParticipantes)
@@ -128,7 +141,11 @@ namespace Honcizek.Controllers_Administrador
             return View("Views/Administrador/Participantes/Create.cshtml",proyectosParticipantes);
         }
 
-        // GET: Participantes/Delete/5
+        /// <summary>
+        /// Redirecciona a la vista de eliminación de participante
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -148,7 +165,11 @@ namespace Honcizek.Controllers_Administrador
             return View("Views/Administrador/Participantes/Delete.cshtml",proyectosParticipantes);
         }
 
-        // POST: Participantes/Delete/5
+        /// <summary>
+        /// Elimina el participante y devuelve al listado
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -158,7 +179,11 @@ namespace Honcizek.Controllers_Administrador
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index), new { id = proyectosParticipantes.ProyectoId });
         }
-
+        /// <summary>
+        /// Comprueba si el participante existe
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         private bool ProyectosParticipantesExists(int id)
         {
             return _context.ProyectosParticipantes.Any(e => e.Id == id);

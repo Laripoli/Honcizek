@@ -11,6 +11,9 @@ using System.Text;
 
 namespace Honcizek.Controllers_Administrador
 {
+    /// <summary>
+    /// Controlador de trabajadores
+    /// </summary>
 	[Authorize(Roles = "Administrador")]
 	[Route("Administrador/[controller]/[action]")]
     public class TrabajadoresController : Controller
@@ -22,13 +25,20 @@ namespace Honcizek.Controllers_Administrador
             _context = context;
         }
 
-        // GET: Trabajadores
+        /// <summary>
+        /// Redirecciona al listado de trabajadores
+        /// Gestiona tanto el listado como el listado filtrado
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> Index()
         {
             return View("Views/Administrador/Trabajadores/Index.cshtml", await _context.Usuarios.OrderBy(u=> u.Nombre).ToListAsync());
         }
 
-        // GET: Trabajadores/Create
+        /// <summary>
+        /// Redirecciona a la creación de un trabajador
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Create()
         {
             ViewData["login-error"] = false;
@@ -40,9 +50,11 @@ namespace Honcizek.Controllers_Administrador
             return View("Views/Administrador/Trabajadores/Create.cshtml");
         }
 
-        // POST: Trabajadores/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Valida y guarda el trabajador y redirecciona al listado, en caso de error vuelve a la creación
+        /// </summary>
+        /// <param name="usuarios"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Login,Nombre,Apellidos,Clave,Email,Puesto")] Usuarios usuarios)
@@ -70,7 +82,11 @@ namespace Honcizek.Controllers_Administrador
             return View("Views/Administrador/Trabajadores/Create.cshtml",usuarios);
         }
 
-        // GET: Trabajadores/Edit/5
+        /// <summary>
+        /// Redirecciona a la edición del trabajador
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -91,9 +107,12 @@ namespace Honcizek.Controllers_Administrador
             return View("Views/Administrador/Trabajadores/Edit.cshtml",usuarios);
         }
 
-        // POST: Trabajadores/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Valida y actualiza el trabajador y redirecciona al listado, en caso de error vuelve a la edición
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="usuarios"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Login,Nombre,Apellidos,Clave,Email,Puesto")] Usuarios usuarios)
@@ -139,7 +158,11 @@ namespace Honcizek.Controllers_Administrador
             return View("Views/Administrador/Trabajadores/Edit.cshtml",usuarios);
         }
 
-        // GET: Trabajadores/Delete/5
+        /// <summary>
+        /// Redirecciona a la eliminación del trabajador
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -157,7 +180,11 @@ namespace Honcizek.Controllers_Administrador
             return View("Views/Administrador/Trabajadores/Delete.cshtml",usuarios);
         }
 
-        // POST: Trabajadores/Delete/5
+        /// <summary>
+        /// Elimina el trabajador y redirecciona al listado
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -168,21 +195,42 @@ namespace Honcizek.Controllers_Administrador
             return RedirectToAction(nameof(Index));
         }
 
+        /// <summary>
+        /// Comprueba si el trabajador existe
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         private bool UsuariosExists(int id)
         {
             return _context.Usuarios.Any(e => e.Id == id);
         }
 
+        /// <summary>
+        /// Comprueba si el login ya existe
+        /// </summary>
+        /// <param name="login"></param>
+        /// <returns></returns>
         public bool login_check(string login)
         {
             return _context.Usuarios.Any(e => e.Login == login);
         }
 
+        /// <summary>
+        /// Comprueba si el login ya existe y pertenece a otro trabajador
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <param name="Login"></param>
+        /// <returns></returns>
         public bool login_check(int Id,string Login)
         {
             return _context.Usuarios.Any(e => e.Login == Login && e.Id!= Id);
         }
 
+        /// <summary>
+        /// Crea un hash md5 del string
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public static string CreateMD5(string input)
         {
             // Use input string to calculate MD5 hash

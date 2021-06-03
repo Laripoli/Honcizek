@@ -11,6 +11,9 @@ using System.Security.Claims;
 
 namespace Honcizek.Controllers_Administrador
 {
+    /// <summary>
+    /// Controlador de trabajos
+    /// </summary>
 	[Authorize(Roles = "Administrador")]
 	[Route("Administrador/[controller]/[action]")]
     public class TrabajosController : Controller
@@ -22,7 +25,12 @@ namespace Honcizek.Controllers_Administrador
             _context = context;
         }
 
-        // GET: Trabajos
+        /// <summary>
+        /// Redirecciona al listado de trabajos de un proyecto
+        /// Gestiona tanto el listado como el listado filtrado
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Index(int? id)
         {
             if (id == null)
@@ -42,6 +50,12 @@ namespace Honcizek.Controllers_Administrador
             return View("Views/Administrador/Trabajos/Index.cshtml",await honcizekContext.ToListAsync());
         }
 
+        /// <summary>
+        /// Redirecciona al listado de trabajos de un proyecto realizados por el usuario
+        /// Gestiona tanto el listado como el listado filtrado
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> IndexUsuario(int? id)
         {
             if (id == null)
@@ -63,8 +77,12 @@ namespace Honcizek.Controllers_Administrador
             ViewData["proyecto_id"] = id;
             return View("Views/Administrador/Trabajos/Index.cshtml", await honcizekContext.ToListAsync());
         }
-  
-        // GET: Trabajos/Create
+
+        /// <summary>
+        /// Redirecciona a la creación de un trabajo de un proyecto
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Create(int? id)
         {
             if (id == null)
@@ -83,9 +101,11 @@ namespace Honcizek.Controllers_Administrador
             return View("Views/Administrador/Trabajos/Create.cshtml");
         }
 
-        // POST: Trabajos/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Valida y guarda un trabajo y redirecciona al listado, en caso de error vuelve a la creación
+        /// </summary>
+        /// <param name="trabajos"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,ProyectoId,AgenteId,Nombre,Descripcion")] Trabajos trabajos)
@@ -102,7 +122,11 @@ namespace Honcizek.Controllers_Administrador
             return View("Views/Administrador/Trabajos/Create.cshtml",trabajos);
         }
 
-        // GET: Trabajos/Edit/5
+        /// <summary>
+        /// Redirecciona a la edición del trabajo de un proyecto
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -121,9 +145,12 @@ namespace Honcizek.Controllers_Administrador
             return View("Views/Administrador/Trabajos/Edit.cshtml",trabajos);
         }
 
-        // POST: Trabajos/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Valida y actualiza un trabajo y redirecciona al listado, en caso de error vuelve a la edición
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="trabajos"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,ProyectoId,AgenteId,Nombre,Descripcion")] Trabajos trabajos)
@@ -158,7 +185,11 @@ namespace Honcizek.Controllers_Administrador
             return View("Views/Administrador/Trabajos/Edit.cshtml",trabajos);
         }
 
-        // GET: Trabajos/Delete/5
+        /// <summary>
+        /// Redirecciona a la eliminación de un trabajo de proyecto
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -178,7 +209,11 @@ namespace Honcizek.Controllers_Administrador
             return View("Views/Administrador/Trabajos/Delete.cshtml",trabajos);
         }
 
-        // POST: Trabajos/Delete/5
+        /// <summary>
+        /// Elimina el trabajo y redirecciona al listado
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -189,6 +224,11 @@ namespace Honcizek.Controllers_Administrador
             return RedirectToAction(nameof(Index), new { id = trabajos.ProyectoId });
         }
 
+        /// <summary>
+        /// Comprueba si el trabajo existe
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         private bool TrabajosExists(int id)
         {
             return _context.Trabajos.Any(e => e.Id == id);

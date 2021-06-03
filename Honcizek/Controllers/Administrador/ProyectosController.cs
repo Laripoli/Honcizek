@@ -12,6 +12,9 @@ using System.Security.Claims;
 
 namespace Honcizek.Controllers.Administrador
 {
+    /// <summary>
+    /// Controlador de proyectos
+    /// </summary>
     [Authorize(Roles = "Administrador")]
     [Route("Administrador/[controller]/[action]")]
     public class ProyectosController : Controller
@@ -23,7 +26,12 @@ namespace Honcizek.Controllers.Administrador
             _context = context;
         }
 
-        // GET: Proyectos
+        /// <summary>
+        /// Redirecciona al listado de proyectos y controla el filtrado
+        /// </summary>
+        /// <param name="nombre"></param>
+        /// <param name="cliente"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Index(String nombre, String cliente)
         {
             ViewData["error"] = false;
@@ -66,6 +74,13 @@ namespace Honcizek.Controllers.Administrador
 
             return View("Views/Administrador/Proyectos/Index.cshtml",await honcizekContext.ToListAsync());
         }
+        /// <summary>
+        /// Redirecciona al listado de proyectos en el que participa el usuario
+        /// Controla filtrado
+        /// </summary>
+        /// <param name="nombre"></param>
+        /// <param name="cliente"></param>
+        /// <returns></returns>
         public async Task<IActionResult> IndexUsuario(String nombre, String cliente)
         {
             
@@ -104,13 +119,10 @@ namespace Honcizek.Controllers.Administrador
             return View("Views/Administrador/Proyectos/Index.cshtml", await honcizekContext.ToListAsync());
         }
 
-        [HttpPost]
-        public int prueba(int proyecto_id)
-        {
-            return proyecto_id;
-        }
-
-        // GET: Proyectos/Create
+        /// <summary>
+        /// Redirecciona a la vista de creación de un proyecto
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Create()
         {
             DateTime hoy = DateTime.Today;
@@ -130,9 +142,11 @@ namespace Honcizek.Controllers.Administrador
             return View("Views/Administrador/Proyectos/Create.cshtml");
         }
 
-        // POST: Proyectos/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+       /// <summary>
+       /// Valida y guarda el proyecto y redirecciona al listado, en caso de error devuelve la vista de creacion
+       /// </summary>
+       /// <param name="proyectos"></param>
+       /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,ClienteId,Tipo,Nombre,Descripcion,DescripcionDesarrollo,FechaRegistro,FechaInicio,FechaFinPrevista,FechaFinReal,HorasInternasPrevistas,Estado,Fase")] Proyectos proyectos)
@@ -164,7 +178,11 @@ namespace Honcizek.Controllers.Administrador
             return View("Views/Administrador/Proyectos/Create.cshtml",proyectos);
         }
 
-        // GET: Proyectos/Edit/5
+        /// <summary>
+        /// Redirecciona a la edicion de un proyecto
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -193,9 +211,12 @@ namespace Honcizek.Controllers.Administrador
             return View("Views/Administrador/Proyectos/Edit.cshtml",proyectos);
         }
 
-        // POST: Proyectos/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Valida y guarda la edición del proyecto, en caso de error devuelve la vista de edición
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="proyectos"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,ClienteId,Tipo,Nombre,Descripcion,DescripcionDesarrollo,FechaRegistro,FechaInicio,FechaFinPrevista,FechaFinReal,HorasInternasPrevistas,Estado,Fase")] Proyectos proyectos)
@@ -229,7 +250,11 @@ namespace Honcizek.Controllers.Administrador
             return View("Views/Administrador/Proyectos/Edit.cshtml",proyectos);
         }
 
-        // GET: Proyectos/Delete/5
+        /// <summary>
+        /// Redirecciona a la vista de eliminación de proyecto
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -248,7 +273,11 @@ namespace Honcizek.Controllers.Administrador
             return View("Views/Administrador/Proyectos/Delete.cshtml",proyectos);
         }
 
-        // POST: Proyectos/Delete/5
+       /// <summary>
+       /// Elimina el proyecto y redirecciona al listado
+       /// </summary>
+       /// <param name="id"></param>
+       /// <returns></returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -258,7 +287,11 @@ namespace Honcizek.Controllers.Administrador
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-
+        /// <summary>
+        /// Comprueba si el proyecto existe
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         private bool ProyectosExists(int id)
         {
             return _context.Proyectos.Any(e => e.Id == id);

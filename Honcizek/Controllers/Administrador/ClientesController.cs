@@ -15,7 +15,7 @@ using System.Text.Json.Serialization;
 namespace Honcizek.Controllers.Administrador
 {
     /// <summary>
-    /// Gestiona la identidad clientes del lado administrador
+    /// Gestiona la entidad clientes del lado administrador
     /// </summary>
     [Authorize(Roles = "Administrador")]
     [Route("Administrador/[controller]/[action]")]

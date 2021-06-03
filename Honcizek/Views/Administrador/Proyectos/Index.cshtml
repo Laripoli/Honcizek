@@ -48,7 +48,7 @@
         </div>
     </form>
 </div>
-    <table class="table">
+    <table class="table proyectos-index">
         <thead>
             <tr>
                 <th>
@@ -57,13 +57,13 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Tipo)
                 </th>
-                <th>
+                <th class="mobile-proyecto">
                     @Html.DisplayNameFor(model => model.FechaInicio)
                 </th>
-                <th>
+                <th class="mobile-proyecto">
                     @Html.DisplayNameFor(model => model.FechaFinPrevista)
                 </th>
-                <th>
+                <th class="mobile-proyecto">
                     @Html.DisplayNameFor(model => model.FechaFinReal)
                 </th>
                 <th>
@@ -93,7 +93,7 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.Tipo)
                         </td>
-                        <td>
+                        <td class="mobile-proyecto">
                             @if (item.FechaFinPrevista != null)
                             {
                                 @Html.DisplayFor(modelItem => item.Finicio)
@@ -103,7 +103,7 @@
                                 <span>Sin especificar</span>
                             }
                         </td>
-                        <td>
+                        <td class="mobile-proyecto">
                             @if (item.FechaFinPrevista != null)
                             {
                                 @Html.DisplayFor(modelItem => item.FFinPrevista)
@@ -113,7 +113,7 @@
                                 <span>Sin especificar</span>
                             }
                         </td>
-                        <td>
+                        <td class="mobile-proyecto">
                             @if (item.FechaFinReal != null)
                             {
                                 @Html.DisplayFor(modelItem => item.FFin)

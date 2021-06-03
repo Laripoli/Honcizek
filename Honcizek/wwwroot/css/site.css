@@ -302,3 +302,9 @@ table tbody td:last-child a {
         display:none
     }
 }
+@media (max-width: 880px) {
+    .mobile-suscripciones {
+        display: none;
+    }
+}
+    

@@ -1,0 +1,107 @@
+@model IEnumerable<Honcizek.DAL.Models.Suscripciones>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 class="py-3">Listado de Suscripciones</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th class="mobile">
+                @Html.DisplayNameFor(model => model.FechaDesde)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaHasta)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Renovacion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Periodicidad)
+            </th>
+            <th class="mobile-suscripciones">
+                @Html.DisplayNameFor(model => model.Agente)
+            </th>
+            <th class="mobile-suscripciones">
+                @Html.DisplayNameFor(model => model.Proyecto)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Count() > 0)
+        {
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nombre)
+                    </td>
+                    <td class="mobile">
+                        @if (item.FechaDesde != null)
+                        {
+                            @Html.DisplayFor(modelItem => item.FDesde)
+                        }
+                        else
+                        {
+                            <span>Sin especificar</span>
+                        }
+                    </td>
+                    <td>
+                        @if (item.FechaHasta != null)
+                        {
+                            @Html.DisplayFor(modelItem => item.FHasta)
+                        }
+                        else
+                        {
+                            <span>Sin especificar</span>
+                        }
+                    </td>
+                    <td>
+                        @if (item.Renovacion == 1)
+                        {
+                            <span>Activa</span>
+                        }
+                        else
+                        {
+                            <span>Inactiva</span>
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Periodicidad)
+                    </td>
+                    <td class="mobile-suscripciones">
+                        @Html.DisplayFor(modelItem => item.Agente.FullName)
+                    </td>
+                    <td class="mobile-suscripciones">
+                        @if (item.Tipo != "Hardware" && item.ProyectoId != null)
+                        {
+                            @Html.DisplayFor(modelItem => item.Proyecto.Nombre)
+                        }
+                        else
+                        {
+                            <span>Sin proyecto</span>
+                        }
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">
+                            <button class="btn btn-primary">
+                                Ver
+                            </button>
+                        </a>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+@if (!(Model.Count() > 0))
+{
+    <h2 style="text-align: center;width: 100%">A&uacute;n no hay registros</h2>
+}

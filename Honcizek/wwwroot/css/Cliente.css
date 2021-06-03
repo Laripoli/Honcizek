@@ -104,6 +104,7 @@ section {
 }
 
 .readonly input:disabled, .readonly select:disabled, .readonly textarea:disabled {
+    user-select: none;
     background-color: white;
 }
 

@@ -122,4 +122,16 @@ section {
     .big {
         display: none;
     }
+
+}
+
+@media(max-width: 1358px){
+    .proyectos-index tbody td:last-child a {
+        display: unset;
+        padding: 1vh;
+        float: left;
+    }
+    .mobile-proyecto{
+        display: none;
+    }
 }

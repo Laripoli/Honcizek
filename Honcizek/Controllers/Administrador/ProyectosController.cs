@@ -198,14 +198,14 @@ namespace Honcizek.Controllers.Administrador
             ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "FullName", proyectos.ClienteId);
             ViewData["Tipo"] = new List<SelectListItem>
                 {
-                    new SelectListItem {Text = "Cliente", Value = "Cliente"},
-                    new SelectListItem {Text = "Interno", Value = "Interno"}
+                    new SelectListItem {Text = "Cliente", Value = "Cliente",Selected = (proyectos.Tipo=="Cliente")?true:false},
+                    new SelectListItem {Text = "Interno", Value = "Interno",Selected = (proyectos.Tipo=="Interno")?true:false}
                 };
             ViewData["Estado"] = new List<SelectListItem>
                 {
-                    new SelectListItem {Text = "Pendiente", Value = "Pendiente"},
-                    new SelectListItem {Text = "En curso", Value = "En curso"},
-                    new SelectListItem {Text = "Finalizado", Value = "Finalizado"}
+                    new SelectListItem {Text = "Pendiente", Value = "Pendiente",Selected = (proyectos.Estado=="Pendiente")?true:false},
+                    new SelectListItem {Text = "En curso", Value = "En curso",Selected = (proyectos.Estado=="En curso")?true:false},
+                    new SelectListItem {Text = "Finalizado", Value = "Finalizado",Selected = (proyectos.Estado=="Finalizado")?true:false}
                 };
             proyectos.Fase = proyectos.Fase == "Dise�o" ? "Diseno" : proyectos.Fase;
             return View("Views/Administrador/Proyectos/Edit.cshtml",proyectos);
@@ -247,6 +247,17 @@ namespace Honcizek.Controllers.Administrador
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "FullName", proyectos.ClienteId);
+            ViewData["Tipo"] = new List<SelectListItem>
+                {
+                    new SelectListItem {Text = "Cliente", Value = "Cliente",Selected = (proyectos.Tipo=="Cliente")?true:false},
+                    new SelectListItem {Text = "Interno", Value = "Interno",Selected = (proyectos.Tipo=="Interno")?true:false}
+                };
+            ViewData["Estado"] = new List<SelectListItem>
+                {
+                    new SelectListItem {Text = "Pendiente", Value = "Pendiente",Selected = (proyectos.Estado=="Pendiente")?true:false},
+                    new SelectListItem {Text = "En curso", Value = "En curso",Selected = (proyectos.Estado=="En curso")?true:false},
+                    new SelectListItem {Text = "Finalizado", Value = "Finalizado",Selected = (proyectos.Estado=="Finalizado")?true:false}
+                };
             return View("Views/Administrador/Proyectos/Edit.cshtml",proyectos);
         }
 

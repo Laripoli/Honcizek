@@ -1,0 +1,93 @@
+@model IEnumerable<Honcizek.DAL.Models.Proyectos>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Listado de mis proyectos</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th class="mobile">
+                @Html.DisplayNameFor(model => model.FechaInicio)
+            </th>
+            <th class="mobile">
+                @Html.DisplayNameFor(model => model.FechaFinPrevista)
+            </th>
+            <th class="mobile">
+                Fecha finalizaci&oacute;n
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fase)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Count() > 0)
+        {
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nombre)
+                    </td>
+                    <td class="mobile">
+                        @if (item.FechaFinPrevista != null)
+                        {
+                            @Html.DisplayFor(modelItem => item.Finicio)
+                        }
+                        else
+                        {
+                            <span>Sin especificar</span>
+                        }
+                    </td>
+                    <td class="mobile">
+                        @if (item.FechaFinPrevista != null)
+                        {
+                            @Html.DisplayFor(modelItem => item.FFinPrevista)
+                        }
+                        else
+                        {
+                            <span>Sin especificar</span>
+                        }
+                    </td>
+                    <td class="mobile">
+                        @if (item.FechaFinReal != null)
+                        {
+                            @Html.DisplayFor(modelItem => item.FFin)
+                        }
+                        else
+                        {
+                            <span>Sin finalizar</span>
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Estado)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Fase)
+                    </td>
+                    <td>
+                        <a asp-action="Ver" asp-route-id="@item.Id">
+                            <button class="btn btn-primary">
+                                Ver
+                            </button>
+                        </a>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+@if (!(Model.Count() > 0))
+{
+    <h2 style="text-align: center;width: 100%">A&uacute;n no hay registros</h2>
+}

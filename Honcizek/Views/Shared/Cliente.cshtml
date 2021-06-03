@@ -19,12 +19,15 @@
         <div class="rest-header bg-danger w-100 h-100">
             <ul class="horizontal h-100">
                 <li><a asp-controller="Cliente" asp-action="Escritorio">Inicio</a></li>
-                <li><a asp-controller="ProyectosC" asp-action="Index" >Proyectos</a></li>
-                <li><a asp-controller="SuscripcionesC" asp-action="Index">Suscripciones</a></li>
+                <li><a asp-controller="ProyectosC" asp-action="Listado">Proyectos</a></li>
+                <li><a asp-controller="SuscripcionesC" asp-action="Listado">Suscripciones</a></li>
+                <li><a asp-controller="ClientesC" asp-action="MiPerfil">Mi perfil</a></li>
                 @*<li><a href="javascript:void(0)">About</a></li>*@
-                <li class="float-right pt-1 pr-1"><form class="float-right pb-1" asp-controller="LoginC" asp-action="Logout" method="post">
-    <button class="btn btn-danger">Cerrar sesión</button>
-</form></li>
+                <li class="float-right pt-1 pr-1">
+                    <form class="float-right pb-1" asp-controller="LoginC" asp-action="Logout" method="post">
+                        <button class="btn btn-danger">Cerrar sesión</button>
+                    </form>
+                </li>
             </ul>
         </div>
     </header>

@@ -296,3 +296,9 @@ table tbody td:last-child a {
 #filtrador input[type="button"]{
     display: inline-block;
 }
+
+@media (max-width: 790px) {
+    .mobile {
+        display:none
+    }
+}

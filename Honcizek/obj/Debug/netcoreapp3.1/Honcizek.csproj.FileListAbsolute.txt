@@ -517,3 +517,6 @@ C:\Users\alvar\Desktop\tuto\Proyectos\Honcizek\Honcizek\obj\Debug\netcoreapp3.1\
 C:\Users\alvar\Desktop\tuto\Proyectos\Honcizek\Honcizek\obj\Debug\netcoreapp3.1\Razor\Views\Programador\Partes\Delete.cshtml.g.cs
 C:\Users\alvar\Desktop\tuto\Proyectos\Honcizek\Honcizek\obj\Debug\netcoreapp3.1\Razor\Views\Programador\Partes\Edit.cshtml.g.cs
 C:\Users\alvar\Desktop\tuto\Proyectos\Honcizek\Honcizek\obj\Debug\netcoreapp3.1\Razor\Views\Programador\Partes\Index.cshtml.g.cs
+C:\Users\alvar\Desktop\tuto\Proyectos\Honcizek\Honcizek\obj\Debug\netcoreapp3.1\Razor\Views\Cliente\Clientes\Edit.cshtml.g.cs
+C:\Users\alvar\Desktop\tuto\Proyectos\Honcizek\Honcizek\obj\Debug\netcoreapp3.1\Razor\Views\Cliente\Proyectos\Edit.cshtml.g.cs
+C:\Users\alvar\Desktop\tuto\Proyectos\Honcizek\Honcizek\obj\Debug\netcoreapp3.1\Razor\Views\Cliente\Proyectos\Index.cshtml.g.cs

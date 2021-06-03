@@ -132,3 +132,31 @@ section {
         display:none;
     }
 }
+
+.warning-bg {
+    background-color: #ffc107;
+}
+
+.success-bg {
+    background-color: #28a745;
+}
+
+.primary-bg {
+    background-color: #007bff;
+}
+
+.botones-escritorio a {
+    color: black;
+}
+
+    .botones-escritorio a div {
+        transition: 0.35s ease-out;
+        color: cornsilk;
+        text-shadow: 0 0 3px black;
+    }
+
+        .botones-escritorio a div:hover {
+            background-color: #001059;
+            transition: 0.25s ease-in;
+            color: yellow;
+        }

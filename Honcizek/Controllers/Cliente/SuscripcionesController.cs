@@ -33,65 +33,20 @@ namespace Honcizek.Controllers.Cliente
             return View("Views/Cliente/Suscripciones/Index.cshtml",await honcizekContext.ToListAsync());
         }
 
-        // GET: Suscripciones/Details/5
-        public async Task<IActionResult> Details(int? id)
+        ///
+        public async Task<IActionResult> Ver(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
-
-            var suscripciones = await _context.Suscripciones
-                .Include(s => s.Agente)
-                .Include(s => s.Cliente)
-                .Include(s => s.Proyecto)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (suscripciones == null)
-            {
-                return NotFound();
-            }
-
-            return View("Views/Cliente/Suscripciones/Details.cshtml",suscripciones);
-        }
-
-        // GET: Suscripciones/Create
-        public IActionResult Create()
-        {
-            ViewData["AgenteId"] = new SelectList(_context.Usuarios, "Id", "Clave");
-            ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "Clave");
-            ViewData["ProyectoId"] = new SelectList(_context.Proyectos, "Id", "Estado");
-            return View("Views/Cliente/Suscripciones/Create.cshtml");
-        }
-
-        // POST: Suscripciones/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,ClienteId,Tipo,Nombre,ProyectoId,AgenteId,FechaDesde,FechaHasta,Renovacion,PrecioAlta,PrecioPeriodo,Periodicidad,Observaciones")] Suscripciones suscripciones)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(suscripciones);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["AgenteId"] = new SelectList(_context.Usuarios, "Id", "Clave", suscripciones.AgenteId);
-            ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "Clave", suscripciones.ClienteId);
-            ViewData["ProyectoId"] = new SelectList(_context.Proyectos, "Id", "Estado", suscripciones.ProyectoId);
-            return View("Views/Cliente/Suscripciones/Create.cshtml",suscripciones);
-        }
-
-        // GET: Suscripciones/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
+            var Id = Int32.Parse(HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.UserData)?.Value);
             var suscripciones = await _context.Suscripciones.FindAsync(id);
             if (suscripciones == null)
+            {
+                return NotFound();
+            }
+            if(suscripciones.ClienteId != Id)
             {
                 return NotFound();
             }
@@ -114,77 +69,11 @@ namespace Honcizek.Controllers.Cliente
                 };
             return View("Views/Cliente/Suscripciones/Edit.cshtml",suscripciones);
         }
-
-        // POST: Suscripciones/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,ClienteId,Tipo,Nombre,ProyectoId,AgenteId,FechaDesde,FechaHasta,Renovacion,PrecioAlta,PrecioPeriodo,Periodicidad,Observaciones")] Suscripciones suscripciones)
-        {
-            if (id != suscripciones.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(suscripciones);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!SuscripcionesExists(suscripciones.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["AgenteId"] = new SelectList(_context.Usuarios, "Id", "Clave", suscripciones.AgenteId);
-            ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "Clave", suscripciones.ClienteId);
-            ViewData["ProyectoId"] = new SelectList(_context.Proyectos, "Id", "Estado", suscripciones.ProyectoId);
-            return View("Views/Cliente/Suscripciones/Edit.cshtml",suscripciones);
-        }
-
-        // GET: Suscripciones/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var suscripciones = await _context.Suscripciones
-                .Include(s => s.Agente)
-                .Include(s => s.Cliente)
-                .Include(s => s.Proyecto)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (suscripciones == null)
-            {
-                return NotFound();
-            }
-
-            return View("Views/Cliente/Suscripciones/Delete.cshtml",suscripciones);
-        }
-
-        // POST: Suscripciones/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var suscripciones = await _context.Suscripciones.FindAsync(id);
-            _context.Suscripciones.Remove(suscripciones);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
+        /// <summary>
+        /// Comprueba si la suscripción existe
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         private bool SuscripcionesExists(int id)
         {
             return _context.Suscripciones.Any(e => e.Id == id);

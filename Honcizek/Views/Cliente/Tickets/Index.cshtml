@@ -1,0 +1,120 @@
+@model IEnumerable<Honcizek.DAL.Models.Tickets>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Listado de @(!(bool)ViewData["general"]?"mis tickets pendientes":"todos mis tickets")</h1>
+<div>
+<p class="float-right">
+    <a asp-action="@((bool)ViewData["general"] ? "Listado":"ListadoCompleto")" asp-route-id="@ViewData["suscripcion_id"]">
+        <button class="btn btn-@((bool)ViewData["general"] ? "primary":"warning")">
+            @((bool)ViewData["general"] ? "Ver mis tickets pendientes":"Ver todos los tickets")
+        </button>
+    </a>
+</p>
+<p class="float-right pr-2">
+    <a asp-action="Crear" asp-route-id="@ViewData["suscripcion_id"]">
+        <button class="btn btn-info">
+            Crear nuevo
+        </button>
+    </a>
+</p>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estado)
+            </th>
+            <th class="mobile">
+                @Html.DisplayNameFor(model => model.FechaRegistro)
+            </th>
+            <th class="mobile">
+                @Html.DisplayNameFor(model => model.HoraRegistro)
+            </th>
+            @if ((bool)ViewData["general"])
+            {
+                <th class="mobile">
+                    @Html.DisplayNameFor(model => model.FechaFinalizacion)
+                </th>
+                <th class="mobile">
+                    @Html.DisplayNameFor(model => model.HoraFinalizacion)
+                </th>
+            }
+            <th>
+                @Html.DisplayNameFor(model => model.Suscripcion)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Count() > 0)
+        {
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Estado)
+                    </td>
+                    <td class="mobile">
+                        @if (item.FechaRegistro != null)
+                        {
+                            @Html.DisplayFor(modelItem => item.FRegistro)
+                        }
+                        else
+                        {
+                            <span>Sin especificar</span>
+                        }
+                    </td>
+                    <td class="mobile">
+                        @Html.DisplayFor(modelItem => item.HoraRegistro)
+                    </td>
+                    @if ((bool)ViewData["general"])
+                    {
+                        <td class="mobile">
+                            @if (item.FechaFinalizacion != null)
+                            {
+                                @Html.DisplayFor(modelItem => item.FFin)
+                            }
+                            else
+                            {
+                                <span>Sin finalizar</span>
+                            }
+                        </td>
+                        <td class="mobile">
+                            @if (item.HoraFinalizacion != null)
+                            {
+                                @Html.DisplayFor(modelItem => item.HoraFinalizacion)
+                            }
+                            else
+                            {
+                                <span>Sin finalizar</span>
+                            }
+                        </td>
+                    }
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Suscripcion.Nombre)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">
+                            <button class="btn btn-primary">
+                                Ver
+                            </button>
+                        </a>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+@if (!(Model.Count() > 0))
+{
+    <h2 style="text-align: center;width: 100%">@((bool)ViewData["general"] ? "Todavia no has creado un ticket":"No tienes tickets pendientes")</h2>
+}

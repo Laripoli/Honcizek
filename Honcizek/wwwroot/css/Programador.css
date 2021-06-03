@@ -112,3 +112,23 @@ section {
 .fase {
     pointer-events: none;
 }
+
+.big {
+    user-select: none;
+}
+
+.little {
+    display: none;
+    user-select: none;
+}
+.little div{
+    padding: .5rem;
+}
+@media(max-width: 995px){
+    .little{
+        display: unset;
+    }
+    .big{
+        display:none;
+    }
+}

@@ -22,13 +22,13 @@
         <aside class="d-flex flex-column">
 
             <a asp-controller="ProyectosP" asp-action="Index">
-                <div class="menu-option ProyectosP">
+                <div class="menu-option ProyectosP TrabajosP ParticipantesP">
                     <span>Proyectos</span>
                 </div>
             </a>
 
             <a asp-controller="TicketsP" asp-action="IndexUsuario">
-                <div class="menu-option TicketsP">
+                <div class="menu-option TicketsP PartesP">
                     <span>
                         Tickets
                     </span>
@@ -49,7 +49,10 @@
             </section>
         <footer class="border-top footer text-muted ">
             <div class="container">
-                <span class="float-right">&copy; 2021 - Honcizek - Todos los derechos reservados</span>
+                <form class="float-right pb-1" asp-controller="Login" asp-action="Logout" method="post">
+                    <button class="btn btn-danger">Cerrar sesión</button>
+                </form>
+                <span class="float-left">&copy; 2021 - Honcizek - Todos los derechos reservados</span>
             </div>
         </footer>
     </div>

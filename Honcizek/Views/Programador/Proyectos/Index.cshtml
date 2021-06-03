@@ -7,26 +7,26 @@
 <h1>Listado de mis proyectos</h1>
 @if (!(bool)ViewData["error"])
 {
-<form id="filtrador" class="float-left pl-3 row" asp-action="Index" method="get">
-    <div class="form-actions no-color px-3">
-        <label for="nombre">
-            Buscar nombre: <input id="filtro" type="text" name="nombre" value="@ViewData["nombreFilter"]" />
-        </label>
-        <label for="cliente">
-            Buscar cliente: <input id="filtro" type="text" name="cliente" value="@ViewData["clienteFilter"]" />
-        </label>
-    </div>
-    <div class="row pl-5 pt-3">
-        <a class="pr-2">
-            <button class="btn btn-primary">Buscar</button>
-        </a>
-        <a asp-action="Index">
-            <button class="btn btn-dark" id="limpia-filtros">
-                Limpiar filtro
-            </button>
-        </a>
-    </div>
-</form>
+    <form id="filtrador" class="float-left pl-3 row" asp-action="Index" method="get">
+        <div class="form-actions no-color px-3">
+            <label for="nombre">
+                Buscar nombre: <input id="filtro" type="text" name="nombre" value="@ViewData["nombreFilter"]" />
+            </label>
+            <label for="cliente">
+                Buscar cliente: <input id="filtro" type="text" name="cliente" value="@ViewData["clienteFilter"]" />
+            </label>
+        </div>
+        <div class="row pl-5 pt-3">
+            <a class="pr-2">
+                <button class="btn btn-primary">Buscar</button>
+            </a>
+            <a asp-action="Index">
+                <button class="btn btn-dark" id="limpia-filtros">
+                    Limpiar filtro
+                </button>
+            </a>
+        </div>
+    </form>
     <table class="table">
         <thead>
             <tr>
@@ -61,80 +61,80 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model)
+            @if (Model.Count() > 0)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Nombre)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Tipo)
-                    </td>
-                    <td>
-                        @if (item.FechaFinPrevista != null)
-                        {
-                            @Html.DisplayFor(modelItem => item.Finicio)
-                        }
-                        else
-                        {
-                            <span>Sin especificar</span>
-                        }
-                    </td>
-                    <td>
-                        @if (item.FechaFinPrevista != null)
-                        {
-                            @Html.DisplayFor(modelItem => item.FFinPrevista)
-                        }
-                        else
-                        {
-                            <span>Sin especificar</span>
-                        }
-                    </td>
-                    <td>
-                        @if (item.FechaFinReal != null)
-                        {
-                            @Html.DisplayFor(modelItem => item.FFin)
-                        }
-                        else
-                        {
-                            <span>Sin finalizar</span>
-                        }
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.HorasInternasPrevistas)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Estado)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Fase)
-                    </td>
-                    <td>
-                        @if (item.Tipo == "Empresa")
-                        {
-                            @Html.DisplayFor(modelItem => item.Cliente.RazonSocial)
-                        }
-                        else
-                        {
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Tipo)
+                        </td>
+                        <td>
+                            @if (item.FechaFinPrevista != null)
+                            {
+                                @Html.DisplayFor(modelItem => item.Finicio)
+                            }
+                            else
+                            {
+                                <span>Sin especificar</span>
+                            }
+                        </td>
+                        <td>
+                            @if (item.FechaFinPrevista != null)
+                            {
+                                @Html.DisplayFor(modelItem => item.FFinPrevista)
+                            }
+                            else
+                            {
+                                <span>Sin especificar</span>
+                            }
+                        </td>
+                        <td>
+                            @if (item.FechaFinReal != null)
+                            {
+                                @Html.DisplayFor(modelItem => item.FFin)
+                            }
+                            else
+                            {
+                                <span>Sin finalizar</span>
+                            }
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.HorasInternasPrevistas)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Estado)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Fase)
+                        </td>
+                        <td>
                             @Html.DisplayFor(modelItem => item.Cliente.FullName);
-                        }
-                    </td>
-                    <td class="w-auto">
-                        <a asp-action="Edit" asp-route-id="@item.Id">
-                            <button class="btn btn-primary">
-                                Ver
-                            </button>
-                        </a>
-                        <a asp-controller="TrabajosP" asp-action="IndexUsuario" asp-route-id="@item.Id">
-                            <button class="btn btn-warning">
-                                Trabajos
-                            </button>
-                        </a>
-                    </td>
-                </tr>
+                        </td>
+                        <td class="w-auto">
+                            <a asp-action="Edit" asp-route-id="@item.Id">
+                                <button class="btn btn-primary">
+                                    Ver
+                                </button>
+                            </a>
+                            <a asp-controller="TrabajosP" asp-action="IndexUsuario" asp-route-id="@item.Id">
+                                <button class="btn btn-warning">
+                                    Trabajos
+                                </button>
+                            </a>
+                        </td>
+                    </tr>
+                }
             }
         </tbody>
     </table>
+    @if (!(Model.Count() > 0))
+    {
+        <h2 style="text-align: center;width: 100%">No participas en ning&uacute;n proyecto</h2>
+    }
 }
 @if ((bool)ViewData["error"])
 {

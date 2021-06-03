@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Listado de @(!(bool)ViewData["general"]?"mis":"") tickets</h1>
+<h1>Listado de todos mis tickets @(!(bool)ViewData["general"]?"pendientes":"")</h1>
 @if(!(bool)ViewData["error"])
 {
     <div>
@@ -127,9 +127,9 @@
         
         @if (!(Model.Count() > 0))
         {
-            <h2 style="text-align: center;width: 100%">A&uacute;n no hay registros</h2>
+            <h2 style="text-align: center;width: 100%">@(!(bool)ViewData["general"]?"No tienes tickets pendientes":"No tienes tickets")</h2>
         }
-        }
+}
 
         @if ((bool)ViewData["error"])
         {

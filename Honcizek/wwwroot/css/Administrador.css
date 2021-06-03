@@ -100,3 +100,26 @@ section {
         width: auto;
         height: inherit;
     }
+
+.big{
+    user-select: none;
+}
+
+.little {
+    user-select: none;
+    display: none;
+}
+
+    .little div {
+        padding: .5rem;
+    }
+
+@media(max-width: 995px) {
+    .little {
+        display: unset;
+    }
+
+    .big {
+        display: none;
+    }
+}

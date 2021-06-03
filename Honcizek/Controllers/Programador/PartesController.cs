@@ -183,7 +183,7 @@ namespace Honcizek.Controllers.Programador
             var partesDeTrabajo = await _context.PartesDeTrabajo.FindAsync(id);
             _context.PartesDeTrabajo.Remove(partesDeTrabajo);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Index), new { id = partesDeTrabajo.TicketId });
         }
 
         private bool PartesDeTrabajoExists(int id)

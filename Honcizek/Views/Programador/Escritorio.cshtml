@@ -39,7 +39,7 @@
     </div>
     <div class="col-3">
         <div class="card card-custom card-stretch gutter-b primary-bg">
-            <a class="honci-link" asp-controller="SuscripcionesP" asp-action="@(suscripcionesPersonalizado ? "IndexUsuario":"Index")">
+            <a class="honci-link" asp-controller="SuscripcionesP" asp-action="Index">
                 <div class="card-body">
                     <span class="card-title font-weight-bolder font-size-h2 mb-0 mt-6 d-block  ">
                         @((int)ViewData["suscripciones"] > 0 ? "Participas en " + ViewData["suscripciones"] : "No participas en ninguna ")
@@ -82,7 +82,7 @@
         </a>
     </div>
     <div class="col-12">
-        <a class="honci-link" asp-controller="SuscripcionesP" asp-action="@(suscripcionesPersonalizado ? "IndexUsuario":"Index")">
+        <a class="honci-link" asp-controller="SuscripcionesP" asp-action="Index">
             <div class="card card-custom card-stretch gutter-b primary-bg">
                 <div class="card-body">
                     <span class="card-title font-weight-bolder font-size-h2 mb-0 mt-6 d-block  ">

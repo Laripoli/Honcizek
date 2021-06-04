@@ -102,7 +102,14 @@
             @Html.DisplayNameFor(model => model.Cliente)
         </dt>
         <dd class="col-sm-4">
-            @Html.DisplayFor(model => model.Cliente.FullName)
+            @if (Model.Cliente == null)
+            {
+                <span>El cliente ha sido eliminado</span>
+            }
+            else
+            {
+                @Html.DisplayFor(model => model.Cliente.FullName)
+            }
         </dd>
     </dl>
 

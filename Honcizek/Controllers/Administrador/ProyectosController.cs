@@ -127,7 +127,14 @@ namespace Honcizek.Controllers.Administrador
         {
             DateTime hoy = DateTime.Today;
             ViewData["hoy"] = hoy.ToString("d");
+            if(_context.Clientes.Count() > 0)
+            {
             ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "FullName");
+            }
+            else
+            {
+                ViewData["ClienteId"] = null;
+            }
             ViewData["Tipo"] = new List<SelectListItem>
                 {
                     new SelectListItem {Text = "Cliente", Value = "Cliente"},
@@ -161,17 +168,24 @@ namespace Honcizek.Controllers.Administrador
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "FullName");
+            if (_context.Clientes.Count() > 0)
+            {
+                ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "FullName", proyectos.ClienteId);
+            }
+            else
+            {
+                ViewData["ClienteId"] = null;
+            }
             ViewData["Tipo"] = new List<SelectListItem>
                 {
-                    new SelectListItem {Text = "Cliente", Value = "Cliente",Selected = (proyectos.Tipo=="Cliente")?true:false},
-                    new SelectListItem {Text = "Interno", Value = "Interno",Selected = (proyectos.Tipo=="Interno")?true:false}
+                    new SelectListItem {Text = "Cliente", Value = "Cliente",Selected = (proyectos.Tipo=="Cliente") },
+                    new SelectListItem {Text = "Interno", Value = "Interno",Selected = (proyectos.Tipo=="Interno") }
                 };
             ViewData["Estado"] = new List<SelectListItem>
                 {
-                    new SelectListItem {Text = "Pendiente", Value = "Pendiente",Selected = (proyectos.Estado=="Pendiente")?true:false},
-                    new SelectListItem {Text = "En curso", Value = "En curso",Selected = (proyectos.Estado=="En curso")?true:false},
-                    new SelectListItem {Text = "Finalizado", Value = "Finalizado",Selected = (proyectos.Estado=="Finalizado")?true:false}
+                    new SelectListItem {Text = "Pendiente", Value = "Pendiente",Selected = (proyectos.Estado=="Pendiente") },
+                    new SelectListItem {Text = "En curso", Value = "En curso",Selected = (proyectos.Estado=="En curso") },
+                    new SelectListItem {Text = "Finalizado", Value = "Finalizado",Selected = (proyectos.Estado=="Finalizado") }
                 };
             DateTime hoy = DateTime.Today;
             ViewData["hoy"] = hoy.ToString("d");
@@ -195,17 +209,24 @@ namespace Honcizek.Controllers.Administrador
             {
                 return NotFound();
             }
-            ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "FullName", proyectos.ClienteId);
+            if (_context.Clientes.Count() > 0)
+            {
+                ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "FullName", proyectos.ClienteId);
+            }
+            else
+            {
+                ViewData["ClienteId"] = null;
+            }
             ViewData["Tipo"] = new List<SelectListItem>
                 {
-                    new SelectListItem {Text = "Cliente", Value = "Cliente",Selected = (proyectos.Tipo=="Cliente")?true:false},
-                    new SelectListItem {Text = "Interno", Value = "Interno",Selected = (proyectos.Tipo=="Interno")?true:false}
+                    new SelectListItem {Text = "Cliente", Value = "Cliente",Selected = (proyectos.Tipo=="Cliente") },
+                    new SelectListItem {Text = "Interno", Value = "Interno",Selected = (proyectos.Tipo=="Interno") }
                 };
             ViewData["Estado"] = new List<SelectListItem>
                 {
-                    new SelectListItem {Text = "Pendiente", Value = "Pendiente",Selected = (proyectos.Estado=="Pendiente")?true:false},
-                    new SelectListItem {Text = "En curso", Value = "En curso",Selected = (proyectos.Estado=="En curso")?true:false},
-                    new SelectListItem {Text = "Finalizado", Value = "Finalizado",Selected = (proyectos.Estado=="Finalizado")?true:false}
+                    new SelectListItem {Text = "Pendiente", Value = "Pendiente",Selected = (proyectos.Estado=="Pendiente") },
+                    new SelectListItem {Text = "En curso", Value = "En curso",Selected = (proyectos.Estado=="En curso") },
+                    new SelectListItem {Text = "Finalizado", Value = "Finalizado",Selected = (proyectos.Estado=="Finalizado") }
                 };
             proyectos.Fase = proyectos.Fase == "Diseño" ? "Diseno" : proyectos.Fase;
             return View("Views/Administrador/Proyectos/Edit.cshtml",proyectos);
@@ -247,17 +268,24 @@ namespace Honcizek.Controllers.Administrador
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "FullName", proyectos.ClienteId);
+            if (_context.Clientes.Count() > 0)
+            {
+                ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "FullName", proyectos.ClienteId);
+            }
+            else
+            {
+                ViewData["ClienteId"] = null;
+            }
             ViewData["Tipo"] = new List<SelectListItem>
                 {
-                    new SelectListItem {Text = "Cliente", Value = "Cliente",Selected = (proyectos.Tipo=="Cliente")?true:false},
-                    new SelectListItem {Text = "Interno", Value = "Interno",Selected = (proyectos.Tipo=="Interno")?true:false}
+                    new SelectListItem {Text = "Cliente", Value = "Cliente",Selected = (proyectos.Tipo=="Cliente")},
+                    new SelectListItem {Text = "Interno", Value = "Interno",Selected = (proyectos.Tipo=="Interno")}
                 };
             ViewData["Estado"] = new List<SelectListItem>
                 {
-                    new SelectListItem {Text = "Pendiente", Value = "Pendiente",Selected = (proyectos.Estado=="Pendiente")?true:false},
-                    new SelectListItem {Text = "En curso", Value = "En curso",Selected = (proyectos.Estado=="En curso")?true:false},
-                    new SelectListItem {Text = "Finalizado", Value = "Finalizado",Selected = (proyectos.Estado=="Finalizado")?true:false}
+                    new SelectListItem {Text = "Pendiente", Value = "Pendiente",Selected = (proyectos.Estado=="Pendiente")},
+                    new SelectListItem {Text = "En curso", Value = "En curso",Selected = (proyectos.Estado=="En curso")},
+                    new SelectListItem {Text = "Finalizado", Value = "Finalizado",Selected = (proyectos.Estado=="Finalizado")}
                 };
             
             return View("Views/Administrador/Proyectos/Edit.cshtml",proyectos);

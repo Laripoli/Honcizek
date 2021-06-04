@@ -84,7 +84,6 @@
                 break;
             case "Analisis":
             case "Diseno":
-            case "Diseño":
             case "Desarrollo":
             case "Maquetacion":
             case "Implantacion":

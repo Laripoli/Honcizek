@@ -105,7 +105,7 @@ namespace Honcizek.Controllers.Administrador
         {
             if (ModelState.IsValid)
             {
-                checkEstadoTicket(partesDeTrabajo.TicketId);
+                await checkEstadoTicket(partesDeTrabajo.TicketId);
                 _context.Add(partesDeTrabajo);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index), new { id = partesDeTrabajo.TicketId });
@@ -232,7 +232,7 @@ namespace Honcizek.Controllers.Administrador
         /// Comprueba si el ticket sigue pendiente, si est� pendiente pasa a estar en proceso
         /// </summary>
         /// <param name="id"></param>
-        private async void checkEstadoTicket(int id)
+        private async Task checkEstadoTicket(int id)
         {
             var tickets = await _context.Tickets.FindAsync(id);
             if(tickets.Estado == "Pendiente")

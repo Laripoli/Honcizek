@@ -13,6 +13,10 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="FechaRegistro" value="@ViewData["hoy"]" />
+            @if (ViewData["ClienteId"] == null)
+            {
+                <input type="hidden" asp-for="ClienteId" value="@ViewData["ClienteId"]" />
+            }
             <div class="row col-12">
                 <div class="form-group col-4">
                     <label asp-for="Tipo" class="control-label"></label>
@@ -23,10 +27,13 @@
                     <input data-val="true" asp-for="Nombre" class="form-control" />
                     <span asp-validation-for="Nombre" class="text-danger"></span>
                 </div>
-                <div class="form-group col-4 cliente-hide">
-                    <label asp-for="ClienteId" class="control-label">Cliente</label>
-                    <select asp-for="ClienteId" class="form-control" asp-items="ViewBag.ClienteId"></select>
-                </div>
+                @if (ViewData["ClienteId"] != null)
+                {
+                    <div class="form-group col-4 cliente-hide">
+                        <label asp-for="ClienteId" class="control-label">Cliente</label>
+                        <select asp-for="ClienteId" class="form-control" asp-items="ViewBag.ClienteId"></select>
+                    </div>
+                }
             </div>
             <div class="row col-12">
                 <div class="form-group col-6">
@@ -65,7 +72,7 @@
             <div class="row eq-height fase pl-3">
                 <div class="col-12 mb-4 text-center">
                     <h2 class="d-block mb-0 text-dark">Fase</h2> <br>
-                  
+
                     <ul class="d-inline-block list-unstyled h-25">
                         <li class="d-inline-block mb-4">
                             <label class="p-label-fase" for="Analisis">
@@ -75,42 +82,42 @@
                             </label>
                         </li>
                         <li class="d-inline-block mb-4">
-                            <label class="p-label-fase" for="Diseno" >
+                            <label class="p-label-fase" for="Diseno">
                                 <input value="Diseno" type="radio" class="d-none" name="Fase" id="Diseno">
                                 <span class="p-esfera c-diseno"> &bull; </span>
                                 Dise&ntilde;o
                             </label>
                         </li>
                         <li class="d-inline-block mb-4">
-                            <label class="p-label-fase" for="Maquetacion" >
-                                <input value="Maquetacion" type="radio" class="d-none" name="Fase"id="Maquetacion">
+                            <label class="p-label-fase" for="Maquetacion">
+                                <input value="Maquetacion" type="radio" class="d-none" name="Fase" id="Maquetacion">
                                 <span class="p-esfera c-maquetacion"> &bull; </span>
                                 Maquetaci&oacute;n
                             </label>
                         </li>
                         <li class="d-inline-block mb-4">
-                            <label class="p-label-fase" for="Desarrollo" >
+                            <label class="p-label-fase" for="Desarrollo">
                                 <input value="Desarrollo" type="radio" class="d-none" name="Fase" id="Desarrollo">
                                 <span class="p-esfera c-desarrollo"> &bull; </span>
                                 Desarrollo
                             </label>
                         </li>
                         <li class="d-inline-block mb-4">
-                            <label class="p-label-fase" for="Pruebas internas" >
+                            <label class="p-label-fase" for="Pruebas internas">
                                 <input value="Pruebas internas" type="radio" class="d-none" name="Fase" id="Pruebas internas">
                                 <span class="p-esfera c-pruebas-internas"> &bull; </span>
                                 Pruebas internas
                             </label>
                         </li>
                         <li class="d-inline-block mb-4">
-                            <label class="p-label-fase" for="Pruebas cliente" >
+                            <label class="p-label-fase" for="Pruebas cliente">
                                 <input value="Pruebas cliente" type="radio" class="d-none" name="Fase" id="Pruebas cliente">
                                 <span class="p-esfera c-pruebas-cliente"> &bull; </span>
                                 Pruebas clientes
                             </label>
                         </li>
                         <li class="d-inline-block mb-4">
-                            <label class="p-label-fase" for="Implantacion" >
+                            <label class="p-label-fase" for="Implantacion">
                                 <input value="Implantacion" type="radio" class="d-none" name="Fase" id="Implantacion">
                                 <span class="p-esfera c-implantacion"> &bull; </span>
                                 Implantaci&oacute;n
@@ -122,10 +129,17 @@
                     </div>
                 </div>
             </div>
-            <div class="form-group pl-3">
-                <input type="submit" value="Crear" class="btn btn-info" />
-            </div>
-        </form>
+            @if (ViewData["ClienteId"] != null)
+            {
+                <div class="form-group pl-3">
+                    <input type="submit" value="Crear" class="btn btn-info" />
+                </div>
+            }
+            else
+            {
+                <span class="text-danger">Parece que no hay clientes en el sistema...</span>
+            }
+            </form>
         <div class="pt-3 pl-3">
             <a asp-action="Index">
                 <button class="btn btn-primary">Volver al listado</button>

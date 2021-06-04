@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -30,12 +30,25 @@ namespace Honcizek.Controllers.Programador
             {
                 return NotFound();
             }
-
+            var Id = Int32.Parse(HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.UserData)?.Value);
             ViewData["error"] = false;
+            ViewData["aviso"] = false;
+            ViewData["finalizado"] = false;
             var tickets = await _context.Tickets.FindAsync(id);
             if (tickets == null)
             {
                 ViewData["error"] = true;
+            }
+            else
+            {
+                if (tickets.Estado == "Finalizado" || tickets.Estado == "Cancelado")
+                {
+                    ViewData["finalizado"] = true;
+                }
+                if (tickets.AgenteId != Id)
+                {
+                    ViewData["aviso"] = true;
+                }
             }
             ViewData["general"] = true;
             ViewData["TicketId"] = id;
@@ -81,6 +94,7 @@ namespace Honcizek.Controllers.Programador
             partesDeTrabajo.AgenteId = Id;
             if (ModelState.IsValid)
             {
+                await checkEstadoTicket(partesDeTrabajo.TicketId);
                 _context.Add(partesDeTrabajo);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index), new { id = partesDeTrabajo.TicketId });
@@ -189,6 +203,20 @@ namespace Honcizek.Controllers.Programador
         private bool PartesDeTrabajoExists(int id)
         {
             return _context.PartesDeTrabajo.Any(e => e.Id == id);
+        }
+
+        /// <summary>
+        /// Comprueba si el ticket sigue pendiente, si est� pendiente pasa a estar en proceso
+        /// </summary>
+        /// <param name="id"></param>
+        private async Task checkEstadoTicket(int id)
+        {
+            var tickets = await _context.Tickets.FindAsync(id);
+            if (tickets.Estado == "Pendiente")
+            {
+                tickets.Estado = "En proceso";
+                _context.Update(tickets);
+            }
         }
     }
 }

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\alvar\\Desktop\\Proyectos\\Honcizek\\Honcizek\\Honcizek.csproj": {}
+    "C:\\Users\\alvar\\Desktop\\tuto\\Proyectos\\Honcizek\\Honcizek\\Honcizek.csproj": {}
   },
   "projects": {
-    "C:\\Users\\alvar\\Desktop\\Proyectos\\Honcizek\\Honcizek.BL\\Honcizek.BL.csproj": {
+    "C:\\Users\\alvar\\Desktop\\tuto\\Proyectos\\Honcizek\\Honcizek.BL\\Honcizek.BL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\alvar\\Desktop\\Proyectos\\Honcizek\\Honcizek.BL\\Honcizek.BL.csproj",
+        "projectUniqueName": "C:\\Users\\alvar\\Desktop\\tuto\\Proyectos\\Honcizek\\Honcizek.BL\\Honcizek.BL.csproj",
         "projectName": "Honcizek.BL",
-        "projectPath": "C:\\Users\\alvar\\Desktop\\Proyectos\\Honcizek\\Honcizek.BL\\Honcizek.BL.csproj",
+        "projectPath": "C:\\Users\\alvar\\Desktop\\tuto\\Proyectos\\Honcizek\\Honcizek.BL\\Honcizek.BL.csproj",
         "packagesPath": "C:\\Users\\alvar\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\alvar\\Desktop\\Proyectos\\Honcizek\\Honcizek.BL\\obj\\",
+        "outputPath": "C:\\Users\\alvar\\Desktop\\tuto\\Proyectos\\Honcizek\\Honcizek.BL\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\alvar\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -28,11 +28,11 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\alvar\\Desktop\\Proyectos\\Honcizek\\Honcizek.Core\\Honcizek.Core.csproj": {
-                "projectPath": "C:\\Users\\alvar\\Desktop\\Proyectos\\Honcizek\\Honcizek.Core\\Honcizek.Core.csproj"
+              "C:\\Users\\alvar\\Desktop\\tuto\\Proyectos\\Honcizek\\Honcizek.Core\\Honcizek.Core.csproj": {
+                "projectPath": "C:\\Users\\alvar\\Desktop\\tuto\\Proyectos\\Honcizek\\Honcizek.Core\\Honcizek.Core.csproj"
               },
-              "C:\\Users\\alvar\\Desktop\\Proyectos\\Honcizek\\Honcizek.DAL\\Honcizek.DAL.csproj": {
-                "projectPath": "C:\\Users\\alvar\\Desktop\\Proyectos\\Honcizek\\Honcizek.DAL\\Honcizek.DAL.csproj"
+              "C:\\Users\\alvar\\Desktop\\tuto\\Proyectos\\Honcizek\\Honcizek.DAL\\Honcizek.DAL.csproj": {
+                "projectPath": "C:\\Users\\alvar\\Desktop\\tuto\\Proyectos\\Honcizek\\Honcizek.DAL\\Honcizek.DAL.csproj"
               }
             }
           }
@@ -64,18 +64,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.300\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.104\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\alvar\\Desktop\\Proyectos\\Honcizek\\Honcizek.Core\\Honcizek.Core.csproj": {
+    "C:\\Users\\alvar\\Desktop\\tuto\\Proyectos\\Honcizek\\Honcizek.Core\\Honcizek.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\alvar\\Desktop\\Proyectos\\Honcizek\\Honcizek.Core\\Honcizek.Core.csproj",
+        "projectUniqueName": "C:\\Users\\alvar\\Desktop\\tuto\\Proyectos\\Honcizek\\Honcizek.Core\\Honcizek.Core.csproj",
         "projectName": "Honcizek.Core",
-        "projectPath": "C:\\Users\\alvar\\Desktop\\Proyectos\\Honcizek\\Honcizek.Core\\Honcizek.Core.csproj",
+        "projectPath": "C:\\Users\\alvar\\Desktop\\tuto\\Proyectos\\Honcizek\\Honcizek.Core\\Honcizek.Core.csproj",
         "packagesPath": "C:\\Users\\alvar\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\alvar\\Desktop\\Proyectos\\Honcizek\\Honcizek.Core\\obj\\",
+        "outputPath": "C:\\Users\\alvar\\Desktop\\tuto\\Proyectos\\Honcizek\\Honcizek.Core\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\alvar\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -121,18 +121,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.300\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.104\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\alvar\\Desktop\\Proyectos\\Honcizek\\Honcizek.DAL\\Honcizek.DAL.csproj": {
+    "C:\\Users\\alvar\\Desktop\\tuto\\Proyectos\\Honcizek\\Honcizek.DAL\\Honcizek.DAL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\alvar\\Desktop\\Proyectos\\Honcizek\\Honcizek.DAL\\Honcizek.DAL.csproj",
+        "projectUniqueName": "C:\\Users\\alvar\\Desktop\\tuto\\Proyectos\\Honcizek\\Honcizek.DAL\\Honcizek.DAL.csproj",
         "projectName": "Honcizek.DAL",
-        "projectPath": "C:\\Users\\alvar\\Desktop\\Proyectos\\Honcizek\\Honcizek.DAL\\Honcizek.DAL.csproj",
+        "projectPath": "C:\\Users\\alvar\\Desktop\\tuto\\Proyectos\\Honcizek\\Honcizek.DAL\\Honcizek.DAL.csproj",
         "packagesPath": "C:\\Users\\alvar\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\alvar\\Desktop\\Proyectos\\Honcizek\\Honcizek.DAL\\obj\\",
+        "outputPath": "C:\\Users\\alvar\\Desktop\\tuto\\Proyectos\\Honcizek\\Honcizek.DAL\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\alvar\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -149,8 +149,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\alvar\\Desktop\\Proyectos\\Honcizek\\Honcizek.Core\\Honcizek.Core.csproj": {
-                "projectPath": "C:\\Users\\alvar\\Desktop\\Proyectos\\Honcizek\\Honcizek.Core\\Honcizek.Core.csproj"
+              "C:\\Users\\alvar\\Desktop\\tuto\\Proyectos\\Honcizek\\Honcizek.Core\\Honcizek.Core.csproj": {
+                "projectPath": "C:\\Users\\alvar\\Desktop\\tuto\\Proyectos\\Honcizek\\Honcizek.Core\\Honcizek.Core.csproj"
               }
             }
           }
@@ -194,18 +194,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.300\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.104\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\alvar\\Desktop\\Proyectos\\Honcizek\\Honcizek\\Honcizek.csproj": {
+    "C:\\Users\\alvar\\Desktop\\tuto\\Proyectos\\Honcizek\\Honcizek\\Honcizek.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\alvar\\Desktop\\Proyectos\\Honcizek\\Honcizek\\Honcizek.csproj",
+        "projectUniqueName": "C:\\Users\\alvar\\Desktop\\tuto\\Proyectos\\Honcizek\\Honcizek\\Honcizek.csproj",
         "projectName": "Honcizek",
-        "projectPath": "C:\\Users\\alvar\\Desktop\\Proyectos\\Honcizek\\Honcizek\\Honcizek.csproj",
+        "projectPath": "C:\\Users\\alvar\\Desktop\\tuto\\Proyectos\\Honcizek\\Honcizek\\Honcizek.csproj",
         "packagesPath": "C:\\Users\\alvar\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\alvar\\Desktop\\Proyectos\\Honcizek\\Honcizek\\obj\\",
+        "outputPath": "C:\\Users\\alvar\\Desktop\\tuto\\Proyectos\\Honcizek\\Honcizek\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\alvar\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -222,14 +222,14 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\alvar\\Desktop\\Proyectos\\Honcizek\\Honcizek.BL\\Honcizek.BL.csproj": {
-                "projectPath": "C:\\Users\\alvar\\Desktop\\Proyectos\\Honcizek\\Honcizek.BL\\Honcizek.BL.csproj"
+              "C:\\Users\\alvar\\Desktop\\tuto\\Proyectos\\Honcizek\\Honcizek.BL\\Honcizek.BL.csproj": {
+                "projectPath": "C:\\Users\\alvar\\Desktop\\tuto\\Proyectos\\Honcizek\\Honcizek.BL\\Honcizek.BL.csproj"
               },
-              "C:\\Users\\alvar\\Desktop\\Proyectos\\Honcizek\\Honcizek.Core\\Honcizek.Core.csproj": {
-                "projectPath": "C:\\Users\\alvar\\Desktop\\Proyectos\\Honcizek\\Honcizek.Core\\Honcizek.Core.csproj"
+              "C:\\Users\\alvar\\Desktop\\tuto\\Proyectos\\Honcizek\\Honcizek.Core\\Honcizek.Core.csproj": {
+                "projectPath": "C:\\Users\\alvar\\Desktop\\tuto\\Proyectos\\Honcizek\\Honcizek.Core\\Honcizek.Core.csproj"
               },
-              "C:\\Users\\alvar\\Desktop\\Proyectos\\Honcizek\\Honcizek.DAL\\Honcizek.DAL.csproj": {
-                "projectPath": "C:\\Users\\alvar\\Desktop\\Proyectos\\Honcizek\\Honcizek.DAL\\Honcizek.DAL.csproj"
+              "C:\\Users\\alvar\\Desktop\\tuto\\Proyectos\\Honcizek\\Honcizek.DAL\\Honcizek.DAL.csproj": {
+                "projectPath": "C:\\Users\\alvar\\Desktop\\tuto\\Proyectos\\Honcizek\\Honcizek.DAL\\Honcizek.DAL.csproj"
               }
             }
           }
@@ -307,6 +307,12 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[3.1.13, 3.1.13]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -315,7 +321,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.300\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.104\\RuntimeIdentifierGraph.json"
         }
       }
     }

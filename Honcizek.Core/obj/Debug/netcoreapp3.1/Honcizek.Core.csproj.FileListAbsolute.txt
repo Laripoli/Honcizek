@@ -27,3 +27,4 @@ C:\Users\alvar\Desktop\Proyectos\Honcizek\Honcizek.Core\obj\Debug\netcoreapp3.1\
 C:\Users\alvar\Desktop\Proyectos\Honcizek\Honcizek.Core\obj\Debug\netcoreapp3.1\Honcizek.Core.RazorTargetAssemblyInfo.cache
 C:\Users\alvar\Desktop\Proyectos\Honcizek\Honcizek.Core\obj\Debug\netcoreapp3.1\Honcizek.Core.dll
 C:\Users\alvar\Desktop\Proyectos\Honcizek\Honcizek.Core\obj\Debug\netcoreapp3.1\Honcizek.Core.pdb
+C:\Users\alvar\Desktop\tuto\Proyectos\Honcizek\Honcizek.Core\obj\Debug\netcoreapp3.1\Honcizek.Core.csprojAssemblyReference.cache

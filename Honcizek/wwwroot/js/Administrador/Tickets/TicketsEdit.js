@@ -2,6 +2,7 @@
 
     var handler = function (fecha, hora) {
         _finalizar_ticket(fecha, hora);
+        _cargar_hidden()
     };
 
     var _finalizar_ticket = function (fecha, hora) {
@@ -20,6 +21,33 @@
                     horaInput.val(null);
                     break;
             }
+        });
+
+    }
+
+    var _cargar_hidden = function () {
+        var suscripcion_id = $('#SuscripcionId').val();
+        $.ajax('/administrador/tickets/cargar_hidden', {
+            type: 'post',
+            data: { 'suscripcion_id': suscripcion_id },
+            dataType: 'JSON',
+            success: function (response) {
+                $('#ClienteId').val(response[0]);
+                $('#AgenteId').val(response[1]);
+            }
+        });
+
+        $('#SuscripcionId').on('change', function () {
+            suscripcion_id = $(this).val();
+            $.ajax('/administrador/tickets/cargar_hidden', {
+                type: 'post',
+                data: { 'suscripcion_id': suscripcion_id },
+                dataType: 'JSON',
+                success: function (response) {
+                    $('#ClienteId').val(response[0]);
+                    $('#AgenteId').val(response[1]);
+                }
+            });
         });
 
     }

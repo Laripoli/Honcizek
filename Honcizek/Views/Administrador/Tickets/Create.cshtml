@@ -27,6 +27,7 @@
                 <div class="form-group col-4">
                     <label asp-for="SuscripcionId" class="control-label">Suscripci&oacute;n</label>
                     <select asp-for="SuscripcionId" class="form-control" asp-items="ViewBag.SuscripcionId"></select>
+                    <span id="Error-suscripcion" class="text-danger d-none">No se puede crear un ticket si no hay suscripciones</span>
                 </div>
             </div>
 

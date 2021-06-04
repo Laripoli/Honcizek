@@ -317,7 +317,7 @@ namespace Honcizek.Controllers.Administrador
         public async Task<IEnumerable<int>> cargar_hidden(int suscripcion_id)
         {
             List<int> list = new List<int>();
-            var suscripcion = await _context.Suscripciones.FirstOrDefaultAsync(s => s.Id == suscripcion_id);
+            var suscripcion = await _context.Suscripciones.FirstOrDefaultAsync(s => s.Id == suscripcion_id && s.ClienteId != null);
             list.Add(suscripcion.ClienteId);
             list.Add(suscripcion.AgenteId);
             IEnumerable<int> ids = list;

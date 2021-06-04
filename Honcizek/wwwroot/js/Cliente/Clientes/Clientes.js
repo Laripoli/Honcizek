@@ -1,9 +1,9 @@
 ﻿var Clientes = function () {
 
-    var handler = function () {
+    var handler = function (localidad_id) {
         _ocultar_campos();
         _limpiar_filtros();
-        _cargar_localidades();
+        _cargar_localidades(localidad_id);
         _validacion();
     };
 
@@ -35,13 +35,13 @@
         });
     }
 
-    var _cargar_localidades = function () {
+    var _cargar_localidades = function (localidad_id) {
         var provincia_id = $('#ProvinciaId').val();
         const localidades = $('#LocalidadId');
         const provincias = $('#ProvinciaId');
         const error = $("#LocalidadError");
         localidades.empty();
-        $.ajax('/administrador/clientes/cargar_localidades', {
+        $.ajax('/cargar_localidades', {
             type: 'post',
             data: { 'provincia_id': provincia_id },
             dataType: 'JSON',
@@ -55,6 +55,12 @@
                 } else {
                     error.removeClass("d-none");
                 }
+                if (localidad_id != null) {
+
+                    if (localidad_id > 0) {
+                        localidades.val(localidad_id);
+                    }
+                }
             }
         }).fail(function () {
             error.removeClass("d-none");
@@ -63,8 +69,8 @@
         provincias.on('change', function () {
             provincia_id = $('#ProvinciaId').val();
             localidades.attr("disabled", true);
-            
-            $.ajax('/administrador/clientes/cargar_localidades', {
+
+            $.ajax('/cargar_localidades', {
                 type: 'post',
                 data: { 'provincia_id': provincia_id },
                 dataType: 'JSON',
@@ -77,6 +83,12 @@
                         localidades.removeAttr("disabled");
                     } else {
                         error.removeClass("d-none");
+                    }
+                    if (localidad_id != null) {
+
+                        if (localidad_id > 0 && $("#LocalidadId option[value='" + localidad_id + "']").length > 0) {
+                            localidades.val(localidad_id);
+                        }
                     }
                 }
             }).fail(function () {
@@ -132,8 +144,8 @@
 
     return {
         // public functions
-        init: function (clave) {
-            handler(clave);
+        init: function (localidad_id) {
+            handler(localidad_id);
         },
     };
 }();

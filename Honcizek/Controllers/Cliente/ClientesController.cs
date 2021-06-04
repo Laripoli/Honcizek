@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using Honcizek.DAL.Models;
 using System.Security.Claims;
+using System.Text.Json;
 
 namespace Honcizek.Controllers.Cliente
 {
@@ -48,7 +49,7 @@ namespace Honcizek.Controllers.Cliente
             {
                 return NotFound();
             }
-            ViewData["LocalidadId"] = new SelectList(_context.Localidades, "Id", "Nombre", clientes.LocalidadId);
+            ViewData["LocalidadId"] = clientes.LocalidadId;
 
             ViewData["ProvinciaId"] = new SelectList(_context.Provincias, "Id", "Nombre", clientes.ProvinciaId);
             return View("Views/Cliente/Clientes/Edit.cshtml",clientes);
@@ -101,7 +102,7 @@ namespace Honcizek.Controllers.Cliente
                 ViewData["login-error"] = true;
             }
 
-            ViewData["LocalidadId"] = new SelectList(_context.Localidades, "Id", "Nombre", clientes.LocalidadId);
+            ViewData["LocalidadId"] = clientes.LocalidadId;
 
             ViewData["ProvinciaId"] = new SelectList(_context.Provincias, "Id", "Nombre", clientes.ProvinciaId);
             ViewData["Tipo"] = new List<SelectListItem>
@@ -130,6 +131,16 @@ namespace Honcizek.Controllers.Cliente
         public bool login_check(int Id, string Login)
         {
             return _context.Clientes.Any(e => e.Login == Login && e.Id != Id);
+        }
+        [Route("/cargar_localidades")]
+        [HttpPost]
+        public string cargar_localidades(int provincia_id)
+        {
+            List<string> list = new List<string>();
+            var localidades = _context.Localidades.Where(l => l.ProvinciaId == provincia_id);
+
+            IEnumerable<string> ids = list;
+            return JsonSerializer.Serialize(localidades);
         }
     }
 }

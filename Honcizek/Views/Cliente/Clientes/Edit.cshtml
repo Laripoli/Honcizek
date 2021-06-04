@@ -33,7 +33,7 @@
                 </div>
                 <div class="form-group col-4">
                     <label asp-for="LocalidadId" class="control-label">Localidad</label>
-                    <select asp-for="LocalidadId" class="form-control" asp-items="ViewBag.LocalidadId"></select>
+                    <select asp-for="LocalidadId" class="form-control"></select>
                 </div>
             </div>
             <div class="row col-12 d-none">
@@ -116,10 +116,10 @@
 
 
 @section Scripts {
-    <script type="text/javascript" src="~/js/Clientes/Clientes/Clientes.js"></script>
+    <script type="text/javascript" src="~/js/Cliente/Clientes/Clientes.js"></script>
     <script>
     $(document).ready(function () {
-        Clientes.init();
+        Clientes.init("@ViewData["LocalidadId"]");
     });
     </script>
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

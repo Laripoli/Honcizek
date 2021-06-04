@@ -6283,11 +6283,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\alvar\\Desktop\\tuto\\Proyectos\\Honcizek\\Honcizek.BL\\Honcizek.BL.csproj",
+      "projectUniqueName": "C:\\Users\\alvar\\Desktop\\Proyectos\\Honcizek\\Honcizek.BL\\Honcizek.BL.csproj",
       "projectName": "Honcizek.BL",
-      "projectPath": "C:\\Users\\alvar\\Desktop\\tuto\\Proyectos\\Honcizek\\Honcizek.BL\\Honcizek.BL.csproj",
+      "projectPath": "C:\\Users\\alvar\\Desktop\\Proyectos\\Honcizek\\Honcizek.BL\\Honcizek.BL.csproj",
       "packagesPath": "C:\\Users\\alvar\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\alvar\\Desktop\\tuto\\Proyectos\\Honcizek\\Honcizek.BL\\obj\\",
+      "outputPath": "C:\\Users\\alvar\\Desktop\\Proyectos\\Honcizek\\Honcizek.BL\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\alvar\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -6304,11 +6304,11 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\alvar\\Desktop\\tuto\\Proyectos\\Honcizek\\Honcizek.Core\\Honcizek.Core.csproj": {
-              "projectPath": "C:\\Users\\alvar\\Desktop\\tuto\\Proyectos\\Honcizek\\Honcizek.Core\\Honcizek.Core.csproj"
+            "C:\\Users\\alvar\\Desktop\\Proyectos\\Honcizek\\Honcizek.Core\\Honcizek.Core.csproj": {
+              "projectPath": "C:\\Users\\alvar\\Desktop\\Proyectos\\Honcizek\\Honcizek.Core\\Honcizek.Core.csproj"
             },
-            "C:\\Users\\alvar\\Desktop\\tuto\\Proyectos\\Honcizek\\Honcizek.DAL\\Honcizek.DAL.csproj": {
-              "projectPath": "C:\\Users\\alvar\\Desktop\\tuto\\Proyectos\\Honcizek\\Honcizek.DAL\\Honcizek.DAL.csproj"
+            "C:\\Users\\alvar\\Desktop\\Proyectos\\Honcizek\\Honcizek.DAL\\Honcizek.DAL.csproj": {
+              "projectPath": "C:\\Users\\alvar\\Desktop\\Proyectos\\Honcizek\\Honcizek.DAL\\Honcizek.DAL.csproj"
             }
           }
         }
@@ -6340,7 +6340,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.104\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.300\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -39,7 +39,9 @@ namespace Honcizek.Controllers.Programador
             var Id = Int32.Parse(HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.UserData)?.Value);
             ViewData["usuario_id"] = Id;
             ViewData["general"] = true;
-            var honcizekContext = _context.Trabajos.Where(t => t.ProyectoId == id).Include(t => t.Proyecto).Include(t => t.Agente).OrderByDescending(t => t.AgenteId);
+            var honcizekContext = _context.Trabajos.Where(t => t.ProyectoId == id)
+                .Include(t => t.Proyecto).Include(t => t.Agente)
+                .OrderByDescending(t => t.AgenteId);
             ViewData["proyecto_id"] = id;
             return View("Views/Programador/Trabajos/Index.cshtml", await honcizekContext.ToListAsync());
             

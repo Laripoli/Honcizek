@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\alvar\\Desktop\\tuto\\Proyectos\\Honcizek\\Honcizek.Core\\Honcizek.Core.csproj",
+      "projectUniqueName": "C:\\Users\\alvar\\Desktop\\Proyectos\\Honcizek\\Honcizek.Core\\Honcizek.Core.csproj",
       "projectName": "Honcizek.Core",
-      "projectPath": "C:\\Users\\alvar\\Desktop\\tuto\\Proyectos\\Honcizek\\Honcizek.Core\\Honcizek.Core.csproj",
+      "projectPath": "C:\\Users\\alvar\\Desktop\\Proyectos\\Honcizek\\Honcizek.Core\\Honcizek.Core.csproj",
       "packagesPath": "C:\\Users\\alvar\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\alvar\\Desktop\\tuto\\Proyectos\\Honcizek\\Honcizek.Core\\obj\\",
+      "outputPath": "C:\\Users\\alvar\\Desktop\\Proyectos\\Honcizek\\Honcizek.Core\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\alvar\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -63,7 +63,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.104\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.300\\RuntimeIdentifierGraph.json"
       }
     }
   }

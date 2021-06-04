@@ -8,6 +8,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication;
 
 namespace Honcizek.Controllers.Administrador
 {
@@ -29,11 +30,25 @@ namespace Honcizek.Controllers.Administrador
         /// </summary>
         /// <returns></returns>
         [Route("Administrador/Escritorio")]
-        public IActionResult Escritorio()
+        public async Task<IActionResult> Escritorio()
         {
             DateTime hoy = DateTime.Now;
             var fecha = hoy.ToString("yyyy-MM-dd");
-            var usuario_id = Int32.Parse(HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.UserData)?.Value);
+            var usuario_id = 0;
+            try
+            {
+            usuario_id = Int32.Parse(HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.UserData)?.Value);
+            if (usuario_id == 0)
+            {
+            await HttpContext.SignOutAsync();
+
+            }
+
+            }catch(Exception e)
+            {
+                await HttpContext.SignOutAsync();
+                return NotFound();
+            }
             var proyectoQuery = "SELECT P.* FROM proyectos P " +
             "LEFT JOIN proyectos_participantes PP ON PP.proyecto_id = P.id " +
             "LEFT JOIN usuarios U ON U.id = PP.usuario_id " +

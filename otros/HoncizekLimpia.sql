@@ -36,9 +36,9 @@ CREATE TABLE IF NOT EXISTS `clientes` (
   KEY `FK_clientes_localidades` (`localidad_id`),
   CONSTRAINT `FK_clientes_localidades` FOREIGN KEY (`localidad_id`) REFERENCES `localidades` (`id`) ON DELETE SET NULL ON UPDATE SET NULL,
   CONSTRAINT `FK_clientes_provincias` FOREIGN KEY (`provincia_id`) REFERENCES `provincias` (`id`) ON DELETE SET NULL ON UPDATE SET NULL
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4;
 
--- Volcando datos para la tabla honcizek.clientes: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla honcizek.clientes: ~1 rows (aproximadamente)
 DELETE FROM `clientes`;
 /*!40000 ALTER TABLE `clientes` DISABLE KEYS */;
 /*!40000 ALTER TABLE `clientes` ENABLE KEYS */;
@@ -8206,9 +8206,9 @@ CREATE TABLE IF NOT EXISTS `partes_de_trabajo` (
   KEY `agente_id` (`agente_id`),
   CONSTRAINT `FK_partes_de_trabajo_tickets` FOREIGN KEY (`ticket_id`) REFERENCES `tickets` (`id`) ON DELETE CASCADE,
   CONSTRAINT `FK_partes_de_trabajo_usuarios` FOREIGN KEY (`agente_id`) REFERENCES `usuarios` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4;
 
--- Volcando datos para la tabla honcizek.partes_de_trabajo: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla honcizek.partes_de_trabajo: ~1 rows (aproximadamente)
 DELETE FROM `partes_de_trabajo`;
 /*!40000 ALTER TABLE `partes_de_trabajo` DISABLE KEYS */;
 /*!40000 ALTER TABLE `partes_de_trabajo` ENABLE KEYS */;
@@ -8282,7 +8282,6 @@ INSERT INTO `provincias` (`id`, `nombre`) VALUES
 CREATE TABLE IF NOT EXISTS `proyectos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `cliente_id` int(11) DEFAULT '10',
-  `tipo` enum('Cliente','Interno') DEFAULT NULL,
   `nombre` varchar(250) DEFAULT NULL,
   `descripcion` text,
   `descripcion_desarrollo` text,
@@ -8295,10 +8294,10 @@ CREATE TABLE IF NOT EXISTS `proyectos` (
   `fase` enum('Analisis','Diseño','Maquetacion','Desarrollo','Pruebas internas','Pruebas cliente','Implantacion') NOT NULL DEFAULT 'Analisis',
   PRIMARY KEY (`id`),
   KEY `cliente_id` (`cliente_id`),
-  CONSTRAINT `cliente_id` FOREIGN KEY (`cliente_id`) REFERENCES `clientes` (`id`) ON DELETE SET NULL
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
+  CONSTRAINT `cliente_id` FOREIGN KEY (`cliente_id`) REFERENCES `clientes` (`id`) ON DELETE SET NULL ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4;
 
--- Volcando datos para la tabla honcizek.proyectos: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla honcizek.proyectos: ~3 rows (aproximadamente)
 DELETE FROM `proyectos`;
 /*!40000 ALTER TABLE `proyectos` DISABLE KEYS */;
 /*!40000 ALTER TABLE `proyectos` ENABLE KEYS */;
@@ -8313,9 +8312,9 @@ CREATE TABLE IF NOT EXISTS `proyectos_participantes` (
   KEY `usuario_id` (`usuario_id`),
   CONSTRAINT `proyecto_id` FOREIGN KEY (`proyecto_id`) REFERENCES `proyectos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `usuario_id` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
 
--- Volcando datos para la tabla honcizek.proyectos_participantes: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla honcizek.proyectos_participantes: ~2 rows (aproximadamente)
 DELETE FROM `proyectos_participantes`;
 /*!40000 ALTER TABLE `proyectos_participantes` DISABLE KEYS */;
 /*!40000 ALTER TABLE `proyectos_participantes` ENABLE KEYS */;
@@ -8323,7 +8322,7 @@ DELETE FROM `proyectos_participantes`;
 -- Volcando estructura para tabla honcizek.suscripciones
 CREATE TABLE IF NOT EXISTS `suscripciones` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `cliente_id` int(11) NOT NULL,
+  `cliente_id` int(11) DEFAULT NULL,
   `agente_id` int(11) NOT NULL,
   `tipo` enum('Software','Hardware','Hosting') DEFAULT 'Software',
   `nombre` varchar(250) DEFAULT NULL,
@@ -8336,15 +8335,15 @@ CREATE TABLE IF NOT EXISTS `suscripciones` (
   `periodicidad` enum('Anual','Mensual','Trimestral','Semestral','Abierta') NOT NULL,
   `observaciones` text,
   PRIMARY KEY (`id`),
-  KEY `cliente_id` (`cliente_id`),
   KEY `suscripciones_proyectos` (`proyecto_id`),
   KEY `FK_suscripciones_usuarios` (`agente_id`),
+  KEY `cliente_id` (`cliente_id`),
+  CONSTRAINT `FK_suscripciones_clientes` FOREIGN KEY (`cliente_id`) REFERENCES `clientes` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_suscripciones_usuarios` FOREIGN KEY (`agente_id`) REFERENCES `usuarios` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  CONSTRAINT `suscripciones_clientes` FOREIGN KEY (`cliente_id`) REFERENCES `clientes` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `suscripciones_proyectos` FOREIGN KEY (`proyecto_id`) REFERENCES `proyectos` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4;
 
--- Volcando datos para la tabla honcizek.suscripciones: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla honcizek.suscripciones: ~1 rows (aproximadamente)
 DELETE FROM `suscripciones`;
 /*!40000 ALTER TABLE `suscripciones` DISABLE KEYS */;
 /*!40000 ALTER TABLE `suscripciones` ENABLE KEYS */;
@@ -8367,11 +8366,11 @@ CREATE TABLE IF NOT EXISTS `tickets` (
   KEY `FK_tickets_usuarios` (`agente_id`),
   KEY `FK_tickets_cliente` (`cliente_id`),
   CONSTRAINT `FK_tickets_clientes` FOREIGN KEY (`cliente_id`) REFERENCES `clientes` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `FK_tickets_usuarios` FOREIGN KEY (`agente_id`) REFERENCES `usuarios` (`id`) ON DELETE SET NULL ON UPDATE NO ACTION,
-  CONSTRAINT `tickets_suscripciones` FOREIGN KEY (`suscripcion_id`) REFERENCES `suscripciones` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
+  CONSTRAINT `FK_tickets_usuarios` FOREIGN KEY (`agente_id`) REFERENCES `usuarios` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `tickets_suscripciones` FOREIGN KEY (`suscripcion_id`) REFERENCES `suscripciones` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4;
 
--- Volcando datos para la tabla honcizek.tickets: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla honcizek.tickets: ~1 rows (aproximadamente)
 DELETE FROM `tickets`;
 /*!40000 ALTER TABLE `tickets` DISABLE KEYS */;
 /*!40000 ALTER TABLE `tickets` ENABLE KEYS */;
@@ -8388,7 +8387,7 @@ CREATE TABLE IF NOT EXISTS `trabajos` (
   KEY `agente_id` (`agente_id`),
   CONSTRAINT `FK_trabajos_proyectos` FOREIGN KEY (`proyecto_id`) REFERENCES `proyectos` (`id`) ON DELETE CASCADE,
   CONSTRAINT `FK_trabajos_usuarios` FOREIGN KEY (`agente_id`) REFERENCES `usuarios` (`id`) ON DELETE SET NULL
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4;
 
 -- Volcando datos para la tabla honcizek.trabajos: ~0 rows (aproximadamente)
 DELETE FROM `trabajos`;
@@ -8406,13 +8405,11 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `puesto` enum('Administrador','Programador') DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `login` (`login`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4;
 
--- Volcando datos para la tabla honcizek.usuarios: ~1 rows (aproximadamente)
+-- Volcando datos para la tabla honcizek.usuarios: ~2 rows (aproximadamente)
 DELETE FROM `usuarios`;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` (`id`, `login`, `nombre`, `apellidos`, `clave`, `email`, `puesto`) VALUES
-	(7, 'lara', 'Álvaro', 'Lara Cazorla', 'D3C327C84F809A5330BBF0D74438500C', 'a_alvaro.lara.cazorla@iespablopicasso.es', 'Administrador');
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

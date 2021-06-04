@@ -64,7 +64,7 @@ namespace Honcizek.Controllers.Programador
             {
                 return NotFound();
             }
-            if (proyectos.Fase == "Dise�o")
+            if (proyectos.Fase == "Diseño")
             {
                 proyectos.Fase = "Diseno";
             }

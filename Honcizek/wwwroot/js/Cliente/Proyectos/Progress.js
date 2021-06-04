@@ -44,15 +44,16 @@
                 break;
             case "Pruebas internas":
                 $('.fase').find('input').attr('checked', false);
-                $pb.css('width', '75%');
-                $pb.addClass('bc-pruebas-cliente');
+                $pb.css('width', '60%');
+                $pb.addClass('bc-pruebas-internas');
+               
                  
                 break;
 
             case "Pruebas cliente":
                 $('.fase').find('input').attr('checked', false);
-                $pb.css('width', '60%');
-                $pb.addClass('bc-pruebas-internas');
+                $pb.css('width', '75%');
+                $pb.addClass('bc-pruebas-cliente');
                  
                 break;
             case "Implantacion":

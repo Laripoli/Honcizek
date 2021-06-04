@@ -1,6 +1,6 @@
 ﻿var Proyectos = function () {
 
-    var handler = function (nuevo) {
+    var handler = function () {
         _ocultar_campos();
         _validar_descripciones();
     };
@@ -43,8 +43,8 @@
 
     return {
         // public functions
-        init: function (nuevo) {
-            handler(nuevo);
+        init: function () {
+            handler();
         },
     };
 }();

@@ -30,10 +30,6 @@
 
                 <div class="row col-12">
                     <div class="form-group col-4">
-                        <label asp-for="Tipo" class="control-label"></label>
-                        <select asp-for="Tipo" class="form-control" asp-items="ViewBag.Tipo"></select>
-                    </div>
-                    <div class="form-group col-4">
                         <label asp-for="Nombre" class="control-label"></label>
                         <input data-val="true" asp-for="Nombre" class="form-control" />
                         <span asp-validation-for="Nombre" class="text-danger"></span>
@@ -167,7 +163,7 @@
         <script type="text/javascript" src="~/js/Administrador/Proyectos/Progress.js"></script>
         <script>
         $(document).ready(function () {
-            Proyectos.init(true);
+            Proyectos.init();
             Progress.init("@((string)Model.Fase)");
         });
         </script>

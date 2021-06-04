@@ -301,14 +301,11 @@ namespace Honcizek.DAL.Models
                     .HasColumnName("nombre")
                     .HasMaxLength(250);
 
-                entity.Property(e => e.Tipo)
-                    .HasColumnName("tipo")
-                    .HasColumnType("enum('Cliente','Interno')");
-
                 entity.HasOne(d => d.Cliente)
-                    .WithMany(p => p.Proyectos)
+                    .WithMany(p => p.Proyectos).IsRequired(false)
                     .HasForeignKey(d => d.ClienteId)
-                    .HasConstraintName("cliente_id");
+                    .HasConstraintName("cliente_id")
+                    ;
             });
 
             modelBuilder.Entity<ProyectosParticipantes>(entity =>

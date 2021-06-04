@@ -53,11 +53,7 @@ namespace Honcizek.Controllers.Cliente
             {
                 return NotFound();
             }
-            ViewData["Tipo"] = new List<SelectListItem>
-                {
-                    new SelectListItem {Text = "Cliente", Value = "Cliente",Selected = (proyectos.Tipo=="Cliente")?true:false},
-                    new SelectListItem {Text = "Interno", Value = "Interno",Selected = (proyectos.Tipo=="Interno")?true:false}
-                };
+
             ViewData["Estado"] = new List<SelectListItem>
                 {
                     new SelectListItem {Text = "Pendiente", Value = "Pendiente",Selected = (proyectos.Estado=="Pendiente")?true:false},

@@ -135,11 +135,7 @@ namespace Honcizek.Controllers.Administrador
             {
                 ViewData["ClienteId"] = null;
             }
-            ViewData["Tipo"] = new List<SelectListItem>
-                {
-                    new SelectListItem {Text = "Cliente", Value = "Cliente"},
-                    new SelectListItem {Text = "Interno", Value = "Interno"}
-                };
+
             ViewData["Estado"] = new List<SelectListItem>
                 {
                     new SelectListItem {Text = "Pendiente", Value = "Pendiente"},
@@ -156,13 +152,14 @@ namespace Honcizek.Controllers.Administrador
        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,ClienteId,Tipo,Nombre,Descripcion,DescripcionDesarrollo,FechaRegistro,FechaInicio,FechaFinPrevista,FechaFinReal,HorasInternasPrevistas,Estado,Fase")] Proyectos proyectos)
+        public async Task<IActionResult> Create([Bind("Id,ClienteId,Nombre,Descripcion,DescripcionDesarrollo,FechaRegistro,FechaInicio,FechaFinPrevista,FechaFinReal,HorasInternasPrevistas,Estado,Fase")] Proyectos proyectos)
         {
+
             if (ModelState.IsValid)
             {
                 if(proyectos.Fase == "Diseno")
                 {
-                    proyectos.Fase = "Dise�o";
+                    proyectos.Fase = "Diseño";
                 }
                 _context.Add(proyectos);
                 await _context.SaveChangesAsync();
@@ -176,11 +173,6 @@ namespace Honcizek.Controllers.Administrador
             {
                 ViewData["ClienteId"] = null;
             }
-            ViewData["Tipo"] = new List<SelectListItem>
-                {
-                    new SelectListItem {Text = "Cliente", Value = "Cliente",Selected = (proyectos.Tipo=="Cliente") },
-                    new SelectListItem {Text = "Interno", Value = "Interno",Selected = (proyectos.Tipo=="Interno") }
-                };
             ViewData["Estado"] = new List<SelectListItem>
                 {
                     new SelectListItem {Text = "Pendiente", Value = "Pendiente",Selected = (proyectos.Estado=="Pendiente") },
@@ -217,11 +209,6 @@ namespace Honcizek.Controllers.Administrador
             {
                 ViewData["ClienteId"] = null;
             }
-            ViewData["Tipo"] = new List<SelectListItem>
-                {
-                    new SelectListItem {Text = "Cliente", Value = "Cliente",Selected = (proyectos.Tipo=="Cliente") },
-                    new SelectListItem {Text = "Interno", Value = "Interno",Selected = (proyectos.Tipo=="Interno") }
-                };
             ViewData["Estado"] = new List<SelectListItem>
                 {
                     new SelectListItem {Text = "Pendiente", Value = "Pendiente",Selected = (proyectos.Estado=="Pendiente") },
@@ -240,7 +227,7 @@ namespace Honcizek.Controllers.Administrador
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,ClienteId,Tipo,Nombre,Descripcion,DescripcionDesarrollo,FechaRegistro,FechaInicio,FechaFinPrevista,FechaFinReal,HorasInternasPrevistas,Estado,Fase")] Proyectos proyectos)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,ClienteId,Nombre,Descripcion,DescripcionDesarrollo,FechaRegistro,FechaInicio,FechaFinPrevista,FechaFinReal,HorasInternasPrevistas,Estado,Fase")] Proyectos proyectos)
         {
             proyectos.Fase = proyectos.Fase == "Diseño" ? "Diseno" : proyectos.Fase;
             if (id != proyectos.Id)
@@ -276,11 +263,6 @@ namespace Honcizek.Controllers.Administrador
             {
                 ViewData["ClienteId"] = null;
             }
-            ViewData["Tipo"] = new List<SelectListItem>
-                {
-                    new SelectListItem {Text = "Cliente", Value = "Cliente",Selected = (proyectos.Tipo=="Cliente")},
-                    new SelectListItem {Text = "Interno", Value = "Interno",Selected = (proyectos.Tipo=="Interno")}
-                };
             ViewData["Estado"] = new List<SelectListItem>
                 {
                     new SelectListItem {Text = "Pendiente", Value = "Pendiente",Selected = (proyectos.Estado=="Pendiente")},

@@ -54,9 +54,6 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Nombre)
                 </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Tipo)
-                </th>
                 <th class="mobile-proyecto">
                     @Html.DisplayNameFor(model => model.FechaInicio)
                 </th>
@@ -89,9 +86,6 @@
                     <tr>
                         <td>
                             @Html.DisplayFor(modelItem => item.Nombre)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Tipo)
                         </td>
                         <td class="mobile-proyecto">
                             @if (item.FechaFinPrevista != null)
@@ -140,6 +134,7 @@
                             {
                                 @Html.DisplayFor(modelItem => item.Cliente.FullName)
                             }
+                            
                         </td>
                         <td>
                             <a asp-controller="Trabajos" asp-action="IndexUsuario" asp-route-id="@item.Id">

@@ -5,6 +5,7 @@
     bool proyectosPersonalizado = (int)ViewData["proyectos"] > 0;
     bool ticketsPersonalizado = (int)ViewData["tickets"] > 0;
     bool suscripcionesPersonalizado = (int)ViewData["suscripciones"] > 0;
+    ViewData["title"] = "Escritorio";
 }
 <h1>Bienvenido al escritorio, @ViewData["nombre"]</h1>
 

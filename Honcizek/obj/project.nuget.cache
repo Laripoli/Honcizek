@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "hJEoBVhmEXERNsX1puyDCNWGr7HAkYPunB0iGoChzJU+azggvK4hZfgpF/q4ju21OULhqgErFyt5JrAyOdSDHg==",
+  "dgSpecHash": "pDRtpNDxV5dkgN8UHyL8ClTdTILG75Stwy5kcZctSj5pUuW3fxOrwC1Oh9n4COtHN4MC5ThnaDqdCH5XTE6A5Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\alvar\\Desktop\\tuto\\Proyectos\\Honcizek\\honcizek\\Honcizek.csproj",
+  "projectFilePath": "C:\\Users\\alvar\\Desktop\\Proyectos\\Honcizek\\Honcizek\\Honcizek.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\alvar\\.nuget\\packages\\bouncycastle.netcore\\1.8.3\\bouncycastle.netcore.1.8.3.nupkg.sha512",
     "C:\\Users\\alvar\\.nuget\\packages\\google.protobuf\\3.11.4\\google.protobuf.3.11.4.nupkg.sha512",
@@ -202,8 +202,7 @@
     "C:\\Users\\alvar\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
     "C:\\Users\\alvar\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512",
     "C:\\Users\\alvar\\.nuget\\packages\\system.xml.xpath\\4.0.1\\system.xml.xpath.4.0.1.nupkg.sha512",
-    "C:\\Users\\alvar\\.nuget\\packages\\system.xml.xpath.xmldocument\\4.0.1\\system.xml.xpath.xmldocument.4.0.1.nupkg.sha512",
-    "C:\\Users\\alvar\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.13\\microsoft.netcore.app.host.win-x64.3.1.13.nupkg.sha512"
+    "C:\\Users\\alvar\\.nuget\\packages\\system.xml.xpath.xmldocument\\4.0.1\\system.xml.xpath.xmldocument.4.0.1.nupkg.sha512"
   ],
   "logs": []
 }

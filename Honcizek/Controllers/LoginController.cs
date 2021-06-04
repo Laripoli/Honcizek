@@ -96,7 +96,7 @@ namespace Honcizek.Controllers
             }
             else {
                 ViewData["Error"] = "Usuario incorrecto";
-                return View(); }
+                return View("Views/Login/Login.cshtml"); }
         }
 
         public static string CreateMD5(string input)

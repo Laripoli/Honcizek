@@ -11,12 +11,12 @@
 <div class="row col-12 p-5 big botones-escritorio">
     <div class="col-3">
         <a asp-controller="ProyectosC" asp-action="Listado">
-            <div class="card card-custom card-stretch gutter-b bg-success">
+            <div class="card card-custom card-stretch gutter-b success-bg">
                 <div class="card-body">
-                    <span class="card-title font-weight-bolder font-size-h2 mb-0 mt-6 d-block text-white">
+                    <span class="card-title font-weight-bolder font-size-h2 mb-0 mt-6 d-block  ">
                         @((int)ViewData["proyectos"] > 0 ? "Posees "+ViewData["proyectos"] : "No participas en ningún ")
                     </span>
-                    <span class="card-title font-weight-bolder font-size-h2 mb-0 mt-6 d-block text-white">
+                    <span class="card-title font-weight-bolder font-size-h2 mb-0 mt-6 d-block  ">
                         @((int)ViewData["proyectos"] > 1 ? "proyectos":"proyecto")
                     </span>
                 </div>
@@ -24,28 +24,28 @@
         </a>
     </div>
     <div class="col-3">
-        <a asp-controller="TicketsC" asp-action="Listado">
-            <div class="card card-custom card-stretch gutter-b bg-warning">
+        <a class="honci-link" asp-controller="SuscripcionesC" asp-action="Listado">
+            <div class="card card-custom card-stretch gutter-b primary-bg">
                 <div class="card-body">
-                    <span class="card-title font-weight-bolder font-size-h2 mb-0 mt-6 d-block text-white">
-                        @((int)ViewData["tickets"] > 0 ? "Tienes " + ViewData["tickets"] : "No tienes ningún ")
+                    <span class="card-title font-weight-bolder font-size-h2 mb-0 mt-6 d-block  ">
+                    @((int)ViewData["suscripciones"] > 0 ? "Posees " + ViewData["suscripciones"] : "No posees ninguna ")
                     </span>
-                    <span class="card-title font-weight-bolder font-size-h2 mb-0 mt-6 d-block text-white link">
-                        @((int)ViewData["tickets"] > 1 ? "tickets pendientes" : "ticket pendiente")
+                    <span class="card-title font-weight-bolder font-size-h2 mb-0 mt-6 d-block   link">
+                    @((int)ViewData["suscripciones"] > 1 ? "suscripciones" : "suscripción")
                     </span>
                 </div>
             </div>
         </a>
     </div>
     <div class="col-3">
-        <a class="honci-link" asp-controller="SuscripcionesC" asp-action="Listado">
-            <div class="card card-custom card-stretch gutter-b bg-primary">
+        <a >
+            <div class="card card-custom card-stretch gutter-b warning-bg">
                 <div class="card-body">
-                    <span class="card-title font-weight-bolder font-size-h2 mb-0 mt-6 d-block text-white">
-                    @((int)ViewData["suscripciones"] > 0 ? "Posees " + ViewData["suscripciones"] : "No posees ninguna ")
+                    <span class="card-title font-weight-bolder font-size-h2 mb-0 mt-6 d-block  ">
+                        @((int)ViewData["tickets"] > 0 ? "Tienes " + ViewData["tickets"] : "No tienes ningún ")
                     </span>
-                    <span class="card-title font-weight-bolder font-size-h2 mb-0 mt-6 d-block text-white link">
-                    @((int)ViewData["suscripciones"] > 1 ? "suscripciones" : "suscripción")
+                    <span class="card-title font-weight-bolder font-size-h2 mb-0 mt-6 d-block   link">
+                        @((int)ViewData["tickets"] > 1 ? "tickets pendientes" : "ticket pendiente")
                     </span>
                 </div>
             </div>
@@ -56,12 +56,12 @@
 <div class="row col-12 p-5 little botones-escritorio">
     <div class="col-12">
         <a asp-controller="ProyectosC" asp-action="Listado">
-            <div class="card card-custom card-stretch gutter-b bg-success">
+            <div class="card card-custom card-stretch gutter-b success-bg">
                 <div class="card-body">
-                    <span class="card-title font-weight-bolder font-size-h2 mb-0 mt-6 d-block text-white">
+                    <span class="card-title font-weight-bolder font-size-h2 mb-0 mt-6 d-block  ">
                         @((int)ViewData["proyectos"] > 0 ? "Posees "+ViewData["proyectos"] : "No participas en ningún ")
                     </span>
-                    <span class="card-title font-weight-bolder font-size-h2 mb-0 mt-6 d-block text-white">
+                    <span class="card-title font-weight-bolder font-size-h2 mb-0 mt-6 d-block  ">
                         @((int)ViewData["proyectos"] > 1 ? "proyectos":"proyecto")
                     </span>
                 </div>
@@ -69,28 +69,28 @@
         </a>
     </div>
     <div class="col-12">
-        <a asp-controller="TicketsC" asp-action="Listado">
-            <div class="card card-custom card-stretch gutter-b bg-warning">
+        <a class="honci-link" asp-controller="SuscripcionesC" asp-action="Listado">
+            <div class="card card-custom card-stretch gutter-b primary-bg">
                 <div class="card-body">
-                    <span class="card-title font-weight-bolder font-size-h2 mb-0 mt-6 d-block text-white">
-                        @((int)ViewData["tickets"] > 0 ? "Tienes " + ViewData["tickets"] : "No tienes ningún ")
+                    <span class="card-title font-weight-bolder font-size-h2 mb-0 mt-6 d-block  ">
+                        @((int)ViewData["suscripciones"] > 0 ? "Posees " + ViewData["suscripciones"] : "No posees ninguna ")
                     </span>
-                    <span class="card-title font-weight-bolder font-size-h2 mb-0 mt-6 d-block text-white link">
-                        @((int)ViewData["tickets"] > 1 ? "tickets pendientes" : "ticket pendiente")
+                    <span class="card-title font-weight-bolder font-size-h2 mb-0 mt-6 d-block   link">
+                        @((int)ViewData["suscripciones"] > 1 ? "suscripciones" : "suscripción")
                     </span>
                 </div>
             </div>
         </a>
     </div>
     <div class="col-12">
-        <a class="honci-link" asp-controller="SuscripcionesC" asp-action="Listado">
-            <div class="card card-custom card-stretch gutter-b bg-primary">
+        <a>
+            <div class="card card-custom card-stretch gutter-b warning-bg">
                 <div class="card-body">
-                    <span class="card-title font-weight-bolder font-size-h2 mb-0 mt-6 d-block text-white">
-                        @((int)ViewData["suscripciones"] > 0 ? "Posees " + ViewData["suscripciones"] : "No posees ninguna ")
+                    <span class="card-title font-weight-bolder font-size-h2 mb-0 mt-6 d-block  ">
+                        @((int)ViewData["tickets"] > 0 ? "Tienes " + ViewData["tickets"] : "No tienes ningún ")
                     </span>
-                    <span class="card-title font-weight-bolder font-size-h2 mb-0 mt-6 d-block text-white link">
-                        @((int)ViewData["suscripciones"] > 1 ? "suscripciones" : "suscripción")
+                    <span class="card-title font-weight-bolder font-size-h2 mb-0 mt-6 d-block   link">
+                        @((int)ViewData["tickets"] > 1 ? "tickets pendientes" : "ticket pendiente")
                     </span>
                 </div>
             </div>

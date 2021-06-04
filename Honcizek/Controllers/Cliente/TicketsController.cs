@@ -117,7 +117,7 @@ namespace Honcizek.Controllers.Cliente
         }
 
         // GET: Tickets/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Ver(int? id)
         {
             if (id == null)
             {

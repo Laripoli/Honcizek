@@ -11,6 +11,9 @@ using System.Security.Claims;
 
 namespace Honcizek.Controllers.Programador
 {
+    /// <summary>
+    /// Controlador de suscripciones en las que participa el programador
+    /// </summary>
 	[Authorize(Roles = "Programador")]
 	[Route("Programador/[controller]/[action]")]
     public class SuscripcionesPController : Controller
@@ -22,7 +25,12 @@ namespace Honcizek.Controllers.Programador
             _context = context;
         }
 
-        // GET: Suscripciones
+        /// <summary>
+        /// Redirecciona al listado de suscripciones en las que participa el usuario
+        /// </summary>
+        /// <param name="nombre"></param>
+        /// <param name="cliente"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Index(String nombre, String cliente)
         {
             var query = "SELECT S.* FROM suscripciones S " +
@@ -55,7 +63,11 @@ namespace Honcizek.Controllers.Programador
             return View("Views/Programador/Suscripciones/Index.cshtml",await honcizekContext.ToListAsync());
         }
 
-        // GET: Suscripciones/Edit/5
+        /// <summary>
+        /// Redirecciona a la ficha de la suscripción
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -87,7 +99,11 @@ namespace Honcizek.Controllers.Programador
                 };
             return View("Views/Programador/Suscripciones/Edit.cshtml",suscripciones);
         }
-
+        /// <summary>
+        /// Comprueba si la suscripción existe
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         private bool SuscripcionesExists(int id)
         {
             return _context.Suscripciones.Any(e => e.Id == id);

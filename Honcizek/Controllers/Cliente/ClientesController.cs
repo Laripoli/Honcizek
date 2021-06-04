@@ -11,6 +11,9 @@ using System.Security.Claims;
 
 namespace Honcizek.Controllers.Cliente
 {
+    /// <summary>
+    /// Controlador del perfil del cliente
+    /// </summary>
 	[Authorize(Roles = "Cliente")]
 	[Route("[controller]/[action]")]
     public class ClientesCController : Controller
@@ -21,7 +24,10 @@ namespace Honcizek.Controllers.Cliente
         {
             _context = context;
         }
-
+        /// <summary>
+        /// Redirecciona al formulario de edicion del cliente
+        /// </summary>
+        /// <returns></returns>
         [Route("/MiPerfil")]
         public async Task<IActionResult> MiPerfil()
         {
@@ -48,9 +54,13 @@ namespace Honcizek.Controllers.Cliente
             return View("Views/Cliente/Clientes/Edit.cshtml",clientes);
         }
 
-        // POST: Clientes/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Valida los cambios y los guarda, si es correcto vuelve a la edicion y muestra un mensaje de confirmación,
+        /// en caso de error vuelve a la edición
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="clientes"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Login,Clave,LocalidadId,ProvinciaId,FechaRegistro,Tipo,RazonSocial,Nombre,Apellidos,Nifcif,Telefono,Movil,Email,Direccion,Cp,Observaciones")] Clientes clientes)
@@ -101,7 +111,11 @@ namespace Honcizek.Controllers.Cliente
                 };
             return View("Views/Cliente/Clientes/Edit.cshtml",clientes);
         }
-
+        /// <summary>
+        /// Comprueba si el cliente existe
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         private bool ClientesExists(int id)
         {
             return _context.Clientes.Any(e => e.Id == id);

@@ -11,6 +11,9 @@ using System.Security.Claims;
 
 namespace Honcizek.Controllers.Cliente
 {
+    /// <summary>
+    /// Controlador de suscripciones del cliente
+    /// </summary>
 	[Authorize(Roles = "Cliente")]
 	[Route("Suscripciones/[action]")]
     public class SuscripcionesCController : Controller
@@ -33,7 +36,11 @@ namespace Honcizek.Controllers.Cliente
             return View("Views/Cliente/Suscripciones/Index.cshtml",await honcizekContext.ToListAsync());
         }
 
-        ///
+        /// <summary>
+        /// Redirecciona a la ficha de la suscripción
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Ver(int? id)
         {
             if (id == null)

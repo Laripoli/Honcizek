@@ -2,7 +2,6 @@
 
     var handler = function () {
         _cargar_hidden();
-        /*_validar_descripciones();*/
     };
 
     var _cargar_hidden = function () {
@@ -32,15 +31,7 @@
         
     }
 
-    var _validar_descripciones = function () {
-        $('form').submit(function () {
-            if ($('#Descripcion').val() == "") {
-                $('#Descripcion').val("Sin descripción");
-            }
-            return true;
-        })
-
-    }
+   
 
     return {
         // public functions

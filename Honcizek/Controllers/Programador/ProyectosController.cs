@@ -11,6 +11,9 @@ using System.Security.Claims;
 
 namespace Honcizek.Controllers.Programador
 {
+    /// <summary>
+    /// Controlador de proyectos de un programador
+    /// </summary>
 	[Authorize(Roles = "Programador")]
 	[Route("Programador/[controller]/[action]")]
     public class ProyectosPController : Controller
@@ -22,7 +25,10 @@ namespace Honcizek.Controllers.Programador
             _context = context;
         }
 
-        // GET: Proyectos
+        /// <summary>
+        /// Redirecciona al listado de proyectos del usuario
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> Index()
         {
             var Id = Int32.Parse(HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.UserData)?.Value);
@@ -41,7 +47,11 @@ namespace Honcizek.Controllers.Programador
             return View("Views/Programador/Proyectos/Index.cshtml",await honcizekContext.ToListAsync());
         }
 
-        // GET: Proyectos/Edit/5
+        /// <summary>
+        /// Redirecciona a la ficha de un proyecto
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -72,73 +82,11 @@ namespace Honcizek.Controllers.Programador
             ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "Clave", proyectos.ClienteId);
             return View("Views/Programador/Proyectos/Edit.cshtml",proyectos);
         }
-
-        // POST: Proyectos/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,ClienteId,Tipo,Nombre,Descripcion,DescripcionDesarrollo,FechaRegistro,FechaInicio,FechaFinPrevista,FechaFinReal,HorasInternasPrevistas,Estado,Fase")] Proyectos proyectos)
-        {
-            if (id != proyectos.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(proyectos);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ProyectosExists(proyectos.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "Clave", proyectos.ClienteId);
-            return View("Views/Programador/Proyectos/Edit.cshtml",proyectos);
-        }
-
-        // GET: Proyectos/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var proyectos = await _context.Proyectos
-                .Include(p => p.Cliente)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (proyectos == null)
-            {
-                return NotFound();
-            }
-
-            return View("Views/Programador/Proyectos/Delete.cshtml",proyectos);
-        }
-
-        // POST: Proyectos/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var proyectos = await _context.Proyectos.FindAsync(id);
-            _context.Proyectos.Remove(proyectos);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
+        /// <summary>
+        /// Comprueba si el proyecto existe
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         private bool ProyectosExists(int id)
         {
             return _context.Proyectos.Any(e => e.Id == id);

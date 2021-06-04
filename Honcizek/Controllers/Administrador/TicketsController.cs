@@ -150,6 +150,7 @@ namespace Honcizek.Controllers.Administrador
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,SuscripcionId,ClienteId,AgenteId,Nombre,Descripcion,FechaRegistro,HoraRegistro,Estado,FechaFinalizacion,HoraFinalizacion")] Tickets tickets)
         {
+            tickets.Estado = "Pendiente";
             if (ModelState.IsValid)
             {
                 _context.Add(tickets);

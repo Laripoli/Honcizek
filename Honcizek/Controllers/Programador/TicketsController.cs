@@ -11,6 +11,9 @@ using System.Security.Claims;
 
 namespace Honcizek.Controllers.Programador
 {
+    /// <summary>
+    /// Controlador de tickets del programador
+    /// </summary>
 	[Authorize(Roles = "Programador")]
 	[Route("Programador/[controller]/[action]")]
     public class TicketsPController : Controller
@@ -22,7 +25,12 @@ namespace Honcizek.Controllers.Programador
             _context = context;
         }
 
-        // GET: Tickets
+        /// <summary>
+        /// Redirecciona al listado de tickets completo del usuario
+        /// </summary>
+        /// <param name="nombre"></param>
+        /// <param name="cliente"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Index(String nombre, String cliente)
         {
             var query = "SELECT T.* FROM tickets T " +
@@ -55,7 +63,12 @@ namespace Honcizek.Controllers.Programador
             var honcizekContext = _context.Tickets.FromSqlRaw(query,Id).Include(t => t.Agente).Include(t => t.Cliente).Include(t => t.Suscripcion);
             return View("Views/Programador/Tickets/Index.cshtml",await honcizekContext.ToListAsync());
         }
-
+        /// <summary>
+        /// Redirecciona al listado de tickets pendientes del usuario
+        /// </summary>
+        /// <param name="nombre"></param>
+        /// <param name="cliente"></param>
+        /// <returns></returns>
         public async Task<IActionResult> IndexUsuario(String nombre, String cliente)
         {
             var query = "SELECT T.* FROM tickets T " +
@@ -89,7 +102,11 @@ namespace Honcizek.Controllers.Programador
             return View("Views/Programador/Tickets/Index.cshtml", await honcizekContext.ToListAsync());
         }
 
-        // GET: Tickets/Edit/5
+        /// <summary>
+        /// Redirecciona a la ficha de un ticket
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -114,17 +131,14 @@ namespace Honcizek.Controllers.Programador
                 };
             return View("Views/Programador/Tickets/Edit.cshtml",tickets);
         }
-
+        /// <summary>
+        /// Comprueba si el ticket existe
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         private bool TicketsExists(int id)
         {
             return _context.Tickets.Any(e => e.Id == id);
-        }
-
-        public int tiempo(int id)
-        {
-            var partes = _context.PartesDeTrabajo.Where(p => p.TicketId == id);
-
-            return 1;
         }
     }
 }

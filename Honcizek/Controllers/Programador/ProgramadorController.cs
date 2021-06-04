@@ -11,6 +11,9 @@ using System.Threading.Tasks;
 
 namespace Honcizek.Controllers.Programador
 {
+    /// <summary>
+    /// Controlador del escritorio de programador
+    /// </summary>
     [Authorize(Roles = "Programador")]
     public class ProgramadorController : Controller
     {
@@ -20,6 +23,10 @@ namespace Honcizek.Controllers.Programador
         {
             _context = context;
         }
+        /// <summary>
+        /// Devuelve el escritorio del programador
+        /// </summary>
+        /// <returns></returns>
         [Route("Programador/Escritorio")]
         public IActionResult Escritorio()
         {

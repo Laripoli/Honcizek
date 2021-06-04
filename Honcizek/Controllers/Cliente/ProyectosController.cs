@@ -11,6 +11,9 @@ using System.Security.Claims;
 
 namespace Honcizek.Controllers.Cliente
 {
+    /// <summary>
+    /// Controlador de los proyectos del cliente
+    /// </summary>
 	[Authorize(Roles = "Cliente")]
 	[Route("/Proyectos/[action]")]
     public class ProyectosCController : Controller
@@ -64,7 +67,11 @@ namespace Honcizek.Controllers.Cliente
             proyectos.Fase = proyectos.Fase == "Diseño" ? "Diseno" : proyectos.Fase;
             return View("Views/Cliente/Proyectos/Edit.cshtml", proyectos);
         }
-
+        /// <summary>
+        /// Comprueba si el proyecto existe
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         private bool ProyectosExists(int id)
         {
             return _context.Proyectos.Any(e => e.Id == id);

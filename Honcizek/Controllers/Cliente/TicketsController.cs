@@ -11,6 +11,9 @@ using System.Security.Claims;
 
 namespace Honcizek.Controllers.Cliente
 {
+    /// <summary>
+    /// Controlador de tickets del cliente
+    /// </summary>
 	[Authorize(Roles = "Cliente")]
 	[Route("Tickets/[action]")]
     public class TicketsCController : Controller
@@ -22,7 +25,12 @@ namespace Honcizek.Controllers.Cliente
             _context = context;
         }
 
-        // GET: Tickets
+        /// <summary>
+        /// Redirecciona al listado de tickets pendientes de la suscripcion indicada
+        /// Además comprueba que el cliente sea el dueño de la suscripcion
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Listado(int? id)
         {
             var suscripciones = await _context.Suscripciones.FindAsync(id);
@@ -43,7 +51,12 @@ namespace Honcizek.Controllers.Cliente
                 .OrderByDescending(t => t.FechaRegistro).ThenByDescending(t => t.HoraRegistro);
             return View("Views/Cliente/Tickets/Index.cshtml",await honcizekContext.ToListAsync());
         }
-
+        /// <summary>
+        /// Redirecciona al listado de todos los tickets de la suscripcion indicada
+        /// Además comprueba que la suscripción séa del cliente
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> ListadoCompleto(int? id)
         {
             var suscripciones = await _context.Suscripciones.FindAsync(id);
@@ -65,7 +78,11 @@ namespace Honcizek.Controllers.Cliente
             return View("Views/Cliente/Tickets/Index.cshtml", await honcizekContext.ToListAsync());
         }
 
-        // GET: Tickets/Create
+        /// <summary>
+        /// Redirecciona a la creación de un ticket
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Crear(int? id)
         {
             if(id == null)
@@ -87,9 +104,12 @@ namespace Honcizek.Controllers.Cliente
             return View("Views/Cliente/Tickets/Create.cshtml");
         }
 
-        // POST: Tickets/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Valida y guarda el nuevo ticket, si es correcto redirecciona al listado de tickets, en caso de error
+        /// vuelve a la creación
+        /// </summary>
+        /// <param name="tickets"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Crear([Bind("Id,SuscripcionId,ClienteId,AgenteId,Nombre,Descripcion,FechaRegistro,HoraRegistro,Estado,FechaFinalizacion,HoraFinalizacion")] Tickets tickets)
@@ -116,7 +136,11 @@ namespace Honcizek.Controllers.Cliente
             return View("Views/Cliente/Tickets/Create.cshtml",tickets);
         }
 
-        // GET: Tickets/Edit/5
+        /// <summary>
+        /// Redirecciona a la ficha de un ticket
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Ver(int? id)
         {
             if (id == null)
@@ -141,77 +165,11 @@ namespace Honcizek.Controllers.Cliente
                 };
             return View("Views/Cliente/Tickets/Edit.cshtml",tickets);
         }
-
-        // POST: Tickets/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,SuscripcionId,ClienteId,AgenteId,Nombre,Descripcion,FechaRegistro,HoraRegistro,Estado,FechaFinalizacion,HoraFinalizacion")] Tickets tickets)
-        {
-            if (id != tickets.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(tickets);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!TicketsExists(tickets.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Listado), new { id = tickets.SuscripcionId });
-            }
-            ViewData["AgenteId"] = new SelectList(_context.Usuarios, "Id", "Clave", tickets.AgenteId);
-            ViewData["ClienteId"] = new SelectList(_context.Clientes, "Id", "Clave", tickets.ClienteId);
-            ViewData["SuscripcionId"] = new SelectList(_context.Suscripciones, "Id", "Nombre", tickets.SuscripcionId);
-            return View("Views/Cliente/Tickets/Edit.cshtml",tickets);
-        }
-
-        // GET: Tickets/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var tickets = await _context.Tickets
-                .Include(t => t.Agente)
-                .Include(t => t.Cliente)
-                .Include(t => t.Suscripcion)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (tickets == null)
-            {
-                return NotFound();
-            }
-
-            return View("Views/Cliente/Tickets/Delete.cshtml",tickets);
-        }
-
-        // POST: Tickets/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var tickets = await _context.Tickets.FindAsync(id);
-            _context.Tickets.Remove(tickets);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Listado), new { id = tickets.SuscripcionId });
-        }
-
+        /// <summary>
+        /// Comprueba si el ticket existe
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         private bool TicketsExists(int id)
         {
             return _context.Tickets.Any(e => e.Id == id);

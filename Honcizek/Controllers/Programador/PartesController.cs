@@ -11,6 +11,9 @@ using System.Security.Claims;
 
 namespace Honcizek.Controllers.Programador
 {
+    /// <summary>
+    /// Controlador de partes de trabajo de un programador
+    /// </summary>
 	[Authorize(Roles = "Programador")]
 	[Route("Programador/[controller]/[action]")]
     public class PartesPController : Controller
@@ -22,7 +25,11 @@ namespace Honcizek.Controllers.Programador
             _context = context;
         }
 
-        // GET: Partes
+        /// <summary>
+        /// Devuelve el listado de todos los partes de trabajo de un ticket
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Index(int? id)
         {
 
@@ -58,7 +65,11 @@ namespace Honcizek.Controllers.Programador
             return View("Views/Programador/Partes/Index.cshtml", await honcizekContext.ToListAsync());
         }
 
-        // GET: Partes/Create
+        /// <summary>
+        /// Redirecciona a la creación de un parte de trabajo para un ticket en específico
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Create(int? id)
         {
             if (id == null)
@@ -83,9 +94,12 @@ namespace Honcizek.Controllers.Programador
             return View("Views/Programador/Partes/Create.cshtml");
         }
 
-        // POST: Partes/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Valida y guarda el parte de trabajo, si es correcto redirecciona al listado de partes de trabajo, 
+        /// en caso de error devuelve a la creación
+        /// </summary>
+        /// <param name="partesDeTrabajo"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,TicketId,AgenteId,Nombre,Fecha,Hora,Descripcion,Horas,Minutos")] PartesDeTrabajo partesDeTrabajo)
@@ -109,7 +123,11 @@ namespace Honcizek.Controllers.Programador
             return View("Views/Programador/Partes/Create.cshtml",partesDeTrabajo);
         }
 
-        // GET: Partes/Edit/5
+        /// <summary>
+        /// Redirecciona a la edición de un parte de trabajo
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -129,9 +147,13 @@ namespace Honcizek.Controllers.Programador
             return View("Views/Programador/Partes/Edit.cshtml",partesDeTrabajo);
         }
 
-        // POST: Partes/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Valida y actualiza el parte de trabajo, si es correcto redirecciona al listado de partes de trabajo, 
+        /// en caso de error vuelve a la edición
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="partesDeTrabajo"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,TicketId,AgenteId,Nombre,Fecha,Hora,Descripcion,Horas,Minutos")] PartesDeTrabajo partesDeTrabajo)
@@ -169,7 +191,11 @@ namespace Honcizek.Controllers.Programador
             return View("Views/Programador/Partes/Edit.cshtml",partesDeTrabajo);
         }
 
-        // GET: Partes/Delete/5
+        /// <summary>
+        /// Redirecciona a la eliminación de un parte de trabajo
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -189,7 +215,11 @@ namespace Honcizek.Controllers.Programador
             return View("Views/Programador/Partes/Delete.cshtml",partesDeTrabajo);
         }
 
-        // POST: Partes/Delete/5
+        /// <summary>
+        /// Elimina el parte de trabajo y redirecciona al listado
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -199,7 +229,11 @@ namespace Honcizek.Controllers.Programador
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index), new { id = partesDeTrabajo.TicketId });
         }
-
+        /// <summary>
+        /// Comprueba si el parte de trabajo existe
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         private bool PartesDeTrabajoExists(int id)
         {
             return _context.PartesDeTrabajo.Any(e => e.Id == id);

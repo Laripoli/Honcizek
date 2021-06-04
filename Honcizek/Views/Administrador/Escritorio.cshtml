@@ -9,7 +9,7 @@
 <h1>Bienvenido al escritorio, @ViewData["nombre"]</h1>
 
 <div class="row col-12 p-5 big botones-escritorio">
-    <div class="col-3">
+    <div class="col-4">
         <a asp-controller="Proyectos" asp-action="@(proyectosPersonalizado ? "IndexUsuario":"Index")">
             <div class="card card-custom card-stretch gutter-b success-bg">
                 <div class="card-body">
@@ -23,7 +23,7 @@
             </div>
         </a>
     </div>
-    <div class="col-3">
+    <div class="col-4">
         <a asp-controller="Tickets" asp-action="@(ticketsPersonalizado ? "IndexUsuario":"Index")">
             <div class="card card-custom card-stretch gutter-b warning-bg">
                 <div class="card-body warning-bg">
@@ -37,7 +37,7 @@
             </div>
         </a>
     </div>
-    <div class="col-3">
+    <div class="col-4">
         <div class="card card-custom card-stretch gutter-b primary-bg">
             <a class="honci-link" asp-controller="Suscripciones" asp-action="@(suscripcionesPersonalizado ? "IndexUsuario":"Index")">
                 <div class="card-body">

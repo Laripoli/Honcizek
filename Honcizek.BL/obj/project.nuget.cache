@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "yAIUadr7lw2lSN1Lus2KVmAN2lzsOq9sP4LyPPptDxQZ/XRS2TDuAhuudn5z2Zcu2sXG49u8it08q37qkCNUvA==",
+  "dgSpecHash": "Xm80iI05erRAp32keSflHUHRYZ7zDd8iujYkn0hMheYEUk4SaaaBbR/xLk8o+kzGWKRhnx79q0PY/1I6Bs389g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\alvar\\Desktop\\tuto\\Proyectos\\Honcizek\\Honcizek.BL\\Honcizek.BL.csproj",
+  "projectFilePath": "C:\\Users\\alvar\\Desktop\\Proyectos\\Honcizek\\Honcizek.BL\\Honcizek.BL.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\alvar\\.nuget\\packages\\bouncycastle.netcore\\1.8.3\\bouncycastle.netcore.1.8.3.nupkg.sha512",
     "C:\\Users\\alvar\\.nuget\\packages\\google.protobuf\\3.11.4\\google.protobuf.3.11.4.nupkg.sha512",

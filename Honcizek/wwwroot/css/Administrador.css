@@ -71,12 +71,17 @@ aside a .menu-option span {
 
 section {
     width: 100%;
-    overflow: auto;
+    overflow: hidden auto;
     max-height: 94%;
     padding-left: 2vh;
     padding-right: 2vh;
     scrollbar-color: #D2D2D2 #0B1D6E;
 }
+
+    section div {
+        max-width: 100%;
+        margin-right: 0 !important;
+    }
 
 @media screen and (max-height: 710px) {
     section{
@@ -131,6 +136,18 @@ section {
         float: left;
     }
     .mobile-proyecto{
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 1370px) {
+    .proyectos-index tbody td:last-child a {
+        display: unset;
+        padding: 1vh;
+        float: left;
+    }
+
+    .mobile-proyecto {
         display: none;
     }
 }
